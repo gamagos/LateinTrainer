@@ -1,4 +1,3 @@
 *.tmp.driveupload/
-tmp
-/tmp
-driveupload
+*.tmp
+tmp.driveupload/
