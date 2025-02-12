@@ -2,135 +2,135 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 
-# Declension data with all five Latin declensions, including I-stem and neuter variants
-declensions = {
-    "A-Declension": {
-        "nominative_singular": "puella",
-        "genitive_singular": "puellae",
-        "dative_singular": "puellae",
-        "accusative_singular": "puellam",
-        "ablative_singular": "puella",
-        "nominative_plural": "puellae",
-        "genitive_plural": "puellarum",
-        "dative_plural": "puellis",
-        "accusative_plural": "puellas",
-        "ablative_plural": "puellis",
+# Deklinationen Daten mit allen fünf lateinischen Deklinationen, einschließlich I-Stamm und Neutrum-Varianten
+deklinationen = {
+    "A-Deklination": {
+        "nominativ_singular": "puella",
+        "genitiv_singular": "puellae",
+        "dativ_singular": "puellae",
+        "akkusativ_singular": "puellam",
+        "ablativ_singular": "puella",
+        "nominativ_plural": "puellae",
+        "genitiv_plural": "puellarum",
+        "dativ_plural": "puellis",
+        "akkusativ_plural": "puellas",
+        "ablativ_plural": "puellis",
     },
     
-    "      O-Declension": {
-        "nominative_singular": "dominus",
-        "genitive_singular": "domini",
-        "dative_singular": "domino",
-        "accusative_singular": "dominum",
-        "ablative_singular": "domino",
-        "nominative_plural": "domini",
-        "genitive_plural": "dominorum",
-        "dative_plural": "dominis",
-        "accusative_plural": "dominos",
-        "ablative_plural": "dominis",
+    "O-Deklination": {
+        "nominativ_singular": "dominus",
+        "genitiv_singular": "domini",
+        "dativ_singular": "domino",
+        "akkusativ_singular": "dominum",
+        "ablativ_singular": "domino",
+        "nominativ_plural": "domini",
+        "genitiv_plural": "dominorum",
+        "dativ_plural": "dominis",
+        "akkusativ_plural": "dominos",
+        "ablativ_plural": "dominis",
     },
     
-    "O-Declension Neuter": {
-        "nominative_singular": "bellum",
-        "genitive_singular": "belli",
-        "dative_singular": "bello",
-        "accusative_singular": "bellum",
-        "ablative_singular": "bello",
-        "nominative_plural": "bella",
-        "genitive_plural": "bellorum",
-        "dative_plural": "bellis",
-        "accusative_plural": "bella",
-        "ablative_plural": "bellis",
+    "O-Deklination Neutrum": {
+        "nominativ_singular": "bellum",
+        "genitiv_singular": "belli",
+        "dativ_singular": "bello",
+        "akkusativ_singular": "bellum",
+        "ablativ_singular": "bello",
+        "nominativ_plural": "bella",
+        "genitiv_plural": "bellorum",
+        "dativ_plural": "bellis",
+        "akkusativ_plural": "bella",
+        "ablativ_plural": "bellis",
     },
     
-    "Consonant-Declension": {
-        "nominative_singular": "rex",
-        "genitive_singular": "regis",
-        "dative_singular": "regi",
-        "accusative_singular": "regem",
-        "ablative_singular": "rege",
-        "nominative_plural": "reges",
-        "genitive_plural": "regum",
-        "dative_plural": "regibus",
-        "accusative_plural": "reges",
-        "ablative_plural": "regibus",
+    "Konsonantische Deklination": {
+        "nominativ_singular": "rex",
+        "genitiv_singular": "regis",
+        "dativ_singular": "regi",
+        "akkusativ_singular": "regem",
+        "ablativ_singular": "rege",
+        "nominativ_plural": "reges",
+        "genitiv_plural": "regum",
+        "dativ_plural": "regibus",
+        "akkusativ_plural": "reges",
+        "ablativ_plural": "regibus",
     },
     
-    "Consonant-Declension Neuter": {
-        "nominative_singular": "corpus",
-        "genitive_singular": "corporis",
-        "dative_singular": "corpori",
-        "accusative_singular": "corpus",
-        "ablative_singular": "corpore",
-        "nominative_plural": "corpora",
-        "genitive_plural": "corporum",
-        "dative_plural": "corporibus",
-        "accusative_plural": "corpora",
-        "ablative_plural": "corporibus",
+    "Konsonantische Deklination Neutrum": {
+        "nominativ_singular": "corpus",
+        "genitiv_singular": "corporis",
+        "dativ_singular": "corpori",
+        "akkusativ_singular": "corpus",
+        "ablativ_singular": "corpore",
+        "nominativ_plural": "corpora",
+        "genitiv_plural": "corporum",
+        "dativ_plural": "corporibus",
+        "akkusativ_plural": "corpora",
+        "ablativ_plural": "corporibus",
     },
-    "Consonant-Declension Neuter with Genitive Plural -ium": {
-        "nominative_singular": "animal",
-        "genitive_singular": "animalis",
-        "dative_singular": "animali",
-        "accusative_singular": "animal",
-        "ablative_singular": "animali",
-        "nominative_plural": "animalia",
-        "genitive_plural": "animalium",
-        "dative_plural": "animalibus",
-        "accusative_plural": "animalia",
-        "ablative_plural": "animalibus",
-    },
-    
-    "I-Declension": {
-        "nominative_singular": "civis",
-        "genitive_singular": "civis",
-        "dative_singular": "civi",
-        "accusative_singular": "civem",
-        "ablative_singular": "cive",
-        "nominative_plural": "cives",
-        "genitive_plural": "civium",
-        "dative_plural": "civibus",
-        "accusative_plural": "cives",
-        "ablative_plural": "civibus",
+    "Konsonantische Deklination Neutrum mit Genitiv Plural -ium": {
+        "nominativ_singular": "animal",
+        "genitiv_singular": "animalis",
+        "dativ_singular": "animali",
+        "akkusativ_singular": "animal",
+        "ablativ_singular": "animali",
+        "nominativ_plural": "animalia",
+        "genitiv_plural": "animalium",
+        "dativ_plural": "animalibus",
+        "akkusativ_plural": "animalia",
+        "ablativ_plural": "animalibus",
     },
     
-    "I-Declension Neuter": {
-        "nominative_singular": "mare",
-        "genitive_singular": "maris",
-        "dative_singular": "mari",
-        "accusative_singular": "mare",
-        "ablative_singular": "mari",
-        "nominative_plural": "maria",
-        "genitive_plural": "marium",
-        "dative_plural": "maribus",
-        "accusative_plural": "maria",
-        "ablative_plural": "maribus",
+    "I-Deklination": {
+        "nominativ_singular": "civis",
+        "genitiv_singular": "civis",
+        "dativ_singular": "civi",
+        "akkusativ_singular": "civem",
+        "ablativ_singular": "cive",
+        "nominativ_plural": "cives",
+        "genitiv_plural": "civium",
+        "dativ_plural": "civibus",
+        "akkusativ_plural": "cives",
+        "ablativ_plural": "civibus",
     },
     
-    "U-Declension": {
-        "nominative_singular": "manus",
-        "genitive_singular": "manus",
-        "dative_singular": "manui",
-        "accusative_singular": "manum",
-        "ablative_singular": "manu",
-        "nominative_plural": "manus",
-        "genitive_plural": "manuum",
-        "dative_plural": "manibus",
-        "accusative_plural": "manus",
-        "ablative_plural": "manibus",
+    "I-Deklination Neutrum": {
+        "nominativ_singular": "mare",
+        "genitiv_singular": "maris",
+        "dativ_singular": "mari",
+        "akkusativ_singular": "mare",
+        "ablativ_singular": "mari",
+        "nominativ_plural": "maria",
+        "genitiv_plural": "marium",
+        "dativ_plural": "maribus",
+        "akkusativ_plural": "maria",
+        "ablativ_plural": "maribus",
     },
     
-    "E-Declension": {
-        "nominative_singular": "res",
-        "genitive_singular": "rei",
-        "dative_singular": "rei",
-        "accusative_singular": "rem",
-        "ablative_singular": "re",
-        "nominative_plural": "res",
-        "genitive_plural": "rerum",
-        "dative_plural": "rebus",
-        "accusative_plural": "res",
-        "ablative_plural": "rebus",
+    "U-Deklination": {
+        "nominativ_singular": "manus",
+        "genitiv_singular": "manus",
+        "dativ_singular": "manui",
+        "akkusativ_singular": "manum",
+        "ablativ_singular": "manu",
+        "nominativ_plural": "manus",
+        "genitiv_plural": "manuum",
+        "dativ_plural": "manibus",
+        "akkusativ_plural": "manus",
+        "ablativ_plural": "manibus",
+    },
+    
+    "E-Deklination": {
+        "nominativ_singular": "res",
+        "genitiv_singular": "rei",
+        "dativ_singular": "rei",
+        "akkusativ_singular": "rem",
+        "ablativ_singular": "re",
+        "nominativ_plural": "res",
+        "genitiv_plural": "rerum",
+        "dativ_plural": "rebus",
+        "akkusativ_plural": "res",
+        "ablativ_plural": "rebus",
     },
 }
 
@@ -169,10 +169,10 @@ class LatinDeclensionApp:
         self.initial_height = self.root.winfo_screenheight() // 2
         self.root.geometry( f"{self.initial_width}x{self.initial_height}" )
         
-        self.classes = list( declensions.keys() )
+        self.classes = list( deklinationen.keys() )
         random.shuffle( self.classes )  # Shuffle the order of declensions
         self.current_class_index = 0
-        self.current_declension = declensions[ self.classes[ self.current_class_index ] ]
+        self.current_declension = deklinationen[ self.classes[ self.current_class_index ] ]
         
         self.entries = {}
         self.results = {}  # Variable to save whether the answer was right or wrong
@@ -208,7 +208,7 @@ class LatinDeclensionApp:
             label.grid( row=i, column=0, padx=5, pady=5, sticky="e" )  # Use grid layout
             entry = tk.Entry( self.frame, font=("Arial", int( 14 * self.ui_scale )) )
             
-            if case == "nominative_singular":
+            if case == "nominativ_singular":
                 entry.insert( 0, correct_answer )
                 entry.config( state="disabled", disabledforeground="gray" )
                 
@@ -249,7 +249,7 @@ class LatinDeclensionApp:
         
         for case, correct_answer in self.current_declension.items():
             
-            if case == "nominative_singular":
+            if case == "nominativ_singular":
                 continue
             user_input = self.entries[ case ].get().strip()
             
@@ -272,7 +272,7 @@ class LatinDeclensionApp:
     def show_solutions( self ):
         for case, correct_answer in self.current_declension.items():
             
-            if case == "nominative_singular" or self.results.get( case, True ):
+            if case == "nominativ_singular" or self.results.get( case, True ):
                 continue
             
             user_input = self.entries[ case ].get().strip()
@@ -288,7 +288,7 @@ class LatinDeclensionApp:
     def retry( self ):
         for case, correct_answer in self.current_declension.items():
             
-            if case == "nominative_singular" or self.results.get( case, True ):
+            if case == "nominativ_singular" or self.results.get( case, True ):
                 continue
             
             self.entries[ case ].config( fg="black", state="normal" )
@@ -304,7 +304,7 @@ class LatinDeclensionApp:
             self.root.quit()
             
         else:
-            self.current_declension = declensions[ self.classes[ self.current_class_index ] ]
+            self.current_declension = deklinationen[ self.classes[ self.current_class_index ] ]
             
             for widget in self.frame.winfo_children():
                 widget.destroy()
