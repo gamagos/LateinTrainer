@@ -163,11 +163,16 @@ class LatinDeclensionApp:
         self.root = root
         self.root.title( "Latin Declension Trainer" )
         
+        self.canvas = tk.Canvas( root )
+        #self.canvas.pack( side = "left", fill = "both", expand = True )
+
+        self.scrollbar = tk.Scrollbar( root, orient = "vertical", command = self.canvas.yview )
+        #self.scrollbar.pack()
+        
         self.ORIGINAL_SCALE = 1.5  # Original scale factor
         self.ui_scale = self.ORIGINAL_SCALE  # Adjusted scale factor
         self.initial_width = self.root.winfo_screenwidth() // 2
         self.initial_height = self.root.winfo_screenheight() // 2
-        self.root.geometry( f"{self.initial_width}x{self.initial_height}" )
         
         self.classes = list( deklinationen.keys() )
         random.shuffle( self.classes )  # Shuffle the order of declensions
@@ -189,7 +194,7 @@ class LatinDeclensionApp:
         self.label.grid( row=0, column=0, pady=10, sticky="w" )  # Use grid layout
         
         self.option_menu = tk.OptionMenu( self.main_frame, self.selected_option, "Nouns-Declension", "Verbs-Konjugation" )
-        self.option_menu.config( font=("Arial", 14) )  # Fixed font size
+        self.option_menu.config( font=("Arial", 10) )  # Fixed font size
         self.option_menu.grid( row=0, column=1, pady=10, sticky="w" )  # Use grid layout
         
         self.frame = tk.Frame( self.main_frame )
