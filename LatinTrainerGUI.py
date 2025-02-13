@@ -14,11 +14,14 @@ class LatinTrainerGUI:
         
         self.canvas = tk.Canvas( root )
         self.canvas.pack( side = "left", fill = "both", expand = True )
+        
+        self.h_scrollbar = tk.Scrollbar( root, orient = "horizontal", command = self.canvas.yview )
+        self.h_scrollbar.pack( side = "bottom", fill = "x" )
 
         self.v_scrollbar = tk.Scrollbar( root, orient = "vertical", command = self.canvas.yview )
         self.v_scrollbar.pack( side = "right", fill = "y" )
         
-        self.canvas.config( yscrollcommand = self.scrollbar.set )
+        self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
         
         self.ORIGINAL_SCALE = 1.5  # Original scale factor
         self.ui_scale = self.ORIGINAL_SCALE  # Adjusted scale factor
