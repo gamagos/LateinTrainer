@@ -1,11 +1,10 @@
 import data
-
 import tkinter as tk
 from tkinter import messagebox
 
 import random
 
-class LatinDeclensionApp:
+class LatinTrainerGUI:
     def __init__( self, root ):
         data_instance = data.data()
         self.deklinationen = data_instance.deklinationen
@@ -16,15 +15,13 @@ class LatinDeclensionApp:
         self.canvas = tk.Canvas( root )
         self.canvas.pack( side = "left", fill = "both", expand = True )
 
-        self.scrollbar = tk.Scrollbar( root, orient = "vertical", command = self.canvas.yview )
-        self.scrollbar.pack( side = "right", fill = "y" )
+        self.v_scrollbar = tk.Scrollbar( root, orient = "vertical", command = self.canvas.yview )
+        self.v_scrollbar.pack( side = "right", fill = "y" )
         
         self.canvas.config( yscrollcommand = self.scrollbar.set )
         
         self.ORIGINAL_SCALE = 1.5  # Original scale factor
         self.ui_scale = self.ORIGINAL_SCALE  # Adjusted scale factor
-        self.initial_width = self.root.winfo_screenwidth() // 2
-        self.initial_height = self.root.winfo_screenheight() // 2
         
         self.classes = list( self.deklinationen.keys() )
         random.shuffle( self.classes )  # Shuffle the order of declensions
@@ -35,29 +32,34 @@ class LatinDeclensionApp:
         self.results = {}  # Variable to save whether the answer was right or wrong
         self.selected_option = tk.StringVar( value="Nouns-Declension" )  # Variable to save the selected option
         self.create_widgets()
-        
-        self.root.bind( "<Configure>", self.on_resize )
     
     def create_widgets( self ):
         self.main_frame = tk.Frame( self.root )
-        self.main_frame.pack( fill="both", expand=True )
+        self.canvas.create_window( ( 0, 0 ), window = self.main_frame, anchor = "nw" )
         
-        self.label = tk.Label( self.main_frame, text=f"            {self.classes[self.current_class_index]}", font=("Arial", int( 20 * self.ui_scale ), "bold") )   #weird spaces because of offset in UI
+        self.label = tk.Label( self.main_frame, text=f"          {self.classes[self.current_class_index]}", font=("Arial", int( 20 * self.ui_scale ), "bold") )   #weird spaces because of offset in UI
         self.label.grid( row=0, column=0, pady=10, sticky="w" )  # Use grid layout
         
         self.option_menu = tk.OptionMenu( self.main_frame, self.selected_option, "Nouns-Declension", "Verbs-Konjugation" )
-        self.option_menu.config( font=("Arial", 10) )  # Fixed font size
+        self.option_menu.config( font = ( "Arial", 10 ) )  # Fixed font size
         self.option_menu.grid( row=0, column=1, pady=10, sticky="w" )  # Use grid layout
         
         self.frame = tk.Frame( self.main_frame )
-        self.frame.grid( row=1, column=0, columnspan=2, sticky="nsew" )  # Use grid layout
-        self.main_frame.grid_rowconfigure( 1, weight=1 )
-        self.main_frame.grid_columnconfigure( 0, weight=1 )
+        self.frame.grid( row=1, column = 0, columnspan = 2, sticky = "nsew" )  # Use grid layout
+        self.main_frame.grid_rowconfigure( 1, weight = 1 )
+        self.main_frame.grid_columnconfigure( 0, weight = 1 )
         
         self.populate_entries()
         
         self.check_button = tk.Button( self.main_frame, text="Check", font=("Arial", int( 14 * self.ui_scale )), command=self.check_answers )
-        self.check_button.grid( row=2, column=0, columnspan=2, pady=10 )  # Use grid layout
+        self.check_button.grid( row=2, column=0, columnspan=2, pady=10,  )  # Use grid layout
+        
+        self.main_frame.update_idletasks()
+        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
+        self.main_frame.bind( "<Configure>", self.self_on_frame_configure )
+
+    def self_on_frame_configure( self, event ):
+        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
     
     def populate_entries( self ):
         for i, ( case, correct_answer ) in enumerate( self.current_declension.items() ):
@@ -71,31 +73,6 @@ class LatinDeclensionApp:
                 
             entry.grid( row=i, column=1, padx=5, pady=5, sticky="w" )  # Use grid layout
             self.entries[ case ] = entry
-    
-    def on_resize( self, event ):
-        if event.widget == self.root:
-            new_width = event.width
-            new_height = event.height
-            width_ratio = new_width / self.initial_width
-            height_ratio = new_height / self.initial_height
-            self.ui_scale = ( width_ratio + height_ratio ) / 2 * self.ORIGINAL_SCALE  # Adjust scale factor to use average
-            
-            self.label.config( font=("Arial", int( 20 * self.ui_scale ), "bold") )
-            for widget in self.frame.winfo_children():
-                if isinstance( widget, tk.Label ) or isinstance( widget, tk.Entry ):
-                    widget.config( font=("Arial", int( 14 * self.ui_scale )) )
-            self.check_button.config( font=("Arial", int( 14 * self.ui_scale )) )
-            
-            self.adjust_ui_elements()
-    
-    def adjust_ui_elements( self ):
-        while self.is_overflowing():
-            self.ui_scale -= 0.1
-            self.label.config( font=("Arial", int( 20 * self.ui_scale ), "bold") )
-            for widget in self.frame.winfo_children():
-                if isinstance( widget, tk.Label ) or isinstance( widget, tk.Entry ):
-                    widget.config( font=("Arial", int( 14 * self.ui_scale )) )
-            self.check_button.config( font=( "Arial", int( 14 * self.ui_scale )) )
     
     def is_overflowing( self ):
         self.root.update_idletasks()
@@ -168,5 +145,5 @@ class LatinDeclensionApp:
                 
             self.entries = {}
             self.results = {}  # Reset results for the new class
-            self.label.config( text=f"            {self.classes[self.current_class_index]}" )   #weird spaces because of offset
+            self.label.config( text=f"          {self.classes[self.current_class_index]}" )   #weird spaces because of offset
             self.populate_entries()
