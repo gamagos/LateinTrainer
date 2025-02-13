@@ -3,7 +3,7 @@ import tkinter as tk
         
 root = tk.Tk()
 root.resizable( False, False )
-root.geometry("700x800")
+root.geometry("800x700")
 
 app = LatinTrainerGUI.LatinTrainerGUI( root )
 
