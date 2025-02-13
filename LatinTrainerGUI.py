@@ -1,9 +1,15 @@
+import data
+
 import tkinter as tk
 from tkinter import messagebox
+
 import random
 
 class LatinDeclensionApp:
     def __init__( self, root ):
+        data_instance = data.data()
+        self.deklinationen = data_instance.deklinationen
+        
         self.root = root
         self.root.title( "Latin Declension Trainer" )
         
@@ -20,10 +26,10 @@ class LatinDeclensionApp:
         self.initial_width = self.root.winfo_screenwidth() // 2
         self.initial_height = self.root.winfo_screenheight() // 2
         
-        self.classes = list( deklinationen.keys() )
+        self.classes = list( self.deklinationen.keys() )
         random.shuffle( self.classes )  # Shuffle the order of declensions
         self.current_class_index = 0
-        self.current_declension = deklinationen[ self.classes[ self.current_class_index ] ]
+        self.current_declension = self.deklinationen[ self.classes[ self.current_class_index ] ]
         
         self.entries = {}
         self.results = {}  # Variable to save whether the answer was right or wrong
@@ -155,7 +161,7 @@ class LatinDeclensionApp:
             self.root.quit()
             
         else:
-            self.current_declension = deklinationen[ self.classes[ self.current_class_index ] ]
+            self.current_declension = self.deklinationen[ self.classes[ self.current_class_index ] ]
             
             for widget in self.frame.winfo_children():
                 widget.destroy()
