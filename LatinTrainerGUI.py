@@ -32,7 +32,7 @@ class LatinTrainerGUI:
         
         self.entries = {}
         self.results = {}  # Variable to save whether the answer was right or wrong
-        self.selected_option = tk.StringVar( value="Nouns-Declension" )  # Variable to save the selected option
+        self.selected_option = tk.StringVar( value="Nomen-Deklinationen" )  # Variable to save the selected option
         self.create_widgets()
     
     def create_widgets( self ):
@@ -42,7 +42,7 @@ class LatinTrainerGUI:
         self.label = tk.Label( self.main_frame, text=f"          { self.classes[ self.current_class_index ] }", font = ( "Arial", int( 20 * self.ui_scale), "bold"))   #weird spaces because of offset in UI
         self.label.grid( row = 0, column = 0, pady = 10, sticky = "w")  # Use grid layout
         
-        self.option_menu = tk.OptionMenu( self.main_frame, self.selected_option, "Nouns-Declension", "Verbs-Konjugation" )
+        self.option_menu = tk.OptionMenu( self.main_frame, self.selected_option, "Nomen-Deklinationen", "Verben-Konjugation" )
         self.option_menu.config( font = ( "Arial", 10 ) )  # Fixed font size
         self.option_menu.grid(row=0, column=1, pady=10, sticky="w")  # Use grid layout
         
@@ -53,7 +53,7 @@ class LatinTrainerGUI:
         
         self.populate_entries()
         
-        self.check_button = tk.Button(self.main_frame, text="Check", font=("Arial", int(14 * self.ui_scale)), command=self.check_answers)
+        self.check_button = tk.Button(self.main_frame, text="Überprüfen", font=("Arial", int(14 * self.ui_scale)), command=self.check_answers)
         self.check_button.grid(row=2, column=0, columnspan=2, pady=10)  # Use grid layout
         
         self.main_frame.update_idletasks()
