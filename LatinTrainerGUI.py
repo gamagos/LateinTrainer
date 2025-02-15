@@ -18,11 +18,11 @@ class LatinTrainerGUI:
         self.canvas = tk.Canvas( self.main_frame )
         self.canvas.place( relheight = 0.95, relwidth = 0.95 )
 
-        self.h_scrollbar = tk.Scrollbar( self.main_frame, orient="horizontal", command=self.canvas.xview )
-        self.h_scrollbar.place( relx = 0, rely = 0.95, relwidth = 0.95, height = 20 )
+        self.h_scrollbar = tk.Scrollbar( self.main_frame, orient = "horizontal", command = self.canvas.xview )
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.9, relheight = 0.023 )
 
-        self.v_scrollbar = tk.Scrollbar( self.main_frame, orient="vertical", command=self.canvas.yview )
-        self.v_scrollbar.place( relx = 0.95, rely = 0, relheight = 0.95, width = 20 )
+        self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
+        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.023 )
         
         self.canvas.config( yscrollcommand=self.v_scrollbar.set, xscrollcommand=self.h_scrollbar.set )
         
@@ -41,6 +41,9 @@ class LatinTrainerGUI:
         self.create_widgets()
         self.resize_content_frame(None)
         
+        self.canvas.bind_all("<MouseWheel>", self.on_mouse_wheel)
+        self.canvas.bind_all("<Shift-MouseWheel>", self.on_shift_mouse_wheel)
+        
         
     #puts stuff in the window that will always be there
     def create_widgets( self ):
@@ -52,7 +55,7 @@ class LatinTrainerGUI:
         
         self.option_menu = tk.OptionMenu( self.content_frame, self.selected_option, "Nomen-Deklinationen", "Verben-Konjugation" )
         self.option_menu.config( font = ( "Arial", 10 ) ) 
-        self.option_menu.place( relx = 0.9, y = 15 )
+        self.option_menu.place( relx = 0.8, rely = 0.1 )
         
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( x = 10, y = 50, relwidth = 0.9, relheight = 0.7 )
@@ -66,22 +69,10 @@ class LatinTrainerGUI:
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
         self.content_frame.bind( "<Configure>", self.on_frame_configure )
         self.root.bind( "<Configure>", self.resize_content_frame )
-
-
-    def resize_content_frame(self, event):
-        root_width = self.root.winfo_width()
-        root_height = self.root.winfo_height()
         
-        new_width = root_width - self.v_scrollbar.winfo_width() - 2                           # Leave space for the vertical scrollbar
-        new_height = root_height - self.h_scrollbar.winfo_height() - 2                        # Leave space for the horizontal scrollbar
-        
-        self.canvas.itemconfig( self.canvas_window, width=new_width, height=new_height )
-        self.canvas.config(scrollregion=self.canvas.bbox( "all" ) )
+        self.root.update()
 
-    def on_frame_configure( self, event ):
-        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
-    
-    
+
     #puts the temporary stuff in the frame
     def populate_entries( self ):
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_declension.items() ):
@@ -95,6 +86,30 @@ class LatinTrainerGUI:
                 
             entry.place( x = 200, y = 30 * i )
             self.entries[ case_or_tempus ] = entry
+    
+    
+    def on_frame_configure( self, event ):
+        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
+        self.root.update()
+    
+    
+    def resize_content_frame(self, event):
+        root_width = self.root.winfo_width()
+        root_height = self.root.winfo_height()
+        
+        new_width = root_width - self.v_scrollbar.winfo_width() - 2                           # Leave space for the vertical scrollbar
+        new_height = root_height - self.h_scrollbar.winfo_height() - 2                        # Leave space for the horizontal scrollbar
+        
+        self.canvas.itemconfig( self.canvas_window, width=new_width, height=new_height )
+        self.canvas.config(scrollregion=self.canvas.bbox( "all" ) )
+
+
+    def on_mouse_wheel(self, event):
+        self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+    
+    
+    def on_shift_mouse_wheel(self, event):
+        self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
     
     
     def check_answers( self ):
