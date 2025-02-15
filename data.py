@@ -41,7 +41,7 @@ class Data:
                 "ablativ_plural": "bellis",
             },
     
-            "Konsonantische Deklination": {
+            "konsonantische Deklination": {
                 "nominativ_singular": "rex",
                 "genitiv_singular": "regis",
                 "dativ_singular": "regi",
@@ -54,7 +54,7 @@ class Data:
                 "ablativ_plural": "regibus",
             },
     
-            "Konsonantische Deklination Neutrum": {
+            "konsonantische Deklination neutrum": {
                 "nominativ_singular": "corpus",
                 "genitiv_singular": "corporis",
                 "dativ_singular": "corpori",
@@ -66,7 +66,7 @@ class Data:
                 "akkusativ_plural": "corpora",
                 "ablativ_plural": "corporibus",
             },
-            "Konsonantische Deklination Neutrum mit Genitiv Plural -ium": {
+            "konsonantische Deklination neutrum\n mit Gen. Plural -ium": {
                 "nominativ_singular": "animal",
                 "genitiv_singular": "animalis",
                 "dativ_singular": "animali",

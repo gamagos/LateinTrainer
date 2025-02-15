@@ -50,15 +50,17 @@ class LatinTrainerGUI:
         self.content_frame = tk.Frame( self.canvas )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor="nw" )
         
-        self.label = tk.Label( self.content_frame, text = f"{ self.declension_classes[ self.current_class_index ] }", font = ( "Arial", int( 20 * self.ui_scale ), "bold" ) )   #weird spaces because of offset in UI
-        self.label.place( x = 10, y = 10 )
+        self.label = tk.Label( self.content_frame, text = f"{ self.declension_classes[ self.current_class_index ] }",
+                              font = ( "Arial", int( 18 * self.ui_scale ), "bold" ),
+                              anchor = "nw", justify = "left" )
+        self.label.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.7 )
         
-        self.option_menu = tk.OptionMenu( self.content_frame, self.selected_option, "Nomen-Deklinationen", "Verben-Konjugation" )
-        self.option_menu.config( font = ( "Arial", 10 ) ) 
-        self.option_menu.place( relx = 0.8, rely = 0.1 )
-        
+        self.training_selection = tk.OptionMenu( self.content_frame, self.selected_option, "Nomen-Deklinationen", "Verben-Konjugation" )
+        self.training_selection.config( font = ( "Arial", 10 ) ) 
+        self.training_selection.place( relx = 0.977 , rely = 0, anchor = "ne" )
+
         self.forms_frame = tk.Frame( self.content_frame )
-        self.forms_frame.place( x = 10, y = 50, relwidth = 0.9, relheight = 0.7 )
+        self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
         
         self.populate_entries()
         
@@ -70,6 +72,7 @@ class LatinTrainerGUI:
         self.content_frame.bind( "<Configure>", self.on_frame_configure )
         self.root.bind( "<Configure>", self.resize_content_frame )
         
+        self.training_selection.tkraise()
         self.root.update()
 
 
@@ -77,14 +80,14 @@ class LatinTrainerGUI:
     def populate_entries( self ):
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_declension.items() ):
             label = tk.Label( self.forms_frame, text=case_or_tempus.replace( "_", " " ).capitalize(), font=( "Arial", int(14 * self.ui_scale ) ) )
-            label.place( x = 10, y = 30 * i )
+            label.place( relx = 0.013, rely = 0.065 * i )
             entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
             
             if case_or_tempus == "nominativ_singular":
                 entry.insert( 0, correct_answer )
                 entry.config( state="disabled", disabledforeground="gray" )
                 
-            entry.place( x = 200, y = 30 * i )
+            entry.place( relx = 0.36, rely = 0.065 * i )
             self.entries[ case_or_tempus ] = entry
     
     
@@ -124,17 +127,14 @@ class LatinTrainerGUI:
             if user_input == correct_answer:
                 self.entries[ case_or_tempus ].config(fg = "green", state = "disabled", disabledforeground = "green")
                 self.results[ case_or_tempus ] = True 
-                
             else:
                 wrong = True
                 self.entries[ case_or_tempus ].config(fg = "red", state = "disabled", disabledforeground = "red")
                 self.results[ case_or_tempus ] = False
         
         if wrong:
-            self.check_button.config( text = "Show Solutions", command = self.show_solutions )
-            
+            self.check_button.config( text = "Show Solutions", command = self.show_solutions ) 
         else:
-            messagebox.showinfo( "Correct!", "You got all answers right!" )
             self.next_class()
     
     
@@ -174,7 +174,6 @@ class LatinTrainerGUI:
         if self.current_class_index >= len(self.declension_classes):
             messagebox.showinfo("Done", "You have completed all declensions!")
             self.root.quit()
-            
         else:
             self.current_declension = self.deklinationen[self.declension_classes[self.current_class_index]]
             
