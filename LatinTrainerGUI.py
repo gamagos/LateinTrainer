@@ -2,6 +2,7 @@ from threading import main_thread
 import Data
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 import random
 
 class LatinTrainerGUI:
@@ -19,7 +20,7 @@ class LatinTrainerGUI:
         self.canvas.place( relheight = 0.95, relwidth = 0.95 )
 
         self.h_scrollbar = tk.Scrollbar( self.main_frame, orient = "horizontal", command = self.canvas.xview )
-        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.9, relheight = 0.023 )
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.976, relheight = 0.023 )
 
         self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.023 )
@@ -51,21 +52,19 @@ class LatinTrainerGUI:
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor="nw" )
         
         self.label = tk.Label( self.content_frame, text = f"{ self.declension_classes[ self.current_class_index ] }",
-                              font = ( "Arial", int( 18 * self.ui_scale ), "bold" ),
-                              anchor = "nw", justify = "left" )
-        self.label.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.7 )
+                              font = ( "Arial", int( 18 * self.ui_scale ), "bold" ), anchor = "nw", justify = "left" )
+        self.label.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.71 )
         
-        self.training_selection = tk.OptionMenu( self.content_frame, self.selected_option, "Nomen-Deklinationen", "Verben-Konjugation" )
-        self.training_selection.config( font = ( "Arial", 10 ) ) 
-        self.training_selection.place( relx = 0.977 , rely = 0, anchor = "ne" )
+        self.training_selection = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Nomen-Deklinationen", "Verben-Konjugation" ] ) 
+        self.training_selection.place( relx = 0.974 , rely = 0, relheight = 0.023, relwidth = 0.181, anchor = "ne" )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
         
         self.populate_entries()
         
-        self.check_button = tk.Button(self.content_frame, text="Überprüfen", font=("Arial", int(14 * self.ui_scale)), command=self.check_answers)
-        self.check_button.place( relx = 0.45, rely = 0.8 )
+        self.check_button = tk.Button(self.content_frame, text="Überprüfen", command=self.check_answers)
+        self.check_button.place( relx = 0.45, rely = 0.8, relheight = 0.08, relwidth = 0.24 )
         
         self.content_frame.update_idletasks()
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )

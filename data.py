@@ -54,7 +54,7 @@ class Data:
                 "ablativ_plural": "regibus",
             },
     
-            "konsonantische Deklination neutrum": {
+            "konsonantische Deklination\nneutrum": {
                 "nominativ_singular": "corpus",
                 "genitiv_singular": "corporis",
                 "dativ_singular": "corpori",
