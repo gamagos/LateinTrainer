@@ -6,8 +6,8 @@ import random
 
 class LatinTrainerGUI:
     def __init__( self, root ):
-        data_instance = Data.Data()
-        self.deklinationen = data_instance.deklinationen
+        self.data_instance = Data.Data()
+        self.deklinationen = self.data_instance.deklinationen
         
         self.root = root
         self.root.title( "Latin Trainer" )
