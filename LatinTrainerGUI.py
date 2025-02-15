@@ -1,3 +1,4 @@
+from threading import main_thread
 import data
 import tkinter as tk
 from tkinter import messagebox
@@ -11,13 +12,16 @@ class LatinTrainerGUI:
         self.root = root
         self.root.title( "Latin Declension Trainer" )
         
-        self.canvas = tk.Canvas( root )
+        self.main_frame = tk.Frame( root )
+        self.main_frame.pack( side = "left", fill = "both", expand = True )
+        
+        self.canvas = tk.Canvas( self.main_frame )
         self.canvas.pack( side="left", fill="both", expand=True )
 
-        self.h_scrollbar = tk.Scrollbar( root, orient="horizontal", command=self.canvas.xview )
+        self.h_scrollbar = tk.Scrollbar( self.main_frame, orient="horizontal", command=self.canvas.xview )
         self.h_scrollbar.pack( side="bottom", fill="x" )
 
-        self.v_scrollbar = tk.Scrollbar( root, orient="vertical", command=self.canvas.yview )
+        self.v_scrollbar = tk.Scrollbar( self.main_frame, orient="vertical", command=self.canvas.yview )
         self.v_scrollbar.pack( side="right", fill="y" )
         
         self.canvas.config( yscrollcommand=self.v_scrollbar.set, xscrollcommand=self.h_scrollbar.set )
