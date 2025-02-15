@@ -173,6 +173,14 @@ class Data:
                 "2._Person_Plural": "amabitis",
                 "3._Person_Plural": "amabunt",
             },
+            "a-Konjugation Futur 2": {
+                "1._Person_Singular": "amavero",
+                "2._Person_Singular": "amaveris",
+                "3._Person_Singular": "amaverit",
+                "1._Person_Plural": "amaverimus",
+                "2._Person_Plural": "amaveritis",
+                "3._Person_Plural": "amaverint",
+            },
             "a-Konjugation PPA": {
                 "Singular": "amans",
                 "Plural": "amantes",
@@ -224,6 +232,14 @@ class Data:
                 "1._Person_Plural": "monebimus",
                 "2._Person_Plural": "monebitis",
                 "3._Person_Plural": "monebunt",
+            },
+            "e-Konjugation Futur 2": {
+                "1._Person_Singular": "monuero",
+                "2._Person_Singular": "monueris",
+                "3._Person_Singular": "monuerit",
+                "1._Person_Plural": "monuerimus",
+                "2._Person_Plural": "monueritis",
+                "3._Person_Plural": "monuerint",
             },
             "e-Konjugation PPA": {
                 "Singular": "monens",
@@ -277,6 +293,14 @@ class Data:
                 "2._Person_Plural": "audietis",
                 "3._Person_Plural": "audient",
             },
+            "i-Konjugation Futur 2": {
+                "1._Person_Singular": "audivero",
+                "2._Person_Singular": "audiveris",
+                "3._Person_Singular": "audiverit",
+                "1._Person_Plural": "audiverimus",
+                "2._Person_Plural": "audiveritis",
+                "3._Person_Plural": "audiverint",
+            },
             "i-Konjugation PPA": {
                 "Singular": "audiens",
                 "Plural": "audientes",
@@ -329,6 +353,14 @@ class Data:
                 "2._Person_Plural": "regetis",
                 "3._Person_Plural": "regent",
             },
+            "konsonantische Konjugation Futur 2": {
+                "1._Person_Singular": "rexero",
+                "2._Person_Singular": "rexeris",
+                "3._Person_Singular": "rexerit",
+                "1._Person_Plural": "rexerimus",
+                "2._Person_Plural": "rexeritis",
+                "3._Person_Plural": "rexerint",
+            },
             "konsonantische Konjugation PPA": {
                 "Singular": "regens",
                 "Plural": "regentes",
@@ -380,6 +412,14 @@ class Data:
                 "1._Person_Plural": "capiemus",
                 "2._Person_Plural": "capietis",
                 "3._Person_Plural": "capient",
+            },
+            "gemischte Konjugation Futur 2": {
+                "1._Person_Singular": "cepero",
+                "2._Person_Singular": "ceperis",
+                "3._Person_Singular": "ceperit",
+                "1._Person_Plural": "ceperimus",
+                "2._Person_Plural": "ceperitis",
+                "3._Person_Plural": "ceperint",
             },
             "gemischte Konjugation PPA": {
                 "Singular": "capiens",
