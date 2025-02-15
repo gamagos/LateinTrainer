@@ -1,5 +1,4 @@
 -make resizing work and not break the UI
--make the scrollbars appear on top of the canvas for visibility with small windows
 -add more grammar forms
 -make UI look nicer
 -make settings to select what you want to learn
