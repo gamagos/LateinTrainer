@@ -1,4 +1,4 @@
-class data:
+class Data:
     def __init__( self ):
         
         self.deklinationen = {
@@ -181,6 +181,10 @@ class data:
                 "Singular": "amatus",
                 "Plural": "amati",
             },
+            "a-Konjugation PFA": {
+                "Singular": "amaturus",
+                "Plural": "amaturi",
+            },
             "e-Konjugation Präsens": {
                 "1._Person_Singular": "moneo",
                 "2._Person_Singular": "mones",
@@ -228,6 +232,10 @@ class data:
             "e-Konjugation PPP": {
                 "Singular": "monitus",
                 "Plural": "moniti",
+            },
+            "e-Konjugation PFA": {
+                "Singular": "moniturus",
+                "Plural": "monituri",
             },
             "i-Konjugation Präsens": {
                 "1._Person_Singular": "audio",
@@ -277,6 +285,10 @@ class data:
                 "Singular": "auditus",
                 "Plural": "auditi",
             },
+            "i-Konjugation PFA": {
+                "Singular": "auditurus",
+                "Plural": "audituri",
+            },
             "konsonantische Konjugation Präsens": {
                 "1._Person_Singular": "rego",
                 "2._Person_Singular": "regis",
@@ -325,6 +337,10 @@ class data:
                 "Singular": "rectus",
                 "Plural": "recti",
             },
+            "konsonantische Konjugation PFA": {
+                "Singular": "recturus",
+                "Plural": "recturi",
+            },
             "gemischte Konjugation Präsens": {
                 "1._Person_Singular": "capio",
                 "2._Person_Singular": "capis",
@@ -372,5 +388,9 @@ class data:
             "gemischte Konjugation PPP": {
                 "Singular": "captus",
                 "Plural": "capti",
+            },
+            "gemischte Konjugation PFA": {
+                "Singular": "capturus",
+                "Plural": "capturi",
             }
         }
