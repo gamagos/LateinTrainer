@@ -1,3 +1,4 @@
 *.tmp
 .tmp.driveupload/
 .tmp.driveupload
+__pycache__
