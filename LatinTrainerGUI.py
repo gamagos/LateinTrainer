@@ -54,6 +54,7 @@ class LatinTrainerGUI:
         self.label = tk.Label( self.content_frame, text = f"{ self.declension_classes[ self.current_class_index ] }",
                               font = ( "Arial", int( 18 * self.ui_scale ), "bold" ), anchor = "nw", justify = "left" )
         self.label.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.71 )
+        self.label.bind( "<Configure>", self.adjust_label_font_size )
         
         self.training_selection = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Nomen-Deklinationen", "Verben-Konjugation" ] ) 
         self.training_selection.place( relx = 0.974 , rely = 0, relheight = 0.023, relwidth = 0.181, anchor = "ne" )
@@ -63,8 +64,9 @@ class LatinTrainerGUI:
         
         self.populate_entries()
         
-        self.check_button = tk.Button(self.content_frame, text="Überprüfen", command=self.check_answers)
+        self.check_button = tk.Button( self.content_frame, text="Überprüfen", command=self.check_answers )
         self.check_button.place( relx = 0.45, rely = 0.8, relheight = 0.08, relwidth = 0.24 )
+        self.check_button.bind( "<Configure>", self.adjust_button_font_size )
         
         self.content_frame.update_idletasks()
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
@@ -88,6 +90,18 @@ class LatinTrainerGUI:
                 
             entry.place( relx = 0.36, rely = 0.065 * i )
             self.entries[ case_or_tempus ] = entry
+            
+            
+    def adjust_label_font_size(self, event):
+        widget = event.widget
+        font_size = int(widget.winfo_height() * 0.3 )
+        widget.config(font=("Arial", font_size))
+
+
+    def adjust_button_font_size(self, event):
+        widget = event.widget
+        font_size = int(widget.winfo_height() * 0.4 )
+        widget.config(font=("Arial", font_size))
     
     
     def on_frame_configure( self, event ):
