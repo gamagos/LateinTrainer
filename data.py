@@ -992,6 +992,6 @@ class Data:
                 "3._Person_Plural": "cepissent",
             }
         }
-        self.declensions_adjectives{
+        self.declensions_adjectives = {
         
         }
