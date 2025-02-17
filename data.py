@@ -995,3 +995,4 @@ class Data:
         self.declensions_adjectives{
         
         }
+        test
