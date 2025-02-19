@@ -8,10 +8,14 @@ import random
 class LatinTrainerGUI:
     def __init__( self, root ):
         self.data_instance = Data.Data()
+        
         self.deklinationen = self.data_instance.deklinationen
         self.konjugationen = self.data_instance.konjugationen
         self.deklinationen_adjeltive = self.data_instance.deklinationen_adjektive
         self.hic_haec_hoc = self.data_instance.hic_haec_hoc
+        
+        self.dictionaries = [ self.deklinationen, self.konjugationen ]
+        random.shuffle( self.dictionaries )
         
         self.root = root
         self.root.title( "Latin Trainer" )
@@ -36,7 +40,7 @@ class LatinTrainerGUI:
         self.declension_classes = list( self.deklinationen.keys() )
         random.shuffle( self.declension_classes )                                                       
         self.current_class_index = 0
-        self.current_declension = self.deklinationen[ self.declension_classes[ self.current_class_index ] ]
+        self.current_forms = self.deklinationen[ self.declension_classes[ self.current_class_index ] ]
         
         self.entries = {}
         self.results = {}                                                                                          # Variable to save whether the answer was right or wrong
@@ -82,7 +86,7 @@ class LatinTrainerGUI:
 
     #puts the temporary stuff in the frame
     def populate_entries( self ):
-        for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_declension.items() ):
+        for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_forms.items() ):
             form_label = tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ).capitalize(), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "nw", justify = "left" )
             form_label.place( relx = 0.013, rely = 0.07 * i, relwidth = 0.4, relheight = 0.08 )
             form_label.bind( "<Configure>", self.adjust_forms_label_font_size )
@@ -143,7 +147,7 @@ class LatinTrainerGUI:
     def check_answers( self ):
         wrong = False
         
-        for case_or_tempus, correct_answer in self.current_declension.items():
+        for case_or_tempus, correct_answer in self.current_forms.items():
             
             if case_or_tempus == "nominativ_singular":
                 continue
@@ -164,7 +168,7 @@ class LatinTrainerGUI:
     
     
     def show_solutions( self ):
-        for case, correct_answer in self.current_declension.items():
+        for case, correct_answer in self.current_forms.items():
             
             if case == "nominativ_singular" or self.results.get( case, True ):
                 continue
@@ -181,7 +185,7 @@ class LatinTrainerGUI:
     
     
     def retry(self):
-        for case, correct_answer in self.current_declension.items():
+        for case, correct_answer in self.current_forms.items():
             
             if case == "nominativ_singular" or self.results.get(case, True):
                 continue
@@ -200,7 +204,7 @@ class LatinTrainerGUI:
             messagebox.showinfo("Done", "You have completed all declensions!")
             self.root.quit()
         else:
-            self.current_declension = self.deklinationen[self.declension_classes[self.current_class_index]]
+            self.current_forms = self.deklinationen[self.declension_classes[self.current_class_index]]
             
             for widget in self.forms_frame.winfo_children():
                 widget.destroy()
