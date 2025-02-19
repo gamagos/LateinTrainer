@@ -3,3 +3,5 @@
 -make UI look nicer
 -make settings to select what you want to learn
 -make updater
+
+*make entries relative to labels

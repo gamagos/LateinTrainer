@@ -992,6 +992,23 @@ class Data:
                 "3._Person_Plural": "cepissent",
             }
         }
-        self.declensions_adjectives = {
         
+        self.deklinationen_adjektive = {
+            
+        }
+        
+        self.hic_haec_hoc = {
+            
+        }
+        
+        self.qui_quae_qoud = {
+            
+        }
+        
+        self.ille_illa_illud = {
+            
+        }
+        
+        self.ipse_ipsa_ipsum = {
+            
         }
