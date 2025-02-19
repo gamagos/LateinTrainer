@@ -80,8 +80,8 @@ class LatinTrainerGUI:
     #puts the temporary stuff in the frame
     def populate_entries( self ):
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_declension.items() ):
-            label = tk.Label( self.forms_frame, text=case_or_tempus.replace( "_", " " ).capitalize(), font=( "Arial", int(14 * self.ui_scale ) ) )
-            label.place( relx = 0.013, rely = 0.065 * i )
+            label = tk.Label( self.forms_frame, text=case_or_tempus.replace( "_", " " ).capitalize(), font=( "Arial", int(14 * self.ui_scale ) ), anchor="nw", justify = "left" )
+            label.place( relx = 0.013, rely = 0.065 * i, relwidth = 0.4, relheight = 0.06 )
             entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
             
             if case_or_tempus == "nominativ_singular":
@@ -94,7 +94,7 @@ class LatinTrainerGUI:
             
     def adjust_label_font_size(self, event):
         widget = event.widget
-        font_size = int(widget.winfo_height() * 0.3 )
+        font_size = int(widget.winfo_height() * 0.2 )
         widget.config(font=("Arial", font_size))
 
 
