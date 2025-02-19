@@ -203,7 +203,7 @@ class Data:
                 "Genitiv_Plural": "amatorum",
                 "Dativ_Plural": "amatis",
                 "Akkusativ_Plural": "amatos",
-                "Ablativ_Plural": "amatis"
+                "Ablativ_Plural": "amatis",
             },
             "a-Konjugation PFA": {
                 "Singular": "amaturus",
