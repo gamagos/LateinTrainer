@@ -31,7 +31,7 @@ class LatinTrainerGUI:
         self.ui_scale = self.ORIGINAL_SCALE  
         
         self.declension_classes = list( self.deklinationen.keys() )
-        random.shuffle( self.declension_classes )                                                                  # Shuffle the order of declensions
+        random.shuffle( self.declension_classes )                                                       
         self.current_class_index = 0
         self.current_declension = self.deklinationen[ self.declension_classes[ self.current_class_index ] ]
         
@@ -49,15 +49,15 @@ class LatinTrainerGUI:
     #puts stuff in the window that will always be there
     def create_widgets( self ):
         self.content_frame = tk.Frame( self.canvas )
-        self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor="nw" )
+        self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
-        self.label = tk.Label( self.content_frame, text = f"{ self.declension_classes[ self.current_class_index ] }",
-                              font = ( "Arial", int( 18 * self.ui_scale ), "bold" ), anchor = "nw", justify = "left" )
-        self.label.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.71 )
-        self.label.bind( "<Configure>", self.adjust_label_font_size )
+        self.titel = tk.Label( self.content_frame, text = f"{ self.declension_classes[ self.current_class_index ] }",
+                              font = ( "Arial", int( 18 * self.ui_scale ), "bold" ), anchor = "n", justify = "left" )
+        self.titel.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.71 )
+        self.titel.bind( "<Configure>", self.adjust_titel_font_size )
         
         self.training_selection = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Nomen-Deklinationen", "Verben-Konjugation" ] ) 
-        self.training_selection.place( relx = 0.974 , rely = 0, relheight = 0.023, relwidth = 0.181, anchor = "ne" )
+        self.training_selection.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
@@ -80,28 +80,37 @@ class LatinTrainerGUI:
     #puts the temporary stuff in the frame
     def populate_entries( self ):
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_declension.items() ):
-            label = tk.Label( self.forms_frame, text=case_or_tempus.replace( "_", " " ).capitalize(), font=( "Arial", int(14 * self.ui_scale ) ), anchor="nw", justify = "left" )
-            label.place( relx = 0.013, rely = 0.065 * i, relwidth = 0.4, relheight = 0.06 )
+            form_label = tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ).capitalize(), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "nw", justify = "left" )
+            form_label.place( relx = 0.013, rely = 0.07 * i, relwidth = 0.4, relheight = 0.08 )
+            form_label.bind( "<Configure>", self.adjust_forms_label_font_size )
+            
             entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
             
             if case_or_tempus == "nominativ_singular":
                 entry.insert( 0, correct_answer )
-                entry.config( state="disabled", disabledforeground="gray" )
+                entry.config( state = "disabled", disabledforeground = "gray" )
                 
-            entry.place( relx = 0.36, rely = 0.065 * i )
+            entry.place( relx = 0.39, rely = 0.07 * i, relwidth = 0.6, relheight = 0.08 )
             self.entries[ case_or_tempus ] = entry
             
             
-    def adjust_label_font_size(self, event):
+    def adjust_titel_font_size( self, event ):
         widget = event.widget
-        font_size = int(widget.winfo_height() * 0.2 )
-        widget.config(font=("Arial", font_size))
+        font_size = int( widget.winfo_height() / len(widget.cget("text")) * 6 )
+        widget.config( font = ( "Arial", font_size ) )
 
 
-    def adjust_button_font_size(self, event):
+    def adjust_button_font_size( self, event ):
         widget = event.widget
-        font_size = int(widget.winfo_height() * 0.4 )
-        widget.config(font=("Arial", font_size))
+        font_size = int( widget.winfo_height() * 0.4 )
+        widget.config( font = ( "Arial", font_size ) )
+        
+        
+    def adjust_forms_label_font_size( self, event ):
+        widget = event.widget
+        font_size = int( widget.winfo_height() *  0.5 )
+        widget.config( font = ( "Arial", font_size ) )
+        
     
     
     def on_frame_configure( self, event ):
@@ -113,8 +122,8 @@ class LatinTrainerGUI:
         root_width = self.root.winfo_width()
         root_height = self.root.winfo_height()
         
-        new_width = root_width - self.v_scrollbar.winfo_width() - 2                           # Leave space for the vertical scrollbar
-        new_height = root_height - self.h_scrollbar.winfo_height() - 2                        # Leave space for the horizontal scrollbar
+        new_width = root_width - self.v_scrollbar.winfo_width() - 2                       
+        new_height = root_height - self.h_scrollbar.winfo_height() - 2                      
         
         self.canvas.itemconfig( self.canvas_window, width=new_width, height=new_height )
         self.canvas.config(scrollregion=self.canvas.bbox( "all" ) )
@@ -195,5 +204,5 @@ class LatinTrainerGUI:
                 
             self.entries = {}
             self.results = {}                                                                                                 # Reset results for the new class
-            self.label.config(text=f"{self.declension_classes[self.current_class_index]}")
+            self.titel.config(text=f"{self.declension_classes[self.current_class_index]}")
             self.populate_entries()
