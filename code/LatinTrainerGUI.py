@@ -9,6 +9,9 @@ class LatinTrainerGUI:
     def __init__( self, root ):
         self.data_instance = Data.Data()
         self.deklinationen = self.data_instance.deklinationen
+        self.konjugationen = self.data_instance.konjugationen
+        self.deklinationen_adjeltive = self.data_instance.deklinationen_adjektive
+        self.hic_haec_hoc = self.data_instance.hic_haec_hoc
         
         self.root = root
         self.root.title( "Latin Trainer" )
