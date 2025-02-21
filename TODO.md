@@ -7,6 +7,7 @@ Fiaults To do List
 -make updater
 -add version variable
 -make icon
+-add gerundien
 
 *make entries relative to labels
 
