@@ -1048,10 +1048,10 @@ class Data:
         self.hic_haec_hoc = {
             "hic": {
 
-            }
+            },
             "haec": {
 
-            }
+            },
             "hoc": {
             }
         }
