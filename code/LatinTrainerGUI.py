@@ -38,7 +38,7 @@ class LatinTrainerGUI:
         self.ui_scale = self.ORIGINAL_SCALE  
         
         self.declension_classes = list( self.deklinationen.keys() )
-        random.shuffle( self.declension_classes )                                                       
+        random.shuffle( self.declension_classes )                                                     
         self.current_class_index = 0
         self.current_forms = self.deklinationen[ self.declension_classes[ self.current_class_index ] ]
         
@@ -47,7 +47,7 @@ class LatinTrainerGUI:
         self.selected_option = tk.StringVar( value = "Nomen-Deklinationen" )  
         
         self.create_widgets()
-        self.resize_content_frame(None)
+        self.resize_content_frame( None )
         
         self.canvas.bind_all("<MouseWheel>", self.on_mouse_wheel)
         self.canvas.bind_all("<Shift-MouseWheel>", self.on_shift_mouse_wheel)
@@ -149,7 +149,7 @@ class LatinTrainerGUI:
         
         for case_or_tempus, correct_answer in self.current_forms.items():
             
-            if case_or_tempus == "nominativ_singular":
+            if case_or_tempus == "nominativ_singular" or case_or_tempus == "1._Person_Singular":
                 continue
             user_input = self.entries[ case_or_tempus ].get().strip()
             
@@ -200,16 +200,16 @@ class LatinTrainerGUI:
     def next_class( self ):
         self.current_class_index += 1
         
-        if self.current_class_index >= len(self.declension_classes):
-            messagebox.showinfo("Done", "You have completed all declensions!")
+        if self.current_class_index >= len( self.declension_classes ):
+            messagebox.showinfo( "Fertig", "Du hast alle durch!" )
             self.root.quit()
         else:
-            self.current_forms = self.deklinationen[self.declension_classes[self.current_class_index]]
+            self.current_forms = self.deklinationen[ self.declension_classes[ self.current_class_index ] ]
             
             for widget in self.forms_frame.winfo_children():
                 widget.destroy()
                 
             self.entries = {}
             self.results = {}                                                                                                 # Reset results for the new class
-            self.titel.config(text=f"{self.declension_classes[self.current_class_index]}")
+            self.titel.config( text = f"{ self.declension_classes[ self.current_class_index ] }" )
             self.populate_entries()
