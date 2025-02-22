@@ -8,8 +8,9 @@ Fiaults To do List
 -add version variable
 -make icon
 -add gerundien
+-translate code not contens to English
+-make entries relative to labels
 
-*make entries relative to labels
-
+*ich war dabei rauszufinden wie ich den Titel fixen kann beim randomizen von den Labels. Ich kann den key vom dictionary der der Titel wird noch nicht richtig extrahieren
 
 Schiesslers To Do List
