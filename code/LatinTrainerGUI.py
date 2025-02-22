@@ -53,14 +53,18 @@ class LatinTrainerGUI:
             
             if word_type == "Nomen":
                 self.current_forms = self.deklinationen[ self.declension_forms[ self.current_class_index ] ]
+                self.current_forms_names = list( self.current_forms.keys() )
             elif word_type == "Verben":
                 self.current_forms = self.konjugationen[ self.conjugation_forms[ self.current_class_index ] ]
-                
+                self.current_forms_names = list( self.current_forms.keys() )
+ 
         elif self.selected_option.get() == "Nomen":
             self.current_forms = self.deklinationen[ self.declension_forms[ self.current_class_index ] ]
+            self.current_forms_names = list( self.current_forms.keys() )
             
         elif self.selected_option.get() == "Verben":
-            self.current_forms = self.konjugationen[ self.conjugation_forms[ self.current_class_index ] ]        
+            self.current_forms = self.konjugationen[ self.conjugation_forms[ self.current_class_index ] ]      
+            self.current_forms_names = list( self.current_forms.keys() )  
     
         else:
             messagebox.showerror( "Fehler:\n Programm konnte Form nicht auswählen" )    
