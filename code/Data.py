@@ -608,7 +608,6 @@ class Data:
                 "Dativ_Plural": "audituris",
                 "Akkusativ_Plural": "audituros",
                 "Ablativ_Plural": "audituris",
-                
             },
             "i-Konjugation Passiv Präsens": {
                 "1._Person_Singular": "audior",
