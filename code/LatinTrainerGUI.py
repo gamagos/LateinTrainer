@@ -48,6 +48,7 @@ class LatinTrainerGUI:
         random.shuffle( self.qui_quae_quod_forms )                                          
         self.current_class_index = 0
         self.selected_option = tk.StringVar( value = "Alle" )
+        self.previous_form = self.selected_option.get()
         
         self.form_select()
                 
@@ -69,19 +70,28 @@ class LatinTrainerGUI:
             if word_type == "Nomen":
                 self.current_key = self.declension_forms[ self.current_class_index ]
                 self.current_forms = self.declensions_nouns[ self.current_key ]
+                self.curent_word_type_amount_of_forms = len( self.declension_forms )
+                
             elif word_type == "Verben":
                 self.current_key = self.conjugation_forms[ self.current_class_index ]
                 self.current_forms = self.conjugations[ self.current_key ]
+                self.curent_word_type_amount_of_forms = len( self.conjugation_forms )
+                
+            self.previous_form = self.selected_option.get()
 
         elif self.selected_option.get() == "Nomen":
             self.current_key = self.declension_forms[ self.current_class_index ]
             self.current_forms = self.declensions_nouns[ self.current_key ]
+            self.curent_word_type_amount_of_forms = len( self.declension_forms )
             
         elif self.selected_option.get() == "Verben":
-            self.current_key = self.declension_forms[ self.current_class_index ]
-            self.current_forms = self.declensions_nouns[ self.current_key ]   
+            self.current_key = self.conjugation_forms[ self.current_class_index ]
+            self.current_forms = self.conjugations[ self.current_key ]
+            self.curent_word_type_amount_of_forms = len( self.conjugation_forms )
+            
+            self.previous_form = self.selected_option.get()
         else:
-            messagebox.showerror( "Fehler:\n Programm konnte die Form nicht auswählen" )   
+            messagebox.showerror( "Fehler:\n Programm konnte die Form nicht auswählen" )
         
         
     #puts stuff in the window that will always be there
@@ -96,6 +106,7 @@ class LatinTrainerGUI:
         
         self.menu_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben" ] ) 
         self.menu_select_form.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
+        self.menu_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
@@ -117,9 +128,15 @@ class LatinTrainerGUI:
 
     #puts the temporary stuff in the frame
     def populate_entries( self ):
+        self.separation_form_tabel = -1
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_forms.items() ):
+            
+            if case_or_tempus == "Nominativ_Plural" or case_or_tempus == "1._Person_Plural":
+                self.separation_form_tabel += 1
+                
+            self.separation_form_tabel += 1          
             form_label = tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "nw", justify = "left" )
-            form_label.place( relx = 0.013, rely = 0.07 * i, relwidth = 0.4, relheight = 0.08 )
+            form_label.place( relx = 0.013, rely = 0.07 * self.separation_form_tabel, relwidth = 0.4, relheight = 0.08 )
             form_label.bind( "<Configure>", self.adjust_forms_label_font_size )
             
             entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
@@ -128,8 +145,10 @@ class LatinTrainerGUI:
                 entry.insert( 0, correct_answer )
                 entry.config( state = "disabled", disabledforeground = "gray" )
                 
-            entry.place( relx = 0.39, rely = 0.07 * i, relwidth = 0.6, relheight = 0.08 )
+            entry.place( relx = 0.39, rely = 0.07 * self.separation_form_tabel, relwidth = 0.6, relheight = 0.08 )
             self.entries[ case_or_tempus ] = entry
+            
+            self.titel.config( text = f"{ self.current_key }" )
             
             
     def adjust_titel_font_size( self, event ):
@@ -150,10 +169,14 @@ class LatinTrainerGUI:
         widget.config( font = ( "Arial", font_size ) )
         
     
-    
     def on_frame_configure( self, event ):
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
         self.root.update()
+    
+    
+    def on_form_select( self, event ):
+        if self.previous_form != self.selected_option.get():
+            self.next_class()
     
     
     def resize_content_frame(self, event):
@@ -226,21 +249,19 @@ class LatinTrainerGUI:
         
         self.check_button.config(text="Check", command=self.check_answers)
     
-    
-    #removes the temporary stuff from the frame
+
     def next_class( self ):
         self.current_class_index += 1
         
-        if self.current_class_index >= len( self.declension_forms ):
-            messagebox.showinfo( "Fertig", "Du hast alle durch!" )
+        if self.current_class_index >= self.curent_word_type_amount_of_forms:
+            messagebox.showinfo( "Fertig", "Du es geschafft!" )
             self.root.quit()
         else:
-            self.current_forms = self.declensions_nouns[ self.declension_forms[ self.current_class_index ] ]
+            self.form_select()
             
             for widget in self.forms_frame.winfo_children():
                 widget.destroy()
                 
             self.entries = {}
-            self.results = {}                                                                                                 # Reset results for the new class
-            self.titel.config( text = f"{ self.declension_forms[ self.current_class_index ] }" )
+            self.results = {}         
             self.populate_entries()
