@@ -8,13 +8,15 @@ import random
 
 class LatinTrainerGUI:
     def __init__( self, root ):
-        self.data_instance = Data.Data()
+        self.data = Data.Data()
         
-        self.deklinationen = self.data_instance.deklinationen
-        self.konjugationen = self.data_instance.konjugationen
-        self.deklinationen_adjeltive = self.data_instance.deklinationen_adjektive
-        self.hic_haec_hoc = self.data_instance.hic_haec_hoc
-        self.qui_quae_quod = self.data_instance.qui_quae_qoud
+        self.declensions_nouns = self.data.declensions
+        self.conjugations = self.data.conjugations
+        self.declensions_adjectives = self.data.declensions_adjectives
+        self.hic_haec_hoc = self.data.hic_haec_hoc
+        self.qui_quae_quod = self.data.qui_quae_qoud
+        self.ille_illa_illud = self.data.ille_illa_illud
+        self.ipse_ipsa_ipsum = self.data.ipse_ipsa_ipsum
         
         self.root = root
         self.root.title( "Latin Trainer" )
@@ -23,7 +25,7 @@ class LatinTrainerGUI:
         self.main_frame.place( relheight = 1, relwidth = 1 )
         
         self.canvas = tk.Canvas( self.main_frame )
-        self.canvas.place( relheight = 0.95, relwidth = 0.95 )
+        self.canvas.place( relheight = 0.96, relwidth = 0.96 )
 
         self.h_scrollbar = tk.Scrollbar( self.main_frame, orient = "horizontal", command = self.canvas.xview )
         self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.976, relheight = 0.023 )
@@ -36,8 +38,8 @@ class LatinTrainerGUI:
         self.ORIGINAL_SCALE = 1.5 
         self.ui_scale = self.ORIGINAL_SCALE  
         
-        self.declension_forms = list( self.deklinationen.keys() )
-        self.conjugation_forms = list( self.konjugationen.keys() )
+        self.declension_forms = list( self.declensions_nouns.keys() )
+        self.conjugation_forms = list( self.conjugations.keys() )
         self.hic_haec_hoc_forms = list( self.hic_haec_hoc.keys() )
         self.qui_quae_quod_forms = list( self.qui_quae_quod.keys() )
         random.shuffle( self.declension_forms )
@@ -46,28 +48,8 @@ class LatinTrainerGUI:
         random.shuffle( self.qui_quae_quod_forms )                                          
         self.current_class_index = 0
         self.selected_option = tk.StringVar( value = "Alle" )
-                
-        if self.selected_option.get() == "Alle":
-            choices = [ "Nomen", "Verben" ] 
-            word_type = random.choice( choices )
-            
-            if word_type == "Nomen":
-                self.current_forms = self.deklinationen[ self.declension_forms[ self.current_class_index ] ]
-                self.current_forms_names = list( self.current_forms.keys() )
-            elif word_type == "Verben":
-                self.current_forms = self.konjugationen[ self.conjugation_forms[ self.current_class_index ] ]
-                self.current_forms_names = list( self.current_forms.keys() )
- 
-        elif self.selected_option.get() == "Nomen":
-            self.current_forms = self.deklinationen[ self.declension_forms[ self.current_class_index ] ]
-            self.current_forms_names = list( self.current_forms.keys() )
-            
-        elif self.selected_option.get() == "Verben":
-            self.current_forms = self.konjugationen[ self.conjugation_forms[ self.current_class_index ] ]      
-            self.current_forms_names = list( self.current_forms.keys() )  
-    
-        else:
-            messagebox.showerror( "Fehler:\n Programm konnte Form nicht auswählen" )    
+        
+        self.form_select()
                 
         self.entries = {}
         self.results = {}                                     # Variable to save whether the answer was right or wrong
@@ -79,18 +61,41 @@ class LatinTrainerGUI:
         self.canvas.bind_all( "<Shift-MouseWheel>", self.on_shift_mouse_wheel )
         
         
+    def form_select( self ):         
+        if self.selected_option.get() == "Alle":
+            choices = [ "Nomen", "Verben" ] 
+            word_type = random.choice( choices )
+
+            if word_type == "Nomen":
+                self.current_key = self.declension_forms[ self.current_class_index ]
+                self.current_forms = self.declensions_nouns[ self.current_key ]
+            elif word_type == "Verben":
+                self.current_key = self.conjugation_forms[ self.current_class_index ]
+                self.current_forms = self.conjugations[ self.current_key ]
+
+        elif self.selected_option.get() == "Nomen":
+            self.current_key = self.declension_forms[ self.current_class_index ]
+            self.current_forms = self.declensions_nouns[ self.current_key ]
+            
+        elif self.selected_option.get() == "Verben":
+            self.current_key = self.declension_forms[ self.current_class_index ]
+            self.current_forms = self.declensions_nouns[ self.current_key ]   
+        else:
+            messagebox.showerror( "Fehler:\n Programm konnte die Form nicht auswählen" )   
+        
+        
     #puts stuff in the window that will always be there
     def create_widgets( self ):
         self.content_frame = tk.Frame( self.canvas )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
-        self.titel = tk.Label( self.content_frame, text = f"{ self.current_forms[ self.current_class_index ] }",
-                              font = ( "Arial", int( 18 * self.ui_scale ), "bold" ), anchor = "n", justify = "left" )
-        self.titel.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.71 )
+        self.titel = tk.Label( self.content_frame, text = f"{ self.current_key }",
+                              font = ( "Arial", int( 19 * self.ui_scale ), "bold" ), anchor = "n", justify = "left" )
+        self.titel.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.81 )
         self.titel.bind( "<Configure>", self.adjust_titel_font_size )
         
-        self.menu_selected_forms = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben" ] ) 
-        self.menu_selected_forms.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
+        self.menu_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben" ] ) 
+        self.menu_select_form.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
@@ -106,7 +111,7 @@ class LatinTrainerGUI:
         self.content_frame.bind( "<Configure>", self.on_frame_configure )
         self.root.bind( "<Configure>", self.resize_content_frame )
         
-        self.menu_selected_forms.tkraise()
+        self.menu_select_form.tkraise()
         self.root.update()
 
 
@@ -230,7 +235,7 @@ class LatinTrainerGUI:
             messagebox.showinfo( "Fertig", "Du hast alle durch!" )
             self.root.quit()
         else:
-            self.current_forms = self.deklinationen[ self.declension_forms[ self.current_class_index ] ]
+            self.current_forms = self.declensions_nouns[ self.declension_forms[ self.current_class_index ] ]
             
             for widget in self.forms_frame.winfo_children():
                 widget.destroy()

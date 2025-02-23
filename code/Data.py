@@ -1,7 +1,7 @@
 class Data:
     def __init__( self ):
         
-        self.deklinationen = {
+        self.declensions = {
             "A-Deklination": {
                 "Nominativ_Singular": "puella",
                 "Genitiv_Singular": "puellae",
@@ -132,7 +132,7 @@ class Data:
             },
         }
 
-        self.konjugationen = {
+        self.conjugations = {
             "a-Konjugation Präsens": {
                 "1._Person_Singular": "amo",
                 "2._Person_Singular": "amas",
@@ -993,7 +993,7 @@ class Data:
             }
         }
         
-        self.deklinationen_adjektive = {
+        self.declensions_adjectives = {
             
         }
         
