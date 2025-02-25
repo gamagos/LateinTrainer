@@ -77,8 +77,17 @@ class LatinTrainerGUI:
                 self.current_key = self.conjugation_forms[ self.current_class_index ]
                 self.current_forms = self.conjugations[ self.current_key ]
                 self.curent_word_type_amount_of_forms = len( self.conjugation_forms )
+            
+            elif word_type == "hic_haec_hoc":
+                self.current_key = self.hic_haec_hoc_forms[ self.current_class_index ]
+                self.current_forms = self.hic_haec_hoc[ self.current_key ]
+                self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
                 
-            self.previous_form = self.selected_option.get()
+            #nicht fertig
+            elif word_type == "qui_quae_quod":
+                self.current_key = self.qui_quae_quod_forms[ self.current_class_index ]
+                self.current_forms = self.hic_haec_hoc[ self.current_key ]
+                self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
 
         elif self.selected_option.get() == "Nomen":
             self.current_key = self.declension_forms[ self.current_class_index ]
@@ -90,9 +99,15 @@ class LatinTrainerGUI:
             self.current_forms = self.conjugations[ self.current_key ]
             self.curent_word_type_amount_of_forms = len( self.conjugation_forms )
             
-            self.previous_form = self.selected_option.get()
+        elif self.selected_option.get() == "hic_haec_hoc":
+            self.current_key = self.hic_haec_hoc_forms[ self.current_class_index ]
+            self.current_forms = self.hic_haec_hoc[ self.current_key ]
+            self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
+
         else:
             messagebox.showerror( "Fehler:\n Programm konnte die Form nicht auswählen" )
+        
+        self.previous_form = self.selected_option.get()
         
         
     #puts stuff in the window that will always be there
