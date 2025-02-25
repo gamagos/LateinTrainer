@@ -13,11 +13,11 @@ class LatinTrainerGUI:
         
         self.declensions_nouns = self.data.declensions
         self.conjugations = self.data.conjugations
-        #self.declensions_adjectives = self.data.declensions_adjectives
-        #self.hic_haec_hoc = self.data.hic_haec_hoc
-        #self.qui_quae_quod = self.data.qui_quae_qoud
-        #self.ille_illa_illud = self.data.ille_illa_illud
-        #self.ipse_ipsa_ipsum = self.data.ipse_ipsa_ipsum
+        self.declensions_adjectives = self.data.declensions_adjectives
+        self.hic_haec_hoc = self.data.hic_haec_hoc
+        self.qui_quae_quod = self.data.qui_quae_qoud
+        self.ille_illa_illud = self.data.ille_illa_illud
+        self.ipse_ipsa_ipsum = self.data.ipse_ipsa_ipsum
         
         self.root = root
         self.root.title( "Latin Trainer " + version )
@@ -83,11 +83,10 @@ class LatinTrainerGUI:
                 self.current_forms = self.hic_haec_hoc[ self.current_key ]
                 self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
                 
-            #nicht fertig
             elif word_type == "qui_quae_quod":
                 self.current_key = self.qui_quae_quod_forms[ self.current_class_index ]
-                self.current_forms = self.hic_haec_hoc[ self.current_key ]
-                self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
+                self.current_forms = self.qui_quae_quod[ self.current_key ]
+                self.curent_word_type_amount_of_forms = len( self.qui_quae_quod_forms )
 
         elif self.selected_option.get() == "Nomen":
             self.current_key = self.declension_forms[ self.current_class_index ]
@@ -103,6 +102,11 @@ class LatinTrainerGUI:
             self.current_key = self.hic_haec_hoc_forms[ self.current_class_index ]
             self.current_forms = self.hic_haec_hoc[ self.current_key ]
             self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
+            
+        elif word_type == "qui_quae_quod":
+            self.current_key = self.qui_quae_quod_forms[ self.current_class_index ]
+            self.current_forms = self.qui_quae_quod[ self.current_key ]
+            self.curent_word_type_amount_of_forms = len( self.qui_quae_quod_forms )
 
         else:
             messagebox.showerror( "Fehler:\n Programm konnte die Form nicht auswählen" )

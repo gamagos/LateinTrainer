@@ -1110,21 +1110,21 @@ class Data:
         
         self.qui_quae_qoud = {
             "qui": {
-        "Nominativ_Singular": "qui",
-        "Genitiv_Singular": "cuius",
-        "Dativ_Singular": "cui",
-        "Akkusativ_Singular": "quem",
-        "Ablativ_Singular": "quo",
-        "Nominativ_Plural": "qui",
-        "Genitiv_Plural": "quorum",
-        "Dativ_Plural": "quibus",
-        "Akkusativ_Plural": "quos",
-        "Ablativ_Plural": "quibus",
-    },
-    "quae": {
-        "Nominativ_Singular": "quae",
-        "Genitiv_Singular": "cuius",
-        "Dativ_Singular": "cui",
+                "Nominativ_Singular": "qui",
+                "Genitiv_Singular": "cuius",
+                "Dativ_Singular": "cui",
+                "Akkusativ_Singular": "quem",
+                "Ablativ_Singular": "quo",
+                "Nominativ_Plural": "qui",
+                "Genitiv_Plural": "quorum",
+                "Dativ_Plural": "quibus",
+                "Akkusativ_Plural": "quos",
+                "Ablativ_Plural": "quibus",
+            },
+            "quae": {
+                "Nominativ_Singular": "quae",
+                "Genitiv_Singular": "cuius",
+                "Dativ_Singular": "cui",
                 "Akkusativ_Singular": "quam",
                 "Ablativ_Singular": "qua",
                 "Nominativ_Plural": "quae",
@@ -1148,9 +1148,79 @@ class Data:
         }
         
         self.ille_illa_illud = {
-            
+            "ille": {
+                "Nominativ_Singular": "ille",
+                "Genitiv_Singular": "illius",
+                "Dativ_Singular": "illi",
+                "Akkusativ_Singular": "illum",
+                "Ablativ_Singular": "illo",
+                "Nominativ_Plural": "illi",
+                "Genitiv_Plural": "illorum",
+                "Dativ_Plural": "illis",
+                "Akkusativ_Plural": "illos",
+                "Ablativ_Plural": "illis",
+            },
+            "illa": {
+                "Nominativ_Singular": "illa",
+                "Genitiv_Singular": "illius",
+                "Dativ_Singular": "illi",
+                "Akkusativ_Singular": "illam",
+                "Ablativ_Singular": "illa",
+                "Nominativ_Plural": "illae",
+                "Genitiv_Plural": "illarum",
+                "Dativ_Plural": "illis",
+                "Akkusativ_Plural": "illas",
+                "Ablativ_Plural": "illis",
+            },
+            "illud": {
+                "Nominativ_Singular": "illud",
+                "Genitiv_Singular": "illius",
+                "Dativ_Singular": "illi",
+                "Akkusativ_Singular": "illud",
+                "Ablativ_Singular": "illo",
+                "Nominativ_Plural": "illa",
+                "Genitiv_Plural": "illorum",
+                "Dativ_Plural": "illis",
+                "Akkusativ_Plural": "illa",
+                "Ablativ_Plural": "illis",
+            }
         }
         
         self.ipse_ipsa_ipsum = {
-            
+            "ipse": {
+                "Nominativ_Singular": "ipse",
+                "Genitiv_Singular": "ipsius",
+                "Dativ_Singular": "ipsi",
+                "Akkusativ_Singular": "ipsum",
+                "Ablativ_Singular": "ipso",
+                "Nominativ_Plural": "ipsi",
+                "Genitiv_Plural": "ipsorum",
+                "Dativ_Plural": "ipsis",
+                "Akkusativ_Plural": "ipsos",
+                "Ablativ_Plural": "ipsis",
+            },
+            "ipsa": {
+                "Nominativ_Singular": "ipsa",
+                "Genitiv_Singular": "ipsius",
+                "Dativ_Singular": "ipsi",
+                "Akkusativ_Singular": "ipsam",
+                "Ablativ_Singular": "ipsa",
+                "Nominativ_Plural": "ipsae",
+                "Genitiv_Plural": "ipsarum",
+                "Dativ_Plural": "ipsis",
+                "Akkusativ_Plural": "ipsas",
+                "Ablativ_Plural": "ipsis",
+            },
+            "ipsum": {
+                "Nominativ_Singular": "ipsum",
+                "Genitiv_Singular": "ipsius",
+                "Dativ_Singular": "ipsi",
+                "Akkusativ_Singular": "ipsum",
+                "Ablativ_Singular": "ipso",
+                "Nominativ_Plural": "ipsa",
+                "Genitiv_Plural": "ipsorum",
+                "Dativ_Plural": "ipsis",
+                "Akkusativ_Plural": "ipsa",
+                "Ablativ_Plural": "ipsis",
+            }
         }
