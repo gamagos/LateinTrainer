@@ -3,3 +3,7 @@
 .tmp.driveupload
 __pycache__
 temporary/
+code-workspace
+workspace
+.code-workspace
+LateinTrainer.code-workspace

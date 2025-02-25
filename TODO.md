@@ -4,13 +4,14 @@ Fiaults To do List
 -add more grammar forms
 -make UI look nicer
 -make updater
--add version variable
 -make icon
 -add gerundien
 -translate code not contens to English
 -make entries relative to labels
--make titel font bold
+-fill adjectives in Data.py
+-make scrollbars cleaner and disapear when mouse away
+-add diagnostics
+-add tests
 
-*ich war dabei rauszufinden wie ich den Titel fixen kann beim randomizen von den Labels. Ich kann den key vom dictionary der der Titel wird noch nicht richtig extrahieren
-
+------------------------------------
 Schiesslers To Do List
