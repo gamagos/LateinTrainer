@@ -1065,7 +1065,7 @@ class Data:
             }
         }
         
-        self.deklinationen_adjektive = {
+        self.declensions_adjectives = {
             
         }
         

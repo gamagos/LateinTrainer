@@ -8,6 +8,10 @@ Fiaults To do List
 -add gerundien
 -translate code not contens to English
 -make entries relative to labels
+-fill adjectives in Data.py
+-make scrollbars cleaner and disapear when mouse away
+-add diagnostics
+-add tests
 
 ------------------------------------
 Schiesslers To Do List

@@ -8,12 +8,15 @@ import random
 
 class LatinTrainerGUI:
     def __init__( self, root ):
-        version = "v1.4.1"
+        diagnostics = False     #Variable to track program for bugs
+        tests = False           #Variable to let program run tests
+        version = "v1.6.0"    
         self.data = Data.Data()
         
         self.declensions_nouns = self.data.declensions
         self.conjugations = self.data.conjugations
         self.declensions_adjectives = self.data.declensions_adjectives
+        #pronouns
         self.hic_haec_hoc = self.data.hic_haec_hoc
         self.qui_quae_quod = self.data.qui_quae_qoud
         self.ille_illa_illud = self.data.ille_illa_illud
@@ -43,6 +46,8 @@ class LatinTrainerGUI:
         self.conjugation_forms = list( self.conjugations.keys() )
         self.hic_haec_hoc_forms = list( self.hic_haec_hoc.keys() )
         self.qui_quae_quod_forms = list( self.qui_quae_quod.keys() )
+        self.ille_illa_illud_forms = list( self.ille_illa_illud.keys() )
+        self.ipse_ipsa_ipsum_forms = list( self.ipse_ipsa_ipsum.keys() )
         random.shuffle( self.declension_forms )
         random.shuffle( self.conjugation_forms )
         random.shuffle( self.hic_haec_hoc_forms )
@@ -63,9 +68,10 @@ class LatinTrainerGUI:
         self.canvas.bind_all( "<Shift-MouseWheel>", self.on_shift_mouse_wheel )
         
         
-    def form_select( self ):         
+    def form_select( self ):
+        word_type = self.selected_option.get()   
         if self.selected_option.get() == "Alle":
-            choices = [ "Nomen", "Verben" ] 
+            choices = [ "Nomen", "Verben","hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] 
             word_type = random.choice( choices )
 
             if word_type == "Nomen":
@@ -78,35 +84,55 @@ class LatinTrainerGUI:
                 self.current_forms = self.conjugations[ self.current_key ]
                 self.curent_word_type_amount_of_forms = len( self.conjugation_forms )
             
-            elif word_type == "hic_haec_hoc":
+            elif word_type == "hic haec hoc":
                 self.current_key = self.hic_haec_hoc_forms[ self.current_class_index ]
                 self.current_forms = self.hic_haec_hoc[ self.current_key ]
                 self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
                 
-            elif word_type == "qui_quae_quod":
+            elif word_type == "qui quae quod":
                 self.current_key = self.qui_quae_quod_forms[ self.current_class_index ]
                 self.current_forms = self.qui_quae_quod[ self.current_key ]
                 self.curent_word_type_amount_of_forms = len( self.qui_quae_quod_forms )
+                
+            elif word_type == "ille illa illud":
+                self.current_key = self.ille_illa_illud_forms[ self.current_class_index ]
+                self.current_forms = self.ille_illa_illud[ self.current_key ]
+                self.curent_word_type_amount_of_forms = len( self.ille_illa_illud_forms )
+                
+            elif word_type == "ipse ipsa ipsum":
+                self.current_key = self.ipse_ipsa_ipsum_forms[ self.current_class_index ]
+                self.current_forms = self.ipse_ipsa_ipsum[ self.current_key ]
+                self.curent_word_type_amount_of_forms = len( self.ipse_ipsa_ipsum_forms )
 
-        elif self.selected_option.get() == "Nomen":
+        elif word_type == "Nomen":
             self.current_key = self.declension_forms[ self.current_class_index ]
             self.current_forms = self.declensions_nouns[ self.current_key ]
             self.curent_word_type_amount_of_forms = len( self.declension_forms )
             
-        elif self.selected_option.get() == "Verben":
+        elif word_type == "Verben":
             self.current_key = self.conjugation_forms[ self.current_class_index ]
             self.current_forms = self.conjugations[ self.current_key ]
             self.curent_word_type_amount_of_forms = len( self.conjugation_forms )
             
-        elif self.selected_option.get() == "hic_haec_hoc":
+        elif word_type == "hic haec hoc":
             self.current_key = self.hic_haec_hoc_forms[ self.current_class_index ]
             self.current_forms = self.hic_haec_hoc[ self.current_key ]
             self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
             
-        elif word_type == "qui_quae_quod":
+        elif word_type == "qui quae quod":
             self.current_key = self.qui_quae_quod_forms[ self.current_class_index ]
             self.current_forms = self.qui_quae_quod[ self.current_key ]
             self.curent_word_type_amount_of_forms = len( self.qui_quae_quod_forms )
+            
+        elif word_type == "ille illa illud":
+            self.current_key = self.ille_illa_illud_forms[ self.current_class_index ]
+            self.current_forms = self.ille_illa_illud[ self.current_key ]
+            self.curent_word_type_amount_of_forms = len( self.ille_illa_illud_forms )
+                
+        elif word_type == "ipse ipsa ipsum":
+            self.current_key = self.ipse_ipsa_ipsum_forms[ self.current_class_index ]
+            self.current_forms = self.ipse_ipsa_ipsum[ self.current_key ]
+            self.curent_word_type_amount_of_forms = len( self.ipse_ipsa_ipsum_forms )    
 
         else:
             messagebox.showerror( "Fehler:\n Programm konnte die Form nicht auswählen" )
@@ -124,7 +150,7 @@ class LatinTrainerGUI:
         self.titel.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.81 )
         self.titel.bind( "<Configure>", self.adjust_titel_font_size )
         
-        self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben" ] ) 
+        self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben", "hic haec hoc", "qui quae quod" ] ) 
         self.combobox_select_form.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
@@ -134,7 +160,7 @@ class LatinTrainerGUI:
         
         self.populate_entries()
         
-        self.check_button = tk.Button( self.content_frame, text="Überprüfen", command=self.check_answers )
+        self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers )
         self.check_button.place( relx = 0.45, rely = 0.8, relheight = 0.08, relwidth = 0.24 )
         self.check_button.bind( "<Configure>", self.adjust_button_font_size )
         
@@ -174,7 +200,7 @@ class LatinTrainerGUI:
             
     def adjust_titel_font_size( self, event ):
         widget = event.widget
-        font_size = int( widget.winfo_height() / len( widget.cget("text")) * 6 )
+        font_size = int( 20 )       #TODO make a good method to select label size
         widget.config( font = ( "Arial", font_size, "bold" ) )
 
 
@@ -198,7 +224,6 @@ class LatinTrainerGUI:
     def on_form_select( self, event ):
         if self.previous_form != self.selected_option.get():
             self.next_class()
-        print( self.previous_form + " != " + self.selected_option.get() )
     
     
     def resize_content_frame(self, event):
