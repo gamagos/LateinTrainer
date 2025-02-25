@@ -5,7 +5,6 @@ Fiaults To do List
 -make UI look nicer
 -make settings to select what you want to learn
 -make updater
--add version variable
 -make icon
 -add gerundien
 -translate code not contens to English

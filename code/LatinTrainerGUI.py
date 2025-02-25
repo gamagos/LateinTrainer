@@ -8,18 +8,19 @@ import random
 
 class LatinTrainerGUI:
     def __init__( self, root ):
+        version = "v1.4.1"
         self.data = Data.Data()
         
         self.declensions_nouns = self.data.declensions
         self.conjugations = self.data.conjugations
-        self.declensions_adjectives = self.data.declensions_adjectives
-        self.hic_haec_hoc = self.data.hic_haec_hoc
-        self.qui_quae_quod = self.data.qui_quae_qoud
-        self.ille_illa_illud = self.data.ille_illa_illud
-        self.ipse_ipsa_ipsum = self.data.ipse_ipsa_ipsum
+        #self.declensions_adjectives = self.data.declensions_adjectives
+        #self.hic_haec_hoc = self.data.hic_haec_hoc
+        #self.qui_quae_quod = self.data.qui_quae_qoud
+        #self.ille_illa_illud = self.data.ille_illa_illud
+        #self.ipse_ipsa_ipsum = self.data.ipse_ipsa_ipsum
         
         self.root = root
-        self.root.title( "Latin Trainer" )
+        self.root.title( "Latin Trainer " + version )
         
         self.main_frame = tk.Frame( root )
         self.main_frame.place( relheight = 1, relwidth = 1 )
@@ -104,9 +105,10 @@ class LatinTrainerGUI:
         self.titel.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.81 )
         self.titel.bind( "<Configure>", self.adjust_titel_font_size )
         
-        self.menu_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben" ] ) 
-        self.menu_select_form.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
-        self.menu_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
+        self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben" ] ) 
+        self.combobox_select_form.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
+        self.combobox_select_form.state( ["readonly"] )
+        self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
@@ -122,7 +124,7 @@ class LatinTrainerGUI:
         self.content_frame.bind( "<Configure>", self.on_frame_configure )
         self.root.bind( "<Configure>", self.resize_content_frame )
         
-        self.menu_select_form.tkraise()
+        self.combobox_select_form.tkraise()
         self.root.update()
 
 
@@ -153,8 +155,8 @@ class LatinTrainerGUI:
             
     def adjust_titel_font_size( self, event ):
         widget = event.widget
-        font_size = int( widget.winfo_height() / len(widget.cget("text")) * 6 )
-        widget.config( font = ( "Arial", font_size ) )
+        font_size = int( widget.winfo_height() / len( widget.cget("text")) * 6 )
+        widget.config( font = ( "Arial", font_size, "bold" ) )
 
 
     def adjust_button_font_size( self, event ):
@@ -177,6 +179,7 @@ class LatinTrainerGUI:
     def on_form_select( self, event ):
         if self.previous_form != self.selected_option.get():
             self.next_class()
+        print( self.previous_form + " != " + self.selected_option.get() )
     
     
     def resize_content_frame(self, event):

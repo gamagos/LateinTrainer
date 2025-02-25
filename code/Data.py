@@ -993,7 +993,7 @@ class Data:
             }
         }
         
-        self.declensions_adjectives = {
+        self.deklinationen_adjektive = {
             
         }
         
