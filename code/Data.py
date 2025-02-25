@@ -1071,17 +1071,80 @@ class Data:
         
         self.hic_haec_hoc = {
             "hic": {
-
+                "Nominativ_Singular": "hic",
+                "Genitiv_Singular": "huius",
+                "Dativ_Singular": "huic",
+                "Akkusativ_Singular": "hunc",
+                "Ablativ_Singular": "hoc",
+                "Nominativ_Plural": "hi",
+                "Genitiv_Plural": "horum",
+                "Dativ_Plural": "his",
+                "Akkusativ_Plural": "hos",
+                "Ablativ_Plural": "his",
             },
             "haec": {
-
+                "Nominativ_Singular": "haec",
+                "Genitiv_Singular": "huius",
+                "Dativ_Singular": "huic",
+                "Akkusativ_Singular": "hanc",
+                "Ablativ_Singular": "hac",
+                "Nominativ_Plural": "hae",
+                "Genitiv_Plural": "harum",
+                "Dativ_Plural": "his",
+                "Akkusativ_Plural": "has",
+                "Ablativ_Plural": "his",
             },
             "hoc": {
+                "Nominativ_Singular": "hoc",
+                "Genitiv_Singular": "huius",
+                "Dativ_Singular": "huic",
+                "Akkusativ_Singular": "hoc",
+                "Ablativ_Singular": "hoc",
+                "Nominativ_Plural": "haec",
+                "Genitiv_Plural": "horum",
+                "Dativ_Plural": "his",
+                "Akkusativ_Plural": "haec",
+                "Ablativ_Plural": "his",
             }
         }
         
         self.qui_quae_qoud = {
-            
+            "qui": {
+        "Nominativ_Singular": "qui",
+        "Genitiv_Singular": "cuius",
+        "Dativ_Singular": "cui",
+        "Akkusativ_Singular": "quem",
+        "Ablativ_Singular": "quo",
+        "Nominativ_Plural": "qui",
+        "Genitiv_Plural": "quorum",
+        "Dativ_Plural": "quibus",
+        "Akkusativ_Plural": "quos",
+        "Ablativ_Plural": "quibus",
+    },
+    "quae": {
+        "Nominativ_Singular": "quae",
+        "Genitiv_Singular": "cuius",
+        "Dativ_Singular": "cui",
+                "Akkusativ_Singular": "quam",
+                "Ablativ_Singular": "qua",
+                "Nominativ_Plural": "quae",
+                "Genitiv_Plural": "quarum",
+                "Dativ_Plural": "quibus",
+                "Akkusativ_Plural": "quas",
+                "Ablativ_Plural": "quibus",
+            },
+            "quod": {
+                "Nominativ_Singular": "quod",
+                "Genitiv_Singular": "cuius",
+                "Dativ_Singular": "cui",
+                "Akkusativ_Singular": "quod",
+                "Ablativ_Singular": "quo",
+                "Nominativ_Plural": "quae",
+                "Genitiv_Plural": "quorum",
+                "Dativ_Plural": "quibus",
+                "Akkusativ_Plural": "quae",
+                "Ablativ_Plural": "quibus",
+            }
         }
         
         self.ille_illa_illud = {
