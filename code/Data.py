@@ -1066,7 +1066,9 @@ class Data:
         }
         
         self.declensions_adjectives = {
-            
+            "A-Deklination":{
+                
+            }
         }
         
         self.hic_haec_hoc = {

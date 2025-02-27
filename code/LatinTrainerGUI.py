@@ -222,6 +222,7 @@ class LatinTrainerGUI:
     
     
     def on_form_select( self, event ):
+        self.current_class_index = 0
         if self.previous_form != self.selected_option.get():
             self.next_class()
     
@@ -301,8 +302,7 @@ class LatinTrainerGUI:
         self.current_class_index += 1
         
         if self.current_class_index >= self.curent_word_type_amount_of_forms:
-            messagebox.showinfo( "Fertig", "Du es geschafft!" )
-            self.root.quit()
+            self.current_class_index = 0
         else:
             self.form_select()
             
