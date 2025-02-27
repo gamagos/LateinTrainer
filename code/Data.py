@@ -131,9 +131,9 @@ class Data:
                 "Ablativ_Plural": "rebus",
             },
         }
-
+        #@Copilot start here
         self.conjugations = {
-            "a-Konjugation Präsens": {
+            "A-Konjugation Präsens": {
                 "1._Person_Singular": "amo",
                 "2._Person_Singular": "amas",
                 "3._Person_Singular": "amat",
@@ -141,7 +141,7 @@ class Data:
                 "2._Person_Plural": "amatis",
                 "3._Person_Plural": "amant",
             },
-            "a-Konjugation Imperfekt": {
+            "A-Konjugation Imperfekt": {
                 "1._Person_Singular": "amabam",
                 "2._Person_Singular": "amabas",
                 "3._Person_Singular": "amabat",
@@ -149,7 +149,7 @@ class Data:
                 "2._Person_Plural": "amabatis",
                 "3._Person_Plural": "amabant",
             },
-            "a-Konjugation Plusquamperfekt": {
+            "A-Konjugation Plusquamperfekt": {
                 "1._Person_Singular": "amaveram",
                 "2._Person_Singular": "amaveras",
                 "3._Person_Singular": "amaverat",
@@ -157,7 +157,7 @@ class Data:
                 "2._Person_Plural": "amaveratis",
                 "3._Person_Plural": "amaverant",
             },
-            "a-Konjugation Perfekt": {
+            "A-Konjugation Perfekt": {
                 "1._Person_Singular": "amavi",
                 "2._Person_Singular": "amavisti",
                 "3._Person_Singular": "amavit",
@@ -165,7 +165,7 @@ class Data:
                 "2._Person_Plural": "amavistis",
                 "3._Person_Plural": "amaverunt",
             },
-            "a-Konjugation Futur 1": {
+            "A-Konjugation Futur 1": {
                 "1._Person_Singular": "amabo",
                 "2._Person_Singular": "amabis",
                 "3._Person_Singular": "amabit",
@@ -173,7 +173,7 @@ class Data:
                 "2._Person_Plural": "amabitis",
                 "3._Person_Plural": "amabunt",
             },
-            "a-Konjugation Futur 2": {
+            "A-Konjugation Futur 2": {
                 "1._Person_Singular": "amavero",
                 "2._Person_Singular": "amaveris",
                 "3._Person_Singular": "amaverit",
@@ -181,7 +181,7 @@ class Data:
                 "2._Person_Plural": "amaveritis",
                 "3._Person_Plural": "amaverint",
             },
-            "a-Konjugation PPA": {
+            "A-Konjugation PPA": {
                 "Nominatv_Singular": "amans",
                 "Genitiv_Singular": "amantis",
                 "Dativ_Singular":  "amanti",
@@ -193,7 +193,7 @@ class Data:
                 "Akkusativ_Plural": "amantes",
                 "Ablativ_Plural": "amantibus",
             },
-            "a-Konjugation PPP": {
+            "A-Konjugation PPP": {
                 "Nominativ_Singular": "amatus",
                 "Genitiv_Singular": "amati",
                 "Dativ_Singular":  "amato",
@@ -205,7 +205,7 @@ class Data:
                 "Akkusativ_Plural": "amatos",
                 "Ablativ_Plural": "amatis",
             },
-            "a-Konjugation PFA": {
+            "A-Konjugation PFA": {
                 "Singular": "amaturus",
                 "Genitiv_Singular": "amaturi",
                 "Dativ_Singular":  "amaturo",
@@ -217,7 +217,7 @@ class Data:
                 "Akkusativ_Plural": "amaturos",
                 "Ablativ_Plural": "amaturis",
             },
-            "a-Konjugation Passiv Präsens": {
+            "A-Konjugation Passiv Präsens": {
                 "1._Person_Singular": "amor",
                 "2._Person_Singular": "amaris",
                 "3._Person_Singular": "amatur",
@@ -225,7 +225,7 @@ class Data:
                 "2._Person_Plural": "amamini",
                 "3._Person_Plural": "amantur",
             },
-            "a-Konjugation Passiv Imperfekt": {
+            "A-Konjugation Passiv Imperfekt": {
                 "1._Person_Singular": "amabar",
                 "2._Person_Singular": "amabaris",
                 "3._Person_Singular": "amabatur",
@@ -233,7 +233,7 @@ class Data:
                 "2._Person_Plural": "amabamini",
                 "3._Person_Plural": "amabantur",
             },
-            "a-Konjugation Passiv Perfekt": {
+            "A-Konjugation Passiv Perfekt": {
                 "1._Person_Singular": "amatus sum",
                 "2._Person_Singular": "amatus es",
                 "3._Person_Singular": "amatus est",
@@ -241,7 +241,7 @@ class Data:
                 "2._Person_Plural": "amati estis",
                 "3._Person_Plural": "amati sunt",
             },
-            "a-Konjugation Passiv Plusquamperfekt": {
+            "A-Konjugation Passiv Plusquamperfekt": {
                 "1._Person_Singular": "amatus eram",
                 "2._Person_Singular": "amatus eras",
                 "3._Person_Singular": "amatus erat",
@@ -249,7 +249,7 @@ class Data:
                 "2._Person_Plural": "amati eratis",
                 "3._Person_Plural": "amati erant",
             },
-            "a-Konjugation Passiv Futur 1": {
+            "A-Konjugation Passiv Futur 1": {
                 "1._Person_Singular": "amabor",
                 "2._Person_Singular": "amaberis",
                 "3._Person_Singular": "amabitur",
@@ -257,7 +257,7 @@ class Data:
                 "2._Person_Plural": "amabimini",
                 "3._Person_Plural": "amabuntur",
             },
-            "a-Konjugation Passiv Futur 2": {
+            "A-Konjugation Passiv Futur 2": {
                 "1._Person_Singular": "amatus ero",
                 "2._Person_Singular": "amatus eris",
                 "3._Person_Singular": "amatus erit",
@@ -265,7 +265,7 @@ class Data:
                 "2._Person_Plural": "amati eritis",
                 "3._Person_Plural": "amati erunt",
             },
-            "a-Konjugation Konjunktiv Präsens": {
+            "A-Konjugation Konjunktiv Präsens": {
                 "1._Person_Singular": "amem",
                 "2._Person_Singular": "ames",
                 "3._Person_Singular": "amet",
@@ -273,7 +273,7 @@ class Data:
                 "2._Person_Plural": "ametis",
                 "3._Person_Plural": "ament",
             },
-            "a-Konjugation Konjunktiv Imperfekt": {
+            "A-Konjugation Konjunktiv Imperfekt": {
                 "1._Person_Singular": "amarem",
                 "2._Person_Singular": "amares",
                 "3._Person_Singular": "amaret",
@@ -281,7 +281,7 @@ class Data:
                 "2._Person_Plural": "amaretis",
                 "3._Person_Plural": "amarent",
             },
-            "a-Konjugation Konjunktiv Perfekt": {
+            "A-Konjugation Konjunktiv Perfekt": {
                 "1._Person_Singular": "amaverim",
                 "2._Person_Singular": "amaveris",
                 "3._Person_Singular": "amaverit",
@@ -289,7 +289,7 @@ class Data:
                 "2._Person_Plural": "amaveritis",
                 "3._Person_Plural": "amaverint",
             },
-            "a-Konjugation Konjunktiv Plusquamperfekt": {
+            "A-Konjugation Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "amavissem",
                 "2._Person_Singular": "amavisses",
                 "3._Person_Singular": "amavisset",
@@ -297,7 +297,7 @@ class Data:
                 "2._Person_Plural": "amavissetis",
                 "3._Person_Plural": "amavissent",
             },
-            "a-Konjugation Passiv Konjunktiv Präsens": {
+            "A-Konjugation Passiv Konjunktiv Präsens": {
                 "1._Person_Singular": "amer",
                 "2._Person_Singular": "ameris",
                 "3._Person_Singular": "ametur",
@@ -305,7 +305,7 @@ class Data:
                 "2._Person_Plural": "amemini",
                 "3._Person_Plural": "amentur",
             },
-            "a-Konjugation Passiv Konjunktiv Imperfekt": {
+            "A-Konjugation Passiv Konjunktiv Imperfekt": {
                 "1._Person_Singular": "amarer",
                 "2._Person_Singular": "amareris",
                 "3._Person_Singular": "amaretur",
@@ -313,7 +313,7 @@ class Data:
                 "2._Person_Plural": "amaremini",
                 "3._Person_Plural": "amarentur",
             },
-            "a-Konjugation Passiv Konjunktiv Perfekt": {
+            "A-Konjugation Passiv Konjunktiv Perfekt": {
                 "1._Person_Singular": "amatus sim",
                 "2._Person_Singular": "amatus sis",
                 "3._Person_Singular": "amatus sit",
@@ -321,7 +321,7 @@ class Data:
                 "2._Person_Plural": "amati sitis",
                 "3._Person_Plural": "amati sint",
             },
-            "a-Konjugation Passiv Konjunktiv Plusquamperfekt": {
+            "A-Konjugation Passiv Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "amatus essem",
                 "2._Person_Singular": "amatus esses",
                 "3._Person_Singular": "amatus esset",
@@ -329,7 +329,7 @@ class Data:
                 "2._Person_Plural": "amati essetis",
                 "3._Person_Plural": "amati essent",
             },
-            "e-Konjugation Präsens": {
+            "E-Konjugation Präsens": {
                 "1._Person_Singular": "moneo",
                 "2._Person_Singular": "mones",
                 "3._Person_Singular": "monet",
@@ -337,7 +337,7 @@ class Data:
                 "2._Person_Plural": "monetis",
                 "3._Person_Plural": "monent",
             },
-            "e-Konjugation Imperfekt": {
+            "E-Konjugation Imperfekt": {
                 "1._Person_Singular": "monebam",
                 "2._Person_Singular": "monebas",
                 "3._Person_Singular": "monebat",
@@ -345,7 +345,7 @@ class Data:
                 "2._Person_Plural": "monebatis",
                 "3._Person_Plural": "monebant",
             },
-            "e-Konjugation Plusquamperfekt": {
+            "E-Konjugation Plusquamperfekt": {
                 "1._Person_Singular": "monueram",
                 "2._Person_Singular": "monueras",
                 "3._Person_Singular": "monuerat",
@@ -353,7 +353,7 @@ class Data:
                 "2._Person_Plural": "monueratis",
                 "3._Person_Plural": "monuerant",
             },
-            "e-Konjugation Perfekt": {
+            "E-Konjugation Perfekt": {
                 "1._Person_Singular": "monui",
                 "2._Person_Singular": "monuisti",
                 "3._Person_Singular": "monuit",
@@ -361,7 +361,7 @@ class Data:
                 "2._Person_Plural": "monuistis",
                 "3._Person_Plural": "monuerunt",
             },
-            "e-Konjugation Futur 1": {
+            "E-Konjugation Futur 1": {
                 "1._Person_Singular": "monebo",
                 "2._Person_Singular": "monebis",
                 "3._Person_Singular": "monebit",
@@ -369,7 +369,7 @@ class Data:
                 "2._Person_Plural": "monebitis",
                 "3._Person_Plural": "monebunt",
             },
-            "e-Konjugation Futur 2": {
+            "E-Konjugation Futur 2": {
                 "1._Person_Singular": "monuero",
                 "2._Person_Singular": "monueris",
                 "3._Person_Singular": "monuerit",
@@ -377,7 +377,7 @@ class Data:
                 "2._Person_Plural": "monueritis",
                 "3._Person_Plural": "monuerint",
             },
-            "e-Konjugation PPA": {
+            "E-Konjugation PPA": {
                 "Nominativ_Singular": "monens",
                 "Genitiv_Singular": "monentis",
                 "Dativ_Singular": "monenti",
@@ -389,7 +389,7 @@ class Data:
                 "Akkusativ_Plural": "monentes",
                 "Ablativ_Plural": "monentibus",
             },
-            "e-Konjugation PPP": {
+            "E-Konjugation PPP": {
                 "Nominativ_Singular": "monitus",
                 "Genitiv_Singular": "moniti",
                 "Dativ_Singular": "monito",
@@ -401,7 +401,7 @@ class Data:
                 "Akkusativ_Plural": "monitos",
                 "Ablativ_Plural": "monitis",
             },
-            "e-Konjugation PFA": {
+            "E-Konjugation PFA": {
                 "Nominativ_Singular": "moniturus",
                 "Genitiv_Singular": "monituri",
                 "Dativ_Singular": "monituro",
@@ -413,7 +413,7 @@ class Data:
                 "Akkusativ_Plural": "monituros",
                 "Ablativ_Plural": "monituris",
             },
-            "e-Konjugation Passiv Präsens": {
+            "E-Konjugation Passiv Präsens": {
                 "1._Person_Singular": "moneor",
                 "2._Person_Singular": "moneris",
                 "3._Person_Singular": "monetur",
@@ -421,7 +421,7 @@ class Data:
                 "2._Person_Plural": "monemini",
                 "3._Person_Plural": "monentur",
             },
-            "e-Konjugation Passiv Imperfekt": {
+            "E-Konjugation Passiv Imperfekt": {
                 "1._Person_Singular": "monebar",
                 "2._Person_Singular": "monebaris",
                 "3._Person_Singular": "monebatur",
@@ -429,7 +429,7 @@ class Data:
                 "2._Person_Plural": "monebamini",
                 "3._Person_Plural": "monebantur",
             },
-            "e-Konjugation Passiv Perfekt": {
+            "E-Konjugation Passiv Perfekt": {
                 "1._Person_Singular": "monitus sum",
                 "2._Person_Singular": "monitus es",
                 "3._Person_Singular": "monitus est",
@@ -437,7 +437,7 @@ class Data:
                 "2._Person_Plural": "moniti estis",
                 "3._Person_Plural": "moniti sunt",
             },
-            "e-Konjugation Passiv Plusquamperfekt": {
+            "E-Konjugation Passiv Plusquamperfekt": {
                 "1._Person_Singular": "monitus eram",
                 "2._Person_Singular": "monitus eras",
                 "3._Person_Singular": "monitus erat",
@@ -445,7 +445,7 @@ class Data:
                 "2._Person_Plural": "moniti eratis",
                 "3._Person_Plural": "moniti erant",
             },
-            "e-Konjugation Passiv Futur 1": {
+            "E-Konjugation Passiv Futur 1": {
                 "1._Person_Singular": "monebor",
                 "2._Person_Singular": "moneberis",
                 "3._Person_Singular": "monebitur",
@@ -453,7 +453,7 @@ class Data:
                 "2._Person_Plural": "monebimini",
                 "3._Person_Plural": "monebuntur",
             },
-            "e-Konjugation Passiv Futur 2": {
+            "E-Konjugation Passiv Futur 2": {
                 "1._Person_Singular": "monitus ero",
                 "2._Person_Singular": "monitus eris",
                 "3._Person_Singular": "monitus erit",
@@ -461,7 +461,7 @@ class Data:
                 "2._Person_Plural": "moniti eritis",
                 "3._Person_Plural": "moniti erunt",
             },
-            "e-Konjugation Konjunktiv Präsens": {
+            "E-Konjugation Konjunktiv Präsens": {
                 "1._Person_Singular": "moneam",
                 "2._Person_Singular": "moneas",
                 "3._Person_Singular": "moneat",
@@ -469,7 +469,7 @@ class Data:
                 "2._Person_Plural": "moneatis",
                 "3._Person_Plural": "moneant",
             },
-            "e-Konjugation Konjunktiv Imperfekt": {
+            "E-Konjugation Konjunktiv Imperfekt": {
                 "1._Person_Singular": "monerem",
                 "2._Person_Singular": "moneres",
                 "3._Person_Singular": "moneret",
@@ -477,7 +477,7 @@ class Data:
                 "2._Person_Plural": "moneretis",
                 "3._Person_Plural": "monerent",
             },
-            "e-Konjugation Konjunktiv Perfekt": {
+            "E-Konjugation Konjunktiv Perfekt": {
                 "1._Person_Singular": "monuerim",
                 "2._Person_Singular": "monueris",
                 "3._Person_Singular": "monuerit",
@@ -485,7 +485,7 @@ class Data:
                 "2._Person_Plural": "monueritis",
                 "3._Person_Plural": "monuerint",
             },
-            "e-Konjugation Konjunktiv Plusquamperfekt": {
+            "E-Konjugation Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "monuissem",
                 "2._Person_Singular": "monuisses",
                 "3._Person_Singular": "monuisset",
@@ -493,7 +493,7 @@ class Data:
                 "2._Person_Plural": "monuissetis",
                 "3._Person_Plural": "monuissent",
             },
-            "e-Konjugation Passiv Konjunktiv Präsens": {
+            "E-Konjugation Passiv Konjunktiv Präsens": {
                 "1._Person_Singular": "monear",
                 "2._Person_Singular": "monearis",
                 "3._Person_Singular": "moneatur",
@@ -501,7 +501,7 @@ class Data:
                 "2._Person_Plural": "moneamini",
                 "3._Person_Plural": "moneantur",
             },
-            "e-Konjugation Passiv Konjunktiv Imperfekt": {
+            "E-Konjugation Passiv Konjunktiv Imperfekt": {
                 "1._Person_Singular": "monerer",
                 "2._Person_Singular": "monereris",
                 "3._Person_Singular": "moneretur",
@@ -509,7 +509,7 @@ class Data:
                 "2._Person_Plural": "moneremini",
                 "3._Person_Plural": "monerentur",
             },
-            "e-Konjugation Passiv Konjunktiv Perfekt": {
+            "E-Konjugation Passiv Konjunktiv Perfekt": {
                 "1._Person_Singular": "monitus sim",
                 "2._Person_Singular": "monitus sis",
                 "3._Person_Singular": "monitus sit",
@@ -517,7 +517,7 @@ class Data:
                 "2._Person_Plural": "moniti sitis",
                 "3._Person_Plural": "moniti sint",
             },
-            "e-Konjugation Passiv Konjunktiv Plusquamperfekt": {
+            "E-Konjugation Passiv Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "monitus essem",
                 "2._Person_Singular": "monitus esses",
                 "3._Person_Singular": "monitus esset",
@@ -525,7 +525,7 @@ class Data:
                 "2._Person_Plural": "moniti essetis",
                 "3._Person_Plural": "moniti essent",
             },
-            "i-Konjugation Präsens": {
+            "I-Konjugation Präsens": {
                 "1._Person_Singular": "audio",
                 "2._Person_Singular": "audis",
                 "3._Person_Singular": "audit",
@@ -533,7 +533,7 @@ class Data:
                 "2._Person_Plural": "auditis",
                 "3._Person_Plural": "audiunt",
             },
-            "i-Konjugation Imperfekt": {
+            "I-Konjugation Imperfekt": {
                 "1._Person_Singular": "audiebam",
                 "2._Person_Singular": "audiebas",
                 "3._Person_Singular": "audiebat",
@@ -541,7 +541,7 @@ class Data:
                 "2._Person_Plural": "audiebatis",
                 "3._Person_Plural": "audiebant",
             },
-            "i-Konjugation Plusquamperfekt": {
+            "I-Konjugation Plusquamperfekt": {
                 "1._Person_Singular": "audiveram",
                 "2._Person_Singular": "audiveras",
                 "3._Person_Singular": "audiverat",
@@ -549,7 +549,7 @@ class Data:
                 "2._Person_Plural": "audiveratis",
                 "3._Person_Plural": "audiverant",
             },
-            "i-Konjugation Perfekt": {
+            "I-Konjugation Perfekt": {
                 "1._Person_Singular": "audivi",
                 "2._Person_Singular": "audivisti",
                 "3._Person_Singular": "audivit",
@@ -557,7 +557,7 @@ class Data:
                 "2._Person_Plural": "audivistis",
                 "3._Person_Plural": "audiverunt",
             },
-            "i-Konjugation Futur 1": {
+            "I-Konjugation Futur 1": {
                 "1._Person_Singular": "audiam",
                 "2._Person_Singular": "audies",
                 "3._Person_Singular": "audiet",
@@ -565,7 +565,7 @@ class Data:
                 "2._Person_Plural": "audietis",
                 "3._Person_Plural": "audient",
             },
-            "i-Konjugation Futur 2": {
+            "I-Konjugation Futur 2": {
                 "1._Person_Singular": "audivero",
                 "2._Person_Singular": "audiveris",
                 "3._Person_Singular": "audiverit",
@@ -573,7 +573,7 @@ class Data:
                 "2._Person_Plural": "audiveritis",
                 "3._Person_Plural": "audiverint",
             },
-            "i-Konjugation PPA": {
+            "I-Konjugation PPA": {
                 "Nominativ_Singular": "audiens",
                 "Genitiv_Singular": "audientis",
                 "Dativ_Singular": "audienti",
@@ -585,7 +585,7 @@ class Data:
                 "Akkusativ_Plural": "audientes",
                 "Ablativ_Plural": "audientibus",
             },
-            "i-Konjugation PPP": {
+            "I-Konjugation PPP": {
                 "Nominatv_Singular": "auditus",
                 "Genitiv_Singular": "auditi",
                 "Dativ_Singular": "audito",
@@ -597,7 +597,7 @@ class Data:
                 "Akkusativ_Plural": "auditos",
                 "Ablativ_Plural": "auditis",
             },
-            "i-Konjugation PFA": {
+            "I-Konjugation PFA": {
                 "Nominativ_Singular": "auditurus",
                 "Genitiv_Singular": "audituri",
                 "Dativ_Singular": "audituro",
@@ -609,7 +609,7 @@ class Data:
                 "Akkusativ_Plural": "audituros",
                 "Ablativ_Plural": "audituris",
             },
-            "i-Konjugation Passiv Präsens": {
+            "I-Konjugation Passiv Präsens": {
                 "1._Person_Singular": "audior",
                 "2._Person_Singular": "audiris",
                 "3._Person_Singular": "auditur",
@@ -617,7 +617,7 @@ class Data:
                 "2._Person_Plural": "audimini",
                 "3._Person_Plural": "audiuntur",
             },
-            "i-Konjugation Passiv Imperfekt": {
+            "I-Konjugation Passiv Imperfekt": {
                 "1._Person_Singular": "audiebar",
                 "2._Person_Singular": "audiebaris",
                 "3._Person_Singular": "audiebatur",
@@ -625,7 +625,7 @@ class Data:
                 "2._Person_Plural": "audiebamini",
                 "3._Person_Plural": "audiebantur",
             },
-            "i-Konjugation Passiv Perfekt": {
+            "I-Konjugation Passiv Perfekt": {
                 "1._Person_Singular": "auditus sum",
                 "2._Person_Singular": "auditus es",
                 "3._Person_Singular": "auditus est",
@@ -633,7 +633,7 @@ class Data:
                 "2._Person_Plural": "auditi estis",
                 "3._Person_Plural": "auditi sunt",
             },
-            "i-Konjugation Passiv Plusquamperfekt": {
+            "I-Konjugation Passiv Plusquamperfekt": {
                 "1._Person_Singular": "auditus eram",
                 "2._Person_Singular": "auditus eras",
                 "3._Person_Singular": "auditus erat",
@@ -641,7 +641,7 @@ class Data:
                 "2._Person_Plural": "auditi eratis",
                 "3._Person_Plural": "auditi erant",
             },
-            "i-Konjugation Passiv Futur 1": {
+            "I-Konjugation Passiv Futur 1": {
                 "1._Person_Singular": "audiar",
                 "2._Person_Singular": "audieris",
                 "3._Person_Singular": "audietur",
@@ -649,7 +649,7 @@ class Data:
                 "2._Person_Plural": "audiemini",
                 "3._Person_Plural": "audientur",
             },
-            "i-Konjugation Passiv Futur 2": {
+            "I-Konjugation Passiv Futur 2": {
                 "1._Person_Singular": "auditus ero",
                 "2._Person_Singular": "auditus eris",
                 "3._Person_Singular": "auditus erit",
@@ -657,7 +657,7 @@ class Data:
                 "2._Person_Plural": "auditi eritis",
                 "3._Person_Plural": "auditi erunt",
             },
-            "i-Konjugation Konjunktiv Präsens": {
+            "I-Konjugation Konjunktiv Präsens": {
                 "1._Person_Singular": "audiam",
                 "2._Person_Singular": "audias",
                 "3._Person_Singular": "audiat",
@@ -665,7 +665,7 @@ class Data:
                 "2._Person_Plural": "audiatis",
                 "3._Person_Plural": "audiant",
             },
-            "i-Konjugation Konjunktiv Imperfekt": {
+            "I-Konjugation Konjunktiv Imperfekt": {
                 "1._Person_Singular": "audirem",
                 "2._Person_Singular": "audires",
                 "3._Person_Singular": "audiret",
@@ -673,7 +673,7 @@ class Data:
                 "2._Person_Plural": "audiretis",
                 "3._Person_Plural": "audirent",
             },
-            "i-Konjugation Konjunktiv Perfekt": {
+            "I-Konjugation Konjunktiv Perfekt": {
                 "1._Person_Singular": "audiverim",
                 "2._Person_Singular": "audiveris",
                 "3._Person_Singular": "audiverit",
@@ -681,14 +681,14 @@ class Data:
                 "2._Person_Plural": "audiveritis",
                 "3._Person_Plural": "audiverint",
             },
-            "i-Konjugation Konjunktiv Plusquamperfekt": {
+            "I-Konjugation Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "audivissem",
                 "2._Person_Singular": "audivisses",
                 "3._Person_Singular": "audivisset",
                 "1._Person_Plural": "audivissemus",
                 "2._Person_Plural": "audivissetis",
                 "3._Person_Plural": "audivissent",
-            },"i-Konjugation Passiv Konjunktiv Präsens": {
+            },"I-Konjugation Passiv Konjunktiv Präsens": {
                 "1._Person_Singular": "audiar",
                 "2._Person_Singular": "audiaris",
                 "3._Person_Singular": "audiatur",
@@ -696,7 +696,7 @@ class Data:
                 "2._Person_Plural": "audiamini",
                 "3._Person_Plural": "audiantur",
             },
-            "i-Konjugation Passiv Konjunktiv Imperfekt": {
+            "I-Konjugation Passiv Konjunktiv Imperfekt": {
                 "1._Person_Singular": "audirer",
                 "2._Person_Singular": "audireris",
                 "3._Person_Singular": "audiretur",
@@ -704,7 +704,7 @@ class Data:
                 "2._Person_Plural": "audiremini",
                 "3._Person_Plural": "audirentur",
             },
-            "i-Konjugation Passiv Konjunktiv Perfekt": {
+            "I-Konjugation Passiv Konjunktiv Perfekt": {
                 "1._Person_Singular": "auditus sim",
                 "2._Person_Singular": "auditus sis",
                 "3._Person_Singular": "auditus sit",
@@ -712,7 +712,7 @@ class Data:
                 "2._Person_Plural": "auditi sitis",
                 "3._Person_Plural": "auditi sint",
             },
-            "i-Konjugation Passiv Konjunktiv Plusquamperfekt": {
+            "I-Konjugation Passiv Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "auditus essem",
                 "2._Person_Singular": "auditus esses",
                 "3._Person_Singular": "auditus esset",
@@ -720,7 +720,7 @@ class Data:
                 "2._Person_Plural": "auditi essetis",
                 "3._Person_Plural": "auditi essent",
             },
-            "konsonantische Konjugation Präsens": {
+            "Konsonantische Konjugation Präsens": {
                 "1._Person_Singular": "rego",
                 "2._Person_Singular": "regis",
                 "3._Person_Singular": "regit",
@@ -728,7 +728,7 @@ class Data:
                 "2._Person_Plural": "regitis",
                 "3._Person_Plural": "regunt",
             },
-            "konsonantische Konjugation Imperfekt": {
+            "Konsonantische Konjugation Imperfekt": {
                 "1._Person_Singular": "regebam",
                 "2._Person_Singular": "regebas",
                 "3._Person_Singular": "regebat",
@@ -736,7 +736,7 @@ class Data:
                 "2._Person_Plural": "regebatis",
                 "3._Person_Plural": "regebant",
             },
-            "konsonantische Konjugation Plusquamperfekt": {
+            "Konsonantische Konjugation Plusquamperfekt": {
                 "1._Person_Singular": "rexeram",
                 "2._Person_Singular": "rexeras",
                 "3._Person_Singular": "rexerat",
@@ -744,7 +744,7 @@ class Data:
                 "2._Person_Plural": "rexeratis",
                 "3._Person_Plural": "rexerant",
             },
-            "konsonantische Konjugation Perfekt": {
+            "Konsonantische Konjugation Perfekt": {
                 "1._Person_Singular": "rexi",
                 "2._Person_Singular": "rexisti",
                 "3._Person_Singular": "rexit",
@@ -752,7 +752,7 @@ class Data:
                 "2._Person_Plural": "rexistis",
                 "3._Person_Plural": "rexerunt",
             },
-            "konsonantische Konjugation Futur 1": {
+            "Konsonantische Konjugation Futur 1": {
                 "1._Person_Singular": "regam",
                 "2._Person_Singular": "reges",
                 "3._Person_Singular": "reget",
@@ -760,7 +760,7 @@ class Data:
                 "2._Person_Plural": "regetis",
                 "3._Person_Plural": "regent",
             },
-            "konsonantische Konjugation Futur 2": {
+            "Konsonantische Konjugation Futur 2": {
                 "1._Person_Singular": "rexero",
                 "2._Person_Singular": "rexeris",
                 "3._Person_Singular": "rexerit",
@@ -768,19 +768,19 @@ class Data:
                 "2._Person_Plural": "rexeritis",
                 "3._Person_Plural": "rexerint",
             },
-            "konsonantische Konjugation PPA": {
+            "Konsonantische Konjugation PPA": {
                 "Singular": "regens",
                 "Plural": "regentes",
             },
-            "konsonantische Konjugation PPP": {
+            "Konsonantische Konjugation PPP": {
                 "Singular": "rectus",
                 "Plural": "recti",
             },
-            "konsonantische Konjugation PFA": {
+            "Konsonantische Konjugation PFA": {
                 "Singular": "recturus",
                 "Plural": "recturi",
             },
-            "konsonantische Konjugation Passiv Präsens": {
+            "Konsonantische Konjugation Passiv Präsens": {
                 "1._Person_Singular": "regor",
                 "2._Person_Singular": "regeris",
                 "3._Person_Singular": "regitur",
@@ -788,7 +788,7 @@ class Data:
                 "2._Person_Plural": "regimini",
                 "3._Person_Plural": "reguntur",
             },
-            "konsonantische Konjugation Passiv Imperfekt": {
+            "Konsonantische Konjugation Passiv Imperfekt": {
                 "1._Person_Singular": "regebar",
                 "2._Person_Singular": "regebaris",
                 "3._Person_Singular": "regebatur",
@@ -796,7 +796,7 @@ class Data:
                 "2._Person_Plural": "regebamini",
                 "3._Person_Plural": "regebantur",
             },
-            "konsonantische Konjugation Passiv Perfekt": {
+            "Konsonantische Konjugation Passiv Perfekt": {
                 "1._Person_Singular": "rectus sum",
                 "2._Person_Singular": "rectus es",
                 "3._Person_Singular": "rectus est",
@@ -804,7 +804,7 @@ class Data:
                 "2._Person_Plural": "recti estis",
                 "3._Person_Plural": "recti sunt",
             },
-            "konsonantische Konjugation Passiv Plusquamperfekt": {
+            "Konsonantische Konjugation Passiv Plusquamperfekt": {
                 "1._Person_Singular": "rectus eram",
                 "2._Person_Singular": "rectus eras",
                 "3._Person_Singular": "rectus erat",
@@ -812,7 +812,7 @@ class Data:
                 "2._Person_Plural": "recti eratis",
                 "3._Person_Plural": "recti erant",
             },
-            "konsonantische Konjugation Passiv Futur 1": {
+            "Konsonantische Konjugation Passiv Futur 1": {
                 "1._Person_Singular": "regar",
                 "2._Person_Singular": "regeris",
                 "3._Person_Singular": "regetur",
@@ -820,7 +820,7 @@ class Data:
                 "2._Person_Plural": "regemini",
                 "3._Person_Plural": "regentur",
             },
-            "konsonantische Konjugation Passiv Futur 2": {
+            "Konsonantische Konjugation Passiv Futur 2": {
                 "1._Person_Singular": "rectus ero",
                 "2._Person_Singular": "rectus eris",
                 "3._Person_Singular": "rectus erit",
@@ -828,7 +828,7 @@ class Data:
                 "2._Person_Plural": "recti eritis",
                 "3._Person_Plural": "recti erunt",
             },
-            "konsonantische Konjugation Konjunktiv Präsens": {
+            "Konsonantische Konjugation Konjunktiv Präsens": {
                 "1._Person_Singular": "regam",
                 "2._Person_Singular": "regas",
                 "3._Person_Singular": "regat",
@@ -836,7 +836,7 @@ class Data:
                 "2._Person_Plural": "regatis",
                 "3._Person_Plural": "regant",
             },
-            "konsonantische Konjugation Konjunktiv Imperfekt": {
+            "Konsonantische Konjugation Konjunktiv Imperfekt": {
                 "1._Person_Singular": "regerem",
                 "2._Person_Singular": "regeres",
                 "3._Person_Singular": "regeret",
@@ -844,7 +844,7 @@ class Data:
                 "2._Person_Plural": "regeretis",
                 "3._Person_Plural": "regerent",
             },
-            "konsonantische Konjugation Konjunktiv Perfekt": {
+            "Konsonantische Konjugation Konjunktiv Perfekt": {
                 "1._Person_Singular": "rexerim",
                 "2._Person_Singular": "rexeris",
                 "3._Person_Singular": "rexerit",
@@ -852,14 +852,14 @@ class Data:
                 "2._Person_Plural": "rexeritis",
                 "3._Person_Plural": "rexerint",
             },
-            "konsonantische Konjugation Konjunktiv Plusquamperfekt": {
+            "Konsonantische Konjugation Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "rexissem",
                 "2._Person_Singular": "rexisses",
                 "3._Person_Singular": "rexisset",
                 "1._Person_Plural": "rexissemus",
                 "2._Person_Plural": "rexissetis",
                 "3._Person_Plural": "rexissent",
-            },"konsonantische Konjugation Passiv Konjunktiv Präsens": {
+            },"Konsonantische Konjugation Passiv Konjunktiv Präsens": {
                 "1._Person_Singular": "regar",
                 "2._Person_Singular": "regaris",
                 "3._Person_Singular": "regatur",
@@ -867,7 +867,7 @@ class Data:
                 "2._Person_Plural": "regamini",
                 "3._Person_Plural": "regantur",
             },
-            "konsonantische Konjugation Passiv Konjunktiv Imperfekt": {
+            "Konsonantische Konjugation Passiv Konjunktiv Imperfekt": {
                 "1._Person_Singular": "regerer",
                 "2._Person_Singular": "regereris",
                 "3._Person_Singular": "regeretur",
@@ -875,7 +875,7 @@ class Data:
                 "2._Person_Plural": "regeremini",
                 "3._Person_Plural": "regerentur",
             },
-            "konsonantische Konjugation Passiv Konjunktiv Perfekt": {
+            "Konsonantische Konjugation Passiv Konjunktiv Perfekt": {
                 "1._Person_Singular": "rectus sim",
                 "2._Person_Singular": "rectus sis",
                 "3._Person_Singular": "rectus sit",
@@ -883,7 +883,7 @@ class Data:
                 "2._Person_Plural": "recti sitis",
                 "3._Person_Plural": "recti sint",
             },
-            "konsonantische Konjugation Passiv Konjunktiv Plusquamperfekt": {
+            "Konsonantische Konjugation Passiv Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "rectus essem",
                 "2._Person_Singular": "rectus esses",
                 "3._Person_Singular": "rectus esset",
@@ -891,7 +891,7 @@ class Data:
                 "2._Person_Plural": "recti essetis",
                 "3._Person_Plural": "recti essent",
             },
-            "gemischte Konjugation Präsens": {
+            "Gemischte Konjugation Präsens": {
                 "1._Person_Singular": "capio",
                 "2._Person_Singular": "capis",
                 "3._Person_Singular": "capit",
@@ -899,7 +899,7 @@ class Data:
                 "2._Person_Plural": "capitis",
                 "3._Person_Plural": "capiunt",
             },
-            "gemischte Konjugation Imperfekt": {
+            "Gemischte Konjugation Imperfekt": {
                 "1._Person_Singular": "capiebam",
                 "2._Person_Singular": "capiebas",
                 "3._Person_Singular": "capiebat",
@@ -907,7 +907,7 @@ class Data:
                 "2._Person_Plural": "capiebatis",
                 "3._Person_Plural": "capiebant",
             },
-            "gemischte Konjugation Plusquamperfekt": {
+            "Gemischte Konjugation Plusquamperfekt": {
                 "1._Person_Singular": "ceperam",
                 "2._Person_Singular": "ceperas",
                 "3._Person_Singular": "ceperat",
@@ -915,7 +915,7 @@ class Data:
                 "2._Person_Plural": "ceperatis",
                 "3._Person_Plural": "ceperant",
             },
-            "gemischte Konjugation Perfekt": {
+            "Gemischte Konjugation Perfekt": {
                 "1._Person_Singular": "cepi",
                 "2._Person_Singular": "cepisti",
                 "3._Person_Singular": "cepit",
@@ -923,7 +923,7 @@ class Data:
                 "2._Person_Plural": "cepistis",
                 "3._Person_Plural": "ceperunt",
             },
-            "gemischte Konjugation Futur 1": {
+            "Gemischte Konjugation Futur 1": {
                 "1._Person_Singular": "capiam",
                 "2._Person_Singular": "capies",
                 "3._Person_Singular": "capiet",
@@ -931,7 +931,7 @@ class Data:
                 "2._Person_Plural": "capietis",
                 "3._Person_Plural": "capient",
             },
-            "gemischte Konjugation Futur 2": {
+            "Gemischte Konjugation Futur 2": {
                 "1._Person_Singular": "cepero",
                 "2._Person_Singular": "ceperis",
                 "3._Person_Singular": "ceperit",
@@ -939,7 +939,7 @@ class Data:
                 "2._Person_Plural": "ceperitis",
                 "3._Person_Plural": "ceperint",
             },
-            "gemischte Konjugation Passiv Konjunktiv Präsens": {
+            "Gemischte Konjugation Passiv Konjunktiv Präsens": {
                 "1._Person_Singular": "capiar",
                 "2._Person_Singular": "capiaris",
                 "3._Person_Singular": "capiatur",
@@ -947,7 +947,7 @@ class Data:
                 "2._Person_Plural": "capiamini",
                 "3._Person_Plural": "capiantur",
             },
-            "gemischte Konjugation Passiv Konjunktiv Imperfekt": {
+            "Gemischte Konjugation Passiv Konjunktiv Imperfekt": {
                 "1._Person_Singular": "caperer",
                 "2._Person_Singular": "capereris",
                 "3._Person_Singular": "caperetur",
@@ -955,7 +955,7 @@ class Data:
                 "2._Person_Plural": "caperemini",
                 "3._Person_Plural": "caperentur",
             },
-            "gemischte Konjugation Passiv Konjunktiv Perfekt": {
+            "Gemischte Konjugation Passiv Konjunktiv Perfekt": {
                 "1._Person_Singular": "captus sim",
                 "2._Person_Singular": "captus sis",
                 "3._Person_Singular": "captus sit",
@@ -963,7 +963,7 @@ class Data:
                 "2._Person_Plural": "capti sitis",
                 "3._Person_Plural": "capti sint",
             },
-            "gemischte Konjugation Passiv Konjunktiv Plusquamperfekt": {
+            "Gemischte Konjugation Passiv Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "captus essem",
                 "2._Person_Singular": "captus esses",
                 "3._Person_Singular": "captus esset",
@@ -971,19 +971,19 @@ class Data:
                 "2._Person_Plural": "capti essetis",
                 "3._Person_Plural": "capti essent",
             },
-            "gemischte Konjugation PPA": {
+            "Gemischte Konjugation PPA": {
                 "Singular": "capiens",
                 "Plural": "capientes",
             },
-            "gemischte Konjugation PPP": {
+            "Gemischte Konjugation PPP": {
                 "Singular": "captus",
                 "Plural": "capti",
             },
-            "gemischte Konjugation PFA": {
+            "Gemischte Konjugation PFA": {
                 "Singular": "capturus",
                 "Plural": "capturi",
             },
-            "gemischte Konjugation Passiv Präsens": {
+            "Gemischte Konjugation Passiv Präsens": {
                 "1._Person_Singular": "capior",
                 "2._Person_Singular": "caperis",
                 "3._Person_Singular": "capitur",
@@ -991,7 +991,7 @@ class Data:
                 "2._Person_Plural": "capimini",
                 "3._Person_Plural": "capiuntur",
             },
-            "gemischte Konjugation Passiv Imperfekt": {
+            "Gemischte Konjugation Passiv Imperfekt": {
                 "1._Person_Singular": "capiebar",
                 "2._Person_Singular": "capiebaris",
                 "3._Person_Singular": "capiebatur",
@@ -999,7 +999,7 @@ class Data:
                 "2._Person_Plural": "capiebamini",
                 "3._Person_Plural": "capiebantur",
             },
-            "gemischte Konjugation Passiv Perfekt": {
+            "Gemischte Konjugation Passiv Perfekt": {
                 "1._Person_Singular": "captus sum",
                 "2._Person_Singular": "captus es",
                 "3._Person_Singular": "captus est",
@@ -1007,7 +1007,7 @@ class Data:
                 "2._Person_Plural": "capti estis",
                 "3._Person_Plural": "capti sunt",
             },
-            "gemischte Konjugation Passiv Plusquamperfekt": {
+            "Gemischte Konjugation Passiv Plusquamperfekt": {
                 "1._Person_Singular": "captus eram",
                 "2._Person_Singular": "captus eras",
                 "3._Person_Singular": "captus erat",
@@ -1015,7 +1015,7 @@ class Data:
                 "2._Person_Plural": "capti eratis",
                 "3._Person_Plural": "capti erant",
             },
-            "gemischte Konjugation Passiv Futur 1": {
+            "Gemischte Konjugation Passiv Futur 1": {
                 "1._Person_Singular": "capiar",
                 "2._Person_Singular": "capieris",
                 "3._Person_Singular": "capietur",
@@ -1023,7 +1023,7 @@ class Data:
                 "2._Person_Plural": "capiemini",
                 "3._Person_Plural": "capientur",
             },
-            "gemischte Konjugation Passiv Futur 2": {
+            "Gemischte Konjugation Passiv Futur 2": {
                 "1._Person_Singular": "captus ero",
                 "2._Person_Singular": "captus eris",
                 "3._Person_Singular": "captus erit",
@@ -1031,7 +1031,7 @@ class Data:
                 "2._Person_Plural": "capti eritis",
                 "3._Person_Plural": "capti erunt",
             },
-            "gemischte Konjugation Konjunktiv Präsens": {
+            "Gemischte Konjugation Konjunktiv Präsens": {
                 "1._Person_Singular": "capiam",
                 "2._Person_Singular": "capias",
                 "3._Person_Singular": "capiat",
@@ -1039,7 +1039,7 @@ class Data:
                 "2._Person_Plural": "capiatis",
                 "3._Person_Plural": "capiant",
             },
-            "gemischte Konjugation Konjunktiv Imperfekt": {
+            "Gemischte Konjugation Konjunktiv Imperfekt": {
                 "1._Person_Singular": "caperem",
                 "2._Person_Singular": "caperes",
                 "3._Person_Singular": "caperet",
@@ -1047,7 +1047,7 @@ class Data:
                 "2._Person_Plural": "caperetis",
                 "3._Person_Plural": "caperent",
             },
-            "gemischte Konjugation Konjunktiv Perfekt": {
+            "Gemischte Konjugation Konjunktiv Perfekt": {
                 "1._Person_Singular": "ceperim",
                 "2._Person_Singular": "ceperis",
                 "3._Person_Singular": "ceperit",
@@ -1055,7 +1055,7 @@ class Data:
                 "2._Person_Plural": "ceperitis",
                 "3._Person_Plural": "ceperint",
             },
-            "gemischte Konjugation Konjunktiv Plusquamperfekt": {
+            "Gemischte Konjugation Konjunktiv Plusquamperfekt": {
                 "1._Person_Singular": "cepissem",
                 "2._Person_Singular": "cepisses",
                 "3._Person_Singular": "cepisset",
