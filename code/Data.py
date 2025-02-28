@@ -1101,7 +1101,7 @@ class Data:
                 "Dativ_Plural": "magnis",
                 "Akkusativ_Plural": "magna",
                 "Ablativ_Plural": "magnis"
-            }
+            },
             "I-Deklination einendig maskulinum": {
                 "Nominativ_Singular": "ingens",
                 "Genitiv_Singular": "ingentis",
