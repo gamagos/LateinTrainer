@@ -1066,8 +1066,53 @@ class Data:
         }
         
         self.declensions_adjectives = {
-            "A-Deklination":{
-                
+            "A/O-Deklination maskulinum": {
+                "Nominativ_Singular": "magnus",
+                "Genitiv_Singular": "magni",
+                "Dativ_Singular": "magno",
+                "Akkusativ_Singular": "magnum",
+                "Ablativ_Singular": "magno",
+                "Nominativ_Plural": "magni",
+                "Genitiv_Plural": "magnorum",
+                "Dativ_Plural": "magnis",
+                "Akkusativ_Plural": "magnos",
+                "Ablativ_Plural": "magnis"
+            },
+            "A/O-Deklination femininum": {
+                "Nominativ_Singular": "magna",
+                "Genitiv_Singular": "magnae",
+                "Dativ_Singular": "magnae",
+                "Akkusativ_Singular": "magnam",
+                "Ablativ_Singular": "magna",
+                "Nominativ_Plural": "magnae",
+                "Genitiv_Plural": "magnarum",
+                "Dativ_Plural": "magnis",
+                "Akkusativ_Plural": "magnas",
+                "Ablativ_Plural": "magnis"
+            },
+            "A/O-Deklination neutrum":{
+                "Nominativ_Singular": "magnum",
+                "Genitiv_Singular": "magni",
+                "Dativ_Singular": "magno",
+                "Akkusativ_Singular": "magnum",
+                "Ablativ_Singular": "magno",
+                "Nominativ_Plural": "magna",
+                "Genitiv_Plural": "magnorum",
+                "Dativ_Plural": "magnis",
+                "Akkusativ_Plural": "magna",
+                "Ablativ_Plural": "magnis"
+            }
+            "I-Deklination einendig maskulinum": {
+                "Nominativ_Singular": "ingens",
+                "Genitiv_Singular": "ingentis",
+                "Dativ_Singular": "ingenti",
+                "Akkusativ_Singular": "ingentem",
+                "Ablativ_Singular": "ingenti",
+                "Nominativ_Plural": "ingentes",
+                "Genitiv_Plural": "ingentium",
+                "Dativ_Plural": "ingentibus",
+                "Akkusativ_Plural": "ingentes",
+                "Ablativ_Plural": "ingentibus"
             }
         }
         
