@@ -131,7 +131,7 @@ class Data:
                 "Ablativ_Plural": "rebus",
             },
         }
-        #@Copilot start here
+        
         self.conjugations = {
             "A-Konjugation Präsens": {
                 "1._Person_Singular": "amo",
@@ -1064,7 +1064,7 @@ class Data:
                 "3._Person_Plural": "cepissent",
             }
         }
-        
+        #@Copilot start here
         self.declensions_adjectives = {
             "A/O-Deklination maskulinum": {
                 "Nominativ_Singular": "magnus",
@@ -1090,7 +1090,7 @@ class Data:
                 "Akkusativ_Plural": "magnas",
                 "Ablativ_Plural": "magnis"
             },
-            "A/O-Deklination neutrum":{
+            "A/O-Deklination neutrum": {
                 "Nominativ_Singular": "magnum",
                 "Genitiv_Singular": "magni",
                 "Dativ_Singular": "magno",
@@ -1113,6 +1113,102 @@ class Data:
                 "Dativ_Plural": "ingentibus",
                 "Akkusativ_Plural": "ingentes",
                 "Ablativ_Plural": "ingentibus"
+            },
+            "I-Deklination einendig femininum": {
+                "Nominativ_Singular": "ingens",
+                "Genitiv_Singular": "ingentis",
+                "Dativ_Singular": "ingenti",
+                "Akkusativ_Singular": "ingentem",
+                "Ablativ_Singular": "ingenti",
+                "Nominativ_Plural": "ingentes",
+                "Genitiv_Plural": "ingentium",
+                "Dativ_Plural": "ingentibus",
+                "Akkusativ_Plural": "ingentes",
+                "Ablativ_Plural": "ingentibus"
+            },
+            "I-Deklination einendig neutrum": {
+                "Nominativ_Singular": "ingens",
+                "Genitiv_Singular": "ingentis",
+                "Dativ_Singular": "ingenti",
+                "Akkusativ_Singular": "ingens",
+                "Ablativ_Singular": "ingenti",
+                "Nominativ_Plural": "ingentia",
+                "Genitiv_Plural": "ingentium",
+                "Dativ_Plural": "ingentibus",
+                "Akkusativ_Plural": "ingentia",
+                "Ablativ_Plural": "ingentibus"
+            },
+            "I-Deklination zweiendig maskulinum": {
+                "Nominativ_Singular": "fortis",
+                "Genitiv_Singular": "fortis",
+                "Dativ_Singular": "forti",
+                "Akkusativ_Singular": "fortem",
+                "Ablativ_Singular": "forti",
+                "Nominativ_Plural": "fortes",
+                "Genitiv_Plural": "fortium",
+                "Dativ_Plural": "fortibus",
+                "Akkusativ_Plural": "fortes",
+                "Ablativ_Plural": "fortibus"
+            },
+            "I-Deklination zweiendig femininum": {
+                "Nominativ_Singular": "fortis",
+                "Genitiv_Singular": "fortis",
+                "Dativ_Singular": "forti",
+                "Akkusativ_Singular": "fortem",
+                "Ablativ_Singular": "forti",
+                "Nominativ_Plural": "fortes",
+                "Genitiv_Plural": "fortium",
+                "Dativ_Plural": "fortibus",
+                "Akkusativ_Plural": "fortes",
+                "Ablativ_Plural": "fortibus"
+            },
+            "I-Deklination zweiendig neutrum": {
+                "Nominativ_Singular": "forte",
+                "Genitiv_Singular": "fortis",
+                "Dativ_Singular": "forti",
+                "Akkusativ_Singular": "forte",
+                "Ablativ_Singular": "forti",
+                "Nominativ_Plural": "fortia",
+                "Genitiv_Plural": "fortium",
+                "Dativ_Plural": "fortibus",
+                "Akkusativ_Plural": "fortia",
+                "Ablativ_Plural": "fortibus"
+            },
+            "I-Deklination dreiendig maskulinum": {
+                "Nominativ_Singular": "celer",
+                "Genitiv_Singular": "celeris",
+                "Dativ_Singular": "celeri",
+                "Akkusativ_Singular": "celerem",
+                "Ablativ_Singular": "celeri",
+                "Nominativ_Plural": "celeres",
+                "Genitiv_Plural": "celerium",
+                "Dativ_Plural": "celeribus",
+                "Akkusativ_Plural": "celeres",
+                "Ablativ_Plural": "celeribus"
+            },
+            "I-Deklination dreiendig femininum": {
+                "Nominativ_Singular": "celeris",
+                "Genitiv_Singular": "celeris",
+                "Dativ_Singular": "celeri",
+                "Akkusativ_Singular": "celerem",
+                "Ablativ_Singular": "celeri",
+                "Nominativ_Plural": "celeres",
+                "Genitiv_Plural": "celerium",
+                "Dativ_Plural": "celeribus",
+                "Akkusativ_Plural": "celeres",
+                "Ablativ_Plural": "celeribus"
+            },
+            "I-Deklination dreiendig neutrum": {
+                "Nominativ_Singular": "celere",
+                "Genitiv_Singular": "celeris",
+                "Dativ_Singular": "celeri",
+                "Akkusativ_Singular": "celere",
+                "Ablativ_Singular": "celeri",
+                "Nominativ_Plural": "celeria",
+                "Genitiv_Plural": "celerium",
+                "Dativ_Plural": "celeribus",
+                "Akkusativ_Plural": "celeria",
+                "Ablativ_Plural": "celeribus"
             }
         }
         

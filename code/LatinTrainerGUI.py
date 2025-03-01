@@ -10,7 +10,7 @@ class LatinTrainerGUI:
     def __init__( self, root ):
         diagnostics = False     #Variable to track program for bugs
         tests = False           #Variable to let program run tests
-        version = "v1.6.0"    
+        version = "v1.6.2"    
         self.data = Data.Data()
         
         self.declensions_nouns = self.data.declensions
@@ -44,6 +44,7 @@ class LatinTrainerGUI:
         
         self.declension_forms = list( self.declensions_nouns.keys() )
         self.conjugation_forms = list( self.conjugations.keys() )
+        self.declensions_adjectives_forms = list( self.declensions_adjectives.keys() )
         self.hic_haec_hoc_forms = list( self.hic_haec_hoc.keys() )
         self.qui_quae_quod_forms = list( self.qui_quae_quod.keys() )
         self.ille_illa_illud_forms = list( self.ille_illa_illud.keys() )
@@ -69,74 +70,29 @@ class LatinTrainerGUI:
         
         
     def form_select( self ):
-        word_type = self.selected_option.get()   
-        if self.selected_option.get() == "Alle":
-            choices = [ "Nomen", "Verben","hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] 
+        word_type = self.selected_option.get()
+        if word_type == "Alle":
+            choices = [ "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ]
             word_type = random.choice( choices )
+            
+        forms_mapping = {
+            "Nomen": ( self.declension_forms, self.declensions_nouns ),
+            "Verben": ( self.conjugation_forms, self.conjugations ),
+            "Adjektive": ( self.declensions_adjectives_forms, self.declensions_adjectives ),
+            "hic haec hoc": ( self.hic_haec_hoc_forms, self.hic_haec_hoc ),
+            "qui quae quod": ( self.qui_quae_quod_forms, self.qui_quae_quod ),
+            "ille illa illud": ( self.ille_illa_illud_forms, self.ille_illa_illud ),
+            "ipse ipsa ipsum": ( self.ipse_ipsa_ipsum_forms, self.ipse_ipsa_ipsum )
+        }
 
-            if word_type == "Nomen":
-                self.current_key = self.declension_forms[ self.current_class_index ]
-                self.current_forms = self.declensions_nouns[ self.current_key ]
-                self.curent_word_type_amount_of_forms = len( self.declension_forms )
-                
-            elif word_type == "Verben":
-                self.current_key = self.conjugation_forms[ self.current_class_index ]
-                self.current_forms = self.conjugations[ self.current_key ]
-                self.curent_word_type_amount_of_forms = len( self.conjugation_forms )
-            
-            elif word_type == "hic haec hoc":
-                self.current_key = self.hic_haec_hoc_forms[ self.current_class_index ]
-                self.current_forms = self.hic_haec_hoc[ self.current_key ]
-                self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
-                
-            elif word_type == "qui quae quod":
-                self.current_key = self.qui_quae_quod_forms[ self.current_class_index ]
-                self.current_forms = self.qui_quae_quod[ self.current_key ]
-                self.curent_word_type_amount_of_forms = len( self.qui_quae_quod_forms )
-                
-            elif word_type == "ille illa illud":
-                self.current_key = self.ille_illa_illud_forms[ self.current_class_index ]
-                self.current_forms = self.ille_illa_illud[ self.current_key ]
-                self.curent_word_type_amount_of_forms = len( self.ille_illa_illud_forms )
-                
-            elif word_type == "ipse ipsa ipsum":
-                self.current_key = self.ipse_ipsa_ipsum_forms[ self.current_class_index ]
-                self.current_forms = self.ipse_ipsa_ipsum[ self.current_key ]
-                self.curent_word_type_amount_of_forms = len( self.ipse_ipsa_ipsum_forms )
-
-        elif word_type == "Nomen":
-            self.current_key = self.declension_forms[ self.current_class_index ]
-            self.current_forms = self.declensions_nouns[ self.current_key ]
-            self.curent_word_type_amount_of_forms = len( self.declension_forms )
-            
-        elif word_type == "Verben":
-            self.current_key = self.conjugation_forms[ self.current_class_index ]
-            self.current_forms = self.conjugations[ self.current_key ]
-            self.curent_word_type_amount_of_forms = len( self.conjugation_forms )
-            
-        elif word_type == "hic haec hoc":
-            self.current_key = self.hic_haec_hoc_forms[ self.current_class_index ]
-            self.current_forms = self.hic_haec_hoc[ self.current_key ]
-            self.curent_word_type_amount_of_forms = len( self.hic_haec_hoc_forms )
-            
-        elif word_type == "qui quae quod":
-            self.current_key = self.qui_quae_quod_forms[ self.current_class_index ]
-            self.current_forms = self.qui_quae_quod[ self.current_key ]
-            self.curent_word_type_amount_of_forms = len( self.qui_quae_quod_forms )
-            
-        elif word_type == "ille illa illud":
-            self.current_key = self.ille_illa_illud_forms[ self.current_class_index ]
-            self.current_forms = self.ille_illa_illud[ self.current_key ]
-            self.curent_word_type_amount_of_forms = len( self.ille_illa_illud_forms )
-                
-        elif word_type == "ipse ipsa ipsum":
-            self.current_key = self.ipse_ipsa_ipsum_forms[ self.current_class_index ]
-            self.current_forms = self.ipse_ipsa_ipsum[ self.current_key ]
-            self.curent_word_type_amount_of_forms = len( self.ipse_ipsa_ipsum_forms )    
-
+        if word_type in forms_mapping:
+            forms_list, forms_dict = forms_mapping[ word_type ]
+            self.current_key = forms_list[ self.current_class_index ]
+            self.current_forms = forms_dict[ self.current_key ]
+            self.curent_word_type_amount_of_forms = len( forms_list )
         else:
-            messagebox.showerror( "Fehler:\n Programm konnte die Form nicht auswählen" )
-        
+            messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen" )
+
         self.previous_form = self.selected_option.get()
         
         
@@ -150,7 +106,7 @@ class LatinTrainerGUI:
         self.titel.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.81 )
         self.titel.bind( "<Configure>", self.adjust_titel_font_size )
         
-        self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben", "hic haec hoc", "qui quae quod" ] ) 
+        self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
         self.combobox_select_form.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
