@@ -1,17 +1,18 @@
-import select
-from threading import main_thread
-import Data
-import tkinter as tk
-from tkinter import messagebox
-from tkinter import ttk
+from datetime import datetime
 import random
+from tkinter import messagebox
+import tkinter as tk
+from tkinter import ttk
+
+import Data
 
 class LatinTrainerGUI:
     def __init__( self, root ):
-        diagnostics = False     #Variable to track program for bugs
-        tests = False           #Variable to let program run tests
+        self.debug = False     #Variable to track program for bugs
+        self.tests = False           #Variable to let program run tests
         version = "v1.6.2"    
         self.data = Data.Data()
+        self.debug_print( "Program was started" ) 
         
         self.declensions_nouns = self.data.declensions
         self.conjugations = self.data.conjugations
@@ -24,18 +25,22 @@ class LatinTrainerGUI:
         
         self.root = root
         self.root.title( "Latin Trainer " + version )
+        self.root.bind( "<F3>", self.enable_debug )
+        self.debug_print( "Root was initialized" )
         
         self.main_frame = tk.Frame( root )
         self.main_frame.place( relheight = 1, relwidth = 1 )
         
         self.canvas = tk.Canvas( self.main_frame )
-        self.canvas.place( relheight = 0.96, relwidth = 0.96 )
+        self.canvas.place( relheight = 0.93, relwidth = 0.93 )
+        self.canvas.bind( "<Enter>", self.on_canvas_enter )
+        self.canvas.bind( "<Leave>", self.on_canvas_leave )
 
         self.h_scrollbar = tk.Scrollbar( self.main_frame, orient = "horizontal", command = self.canvas.xview )
-        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.976, relheight = 0.023 )
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, relheight = 0.03 )
 
         self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
-        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.023 )
+        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.03 )
         
         self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
         
@@ -58,12 +63,14 @@ class LatinTrainerGUI:
         self.previous_form = self.selected_option.get()
         
         self.form_select()
+        self.debug_print( "Form was selected" )
                 
         self.entries = {}
         self.results = {}                                     # Variable to save whether the answer was right or wrong
         
         self.create_widgets()
         self.resize_content_frame( None )
+        self.debug_print( "Frame was filled" ) 
         
         self.canvas.bind_all( "<MouseWheel>", self.on_mouse_wheel )
         self.canvas.bind_all( "<Shift-MouseWheel>", self.on_shift_mouse_wheel )
@@ -107,7 +114,7 @@ class LatinTrainerGUI:
         self.titel.bind( "<Configure>", self.adjust_titel_font_size )
         
         self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
-        self.combobox_select_form.place( relx = 0.974 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
+        self.combobox_select_form.place( relx = 0.96 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
 
@@ -148,10 +155,10 @@ class LatinTrainerGUI:
                 entry.insert( 0, correct_answer )
                 entry.config( state = "disabled", disabledforeground = "gray" )
                 
-            entry.place( relx = 0.39, rely = 0.07 * self.separation_form_tabel, relwidth = 0.6, relheight = 0.08 )
+            entry.place( relx = 0.4, rely = 0.07 * self.separation_form_tabel, relwidth = 0.6, relheight = 0.08 )
             self.entries[ case_or_tempus ] = entry
             
-            self.titel.config( text = f"{ self.current_key }" )
+        self.titel.config( text = f"{ self.current_key }" )
             
             
     def adjust_titel_font_size( self, event ):
@@ -187,11 +194,11 @@ class LatinTrainerGUI:
         root_width = self.root.winfo_width()
         root_height = self.root.winfo_height()
         
-        new_width = root_width - self.v_scrollbar.winfo_width() - 2                       
-        new_height = root_height - self.h_scrollbar.winfo_height() - 2                      
+        new_width = root_width - self.v_scrollbar.winfo_width() - 4                    
+        new_height = root_height - self.h_scrollbar.winfo_height() - 4                      
         
-        self.canvas.itemconfig( self.canvas_window, width=new_width, height=new_height )
-        self.canvas.config(scrollregion=self.canvas.bbox( "all" ) )
+        self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
+        self.canvas.config(scrollregion = self.canvas.bbox( "all" ) )
 
 
     def on_mouse_wheel(self, event):
@@ -200,6 +207,16 @@ class LatinTrainerGUI:
     
     def on_shift_mouse_wheel(self, event):
         self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
+        
+    #make bigger hitbox, make go away after inactive, make go away after frame leave
+    def on_canvas_enter( self, event ):
+        self.h_scrollbar.place_forget()
+        self.v_scrollbar.place_forget()
+        
+        
+    def on_canvas_leave( self, event ):
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, relheight = 0.03 )
+        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.03 )
     
     
     def check_answers( self ):
@@ -268,3 +285,25 @@ class LatinTrainerGUI:
             self.entries = {}
             self.results = {}         
             self.populate_entries()
+            
+    def debug_print( self, toPrint ):
+        time = str( datetime.now() ) + ": "
+        if ( self.debug == True ):
+            print( time, toPrint )
+            
+    def enable_debug( self, event ):
+        time = str( datetime.now() ) + ": "
+        if self.debug == False:
+            self.debug = True
+            print( time, " Debug on" )
+            self.info_Label = tk.Label( self.main_frame, text = "Debug on", font = ( "Arial", 25, "bold" ) )
+            self.info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
+            self.root.update()
+            self.root.after( 2500,self.info_Label.place_forget() )
+        else:
+            self.debug = False
+            print( time, " Debug off" )
+            self.info_Label = tk.Label( self.main_frame, text = "Debug off", font = ( "Arial", 25, "bold" ) )
+            self.info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
+            self.root.update()
+            self.root.after( 2500, self.info_Label.place_forget() )

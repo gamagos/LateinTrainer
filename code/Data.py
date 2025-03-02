@@ -54,7 +54,7 @@ class Data:
                 "Ablativ_Plural": "regibus",
             },
     
-            "konsonantische Deklination\nneutrum": {
+            "konsonantische Deklination neutrum": {
                 "Nominativ_Singular": "corpus",
                 "Genitiv_Singular": "corporis",
                 "Dativ_Singular": "corpori",
@@ -66,7 +66,7 @@ class Data:
                 "Akkusativ_Plural": "corpora",
                 "Ablativ_Plural": "corporibus",
             },
-            "konsonantische Deklination neutrum\n mit Gen. Plural -ium": {
+            "konsonantische Deklination neutrum mit Gen. Plural -ium": {
                 "Nominativ_Singular": "animal",
                 "Genitiv_Singular": "animalis",
                 "Dativ_Singular": "animali",
@@ -1210,6 +1210,14 @@ class Data:
                 "Akkusativ_Plural": "celeria",
                 "Ablativ_Plural": "celeribus"
             }
+        }
+        
+        self.gerunds = {
+            
+        }
+        
+        self.gerdundives = {
+            
         }
         
         self.hic_haec_hoc = {
