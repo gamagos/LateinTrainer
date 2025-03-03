@@ -1,18 +1,25 @@
+import os
+import sys
+
+sys.path.append( os.path.abspath( "./data" ) ) #resolve import from subfolders
+
 from datetime import datetime
 import random
 from tkinter import messagebox
 import tkinter as tk
 from tkinter import ttk
+import shutil
 
 import Data
 
 class LatinTrainerGUI:
     def __init__( self, root ):
-        self.debug = False     #Variable to track program for bugs
-        self.tests = False           #Variable to let program run tests
+        self.settings_location = "data/settings.csv"
+        self.settings_default_location = "data/settings_default.csv"
+        self.debug = True         #Variable to track program for bugs
+        self.tests = False        #Variable to let program run tests
         version = "v1.6.2"    
         self.data = Data.Data()
-        self.debug_print( "Program was started" ) 
         
         self.declensions_nouns = self.data.declensions
         self.conjugations = self.data.conjugations
@@ -59,8 +66,10 @@ class LatinTrainerGUI:
         random.shuffle( self.hic_haec_hoc_forms )
         random.shuffle( self.qui_quae_quod_forms )                                          
         self.current_class_index = 0
-        self.selected_option = tk.StringVar( value = "Alle" )
+        self.selected_option = tk.StringVar()
         self.previous_form = self.selected_option.get()
+        
+        self.get_settings()
         
         self.form_select()
         self.debug_print( "Form was selected" )
@@ -74,6 +83,26 @@ class LatinTrainerGUI:
         
         self.canvas.bind_all( "<MouseWheel>", self.on_mouse_wheel )
         self.canvas.bind_all( "<Shift-MouseWheel>", self.on_shift_mouse_wheel )
+        
+        
+    def get_settings( self ):    
+        if ( os.path.getsize( self.settings_location ) == 0 ):
+            with open( self.settings_location, "w" ) as file:
+                shutil.copyfile( self.settings_default_location, self.settings_location )
+                print( "settings were restored(empty)" )
+        else:
+            try:
+                with open( self.settings_location, "r" ) as file:
+                    self.contents = file.readlines()
+                    self.debug = "True" == self.contents[ 0 ].split( "=" )[ 1 ].strip()
+                    self.tests = "True" == self.contents[ 1 ].split( "=" )[ 1 ].strip()
+                    self.selected_option.set( self.contents[ 2 ].split( "=" )[ 1 ].strip() )
+                    print( "settings were read successfully" , self.debug, self.tests )
+                                  
+            except Exception as e:
+                with open( self.settings_location, "w" ) as file:
+                    shutil.copyfile( self.settings_default_location, self.settings_location )
+                    print( f"settings were restored(error in settings file): { e }" )
         
         
     def form_select( self ):
@@ -98,12 +127,14 @@ class LatinTrainerGUI:
             self.current_forms = forms_dict[ self.current_key ]
             self.curent_word_type_amount_of_forms = len( forms_list )
         else:
-            messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen" )
+            messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
+            shutil.copyfile( self.settings_default_location, self.settings_location )
+            self.get_settings()
+            self.form_select()
 
         self.previous_form = self.selected_option.get()
         
         
-    #puts stuff in the window that will always be there
     def create_widgets( self ):
         self.content_frame = tk.Frame( self.canvas )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
@@ -188,6 +219,13 @@ class LatinTrainerGUI:
         self.current_class_index = 0
         if self.previous_form != self.selected_option.get():
             self.next_class()
+            
+            with open( self.settings_location, "r+" ) as file:
+                settings = file.readlines()
+                settings[ 2 ] = f"selected_option={ self.selected_option.get() }"
+                file.seek( 0 )
+                file.writelines( settings )
+                file.truncate()
     
     
     def resize_content_frame(self, event):
@@ -295,15 +333,28 @@ class LatinTrainerGUI:
         time = str( datetime.now() ) + ": "
         if self.debug == False:
             self.debug = True
-            print( time, " Debug on" )
+            print( time, "Debug on" )
             self.info_Label = tk.Label( self.main_frame, text = "Debug on", font = ( "Arial", 25, "bold" ) )
             self.info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
-            self.root.after( 2500,self.info_Label.place_forget() )
+            self.root.after( 1900, self.info_Label.place_forget() )
+            with open( self.settings_location, "r+" ) as file:
+                settings = file.readlines()
+                settings[0] = "debug=True\n"
+                file.seek(0)
+                file.writelines( settings )
+                file.truncate()
+                
         else:
             self.debug = False
-            print( time, " Debug off" )
+            print( time, "Debug off" )
             self.info_Label = tk.Label( self.main_frame, text = "Debug off", font = ( "Arial", 25, "bold" ) )
             self.info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
-            self.root.after( 2500, self.info_Label.place_forget() )
+            self.root.after( 1900, self.info_Label.place_forget() )
+            with open( self.settings_location, "r+" ) as file:
+                settings = file.readlines()
+                settings[0] = "debug=False\n"
+                file.seek(0)
+                file.writelines( settings )
+                file.truncate()
