@@ -13,6 +13,7 @@ Fiaults To do List
 -make scrollbars cleaner and disapear when mouse away
 -strg f todo
 -add tests
+-fix icons (sizes)
 
 ------------------------------------
 Schiesslers To Do List
