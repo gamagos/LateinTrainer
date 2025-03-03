@@ -8,8 +8,6 @@ LateinTrainer.code-workspace
 /logs
 logs/
 __pycache__
-*.spec
-.spec
 temporary/
 *.tmp
 .tmp
