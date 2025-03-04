@@ -4,16 +4,15 @@ Fiaults To do List
 -fill adjectives in Data.py
 -add gerundien
 -add more grammar forms
--make settings file
 -make entries relative to labels
 -make resizing work and not break the UI
 -make updater
--make icon
 -make UI look nicer
 -make scrollbars cleaner and disapear when mouse away
 -strg f todo
--add tests
 -fix icons (sizes)
+-make log file
+-make scrollbar height and width absolute
 
 ------------------------------------
 Schiesslers To Do List

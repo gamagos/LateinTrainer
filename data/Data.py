@@ -1259,7 +1259,7 @@ class Data:
             }
         }
         
-        self.qui_quae_qoud = {
+        self.qui_quae_quod = {
             "qui": {
                 "Nominativ_Singular": "qui",
                 "Genitiv_Singular": "cuius",

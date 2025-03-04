@@ -4,7 +4,7 @@ import shutil
 import sys
 import tkinter as tk
 from datetime import datetime
-from tkinter import messagebox, ttk
+from tkinter import messagebox, ttk, font
 
 from data.Data import Data
 
@@ -19,24 +19,28 @@ class GUI:
         self.tests = False        
         version = "v1.6.2"    
         self.data = Data()
+        self.form_labels = []
+        
+        self.first_form_label = tk.Label( text = "this is only a placeholder label for adjust_form_label_font_size()" )
         
         self.declensions_nouns = self.data.declensions
         self.conjugations = self.data.conjugations
         self.declensions_adjectives = self.data.declensions_adjectives
         #pronouns
         self.hic_haec_hoc = self.data.hic_haec_hoc
-        self.qui_quae_quod = self.data.qui_quae_qoud
+        self.qui_quae_quod = self.data.qui_quae_quod
         self.ille_illa_illud = self.data.ille_illa_illud
         self.ipse_ipsa_ipsum = self.data.ipse_ipsa_ipsum
         
         self.root = root
         self.root.title( "Latin Trainer " + version )
         self.root.bind( "<F3>", self.enable_debug )
+        self.root.bind( "<Configure>", self.on_resize )
         self.root.iconbitmap( self.icon_path )
         self.debug_print( "Root was initialized" )
         
-        self.main_frame = tk.Frame( root )
-        self.main_frame.place( relheight = 1, relwidth = 1 )
+        self.main_frame = tk.Frame( self.root )
+        self.main_frame.place( relheight = 1, relwidth = 1, )
         
         self.canvas = tk.Canvas( self.main_frame )
         self.canvas.place( relheight = 0.93, relwidth = 0.93 )
@@ -49,8 +53,8 @@ class GUI:
         self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.03 )
         
-        self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
-        
+        self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set , relief = "flat" )
+
         self.ORIGINAL_SCALE = 1.5 
         self.ui_scale = self.ORIGINAL_SCALE  
         
@@ -78,7 +82,7 @@ class GUI:
         self.results = {}                                     # Variable to save whether the answer was right or wrong
         
         self.create_widgets()
-        self.resize_content_frame( None )
+        self.adjust_canvas_window( None )
         self.debug_print( "Frame was filled" ) 
         
         self.canvas.bind_all( "<MouseWheel>", self.on_mouse_wheel )
@@ -97,7 +101,7 @@ class GUI:
                     self.debug = "True" == self.contents[ 0 ].split( "=" )[ 1 ].strip()
                     self.tests = "True" == self.contents[ 1 ].split( "=" )[ 1 ].strip()
                     self.selected_option.set( self.contents[ 2 ].split( "=" )[ 1 ].strip() )
-                    print( "settings were read successfully" )
+                    print( f"{datetime.now()}: " + "settings were read successfully" )
                     self.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in self.contents ] ) )
                                   
             except Exception as e:
@@ -140,46 +144,59 @@ class GUI:
         self.content_frame = tk.Frame( self.canvas )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
-        self.titel = tk.Label( self.content_frame, text = f"{ self.current_key }",
+        self.titel = tk.Label( self.content_frame, text = f"{ self.add_newline_if_too_long( self.current_key ) }",
                               font = ( "Arial", int( 19 * self.ui_scale ), "bold" ), anchor = "n", justify = "left" )
-        self.titel.place( relx = 0.032, rely = 0.031, relheight = 0.19, relwidth = 0.81 )
-        self.titel.bind( "<Configure>", self.adjust_titel_font_size )
+        self.titel.place( relx = 0.032, rely = 0.028, relheight = 0.21, relwidth = 0.81 )
         
         self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
-        self.combobox_select_form.place( relx = 0.96 , rely = 0, relheight = 0.025, relwidth = 0.18, anchor = "ne" )
+        self.combobox_select_form.place( relx = 0.96 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
         
-        self.populate_entries()
-        
         self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers )
-        self.check_button.place( relx = 0.45, rely = 0.75, relheight = 0.08, relwidth = 0.24 )
-        self.check_button.bind( "<Configure>", self.adjust_button_font_size )
+        self.check_button.place( relx = 0.45, rely = 0.88, relheight = 0.08, relwidth = 0.24 )
         
         self.content_frame.update_idletasks()
-        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
-        self.content_frame.bind( "<Configure>", self.on_frame_configure )
-        self.root.bind( "<Configure>", self.resize_content_frame )
+        self.canvas.config( scrollregion = self.canvas.bbox( "all" ), relief = "flat" )
         
         self.combobox_select_form.tkraise()
         self.root.update()
+        
+        self.populate_entries()
+        
+        
+    def add_newline_if_too_long( self, text, max_length = 33 ):
+        words = text.split()
+        result = []
+        current_line = ""
+
+        for word in words:
+            if len( current_line ) + len( word ) + 1 > max_length:
+                result.append( current_line.strip() )
+                current_line = word + " "
+            else:
+                current_line += word + " "
+
+        if current_line.strip():
+            result.append( current_line.strip() )
+
+        return "\n".join( result )
 
 
     #puts the temporary stuff in the frame
     def populate_entries( self ):
-        self.separation_form_tabel = -1
+        separation_form_tabel = -1
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_forms.items() ):
             
             if case_or_tempus == "Nominativ_Plural" or case_or_tempus == "1._Person_Plural":
-                self.separation_form_tabel += 1
+                separation_form_tabel += 1
                 
-            self.separation_form_tabel += 1          
-            form_label = tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "nw", justify = "left" )
-            form_label.place( relx = 0.013, rely = 0.07 * self.separation_form_tabel, relwidth = 0.4, relheight = 0.08 )
-            form_label.bind( "<Configure>", self.adjust_forms_label_font_size )
+            separation_form_tabel += 1
+            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw", relief = "sunken" ) )
+            self.form_labels[i].place( relx = 0.013, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
             entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
             
@@ -187,28 +204,107 @@ class GUI:
                 entry.insert( 0, correct_answer )
                 entry.config( state = "disabled", disabledforeground = "gray" )
                 
-            entry.place( relx = 0.4, rely = 0.07 * self.separation_form_tabel, relwidth = 0.6, relheight = 0.08 )
+            entry.place( relx = 0.414, rely = 0.09 * separation_form_tabel, relwidth = 0.6, relheight = 0.09 )
             self.entries[ case_or_tempus ] = entry
             
-        self.titel.config( text = f"{ self.current_key }" )
+        self.titel.config( text = self.add_newline_if_too_long( self.current_key ) )
             
             
-    def adjust_titel_font_size( self, event ):
+    def adjust_titel_font_size( self, event, base_font_size = 40 ):
         widget = event.widget
-        font_size = int( 20 )       #TODO make a good method to select label size
+        
+        frame_width = widget.winfo_width()
+        frame_height = widget.winfo_height()
+        max_width_ratio = 0.91
+        max_height_ratio = 0.91  
+        max_width = frame_width * max_width_ratio
+        max_height = frame_height * max_height_ratio
+        font_size = base_font_size        
+        
+        while True:
+            temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
+            
+            text_width = temp_font.measure( self.current_key )
+            text_height = temp_font.metrics( "linespace" )
+            
+            if text_width <= max_width and text_height <= max_height:
+                break
+            
+            font_size -= 1
+            
+            if font_size < 10:
+                font_size = 10
+                break 
         widget.config( font = ( "Arial", font_size, "bold" ) )
 
 
-    def adjust_button_font_size( self, event ):
+    def adjust_check_button_font_size( self, event, base_font_size = 30 ):
         widget = event.widget
-        font_size = int( widget.winfo_height() * 0.4 )
+        
+        frame_width = widget.winfo_width()
+        frame_height = widget.winfo_height()
+        max_width_ratio = 0.7
+        max_height_ratio = 0.7
+        max_width = frame_width * max_width_ratio
+        max_height = frame_height * max_height_ratio
+        font_size = base_font_size
+        
+        while True:
+            temp_font = font.Font( family = "Arial", size = font_size )
+            
+            text_width = temp_font.measure( widget.cget( "text" ) )
+            text_height = temp_font.metrics( "linespace" )
+            
+            if text_width <= max_width and text_height <= max_height:
+                break
+            
+            font_size -= 1
+            
+            if font_size < 8:
+                font_size = 8
+                break 
+        
         widget.config( font = ( "Arial", font_size ) )
         
         
-    def adjust_forms_label_font_size( self, event ):
-        widget = event.widget
-        font_size = int( widget.winfo_height() *  0.5 )
-        widget.config( font = ( "Arial", font_size ) )
+    def adjust_form_label_font_size( self, event, base_font_size = 50 ):
+        frame_width = self.forms_labels[ 0 ].winfo_width()
+        frame_height = self.forms_labels[ 0 ].winfo_height()
+        max_width_ratio = 0.9
+        max_height_ratio = 0.9
+        max_width = frame_width * max_width_ratio
+        max_height = frame_height * max_height_ratio
+        self.forms_labels_font_size = base_font_size
+        
+        while True:  #TODO optimize size finding algorythm with ratio logic (Stani)
+            temp_font = font.Font( family = "Arial", size = self.forms_labels_font_size )
+            
+            text_width = temp_font.measure( self.form_labels[ 0 ].cget( "text" ) )
+            text_height = temp_font.metrics( "linespace" )
+            
+            if text_width <= max_width and text_height <= max_height:
+                break
+            
+            self.forms_labels_font_size -= 1
+            
+            if self.forms_labels_font_size < 8:
+                self.forms_labels_font_size = 8
+                break
+        
+        for i in self.form_labels:
+            self.form_labels[ i ].config( font = ( "Arial", self.forms_labels_font_size ) )
+        self.debug_print( "fonts size:" + str(self.forms_labels_font_size) )
+    
+    
+    def adjust_canvas_window( self, event ):
+        root_width = self.root.winfo_width()
+        root_height = self.root.winfo_height()
+        
+        new_width = root_width - self.v_scrollbar.winfo_width() - 4                    
+        new_height = root_height - self.h_scrollbar.winfo_height() - 4                      
+        
+        self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
+        self.canvas.config(scrollregion = self.canvas.bbox( "all" ) )
         
     
     def on_frame_configure( self, event ):
@@ -227,17 +323,6 @@ class GUI:
                 file.seek( 0 )
                 file.writelines( settings )
                 file.truncate()
-    
-    
-    def resize_content_frame(self, event):
-        root_width = self.root.winfo_width()
-        root_height = self.root.winfo_height()
-        
-        new_width = root_width - self.v_scrollbar.winfo_width() - 4                    
-        new_height = root_height - self.h_scrollbar.winfo_height() - 4                      
-        
-        self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
-        self.canvas.config(scrollregion = self.canvas.bbox( "all" ) )
 
 
     def on_mouse_wheel(self, event):
@@ -256,6 +341,14 @@ class GUI:
     def on_canvas_leave( self, event ):
         self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, relheight = 0.03 )
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.03 )
+        
+    
+    def on_resize( self, event ):
+        self.adjust_check_button_font_size
+        self.adjust_canvas_window
+        self.adjust_form_label_font_size
+        self.adjust_titel_font_size
+        self.debug_print( "resized" )
     
     
     def check_answers( self ):
@@ -335,10 +428,10 @@ class GUI:
         if self.debug == False:
             self.debug = True
             print( time, "Debug on" )
-            self.info_Label = tk.Label( self.main_frame, text = "Debug on", font = ( "Arial", 25, "bold" ) )
-            self.info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
+            info_Label = tk.Label( self.main_frame, text = "Debug on", font = ( "Arial", 25, "bold" ) )
+            info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
-            self.root.after( 1900, self.info_Label.place_forget() )
+            self.root.after( 1900, info_Label.place_forget() )
             with open( self.settings_location, "r+" ) as file:
                 settings = file.readlines()
                 settings[0] = "debug=True\n"
@@ -349,10 +442,10 @@ class GUI:
         else:
             self.debug = False
             print( time, "Debug off" )
-            self.info_Label = tk.Label( self.main_frame, text = "Debug off", font = ( "Arial", 25, "bold" ) )
-            self.info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
+            info_Label = tk.Label( self.main_frame, text = "Debug off", font = ( "Arial", 25, "bold" ) )
+            info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
-            self.root.after( 1900, self.info_Label.place_forget() )
+            self.root.after( 1900, info_Label.place_forget() )
             with open( self.settings_location, "r+" ) as file:
                 settings = file.readlines()
                 settings[0] = "debug=False\n"
