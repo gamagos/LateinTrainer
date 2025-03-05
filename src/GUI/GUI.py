@@ -1,12 +1,18 @@
+import json
 import os
 import random
 import shutil
 import sys
+import time
 import tkinter as tk
 from datetime import datetime
-from tkinter import messagebox, ttk, font
+from tkinter import font, messagebox, ttk
+
+import win32api
+import win32con
 
 from src.data.Data import Data
+
 
 class GUI:
     def __init__( self, root ):
@@ -19,6 +25,12 @@ class GUI:
         version = "v1.6.2"    
         self.data = Data()
         self.form_labels = []
+        self.last_resize_time = 0
+        self.resizing = False
+        self.root_width = 700
+        self.root_old_width = self.root_width
+        self.root_height = 700
+        self.root_old_height = self.root_height
         
         self.first_form_label = tk.Label( text = "this is only a placeholder label for adjust_form_label_font_size()" )
         
@@ -56,6 +68,9 @@ class GUI:
 
         self.ORIGINAL_SCALE = 1.5 
         self.ui_scale = self.ORIGINAL_SCALE  
+        
+        self.frameRate = self.get_refresh_rate()
+        self.frameTime = 1 / self.frameRate
         
         self.declension_forms = list( self.declensions_nouns.keys() )
         self.conjugation_forms = list( self.conjugations.keys() )
@@ -158,11 +173,10 @@ class GUI:
         self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers )
         self.check_button.place( relx = 0.45, rely = 0.88, relheight = 0.08, relwidth = 0.24 )
         
-        self.content_frame.update_idletasks()
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ), relief = "flat" )
         
         self.combobox_select_form.tkraise()
-        self.root.update()
+        self.root.update_idletasks()
         
         self.populate_entries()
         
@@ -185,7 +199,6 @@ class GUI:
         return "\n".join( result )
 
 
-    #puts the temporary stuff in the frame
     def populate_entries( self ):
         separation_form_tabel = -1
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_forms.items() ):
@@ -194,7 +207,7 @@ class GUI:
                 separation_form_tabel += 1
                 
             separation_form_tabel += 1
-            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw", relief = "sunken" ) )
+            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw" ) )
             self.form_labels[i].place( relx = 0.013, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
             entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
@@ -209,7 +222,7 @@ class GUI:
         self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
             
             
-    def adjust_titel_font_size( self, base_font_size = 40 ):
+    def adjust_title_font_size( self, base_font_size = 40 ):
         widget_width = self.title.winfo_width()
         widget_height = self.title.winfo_height()
         max_width_ratio = 0.91
@@ -225,12 +238,13 @@ class GUI:
         width_ratio = max_width/text_width
         height_ratio = max_height/text_height
         ratio = min( width_ratio, height_ratio )
+        if 0.8 < ratio and ratio < 1.1:
+            return
         
         font_size = int( font_size * ratio )
         temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
         text_width = temp_font.measure( self.title.cget( "text" ) )
         text_height = temp_font.metrics( "linespace" )
-        print( "sizes t m: ", text_width, text_height, max_width, max_height )  
         
         while True:
             temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
@@ -243,7 +257,8 @@ class GUI:
             font_size -= 1
             if font_size < 10:
                 font_size = 10
-                break 
+                break
+            
         self.title.config( font = ( "Arial", font_size, "bold" ) )
 
 
@@ -263,6 +278,8 @@ class GUI:
         width_ratio = max_width/text_width
         height_ratio = max_height/text_height
         ratio = min( width_ratio, height_ratio )
+        if 0.8 < ratio and ratio < 1.1:
+            return
         
         font_size = int( font_size * ratio )
         temp_font = font.Font( family = "Arial", size = font_size )
@@ -306,6 +323,8 @@ class GUI:
         width_ratio = max_width/text_width
         height_ratio = max_height/text_height
         ratio = min( width_ratio, height_ratio )
+        if 0.8 < ratio and ratio < 1.1:
+            return
         
         self.forms_labels_font_size = int( self.forms_labels_font_size * ratio )
         temp_font = font.Font( family = "Arial", size = self.forms_labels_font_size )
@@ -334,7 +353,10 @@ class GUI:
         root_height = self.root.winfo_height()
         
         new_width = root_width - self.v_scrollbar.winfo_width() - 4                    
-        new_height = root_height - self.h_scrollbar.winfo_height() - 4     
+        new_height = root_height - self.h_scrollbar.winfo_height() - 4
+        
+        if new_width == self.canvas.winfo_width and new_height == self.canvas.winfo_height():
+            return
         
         self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
         self.canvas.config(scrollregion = self.canvas.bbox( "all" ) )
@@ -358,14 +380,14 @@ class GUI:
                 file.truncate()
 
 
-    def on_mouse_wheel(self, event):
-        self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+    def on_mouse_wheel( self, event ):
+        self.canvas.yview_scroll( int ( -1 * ( event.delta / 120 ) ), "units" )
     
     
-    def on_shift_mouse_wheel(self, event):
-        self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
+    def on_shift_mouse_wheel( self, event ):#       what is delta? and units?
+        self.canvas.xview_scroll( int( -1 * ( event.delta / 120 ) ), "units" )
         
-    #make bigger hitbox, make go away after inactive, make go away after frame leave
+    #TODO make bigger hitbox, make go away after inactive, make go away after frame leave
     def on_canvas_enter( self, event ):
         self.h_scrollbar.place_forget()
         self.v_scrollbar.place_forget()
@@ -374,13 +396,38 @@ class GUI:
     def on_canvas_leave( self, event ):
         self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, relheight = 0.03 )
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.03 )
-        
     
+    
+    #TODO make cache for font sizes
     def on_resize( self, event ):
-        self.adjust_check_button_font_size()
-        self.adjust_canvas_window()
-        self.adjust_form_label_font_size()
-        self.adjust_titel_font_size()
+        now = time.time()
+        if now - self.last_resize_time < self.frameTime or self.resizing:
+            return
+            
+        print((now-self.last_resize_time)*1000)
+        self.last_resize_time = now
+
+        self.handle_resize()
+    
+    
+    def handle_resize( self ):
+        self.resizing = True
+        self.get_root_size()
+        width_diff = abs( self.root_width - self.root_old_width )
+        height_diff = abs( self.root_height - self.root_old_height )
+        minimum_diff =  2
+        
+        if self.root_width != self.root_old_width or self.root_height != self.root_old_height:
+            self.adjust_canvas_window()
+            
+            if width_diff >= minimum_diff or height_diff >= minimum_diff:
+                self.adjust_check_button_font_size()
+                self.adjust_form_label_font_size()
+                self.adjust_title_font_size()
+        
+        self.root_old_width = self.root_width
+        self.root_old_height =self.root_height
+        self.resizing = False
     
     
     def check_answers( self ):
@@ -449,6 +496,26 @@ class GUI:
             self.entries = {}
             self.results = {}         
             self.populate_entries()
+            
+            
+    def get_refresh_rate( self ):
+        try:
+            device = win32api.EnumDisplayDevices( None, 0 )
+            settings = win32api.EnumDisplaySettings( device.DeviceName, win32con.ENUM_CURRENT_SETTINGS )
+            
+            if settings.DisplayFrequency <= 60:
+                return 60
+            else:
+                return settings.DisplayFrequency
+        
+        except Exception as e:
+            self.debug_print( f"Failed to get refresh rate: { e }" )
+            return 60
+        
+    def get_root_size( self ):
+        self.root_width = self.root.winfo_width()
+        self.root_width = self.root.winfo_height()
+            
             
     def debug_print( self, toPrint ):
         time = str( datetime.now() ) + ": "

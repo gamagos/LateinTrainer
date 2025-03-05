@@ -14,6 +14,8 @@ Fiaults To do List
 -fix icons (sizes)
 -make log file
 -make scrollbar height and width absolute
+-optimized code
+-sort methods logicly
 
 ------------------------------------
 Schiesslers To Do List
