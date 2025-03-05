@@ -1,6 +1,7 @@
 Fiaults To do List
 
--make algorythm for newline in titel and fix titel font size algorythm
+-make debug print take tuples
+-make resize faster
 -fill adjectives in Data.py
 -add gerundien
 -add more grammar forms

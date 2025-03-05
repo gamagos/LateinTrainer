@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from src.GUI import GUI
+from src.GUI.GUI import GUI
 
 root = tk.Tk()
 root.geometry("700x700")

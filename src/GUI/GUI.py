@@ -6,8 +6,7 @@ import tkinter as tk
 from datetime import datetime
 from tkinter import messagebox, ttk, font
 
-from data.Data import Data
-
+from src.data.Data import Data
 
 class GUI:
     def __init__( self, root ):
@@ -82,7 +81,7 @@ class GUI:
         self.results = {}                                     # Variable to save whether the answer was right or wrong
         
         self.create_widgets()
-        self.adjust_canvas_window( None )
+        self.adjust_canvas_window()
         self.debug_print( "Frame was filled" ) 
         
         self.canvas.bind_all( "<MouseWheel>", self.on_mouse_wheel )
@@ -144,9 +143,9 @@ class GUI:
         self.content_frame = tk.Frame( self.canvas )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
-        self.titel = tk.Label( self.content_frame, text = f"{ self.add_newline_if_too_long( self.current_key ) }",
+        self.title = tk.Label( self.content_frame, text = f"{ self.add_newline_if_too_long( self.current_key ) }",
                               font = ( "Arial", int( 19 * self.ui_scale ), "bold" ), anchor = "n", justify = "left" )
-        self.titel.place( relx = 0.032, rely = 0.028, relheight = 0.21, relwidth = 0.81 )
+        self.title.place( relx = 0.032, rely = 0.028, relheight = 0.21, relwidth = 0.81 )
         
         self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
         self.combobox_select_form.place( relx = 0.96 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
@@ -207,81 +206,116 @@ class GUI:
             entry.place( relx = 0.414, rely = 0.09 * separation_form_tabel, relwidth = 0.6, relheight = 0.09 )
             self.entries[ case_or_tempus ] = entry
             
-        self.titel.config( text = self.add_newline_if_too_long( self.current_key ) )
+        self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
             
             
-    def adjust_titel_font_size( self, event, base_font_size = 40 ):
-        widget = event.widget
-        
-        frame_width = widget.winfo_width()
-        frame_height = widget.winfo_height()
+    def adjust_titel_font_size( self, base_font_size = 40 ):
+        widget_width = self.title.winfo_width()
+        widget_height = self.title.winfo_height()
         max_width_ratio = 0.91
         max_height_ratio = 0.91  
-        max_width = frame_width * max_width_ratio
-        max_height = frame_height * max_height_ratio
-        font_size = base_font_size        
+        max_width = int( widget_width * max_width_ratio )
+        max_height = int( widget_height * max_height_ratio )
+        font_size = base_font_size
+        
+        temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
+        text_width = temp_font.measure( self.title.cget( "text" ) )
+        text_height = temp_font.metrics( "linespace" )
+                  
+        width_ratio = max_width/text_width
+        height_ratio = max_height/text_height
+        ratio = min( width_ratio, height_ratio )
+        
+        font_size = int( font_size * ratio )
+        temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
+        text_width = temp_font.measure( self.title.cget( "text" ) )
+        text_height = temp_font.metrics( "linespace" )
+        print( "sizes t m: ", text_width, text_height, max_width, max_height )  
         
         while True:
             temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
-            
-            text_width = temp_font.measure( self.current_key )
+            text_width = temp_font.measure( self.title.cget( "text" ) )
             text_height = temp_font.metrics( "linespace" )
-            
+             
             if text_width <= max_width and text_height <= max_height:
                 break
             
             font_size -= 1
-            
             if font_size < 10:
                 font_size = 10
                 break 
-        widget.config( font = ( "Arial", font_size, "bold" ) )
+        self.title.config( font = ( "Arial", font_size, "bold" ) )
 
 
-    def adjust_check_button_font_size( self, event, base_font_size = 30 ):
-        widget = event.widget
-        
-        frame_width = widget.winfo_width()
-        frame_height = widget.winfo_height()
-        max_width_ratio = 0.7
-        max_height_ratio = 0.7
-        max_width = frame_width * max_width_ratio
-        max_height = frame_height * max_height_ratio
+    def adjust_check_button_font_size( self, base_font_size = 30 ):
+        widget_width = self.check_button.winfo_width()
+        widget_height = self.check_button.winfo_height()
+        max_width_ratio = 0.72
+        max_height_ratio = 0.72
+        max_width = int( widget_width * max_width_ratio )
+        max_height = int( widget_height * max_height_ratio )
         font_size = base_font_size
+        
+        temp_font = font.Font( family = "Arial", size = font_size )
+        text_width = temp_font.measure( self.check_button.cget( "text" ) )
+        text_height = temp_font.metrics( "linespace" )
+                  
+        width_ratio = max_width/text_width
+        height_ratio = max_height/text_height
+        ratio = min( width_ratio, height_ratio )
+        
+        font_size = int( font_size * ratio )
+        temp_font = font.Font( family = "Arial", size = font_size )
+        text_width = temp_font.measure( self.check_button.cget( "text" ) )
+        text_height = temp_font.metrics( "linespace" )
         
         while True:
             temp_font = font.Font( family = "Arial", size = font_size )
-            
-            text_width = temp_font.measure( widget.cget( "text" ) )
+            text_width = temp_font.measure( self.check_button.cget( "text" ) )
             text_height = temp_font.metrics( "linespace" )
-            
             if text_width <= max_width and text_height <= max_height:
                 break
             
-            font_size -= 1
-            
             if font_size < 8:
                 font_size = 8
-                break 
+                break
+            
+            font_size -= 1
         
-        widget.config( font = ( "Arial", font_size ) )
+        self.check_button.config( font = ( "Arial", font_size ) )
         
         
-    def adjust_form_label_font_size( self, event, base_font_size = 50 ):
-        frame_width = self.forms_labels[ 0 ].winfo_width()
-        frame_height = self.forms_labels[ 0 ].winfo_height()
+    def adjust_form_label_font_size( self, base_font_size = 50 ):
+        try:
+            widget_width = self.form_labels[ 0 ].winfo_width()
+            widget_height = self.form_labels[ 0 ].winfo_height()
+        except:
+            self.debug_print( "self.populate_entries not run yet" )
+            return
+        
         max_width_ratio = 0.9
         max_height_ratio = 0.9
-        max_width = frame_width * max_width_ratio
-        max_height = frame_height * max_height_ratio
+        max_width = int( widget_width * max_width_ratio )
+        max_height = int( widget_height * max_height_ratio )
         self.forms_labels_font_size = base_font_size
         
-        while True:  #TODO optimize size finding algorythm with ratio logic (Stani)
+        temp_font = font.Font( family = "Arial", size = self.forms_labels_font_size )
+        text_width = temp_font.measure( self.form_labels[ 0 ].cget( "text" ) )
+        text_height = temp_font.metrics( "linespace" )
+                  
+        width_ratio = max_width/text_width
+        height_ratio = max_height/text_height
+        ratio = min( width_ratio, height_ratio )
+        
+        self.forms_labels_font_size = int( self.forms_labels_font_size * ratio )
+        temp_font = font.Font( family = "Arial", size = self.forms_labels_font_size )
+        text_width = temp_font.measure( self.form_labels[ 0 ].cget( "text" ) )
+        text_height = temp_font.metrics( "linespace" )
+        
+        while True:
             temp_font = font.Font( family = "Arial", size = self.forms_labels_font_size )
-            
             text_width = temp_font.measure( self.form_labels[ 0 ].cget( "text" ) )
             text_height = temp_font.metrics( "linespace" )
-            
             if text_width <= max_width and text_height <= max_height:
                 break
             
@@ -291,17 +325,16 @@ class GUI:
                 self.forms_labels_font_size = 8
                 break
         
-        for i in self.form_labels:
+        for i in range( len( self.form_labels ) ):
             self.form_labels[ i ].config( font = ( "Arial", self.forms_labels_font_size ) )
-        self.debug_print( "fonts size:" + str(self.forms_labels_font_size) )
     
     
-    def adjust_canvas_window( self, event ):
+    def adjust_canvas_window( self ):
         root_width = self.root.winfo_width()
         root_height = self.root.winfo_height()
         
         new_width = root_width - self.v_scrollbar.winfo_width() - 4                    
-        new_height = root_height - self.h_scrollbar.winfo_height() - 4                      
+        new_height = root_height - self.h_scrollbar.winfo_height() - 4     
         
         self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
         self.canvas.config(scrollregion = self.canvas.bbox( "all" ) )
@@ -344,11 +377,10 @@ class GUI:
         
     
     def on_resize( self, event ):
-        self.adjust_check_button_font_size
-        self.adjust_canvas_window
-        self.adjust_form_label_font_size
-        self.adjust_titel_font_size
-        self.debug_print( "resized" )
+        self.adjust_check_button_font_size()
+        self.adjust_canvas_window()
+        self.adjust_form_label_font_size()
+        self.adjust_titel_font_size()
     
     
     def check_answers( self ):
