@@ -25,7 +25,7 @@ class GUI:
         self.FileAndChacheHandler = fileAndCacheHandler( self )
         self.font_cache = self.FileAndChacheHandler.load_cache()
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
-        version = "v1.7.0"    
+        version = "v1.0.0"
         self.data = Data()
         self.form_labels = []
         self.last_resize_time = 0
