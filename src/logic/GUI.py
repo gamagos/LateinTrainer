@@ -18,6 +18,7 @@ class GUI:
     def __init__( self, root ):
         self.debug = True         
         self.tests = False
+        self.last_cache_clear = 0
         self.project_path = getattr( sys, "_MEIPASS", os.path.dirname( os.path.dirname( os.path.abspath( __file__ ) ) ) )
         self.settings_location = os.path.join( self.project_path, "data", "settings.csv" )
         self.font_cache_location = os.path.join( self.project_path, "data", "font_cache.json" )
@@ -172,8 +173,8 @@ class GUI:
                 separation_form_tabel += 1
                 
             separation_form_tabel += 1
-            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw" ) )
-            self.form_labels[i].place( relx = 0.013, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
+            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw", relief = "sunken" ) )
+            self.form_labels[i].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
             entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
             
@@ -181,7 +182,7 @@ class GUI:
                 entry.insert( 0, correct_answer )
                 entry.config( state = "disabled", disabledforeground = "gray" )
                 
-            entry.place( relx = 0.414, rely = 0.09 * separation_form_tabel, relwidth = 0.6, relheight = 0.09 )
+            entry.place( relx = 0.41, rely = 0.09 * separation_form_tabel, relwidth = 0.6, relheight = 0.09 )
             self.entries[ case_or_tempus ] = entry
             
         self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
@@ -294,8 +295,13 @@ class GUI:
         
         
     def on_close( self ):
-        self.debug_print( "Window is closing saving cache" )
-        self.FileAndChacheHandler.save_and_exit()
+        if time.time() - self.last_cache_clear < ( 30 * 24 * 60 * 60 ):
+            self.debug_print( "save and exit(on_close)" )
+            self.debug_print( f"time till next clear: { ( ( 30 * 24 * 60 * 60 ) - ( time.time() - self.last_cache_clear ) ) / ( 24 * 60 * 60 ) } days" )
+            self.FileAndChacheHandler.save_cache()
+        else:
+            self.debug_print( "chache got cleared" )
+            self.FileAndChacheHandler.clear_cache()
         self.root.quit()
     
     
@@ -305,7 +311,6 @@ class GUI:
         if now - self.last_resize_time < self.frameTime or self.resizing:
             return
             
-        self.debug_print( f"Frametime(not var): { ( now-self.last_resize_time ) * 1000 }" )
         self.last_resize_time = now
 
         self.handle_resize()
@@ -515,7 +520,7 @@ class GUI:
         
     def get_root_size( self ):
         self.root_width = self.root.winfo_width()
-        self.root_width = self.root.winfo_height()
+        self.root_height = self.root.winfo_height()
         
         
     def add_newline_if_too_long( self, text, max_length = 33 ):
@@ -552,8 +557,8 @@ class GUI:
             self.root.after( 1900, info_Label.place_forget() )
             with open( self.settings_location, "r+" ) as file:
                 settings = file.readlines()
-                settings[0] = "debug=True\n"
-                file.seek(0)
+                settings[ 0 ] = "debug=True\n"
+                file.seek( 0 )
                 file.writelines( settings )
                 file.truncate()
                 

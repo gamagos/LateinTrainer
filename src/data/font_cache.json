@@ -1,1 +1,404 @@
-{}
+{
+    "700x698": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 78
+    },
+    "700x689": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 78
+    },
+    "700x678": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 78
+    },
+    "700x666": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 76
+    },
+    "700x658": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 74
+    },
+    "700x651": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 74
+    },
+    "702x703": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 19
+    },
+    "719x713": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 19
+    },
+    "761x737": {
+        "check_button": 17,
+        "form_labels": 20,
+        "title": 19
+    },
+    "852x789": {
+        "check_button": 19,
+        "form_labels": 21,
+        "title": 21
+    },
+    "903x835": {
+        "check_button": 21,
+        "form_labels": 24,
+        "title": 23
+    },
+    "893x851": {
+        "check_button": 22,
+        "form_labels": 25,
+        "title": 25
+    },
+    "752x841": {
+        "check_button": 22,
+        "form_labels": 25,
+        "title": 25
+    },
+    "572x785": {
+        "check_button": 18,
+        "form_labels": 21,
+        "title": 20
+    },
+    "511x712": {
+        "check_button": 13,
+        "form_labels": 15,
+        "title": 15
+    },
+    "575x629": {
+        "check_button": 12,
+        "form_labels": 14,
+        "title": 13
+    },
+    "800x563": {
+        "check_button": 14,
+        "form_labels": 16,
+        "title": 16
+    },
+    "989x581": {
+        "check_button": 19,
+        "form_labels": 19,
+        "title": 22
+    },
+    "1046x654": {
+        "check_button": 21,
+        "form_labels": 19,
+        "title": 27
+    },
+    "1002x763": {
+        "check_button": 24,
+        "form_labels": 24,
+        "title": 28
+    },
+    "825x849": {
+        "form_labels": 28,
+        "title": 27
+    },
+    "626x838": {
+        "check_button": 20,
+        "form_labels": 23,
+        "title": 22
+    },
+    "536x748": {
+        "check_button": 15,
+        "form_labels": 17,
+        "title": 16
+    },
+    "607x620": {
+        "check_button": 13,
+        "form_labels": 14,
+        "title": 14
+    },
+    "908x490": {
+        "check_button": 15,
+        "form_labels": 17,
+        "title": 16
+    },
+    "1235x473": {
+        "check_button": 17,
+        "form_labels": 17,
+        "title": 25
+    },
+    "1362x556": {
+        "check_button": 16,
+        "form_labels": 17,
+        "title": 34
+    },
+    "1340x689": {
+        "check_button": 19,
+        "form_labels": 19
+    },
+    "1161x818": {
+        "form_labels": 24
+    },
+    "882x889": {
+        "form_labels": 30,
+        "title": 32
+    },
+    "640x870": {
+        "check_button": 22,
+        "form_labels": 24,
+        "title": 24
+    },
+    "537x789": {
+        "check_button": 15,
+        "form_labels": 17,
+        "title": 16
+    },
+    "527x698": {
+        "check_button": 13,
+        "form_labels": 15,
+        "title": 15
+    },
+    "590x610": {
+        "check_button": 13,
+        "form_labels": 14,
+        "title": 14
+    },
+    "706x567": {
+        "check_button": 14,
+        "form_labels": 16,
+        "title": 16
+    },
+    "832x585": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 19
+    },
+    "913x651": {
+        "check_button": 21,
+        "form_labels": 21,
+        "title": 23
+    },
+    "935x745": {
+        "check_button": 23,
+        "form_labels": 24,
+        "title": 25
+    },
+    "898x847": {
+        "check_button": 23,
+        "form_labels": 26,
+        "title": 26
+    },
+    "807x927": {
+        "check_button": 22,
+        "form_labels": 25,
+        "title": 25
+    },
+    "701x949": {
+        "check_button": 19,
+        "form_labels": 22,
+        "title": 22
+    },
+    "619x914": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 19
+    },
+    "587x847": {
+        "check_button": 15,
+        "form_labels": 17,
+        "title": 16
+    },
+    "600x760": {
+        "check_button": 14,
+        "form_labels": 16,
+        "title": 16
+    },
+    "666x675": {
+        "check_button": 15,
+        "form_labels": 16,
+        "title": 16
+    },
+    "771x622": {
+        "check_button": 16,
+        "form_labels": 18,
+        "title": 18
+    },
+    "878x610": {
+        "check_button": 19,
+        "form_labels": 21,
+        "title": 21
+    },
+    "938x636": {
+        "check_button": 22,
+        "form_labels": 22,
+        "title": 24
+    },
+    "957x681": {
+        "check_button": 23,
+        "form_labels": 23,
+        "title": 26
+    },
+    "941x742": {
+        "form_labels": 24,
+        "title": 26
+    },
+    "885x795": {
+        "check_button": 23,
+        "form_labels": 26,
+        "title": 26
+    },
+    "798x826": {
+        "check_button": 22,
+        "form_labels": 25,
+        "title": 24
+    },
+    "730x820": {
+        "check_button": 19,
+        "form_labels": 22,
+        "title": 22
+    },
+    "699x790": {
+        "check_button": 17,
+        "form_labels": 20,
+        "title": 19
+    },
+    "697x747": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 19
+    },
+    "725x699": {
+        "check_button": 17,
+        "form_labels": 19,
+        "title": 19
+    },
+    "780x665": {
+        "check_button": 17,
+        "form_labels": 20,
+        "title": 19
+    },
+    "849x653": {
+        "check_button": 19,
+        "form_labels": 22,
+        "title": 21
+    },
+    "905x675": {
+        "check_button": 21,
+        "form_labels": 24,
+        "title": 23
+    },
+    "926x716": {
+        "check_button": 22,
+        "form_labels": 24,
+        "title": 25
+    },
+    "919x754": {
+        "check_button": 23,
+        "form_labels": 25,
+        "title": 26
+    },
+    "894x779": {
+        "check_button": 23,
+        "form_labels": 26,
+        "title": 25
+    },
+    "858x786": {
+        "check_button": 22,
+        "form_labels": 25,
+        "title": 25
+    },
+    "826x781": {
+        "check_button": 21,
+        "form_labels": 24,
+        "title": 23
+    },
+    "807x767": {
+        "check_button": 20,
+        "form_labels": 23,
+        "title": 23
+    },
+    "798x754": {
+        "check_button": 20,
+        "form_labels": 22,
+        "title": 22
+    },
+    "796x746": {
+        "check_button": 19,
+        "form_labels": 22,
+        "title": 22
+    },
+    "798x747": {
+        "check_button": 19,
+        "form_labels": 22,
+        "title": 22
+    },
+    "809x750": {
+        "check_button": 19,
+        "form_labels": 22,
+        "title": 22
+    },
+    "836x756": {
+        "check_button": 20,
+        "form_labels": 22,
+        "title": 22
+    },
+    "881x768": {
+        "check_button": 21,
+        "form_labels": 23,
+        "title": 23
+    },
+    "941x785": {
+        "check_button": 22,
+        "form_labels": 24,
+        "title": 24
+    },
+    "1015x801": {
+        "check_button": 23,
+        "form_labels": 26,
+        "title": 26
+    },
+    "1120x823": {
+        "form_labels": 28,
+        "title": 28
+    },
+    "1235x843": {
+        "form_labels": 30,
+        "title": 31
+    },
+    "1373x870": {
+        "form_labels": 30,
+        "title": 34
+    },
+    "1481x894": {
+        "form_labels": 31
+    },
+    "1568x916": {
+        "form_labels": 31
+    },
+    "1622x930": {
+        "check_button": 34,
+        "form_labels": 33,
+        "title": 43
+    },
+    "1668x942": {
+        "check_button": 34,
+        "form_labels": 34,
+        "title": 45
+    },
+    "1696x948": {
+        "check_button": 34,
+        "form_labels": 34,
+        "title": 46
+    },
+    "1721x952": {
+        "check_button": 34,
+        "form_labels": 34,
+        "title": 47
+    },
+    "1732x953": {
+        "check_button": 34,
+        "form_labels": 34,
+        "title": 47
+    }
+}

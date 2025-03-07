@@ -1,8 +1,9 @@
 import json
 import os
 import shutil
-import sys
-from datetime import datetime
+import time
+
+from numpy import double
 
 
 class fileAndCacheHandler:
@@ -22,8 +23,9 @@ class fileAndCacheHandler:
                     self.gui_instance.debug = "True" == contents[ 0 ].split( "=" )[ 1 ].strip()
                     self.gui_instance.tests = "True" == contents[ 1 ].split( "=" )[ 1 ].strip()
                     self.gui_instance.selected_option.set( contents[ 2 ].split( "=" )[ 1 ].strip() )
-                    self.gui_instance.debug_print( "settings were read successfully" )
-                    self.gui_instance.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in contents ] ) )
+                    self.gui_instance.last_cache_clear = double( contents[ 3 ].split( "=" )[ 1 ].strip() )
+                    self.gui_instance.debug_print( "settings were read successfully:" )
+                    self.gui_instance.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in contents ] ) + "\n" )
                                   
             except Exception as e:
                 with open( self.gui_instance.settings_location, "w" ) as file:
@@ -50,14 +52,26 @@ class fileAndCacheHandler:
         self.gui_instance.get_root_size()
         key = f"{ self.gui_instance.root_width }x{ self.gui_instance.root_height }"
         if key not in self.gui_instance.font_cache:
-            self.gui_instance.font_cache[key] = {}
-        self.gui_instance.font_cache[key][element_name] = font_size
+            self.gui_instance.font_cache[ key ] = {}
+        self.gui_instance.font_cache[ key ][ element_name ] = font_size
     
     
     def save_cache( self ):
         with open( self.gui_instance.font_cache_location ,"w" ) as file:
-            json.dump( self.gui_instance.font_cache, file, indent = 4 ) 
+            json.dump( self.gui_instance.font_cache, file, indent = 4 )
             
+            
+    def clear_cache( self ):
+        with open( self.gui_instance.font_cache_location, "w" ) as file:
+            json.dump( {}, file, indent = 4 )
+        
+        with open( self.gui_instance.settings_location, "r+" ) as file:
+            contents = file.readlines()
+            contents[ 3 ] = f"last_clear_cache={ time.time() }\n"
+            file.truncate( 0 )
+            file.seek( 0 )
+            file.writelines( contents )
+              
         
     def get_font_size( self, element_name ):
         try:
@@ -67,7 +81,3 @@ class fileAndCacheHandler:
         except Exception as e:
             self.gui_instance.debug_print( f"Error: font size not cached yet or failed to get cached font size: { e }" )
             return None
-    
-    
-    def save_and_exit( self ):
-        self.save_cache()
