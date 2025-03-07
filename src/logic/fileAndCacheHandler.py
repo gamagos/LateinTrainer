@@ -32,6 +32,15 @@ class fileAndCacheHandler:
                     shutil.copyfile( self.gui_instance.settings_default_location, self.gui_instance.settings_location )
                     self.gui_instance.debug_print( f"settings were restored(error in settings file): { e }" )
                     
+                    
+    def save_current_form( self ):
+        with open( self.gui_instance.settings_location, "r+" ) as file:
+                contents = file.readlines()
+                contents[ 2 ] = f"selected_option={ self.gui_instance.selected_option.get() }\n"
+                file.seek( 0 )
+                file.truncate()
+                file.writelines( contents )
+                    
             
     def load_cache( self ):
         if os.path.exists( self.gui_instance.font_cache_location ):

@@ -56,18 +56,20 @@ class GUI:
         self.debug_print( "Root was initialized" )
         
         self.main_frame = tk.Frame( self.root, relief = "flat" )
+        self.main_frame.bind( "<Enter>", self.on_scrollbars_enter )
+        self.main_frame.bind( "<Leave>", self.on_scrollbars_leave )
         self.main_frame.place( relheight = 1, relwidth = 1, )
         
         self.canvas = tk.Canvas( self.main_frame, relief = "flat" )
-        self.canvas.place( relheight = 0.93, relwidth = 0.93 )
-        self.canvas.bind( "<Enter>", self.on_canvas_enter )
-        self.canvas.bind( "<Leave>", self.on_canvas_leave )
+        self.canvas.place( relheight = 0.97, relwidth = 0.97 )
+        self.canvas.bind( "<Enter>", self.on_scrollbars_leave )
+        self.canvas.bind( "<Leave>", self.on_scrollbars_enter )
 
         self.h_scrollbar = tk.Scrollbar( self.main_frame, orient = "horizontal", command = self.canvas.xview )
-        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, relheight = 0.03 )
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 7 )
 
         self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
-        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.03 )
+        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 7 )
         
         self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
 
@@ -173,8 +175,8 @@ class GUI:
                 separation_form_tabel += 1
                 
             separation_form_tabel += 1
-            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw", relief = "sunken" ) )
-            self.form_labels[i].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
+            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw" ) )
+            self.form_labels[ i ].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
             entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
             
@@ -225,17 +227,17 @@ class GUI:
                 self.entries[ case_or_tempus ].insert( 0, correct_answer )
                 self.entries[ case_or_tempus ].config( state = "disabled", disabledforeground = "blue" )
         
-        self.check_button.config(text="Retry", command=self.retry)
+        self.check_button.config( text = "Retry", command = self.retry )
     
     
     def retry(self):
         for case, correct_answer in self.current_forms.items():
             
-            if case == "nominativ_singular" or self.results.get(case, True):
+            if case == "nominativ_singular" or self.results.get( case, True ):
                 continue
             
-            self.entries[case].config(fg="black", state="normal")
-            self.entries[case].delete(0, tk.END)
+            self.entries[ case ].config( fg = "black", state = "normal" )
+            self.entries[ case ].delete( 0, tk.END )
         
         self.check_button.config(text="Check", command=self.check_answers)
     
@@ -266,13 +268,7 @@ class GUI:
         self.current_class_index = 0
         if self.previous_form != self.selected_option.get():
             self.next_class()
-            
-            with open( self.settings_location, "r+" ) as file:
-                settings = file.readlines()
-                settings[ 2 ] = f"selected_option={ self.selected_option.get() }"
-                file.seek( 0 )
-                file.writelines( settings )
-                file.truncate()
+            self.FileAndChacheHandler.save_current_form()
 
 
     def on_mouse_wheel( self, event ):
@@ -283,13 +279,12 @@ class GUI:
         self.canvas.xview_scroll( int( -1 * ( event.delta / 120 ) ), "units" )
     
         
-    #TODO make bigger hitbox, make go away after inactive, make go away after frame leave
-    def on_canvas_enter( self, event ):
+    def on_scrollbars_leave( self, event ):
         self.h_scrollbar.place_forget()
         self.v_scrollbar.place_forget()
         
         
-    def on_canvas_leave( self, event ):
+    def on_scrollbars_enter( self, event ):
         self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, relheight = 0.03 )
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.03 )
         
@@ -305,14 +300,13 @@ class GUI:
         self.root.quit()
     
     
-    #TODO make cache for font sizes
     def on_resize( self, event ):
         now = time.time()
+        
         if now - self.last_resize_time < self.frameTime or self.resizing:
             return
-            
+        
         self.last_resize_time = now
-
         self.handle_resize()
     
     
@@ -490,14 +484,11 @@ class GUI:
     
     
     def adjust_canvas_window( self ):
-        root_width = self.root.winfo_width()
-        root_height = self.root.winfo_height()
+        canvas_width = self.canvas.winfo_width()
+        canvas_height = self.canvas.winfo_height()
         
-        new_width = root_width - self.v_scrollbar.winfo_width() - 4                    
-        new_height = root_height - self.h_scrollbar.winfo_height() - 4
-        
-        if new_width == self.canvas.winfo_width and new_height == self.canvas.winfo_height():
-            return
+        new_width = canvas_width - 2      
+        new_height = canvas_height - 2
         
         self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
         self.canvas.config(scrollregion = self.canvas.bbox( "all" ) )
