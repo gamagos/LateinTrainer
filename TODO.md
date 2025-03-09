@@ -6,7 +6,6 @@ Fiaults To do List
 -add more grammar forms
 -make updater
 -make UI look nicer
--strg f todo
 -make log file
 -optimized code
 

@@ -10,8 +10,8 @@ from tkinter import font, messagebox, ttk
 import win32api
 import win32con
 
-from src.data.Data import Data
-from src.logic.fileAndCacheHandler import fileAndCacheHandler
+from data.Data import Data
+from logic.fileAndCacheHandler import fileAndCacheHandler
 
 
 class GUI:
@@ -26,9 +26,10 @@ class GUI:
         self.FileAndChacheHandler = fileAndCacheHandler( self )
         self.font_cache = self.FileAndChacheHandler.load_cache()
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
-        version = "v1.0.0"
+        version = "v1.1.0"
         self.data = Data()
         self.form_labels = []
+        self.entries = []
         self.last_resize_time = 0
         self.resizing = False
         self.root_width = 700
@@ -61,15 +62,15 @@ class GUI:
         self.main_frame.place( relheight = 1, relwidth = 1, )
         
         self.canvas = tk.Canvas( self.main_frame, relief = "flat" )
-        self.canvas.place( relheight = 0.97, relwidth = 0.97 )
+        self.canvas.place( relheight = 0.95, relwidth = 0.95 )
         self.canvas.bind( "<Enter>", self.on_scrollbars_leave )
         self.canvas.bind( "<Leave>", self.on_scrollbars_enter )
 
         self.h_scrollbar = tk.Scrollbar( self.main_frame, orient = "horizontal", command = self.canvas.xview )
-        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 7 )
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 20 )
 
         self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
-        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 7 )
+        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
         
         self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
 
@@ -93,15 +94,12 @@ class GUI:
         self.current_class_index = 0
         self.selected_option = tk.StringVar()
         self.previous_form = self.selected_option.get()
+        self.user_entries = {}
+        self.results = {}
         
         self.FileAndChacheHandler.get_settings()
-        
         self.form_select()
         self.debug_print( "Form was selected" )
-                
-        self.entries = {}
-        self.results = {}                                     # Variable to save whether the answer was right or wrong
-        
         self.create_widgets()
         self.adjust_canvas_window()
         self.debug_print( "Frame was filled" ) 
@@ -145,10 +143,11 @@ class GUI:
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
         self.title = tk.Label( self.content_frame, text = f"{ self.add_newline_if_too_long( self.current_key ) }",
-                              font = ( "Arial", int( 19 * self.ui_scale ), "bold" ), anchor = "center", justify = "left" )
+                               anchor = "center", justify = "left" )
         self.title.place( relx = 0.032, rely = 0, relheight = 0.2, relwidth = 0.81, anchor = "nw" )
         
-        self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option, values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
+        self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option,
+                                                  values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
         self.combobox_select_form.place( relx = 0.96 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
@@ -168,7 +167,7 @@ class GUI:
 
 
     def populate_entries( self ):
-        separation_form_tabel = -1
+        separation_form_tabel = - 1
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_forms.items() ):
             
             if case_or_tempus == "Nominativ_Plural" or case_or_tempus == "1._Person_Plural":
@@ -178,14 +177,14 @@ class GUI:
             self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw" ) )
             self.form_labels[ i ].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
-            entry = tk.Entry( self.forms_frame, font = ( "Arial", int( 14 * self.ui_scale ) ) )
+            self.entries.append( tk.Entry( self.forms_frame ) )
             
             if case_or_tempus == "Nominativ_Singular":
-                entry.insert( 0, correct_answer )
-                entry.config( state = "disabled", disabledforeground = "gray" )
+                self.entries[ i ].insert( 0, correct_answer )
+                self.entries[ i ].config( state = "disabled", disabledforeground = "gray" )
                 
-            entry.place( relx = 0.41, rely = 0.09 * separation_form_tabel, relwidth = 0.6, relheight = 0.09 )
-            self.entries[ case_or_tempus ] = entry
+            self.entries[ i ].place( relx = 0.42, rely = 0.09 * separation_form_tabel, relwidth = 0.58, relheight = 0.09 )
+            self.user_entries[ case_or_tempus ] = self.entries[ i ]
             
         self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
     
@@ -197,14 +196,14 @@ class GUI:
             
             if case_or_tempus == "Nominativ_Singular" or case_or_tempus == "1._Person_Singular":
                 continue
-            user_input = self.entries[ case_or_tempus ].get().strip()
+            user_input = self.user_entries[ case_or_tempus ].get().strip()
             
             if user_input == correct_answer:
-                self.entries[ case_or_tempus ].config(fg = "green", state = "disabled", disabledforeground = "green")
+                self.user_entries[ case_or_tempus ].config( fg = "green", state = "disabled", disabledforeground = "green" )
                 self.results[ case_or_tempus ] = True 
             else:
                 wrong = True
-                self.entries[ case_or_tempus ].config(fg = "red", state = "disabled", disabledforeground = "red")
+                self.user_entries[ case_or_tempus ].config( fg = "red", state = "disabled", disabledforeground = "red" )
                 self.results[ case_or_tempus ] = False
         
         if wrong:
@@ -219,13 +218,13 @@ class GUI:
             if case_or_tempus == "Nominativ_Singular" or self.results.get( case_or_tempus, True ) or case_or_tempus == "1._Person_Singular":
                 continue
             
-            user_input = self.entries[case_or_tempus].get().strip()
+            user_input = self.user_entries[case_or_tempus].get().strip()
             
             if user_input != correct_answer:
-                self.entries[ case_or_tempus ].config( fg = "blue", state = "normal" )
-                self.entries[ case_or_tempus ].delete( 0, tk.END )
-                self.entries[ case_or_tempus ].insert( 0, correct_answer )
-                self.entries[ case_or_tempus ].config( state = "disabled", disabledforeground = "blue" )
+                self.user_entries[ case_or_tempus ].config( fg = "blue", state = "normal" )
+                self.user_entries[ case_or_tempus ].delete( 0, tk.END )
+                self.user_entries[ case_or_tempus ].insert( 0, correct_answer )
+                self.user_entries[ case_or_tempus ].config( state = "disabled", disabledforeground = "blue" )
         
         self.check_button.config( text = "Retry", command = self.retry )
     
@@ -236,8 +235,8 @@ class GUI:
             if case == "nominativ_singular" or self.results.get( case, True ):
                 continue
             
-            self.entries[ case ].config( fg = "black", state = "normal" )
-            self.entries[ case ].delete( 0, tk.END )
+            self.user_entries[ case ].config( fg = "black", state = "normal" )
+            self.user_entries[ case ].delete( 0, tk.END )
         
         self.check_button.config(text="Check", command=self.check_answers)
     
@@ -253,7 +252,7 @@ class GUI:
             for widget in self.forms_frame.winfo_children():
                 widget.destroy()
                 
-            self.entries = {}
+            self.user_entries = {}
             self.results = {}
             self.form_labels = []    
             self.populate_entries()
@@ -285,8 +284,8 @@ class GUI:
         
         
     def on_scrollbars_enter( self, event ):
-        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, relheight = 0.03 )
-        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, relwidth = 0.03 )
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 20 )
+        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
         
         
     def on_close( self ):
@@ -302,117 +301,80 @@ class GUI:
     
     def on_resize( self, event ):
         now = time.time()
+        self.get_root_size()
+        width_diff = abs( self.root_width - self.root_prev_width )
+        height_diff = abs( self.root_height - self.root_prev_height )
+        minimum_diff =  3
         
         if now - self.last_resize_time < self.frameTime or self.resizing:
             return
         
-        self.last_resize_time = now
-        self.handle_resize()
+        if width_diff >= minimum_diff or height_diff >= minimum_diff:
+            self.last_resize_time = now
+            self.handle_resize()
     
     
     def handle_resize( self ):
         self.resizing = True
-        self.get_root_size()
-        width_diff = abs( self.root_width - self.root_prev_width )
-        height_diff = abs( self.root_height - self.root_prev_height )
-        minimum_diff =  2
+        self.root.update_idletasks()
         
-        if width_diff >= minimum_diff or height_diff >= minimum_diff:
-            self.adjust_check_button_font_size()
-            self.adjust_form_label_font_size()
-            self.adjust_title_font_size()
-            self.adjust_canvas_window()
+        self.adjust_font_size( self.check_button, 0.72, 0.72 )
+        self.adjust_font_size( self.combobox_select_form, 0.83, 0.83 )
             
-            self.root_prev_width = self.root_width
-            self.root_prev_height =self.root_height
+        for i in range( len( self.form_labels ) ):
+            try:
+                self.adjust_font_size( self.form_labels[ i ], 1, 1, self.form_labels[ 0 ].cget( "text" ), element_name = "form_labels" )
+                self.adjust_font_size( self.entries[ i ], 0.7, 0.7, "entryplaceholder", element_name = "entries" )
+            except Exception as e:
+                self.debug_print( f"Error adjusting form labels or entries: { e }" )
+        self.adjust_font_size( self.title, font_weight = "bold" )
+        self.adjust_canvas_window()
+            
+        self.root_prev_width = self.root_width
+        self.root_prev_height =self.root_height
         
         self.resizing = False
-            
-            
-    def adjust_title_font_size( self, base_font_size = 40 ):
-        element_name = "title"
+        
+        
+    def adjust_font_size( self, widget, max_width_ratio = 0.72, max_height_ratio = 0.72, element_text = None, font_weight = "normal", element_name = None ):
         cached_font_size = self.FileAndChacheHandler.get_font_size( element_name )
+        
+        if element_name is None:
+            element_name = widget.winfo_name()
         
         if cached_font_size is not None:
             font_size = cached_font_size
-            self.title.config( font = ( "Arial", font_size, "bold" ) )
-            return
+            widget.config( font = ( "Arial", font_size, font_weight ) )
+            return font_size
             
-        widget_width = self.title.winfo_width()
-        widget_height = self.title.winfo_height()
-        max_width_ratio = 0.91
-        max_height_ratio = 0.91  
+        try:
+            if element_text is None:
+                element_text = widget.cget( "text" )
+        except Exception as e:
+            self.debug_print( f"Error in adjusting font size: { e }" )
+            return font_size
+            
+        widget_width = widget.winfo_width()
+        widget_height = widget.winfo_height()
         max_width = int( widget_width * max_width_ratio )
         max_height = int( widget_height * max_height_ratio )
-        font_size = base_font_size
+        font_size = 120
         
-        temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
-        text_width = temp_font.measure( self.title.cget( "text" ) )
-        text_height = temp_font.metrics( "linespace" )
-                  
-        width_ratio = max_width/text_width
-        height_ratio = max_height/text_height
-        ratio = min( width_ratio, height_ratio )
-        if 0.9 < ratio and ratio < 1.1:
-            return
-        
-        font_size = int( font_size * ratio )
-        temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
-        text_width = temp_font.measure( self.title.cget( "text" ) )
-        text_height = temp_font.metrics( "linespace" )
-        
-        while True:
-            temp_font = font.Font( family = "Arial", size = font_size, weight = "bold" )
-            text_width = temp_font.measure( self.title.cget( "text" ) )
-            text_height = temp_font.metrics( "linespace" )
-             
-            if text_width <= max_width and text_height <= max_height:
-                break
-            
-            font_size -= 1
-            if font_size < 10:
-                font_size = 10
-                break
-            
-        self.title.config( font = ( "Arial", font_size, "bold" ) )
-        self.FileAndChacheHandler.cache_font_size( element_name, font_size )
-
-
-    def adjust_check_button_font_size( self, base_font_size = 30 ):
-        element_name = "check_button"
-        cached_font_size = self.FileAndChacheHandler.get_font_size( element_name )
-        
-        if cached_font_size is not None:
-            font_size = cached_font_size
-            self.check_button.config( font = ( "Arial", font_size ) )
-            return
-            
-        widget_width = self.check_button.winfo_width()
-        widget_height = self.check_button.winfo_height()
-        max_width_ratio = 0.72
-        max_height_ratio = 0.72
-        max_width = int( widget_width * max_width_ratio )
-        max_height = int( widget_height * max_height_ratio )
-        font_size = base_font_size
-        
-        temp_font = font.Font( family = "Arial", size = font_size )
-        text_width = temp_font.measure( self.check_button.cget( "text" ) )
+        temp_font = font.Font( family = "Arial", size = font_size, weight = font_weight )
+        text_width = temp_font.measure( element_text )
         text_height = temp_font.metrics( "linespace" )
                   
         width_ratio = max_width/text_width
         height_ratio = max_height/text_height
         ratio = min( width_ratio, height_ratio )
         if 0.8 < ratio and ratio < 1.1:
-            return
+            return font_size
         
         font_size = int( font_size * ratio )
-        temp_font = font.Font( family = "Arial", size = font_size )
-        text_width = temp_font.measure( self.check_button.cget( "text" ) )
-        text_height = temp_font.metrics( "linespace" )
         
         while True:
-            temp_font = font.Font( family = "Arial", size = font_size )
-            text_width = temp_font.measure( self.check_button.cget( "text" ) )
+            temp_font = font.Font( family = "Arial", size = font_size, weight = font_weight )
+            text_width = temp_font.measure( element_text )
             text_height = temp_font.metrics( "linespace" )
             if text_width <= max_width and text_height <= max_height:
                 break
@@ -423,66 +385,11 @@ class GUI:
             
             font_size -= 1
         
-        self.check_button.config( font = ( "Arial", font_size ) )
+        widget.config( font = ( "Arial", font_size, font_weight ) )
         self.FileAndChacheHandler.cache_font_size( element_name, font_size )
-        
-        
-    def adjust_form_label_font_size( self, base_font_size = 50 ):
-        try:
-            widget_width = self.form_labels[ 0 ].winfo_width()
-            widget_height = self.form_labels[ 0 ].winfo_height()
-        except:
-            self.debug_print( "self.populate_entries not run yet" )
-            return
-        
-        element_name = "form_labels"
-        cached_font_size = self.FileAndChacheHandler.get_font_size( element_name )
-        
-        if cached_font_size is not None:
-            self.forms_labels_font_size = cached_font_size
-            for i in range( len( self.form_labels ) ):
-                self.form_labels[ i ].config( font = ( "Arial", self.forms_labels_font_size ) )
-            return
-        
-        max_width_ratio = 0.9
-        max_height_ratio = 0.9
-        max_width = int( widget_width * max_width_ratio )
-        max_height = int( widget_height * max_height_ratio )
-        self.forms_labels_font_size = base_font_size
-        
-        temp_font = font.Font( family = "Arial", size = self.forms_labels_font_size )
-        text_width = temp_font.measure( self.form_labels[ 0 ].cget( "text" ) )
-        text_height = temp_font.metrics( "linespace" )
-                  
-        width_ratio = max_width/text_width
-        height_ratio = max_height/text_height
-        ratio = min( width_ratio, height_ratio )
-        if 0.8 < ratio and ratio < 1.1:
-            return
-        
-        self.forms_labels_font_size = int( self.forms_labels_font_size * ratio )
-        temp_font = font.Font( family = "Arial", size = self.forms_labels_font_size )
-        text_width = temp_font.measure( self.form_labels[ 0 ].cget( "text" ) )
-        text_height = temp_font.metrics( "linespace" )
-        
-        while True:
-            temp_font = font.Font( family = "Arial", size = self.forms_labels_font_size )
-            text_width = temp_font.measure( self.form_labels[ 0 ].cget( "text" ) )
-            text_height = temp_font.metrics( "linespace" )
-            if text_width <= max_width and text_height <= max_height:
-                break
-            
-            self.forms_labels_font_size -= 1
-            
-            if self.forms_labels_font_size < 8:
-                self.forms_labels_font_size = 8
-                break
-        
-        for i in range( len( self.form_labels ) ):
-            self.form_labels[ i ].config( font = ( "Arial", self.forms_labels_font_size ) )
-        self.FileAndChacheHandler.cache_font_size( element_name, self.forms_labels_font_size )
-    
-    
+        return font_size
+
+
     def adjust_canvas_window( self ):
         canvas_width = self.canvas.winfo_width()
         canvas_height = self.canvas.winfo_height()

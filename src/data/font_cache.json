@@ -1,1730 +1,1037 @@
 {
-    "700x698": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 78
+    "703x703": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "!label": 61
     },
-    "700x689": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 78
+    "714x713": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "!label": 61
     },
-    "700x678": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 78
+    "739x741": {
+        "!button": 17,
+        "!combobox": 8,
+        "form_labels": 21,
+        "!label": 61
+    },
+    "783x784": {
+        "!button": 17,
+        "!combobox": 8,
+        "form_labels": 21,
+        "!label": 63
+    },
+    "835x834": {
+        "!button": 17,
+        "!combobox": 8,
+        "form_labels": 22,
+        "!label": 65
+    },
+    "879x865": {
+        "!button": 19,
+        "!combobox": 9,
+        "form_labels": 23,
+        "!label": 69
+    },
+    "700x700": {
+        "!button": 16,
+        "!combobox": 8,
+        "!label": 61,
+        "form_labels": 21,
+        "entries": 23
+    },
+    "700x703": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 23,
+        "!label": 63
+    },
+    "700x706": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 23,
+        "!label": 61
+    },
+    "700x709": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 23,
+        "!label": 58
+    },
+    "700x712": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 23,
+        "!label": 63
+    },
+    "700x715": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 23,
+        "!label": 63
+    },
+    "700x718": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 24,
+        "!label": 63
+    },
+    "700x721": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 24,
+        "!label": 64
+    },
+    "700x724": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 24,
+        "!label": 62
+    },
+    "700x716": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 24,
+        "!label": 62
+    },
+    "700x711": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 24,
+        "!label": 61
+    },
+    "700x707": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 24,
+        "!label": 63
+    },
+    "700x696": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 23,
+        "!label": 61
+    },
+    "700x691": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 23,
+        "!label": 61
+    },
+    "700x688": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 23,
+        "!label": 61
+    },
+    "700x685": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 60
+    },
+    "700x681": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 60
+    },
+    "700x673": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 64
     },
     "700x666": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 76
-    },
-    "700x658": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 74
-    },
-    "700x651": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 74
-    },
-    "702x703": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 19
-    },
-    "719x713": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 19
-    },
-    "761x737": {
-        "check_button": 17,
-        "form_labels": 20,
-        "title": 19
-    },
-    "852x789": {
-        "check_button": 19,
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 21
+        "entries": 22,
+        "!label": 59
     },
-    "903x835": {
-        "check_button": 21,
-        "form_labels": 24,
-        "title": 23
-    },
-    "893x851": {
-        "check_button": 22,
-        "form_labels": 25,
-        "title": 25
-    },
-    "752x841": {
-        "check_button": 22,
-        "form_labels": 25,
-        "title": 25
-    },
-    "572x785": {
-        "check_button": 18,
+    "700x662": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 20
+        "entries": 22,
+        "!label": 58
     },
-    "511x712": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 15
+    "200x200": {
+        "!button": 8,
+        "!combobox": 8,
+        "!label": 8
     },
-    "575x629": {
-        "check_button": 12,
-        "form_labels": 14,
-        "title": 13
-    },
-    "800x563": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 16
-    },
-    "989x581": {
-        "check_button": 19,
-        "form_labels": 19,
-        "title": 22
-    },
-    "1046x654": {
-        "check_button": 21,
-        "form_labels": 19,
-        "title": 27
-    },
-    "1002x763": {
-        "check_button": 24,
-        "form_labels": 24,
-        "title": 28
-    },
-    "825x849": {
-        "form_labels": 28,
-        "title": 27
-    },
-    "626x838": {
-        "check_button": 20,
-        "form_labels": 23,
-        "title": 22
-    },
-    "536x748": {
-        "check_button": 15,
-        "form_labels": 17,
-        "title": 16
-    },
-    "607x620": {
-        "check_button": 13,
-        "form_labels": 14,
-        "title": 14
-    },
-    "908x490": {
-        "check_button": 15,
-        "form_labels": 17,
-        "title": 16
-    },
-    "1235x473": {
-        "check_button": 17,
-        "form_labels": 17,
-        "title": 25
-    },
-    "1362x556": {
-        "check_button": 16,
-        "form_labels": 17,
-        "title": 34
-    },
-    "1340x689": {
-        "check_button": 19,
-        "form_labels": 19
-    },
-    "1161x818": {
-        "form_labels": 24
-    },
-    "882x889": {
-        "form_labels": 30,
-        "title": 32
-    },
-    "640x870": {
-        "check_button": 22,
-        "form_labels": 24,
-        "title": 24
-    },
-    "537x789": {
-        "check_button": 15,
-        "form_labels": 17,
-        "title": 16
-    },
-    "527x698": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 15
-    },
-    "590x610": {
-        "check_button": 13,
-        "form_labels": 14,
-        "title": 14
-    },
-    "706x567": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 16
-    },
-    "832x585": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 19
-    },
-    "913x651": {
-        "check_button": 21,
+    "700x717": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 23
+        "entries": 19,
+        "!label": 63
     },
-    "935x745": {
-        "check_button": 23,
-        "form_labels": 24,
-        "title": 25
-    },
-    "898x847": {
-        "check_button": 23,
-        "form_labels": 26,
-        "title": 26
-    },
-    "807x927": {
-        "check_button": 22,
-        "form_labels": 25,
-        "title": 25
-    },
-    "701x949": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 22
-    },
-    "619x914": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 19
-    },
-    "587x847": {
-        "check_button": 15,
-        "form_labels": 17,
-        "title": 16
-    },
-    "600x760": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 16
-    },
-    "666x675": {
-        "check_button": 15,
-        "form_labels": 16,
-        "title": 16
-    },
-    "771x622": {
-        "check_button": 16,
-        "form_labels": 18,
-        "title": 18
-    },
-    "878x610": {
-        "check_button": 19,
+    "700x720": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 21
-    },
-    "938x636": {
-        "check_button": 22,
-        "form_labels": 22,
-        "title": 24
-    },
-    "957x681": {
-        "check_button": 23,
-        "form_labels": 23,
-        "title": 26
-    },
-    "941x742": {
-        "form_labels": 24,
-        "title": 26
-    },
-    "885x795": {
-        "check_button": 23,
-        "form_labels": 26,
-        "title": 26
-    },
-    "798x826": {
-        "check_button": 22,
-        "form_labels": 25,
-        "title": 24
-    },
-    "730x820": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 22
-    },
-    "699x790": {
-        "check_button": 17,
-        "form_labels": 20,
-        "title": 19
-    },
-    "697x747": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 19
-    },
-    "725x699": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 19
-    },
-    "780x665": {
-        "check_button": 17,
-        "form_labels": 20,
-        "title": 19
-    },
-    "849x653": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 21
-    },
-    "905x675": {
-        "check_button": 21,
-        "form_labels": 24,
-        "title": 23
-    },
-    "926x716": {
-        "check_button": 22,
-        "form_labels": 24,
-        "title": 25
-    },
-    "919x754": {
-        "check_button": 23,
-        "form_labels": 25,
-        "title": 26
-    },
-    "894x779": {
-        "check_button": 23,
-        "form_labels": 26,
-        "title": 25
-    },
-    "858x786": {
-        "check_button": 22,
-        "form_labels": 25,
-        "title": 25
-    },
-    "826x781": {
-        "check_button": 21,
-        "form_labels": 24,
-        "title": 23
-    },
-    "807x767": {
-        "check_button": 20,
-        "form_labels": 23,
-        "title": 23
-    },
-    "798x754": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 22
-    },
-    "796x746": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 22
-    },
-    "798x747": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 22
-    },
-    "809x750": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 22
-    },
-    "836x756": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 22
-    },
-    "881x768": {
-        "check_button": 21,
-        "form_labels": 23,
-        "title": 23
-    },
-    "941x785": {
-        "check_button": 22,
-        "form_labels": 24,
-        "title": 24
-    },
-    "1015x801": {
-        "check_button": 23,
-        "form_labels": 26,
-        "title": 26
-    },
-    "1120x823": {
-        "form_labels": 28,
-        "title": 28
-    },
-    "1235x843": {
-        "form_labels": 30,
-        "title": 31
-    },
-    "1373x870": {
-        "form_labels": 30,
-        "title": 34
-    },
-    "1481x894": {
-        "form_labels": 31
-    },
-    "1568x916": {
-        "form_labels": 31
-    },
-    "1622x930": {
-        "check_button": 34,
-        "form_labels": 33,
-        "title": 43
-    },
-    "1668x942": {
-        "check_button": 34,
-        "form_labels": 34,
-        "title": 45
-    },
-    "1696x948": {
-        "check_button": 34,
-        "form_labels": 34,
-        "title": 46
-    },
-    "1721x952": {
-        "check_button": 34,
-        "form_labels": 34,
-        "title": 47
-    },
-    "1732x953": {
-        "check_button": 34,
-        "form_labels": 34,
-        "title": 47
+        "entries": 19,
+        "!label": 63
     },
     "700x704": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 78
-    },
-    "701x710": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 79
-    },
-    "702x716": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 79
-    },
-    "704x722": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 80
-    },
-    "707x729": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 81
-    },
-    "714x733": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 81
-    },
-    "721x737": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 82
-    },
-    "728x741": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 83
-    },
-    "738x745": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 83
-    },
-    "748x751": {
-        "check_button": 17,
-        "form_labels": 20,
-        "title": 83
-    },
-    "756x756": {
-        "check_button": 18,
-        "form_labels": 20,
-        "title": 84
-    },
-    "761x759": {
-        "check_button": 18,
-        "form_labels": 20,
-        "title": 84
-    },
-    "764x763": {
-        "check_button": 19,
-        "form_labels": 20,
-        "title": 85
-    },
-    "767x766": {
-        "check_button": 19,
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 85
+        "entries": 19,
+        "!label": 63
     },
-    "771x769": {
-        "check_button": 19,
+    "700x684": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 86
+        "entries": 19,
+        "!label": 61
     },
-    "775x771": {
-        "check_button": 19,
+    "700x679": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 86
+        "entries": 18,
+        "!label": 60
     },
-    "778x773": {
-        "check_button": 19,
+    "700x708": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 87
+        "entries": 18,
+        "!label": 59
     },
-    "784x774": {
-        "check_button": 19,
+    "700x728": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 87
+        "entries": 18,
+        "!label": 62
     },
-    "790x774": {
-        "check_button": 19,
+    "700x692": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 87
+        "entries": 19,
+        "!label": 61
     },
-    "796x774": {
-        "check_button": 19,
+    "700x677": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 87
+        "entries": 18,
+        "!label": 60
     },
-    "801x774": {
-        "check_button": 19,
+    "700x734": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 87
+        "entries": 18,
+        "!label": 59
     },
-    "804x772": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 87
-    },
-    "807x770": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 87
-    },
-    "809x769": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 87
-    },
-    "811x768": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 87
-    },
-    "812x766": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 87
-    },
-    "812x764": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 86
-    },
-    "811x762": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 86
-    },
-    "808x760": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 86
-    },
-    "803x757": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 85
-    },
-    "797x755": {
-        "check_button": 20,
-        "form_labels": 22,
-        "title": 85
-    },
-    "791x752": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 85
-    },
-    "783x751": {
-        "check_button": 19,
-        "form_labels": 22,
-        "title": 85
-    },
-    "774x750": {
-        "check_button": 19,
+    "700x682": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 84
+        "entries": 19,
+        "!label": 63
     },
-    "767x749": {
-        "check_button": 19,
+    "700x658": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 84
+        "entries": 19,
+        "!label": 64
     },
-    "761x748": {
-        "check_button": 19,
+    "700x654": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 84
+        "entries": 18,
+        "!label": 59
     },
-    "756x748": {
-        "check_button": 19,
+    "700x664": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 84
+        "entries": 18,
+        "!label": 59
     },
-    "750x747": {
-        "check_button": 19,
+    "700x693": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 21,
-        "title": 84
+        "entries": 18,
+        "!label": 63
     },
-    "741x747": {
-        "check_button": 19,
-        "form_labels": 20,
-        "title": 84
+    "700x722": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 58
     },
-    "731x745": {
-        "check_button": 18,
-        "form_labels": 20,
-        "title": 84
+    "700x746": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 60
     },
-    "720x745": {
-        "check_button": 18,
-        "form_labels": 20,
-        "title": 84
+    "700x765": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 64
     },
-    "709x745": {
-        "check_button": 18,
-        "form_labels": 20,
-        "title": 84
+    "700x781": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 65
     },
-    "698x744": {
-        "check_button": 17,
+    "700x793": {
+        "!button": 16,
+        "!combobox": 9,
+        "form_labels": 21,
+        "entries": 21,
+        "!label": 68
+    },
+    "700x805": {
+        "!button": 16,
+        "!combobox": 9,
+        "form_labels": 21,
+        "entries": 21,
+        "!label": 68
+    },
+    "700x815": {
+        "!button": 16,
+        "!combobox": 10,
+        "form_labels": 21,
+        "entries": 21,
+        "!label": 73
+    },
+    "700x820": {
+        "!button": 16,
+        "!combobox": 10,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 72
+    },
+    "700x823": {
+        "!button": 16,
+        "!combobox": 10,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 71
+    },
+    "700x809": {
+        "!button": 16,
+        "!combobox": 10,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 72
+    },
+    "700x798": {
+        "!button": 16,
+        "!combobox": 10,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 71
+    },
+    "700x779": {
+        "!button": 16,
+        "!combobox": 10,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 71
+    },
+    "700x762": {
+        "!button": 16,
+        "!combobox": 10,
+        "form_labels": 21,
+        "entries": 22,
+        "!label": 70
+    },
+    "700x748": {
+        "!button": 16,
+        "!combobox": 9,
+        "form_labels": 21,
+        "entries": 21,
+        "!label": 68
+    },
+    "700x729": {
+        "!button": 16,
+        "!combobox": 9,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 67
+    },
+    "700x695": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 61
+    },
+    "700x675": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 61
+    },
+    "700x671": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 60
+    },
+    "700x657": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 58
+    },
+    "700x650": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 58
+    },
+    "700x643": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 58
+    },
+    "700x638": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 57
+    },
+    "700x632": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 17,
+        "!label": 55
+    },
+    "700x623": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 17,
+        "!label": 55
+    },
+    "700x604": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 17,
+        "!label": 55
+    },
+    "700x574": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 16,
+        "!label": 53
+    },
+    "700x548": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 16,
+        "!label": 53
+    },
+    "700x518": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 50
+    },
+    "700x489": {
+        "!button": 16,
+        "!combobox": 6,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 47
+    },
+    "700x464": {
+        "!button": 16,
+        "!combobox": 6,
         "form_labels": 19,
-        "title": 84
+        "entries": 13,
+        "!label": 45
     },
-    "687x743": {
-        "check_button": 17,
+    "700x431": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 19,
-        "title": 84
+        "entries": 13,
+        "!label": 43
     },
-    "677x743": {
-        "check_button": 17,
-        "form_labels": 19,
-        "title": 84
-    },
-    "668x742": {
-        "check_button": 16,
-        "form_labels": 19,
-        "title": 84
-    },
-    "660x742": {
-        "check_button": 16,
+    "700x400": {
+        "!button": 16,
+        "!combobox": 8,
         "form_labels": 18,
-        "title": 84
+        "entries": 12,
+        "!label": 40
     },
-    "652x742": {
-        "check_button": 16,
-        "form_labels": 18,
-        "title": 84
-    },
-    "643x744": {
-        "check_button": 16,
-        "form_labels": 18,
-        "title": 84
-    },
-    "631x748": {
-        "check_button": 16,
-        "form_labels": 18,
-        "title": 84
-    },
-    "618x749": {
-        "check_button": 16,
+    "700x374": {
+        "!button": 15,
+        "!combobox": 8,
         "form_labels": 17,
-        "title": 84
+        "entries": 12,
+        "!label": 37
     },
-    "607x751": {
-        "check_button": 15,
-        "form_labels": 17,
-        "title": 84
-    },
-    "593x752": {
-        "check_button": 15,
-        "form_labels": 17,
-        "title": 84
-    },
-    "580x753": {
-        "check_button": 15,
+    "700x352": {
+        "!button": 13,
+        "!combobox": 5,
         "form_labels": 16,
-        "title": 84
+        "entries": 10,
+        "!label": 34
     },
-    "567x755": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 84
-    },
-    "554x758": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 85
-    },
-    "544x762": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 85
-    },
-    "538x764": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 85
-    },
-    "538x766": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 85
-    },
-    "537x768": {
-        "check_button": 13,
+    "700x332": {
+        "!button": 13,
+        "!combobox": 4,
         "form_labels": 14,
-        "title": 86
+        "entries": 9,
+        "!label": 33
     },
-    "537x770": {
-        "check_button": 13,
-        "form_labels": 14,
-        "title": 86
-    },
-    "542x774": {
-        "check_button": 13,
-        "form_labels": 14,
-        "title": 87
-    },
-    "551x779": {
-        "check_button": 13,
-        "form_labels": 14,
-        "title": 87
-    },
-    "563x786": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 87
-    },
-    "575x793": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 88
-    },
-    "582x796": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 89
-    },
-    "590x800": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 89
-    },
-    "597x803": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 90
-    },
-    "600x805": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 90
-    },
-    "601x807": {
-        "check_button": 15,
-        "form_labels": 16,
-        "title": 90
-    },
-    "596x811": {
-        "check_button": 15,
-        "form_labels": 16,
-        "title": 90
-    },
-    "587x814": {
-        "check_button": 15,
-        "form_labels": 16,
-        "title": 90
-    },
-    "569x817": {
-        "check_button": 15,
-        "form_labels": 16,
-        "title": 91
-    },
-    "547x818": {
-        "check_button": 14,
-        "form_labels": 16,
-        "title": 92
-    },
-    "529x818": {
-        "check_button": 14,
-        "form_labels": 15,
-        "title": 92
-    },
-    "517x815": {
-        "check_button": 13,
-        "form_labels": 15,
-        "title": 92
-    },
-    "507x812": {
-        "check_button": 13,
-        "form_labels": 14,
-        "title": 92
-    },
-    "497x808": {
-        "check_button": 12,
-        "form_labels": 14,
-        "title": 92
-    },
-    "486x803": {
-        "check_button": 12,
-        "form_labels": 14,
-        "title": 91
-    },
-    "476x800": {
-        "check_button": 12,
+    "700x312": {
+        "!button": 12,
+        "!combobox": 4,
         "form_labels": 13,
-        "title": 90
+        "entries": 8,
+        "!label": 30
     },
-    "464x795": {
-        "check_button": 12,
+    "700x294": {
+        "!button": 12,
+        "!combobox": 4,
         "form_labels": 13,
-        "title": 90
+        "entries": 8,
+        "!label": 29
     },
-    "451x790": {
-        "check_button": 11,
-        "form_labels": 13,
-        "title": 90
-    },
-    "440x785": {
-        "check_button": 11,
+    "700x277": {
+        "!button": 10,
+        "!combobox": 4,
         "form_labels": 12,
-        "title": 90
+        "entries": 7,
+        "!label": 26
     },
-    "434x780": {
-        "check_button": 11,
-        "form_labels": 12,
-        "title": 89
-    },
-    "431x776": {
-        "check_button": 11,
-        "form_labels": 12,
-        "title": 89
-    },
-    "429x773": {
-        "check_button": 10,
-        "form_labels": 12,
-        "title": 88
-    },
-    "427x770": {
-        "check_button": 10,
-        "form_labels": 12,
-        "title": 87
-    },
-    "426x765": {
-        "check_button": 10,
+    "700x260": {
+        "!button": 9,
+        "!combobox": 3,
         "form_labels": 11,
-        "title": 87
+        "entries": 8,
+        "!label": 25
     },
-    "424x759": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 87
-    },
-    "423x751": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 86
-    },
-    "421x742": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 85
-    },
-    "419x733": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 84
-    },
-    "418x724": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 84
-    },
-    "416x716": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 83
-    },
-    "415x707": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 81
-    },
-    "414x698": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 81
-    },
-    "413x691": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 80
-    },
-    "411x681": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 78
-    },
-    "408x673": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 78
-    },
-    "404x663": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 77
-    },
-    "401x653": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 76
-    },
-    "394x641": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 74
-    },
-    "386x630": {
-        "check_button": 10,
-        "form_labels": 11,
-        "title": 73
-    },
-    "379x618": {
-        "check_button": 9,
+    "700x242": {
+        "!button": 9,
+        "!combobox": 3,
         "form_labels": 10,
-        "title": 72
+        "entries": 8,
+        "!label": 24
     },
-    "373x603": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 71
-    },
-    "368x590": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 69
-    },
-    "363x574": {
-        "check_button": 8,
-        "form_labels": 10,
-        "title": 68
-    },
-    "358x560": {
-        "check_button": 8,
-        "form_labels": 10,
-        "title": 66
-    },
-    "353x547": {
-        "check_button": 8,
-        "form_labels": 10,
-        "title": 65
-    },
-    "349x535": {
-        "check_button": 8,
+    "700x215": {
+        "!button": 7,
+        "!combobox": 2,
         "form_labels": 9,
-        "title": 63
+        "entries": 6,
+        "!label": 22
     },
-    "345x518": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 61
-    },
-    "341x502": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 60
-    },
-    "337x484": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 58
-    },
-    "330x463": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 56
-    },
-    "321x442": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 54
-    },
-    "313x420": {
-        "check_button": 7,
+    "700x173": {
+        "!button": 7,
+        "!combobox": 2,
         "form_labels": 8,
-        "title": 51
+        "entries": 8,
+        "!label": 21
     },
-    "304x399": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 49
-    },
-    "301x383": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 47
-    },
-    "301x370": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 45
-    },
-    "302x354": {
-        "check_button": 7,
-        "form_labels": 8
-    },
-    "302x341": {
-        "check_button": 7,
-        "form_labels": 8
-    },
-    "302x330": {
-        "check_button": 7,
-        "form_labels": 8
-    },
-    "301x316": {
-        "check_button": 7,
-        "form_labels": 8
-    },
-    "301x300": {
-        "check_button": 7,
-        "form_labels": 8
-    },
-    "299x287": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 35
-    },
-    "297x276": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 33
-    },
-    "294x264": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 31
-    },
-    "291x254": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 30
-    },
-    "287x246": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 29
-    },
-    "286x237": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 28
-    },
-    "286x227": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 26
-    },
-    "286x218": {
-        "check_button": 7,
+    "700x126": {
+        "!button": 8,
+        "!combobox": 2,
         "form_labels": 7,
-        "title": 26
+        "entries": 8,
+        "!label": 17
     },
-    "286x212": {
-        "check_button": 7,
-        "form_labels": 7,
-        "title": 25
-    },
-    "286x210": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 24
-    },
-    "286x206": {
-        "check_button": 8,
-        "form_labels": 8,
-        "title": 23
-    },
-    "285x202": {
-        "check_button": 8,
-        "form_labels": 8,
-        "title": 23
-    },
-    "283x199": {
-        "check_button": 8,
+    "700x93": {
+        "!button": 8,
+        "!combobox": 8,
         "form_labels": 6,
-        "title": 23
-    },
-    "280x198": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 22
-    },
-    "276x198": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 21
-    },
-    "274x198": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 21
-    },
-    "271x199": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 21
-    },
-    "269x200": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 21
-    },
-    "266x201": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 21
-    },
-    "264x203": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 21
-    },
-    "263x206": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 22
-    },
-    "259x210": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 22
-    },
-    "256x215": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 23
-    },
-    "255x218": {
-        "check_button": 6,
-        "form_labels": 8,
-        "title": 23
-    },
-    "254x221": {
-        "check_button": 6,
-        "form_labels": 8,
-        "title": 23
-    },
-    "254x224": {
-        "check_button": 6,
-        "form_labels": 8,
-        "title": 24
-    },
-    "253x226": {
-        "check_button": 6,
-        "form_labels": 8,
-        "title": 25
-    },
-    "251x226": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 25
-    },
-    "249x226": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 25
-    },
-    "245x226": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 25
-    },
-    "242x227": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 25
-    },
-    "239x228": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 25
-    },
-    "236x228": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 25
-    },
-    "234x228": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 25
-    },
-    "232x228": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 25
-    },
-    "231x230": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 25
-    },
-    "231x232": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 25
-    },
-    "232x235": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 25
-    },
-    "233x239": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 25
-    },
-    "235x242": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 25
-    },
-    "235x248": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 26
-    },
-    "237x252": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 26
-    },
-    "238x255": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 27
-    },
-    "240x259": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 27
-    },
-    "241x262": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 28
-    },
-    "244x266": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 29
-    },
-    "248x269": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 29
-    },
-    "252x274": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 29
-    },
-    "257x278": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 30
-    },
-    "266x289": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 30
-    },
-    "278x304": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 31
-    },
-    "287x313": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 31
-    },
-    "300x329": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 34
-    },
-    "312x344": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 34
-    },
-    "328x363": {
-        "check_button": 7,
-        "form_labels": 8
-    },
-    "342x381": {
-        "check_button": 7,
-        "form_labels": 8
-    },
-    "347x394": {
-        "check_button": 7,
-        "form_labels": 8
-    },
-    "350x405": {
-        "check_button": 8,
-        "form_labels": 9
-    },
-    "354x419": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 44
-    },
-    "358x431": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 45
-    },
-    "361x443": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 47
-    },
-    "365x453": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 48
-    },
-    "370x464": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 50
-    },
-    "374x475": {
-        "check_button": 8,
-        "form_labels": 10,
-        "title": 50
-    },
-    "377x481": {
-        "check_button": 8,
-        "form_labels": 10,
-        "title": 52
-    },
-    "377x483": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 53
-    },
-    "377x485": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 54
-    },
-    "374x485": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 54
-    },
-    "368x481": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 54
-    },
-    "364x480": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 54
-    },
-    "361x480": {
-        "check_button": 8,
-        "form_labels": 10,
-        "title": 54
-    },
-    "358x480": {
-        "check_button": 8,
-        "form_labels": 10,
-        "title": 54
-    },
-    "352x480": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 54
-    },
-    "347x478": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 54
-    },
-    "340x476": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 54
-    },
-    "332x471": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 53
-    },
-    "326x468": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 53
-    },
-    "320x464": {
-        "check_button": 8,
-        "form_labels": 8,
-        "title": 52
-    },
-    "315x461": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 52
-    },
-    "311x457": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 52
-    },
-    "306x452": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 51
-    },
-    "300x446": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 51
-    },
-    "294x439": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 50
-    },
-    "288x429": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 50
-    },
-    "279x417": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 49
-    },
-    "269x405": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 48
-    },
-    "260x395": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 46
-    },
-    "252x383": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 45
-    },
-    "243x370": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 44
-    },
-    "233x359": {
-        "check_button": 6,
-        "form_labels": 6
-    },
-    "223x346": {
-        "check_button": 6,
-        "form_labels": 6
-    },
-    "212x333": {
-        "check_button": 5,
-        "form_labels": 6
-    },
-    "201x321": {
-        "check_button": 5,
-        "form_labels": 6
-    },
-    "193x310": {
-        "check_button": 5,
-        "form_labels": 5
-    },
-    "184x298": {
-        "check_button": 8,
-        "form_labels": 5
-    },
-    "179x285": {
-        "check_button": 4,
-        "form_labels": 8,
-        "title": 34
-    },
-    "175x273": {
-        "check_button": 4,
+        "entries": 4,
+        "!label": 14
+    },
+    "700x68": {
+        "!button": 4,
+        "!combobox": 1,
         "form_labels": 4,
-        "title": 32
+        "entries": 2,
+        "!label": 10
     },
-    "171x261": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 31
+    "700x47": {
+        "!button": 3,
+        "!combobox": 8,
+        "form_labels": 3,
+        "entries": 8,
+        "!label": 7
     },
-    "168x251": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 30
+    "700x37": {
+        "!button": 8,
+        "!combobox": 8,
+        "form_labels": 2,
+        "entries": 1,
+        "!label": 5
     },
-    "167x243": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 29
-    },
-    "166x237": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 27
-    },
-    "166x234": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 26
-    },
-    "166x231": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 26
-    },
-    "166x227": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 25
-    },
-    "166x225": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 25
-    },
-    "167x223": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 25
-    },
-    "170x223": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 25
-    },
-    "173x221": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 25
-    },
-    "180x220": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 25
-    },
-    "191x219": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 24
-    },
-    "206x219": {
-        "check_button": 4,
-        "form_labels": 4,
-        "title": 24
-    },
-    "221x219": {
-        "check_button": 4,
+    "700x42": {
+        "!button": 1,
+        "!combobox": 8,
         "form_labels": 8,
-        "title": 24
+        "entries": 1,
+        "!label": 3
     },
-    "236x222": {
-        "check_button": 8,
+    "700x71": {
+        "!button": 1,
+        "!combobox": 8,
+        "form_labels": 1,
+        "entries": 8,
+        "!label": 3
+    },
+    "700x130": {
+        "!button": 1,
+        "!combobox": 8,
+        "form_labels": 1,
+        "entries": 8,
+        "!label": 3
+    },
+    "700x196": {
+        "!button": 8,
+        "!combobox": 8,
+        "form_labels": 2,
+        "entries": 1,
+        "!label": 5
+    },
+    "700x289": {
+        "!button": 4,
+        "!combobox": 1,
         "form_labels": 5,
-        "title": 24
+        "entries": 3,
+        "!label": 10
     },
-    "248x228": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 24
-    },
-    "262x236": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 25
-    },
-    "278x247": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 25
-    },
-    "294x262": {
-        "check_button": 6,
+    "700x375": {
+        "!button": 6,
+        "!combobox": 2,
         "form_labels": 7,
-        "title": 25
+        "entries": 5,
+        "!label": 16
     },
-    "313x280": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 27
+    "700x432": {
+        "!button": 9,
+        "!combobox": 3,
+        "form_labels": 11,
+        "entries": 8,
+        "!label": 25
     },
-    "329x298": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 29
+    "700x461": {
+        "!button": 13,
+        "!combobox": 4,
+        "form_labels": 14,
+        "entries": 9,
+        "!label": 33
     },
-    "342x316": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 31
+    "700x474": {
+        "!button": 15,
+        "!combobox": 8,
+        "form_labels": 17,
+        "entries": 12,
+        "!label": 37
     },
-    "349x337": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 32
+    "700x486": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 18,
+        "entries": 12,
+        "!label": 40
     },
-    "354x357": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 35
+    "700x494": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 18,
+        "entries": 12,
+        "!label": 41
     },
-    "355x373": {
-        "check_button": 8,
-        "form_labels": 9
+    "700x503": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 19,
+        "entries": 13,
+        "!label": 43
     },
-    "355x387": {
-        "check_button": 8,
-        "form_labels": 9
+    "700x513": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 19,
+        "entries": 13,
+        "!label": 43
     },
-    "354x404": {
-        "check_button": 8,
-        "form_labels": 9
+    "700x520": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 19,
+        "entries": 13,
+        "!label": 43
     },
-    "350x419": {
-        "check_button": 8,
-        "form_labels": 9
+    "700x529": {
+        "!button": 16,
+        "!combobox": 6,
+        "form_labels": 19,
+        "entries": 13,
+        "!label": 44
     },
-    "344x428": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 45
+    "700x537": {
+        "!button": 16,
+        "!combobox": 6,
+        "form_labels": 19,
+        "entries": 13,
+        "!label": 45
     },
-    "333x431": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 47
+    "700x544": {
+        "!button": 16,
+        "!combobox": 6,
+        "form_labels": 21,
+        "entries": 14,
+        "!label": 46
     },
-    "305x431": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 48
+    "700x549": {
+        "!button": 16,
+        "!combobox": 6,
+        "form_labels": 21,
+        "entries": 14,
+        "!label": 47
     },
-    "277x426": {
-        "check_button": 8,
-        "form_labels": 8,
-        "title": 48
+    "700x555": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 14,
+        "!label": 52
     },
-    "258x424": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 48
+    "700x565": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 47
     },
-    "245x424": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 47
+    "700x576": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 48
     },
-    "240x425": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 47
+    "700x588": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 49
     },
-    "240x427": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 47
+    "700x595": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 50
     },
-    "251x430": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 47
+    "700x603": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 16,
+        "!label": 51
     },
-    "271x434": {
-        "check_button": 5,
-        "form_labels": 6,
-        "title": 47
+    "700x609": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 16,
+        "!label": 53
     },
-    "305x442": {
-        "check_button": 6,
-        "form_labels": 6,
-        "title": 48
+    "700x606": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 16,
+        "!label": 53
     },
-    "333x453": {
-        "check_button": 6,
-        "form_labels": 7,
-        "title": 48
+    "700x591": {
+        "!button": 16,
+        "!combobox": 7,
+        "form_labels": 21,
+        "entries": 16,
+        "!label": 53
     },
-    "358x464": {
-        "check_button": 7,
-        "form_labels": 8,
-        "title": 49
+    "700x546": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 50
     },
-    "372x471": {
-        "check_button": 8,
-        "form_labels": 8,
-        "title": 50
+    "700x559": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 48
     },
-    "380x474": {
-        "check_button": 8,
-        "form_labels": 9,
-        "title": 52
+    "700x567": {
+        "!button": 16,
+        "!combobox": 6,
+        "form_labels": 21,
+        "entries": 15,
+        "!label": 47
     },
-    "385x475": {
-        "check_button": 8,
-        "form_labels": 10,
-        "title": 52
+    "706x700": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 61
     },
-    "390x475": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 53
+    "717x705": {
+        "!button": 17,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 61
     },
-    "394x475": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 53
+    "728x712": {
+        "!button": 17,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 61
     },
-    "396x474": {
-        "check_button": 9,
-        "form_labels": 10,
-        "title": 53
+    "738x720": {
+        "!button": 17,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 62
+    },
+    "751x731": {
+        "!button": 17,
+        "!combobox": 8,
+        "form_labels": 22,
+        "entries": 19,
+        "!label": 63
+    },
+    "769x743": {
+        "!button": 17,
+        "!combobox": 8,
+        "form_labels": 22,
+        "entries": 19,
+        "!label": 63
+    },
+    "791x758": {
+        "!button": 18,
+        "!combobox": 8,
+        "form_labels": 22,
+        "entries": 19,
+        "!label": 64
+    },
+    "819x775": {
+        "!button": 18,
+        "!combobox": 8,
+        "form_labels": 23,
+        "entries": 19,
+        "!label": 65
+    },
+    "853x792": {
+        "!button": 19,
+        "!combobox": 9,
+        "form_labels": 24,
+        "entries": 19,
+        "!label": 67
+    },
+    "887x808": {
+        "!button": 19,
+        "!combobox": 9,
+        "form_labels": 24,
+        "entries": 21,
+        "!label": 68
+    },
+    "912x822": {
+        "!button": 20,
+        "!combobox": 10,
+        "form_labels": 25,
+        "entries": 21,
+        "!label": 70
+    },
+    "936x832": {
+        "!button": 21,
+        "!combobox": 10,
+        "form_labels": 26,
+        "entries": 22,
+        "!label": 71
+    },
+    "962x840": {
+        "!button": 22,
+        "!combobox": 10,
+        "form_labels": 27,
+        "entries": 22,
+        "!label": 73
+    },
+    "985x846": {
+        "!button": 22,
+        "!combobox": 10,
+        "form_labels": 28,
+        "entries": 23,
+        "!label": 74
+    },
+    "999x848": {
+        "!button": 23,
+        "!combobox": 11,
+        "form_labels": 28,
+        "entries": 23,
+        "!label": 74
+    },
+    "995x846": {
+        "!button": 24,
+        "!combobox": 11,
+        "form_labels": 29,
+        "entries": 23,
+        "!label": 75
+    },
+    "974x836": {
+        "!button": 24,
+        "!combobox": 11,
+        "form_labels": 30,
+        "entries": 23,
+        "!label": 75
+    },
+    "943x827": {
+        "!button": 24,
+        "!combobox": 11,
+        "form_labels": 30,
+        "entries": 23,
+        "!label": 75
+    },
+    "916x822": {
+        "!button": 23,
+        "!combobox": 11,
+        "form_labels": 29,
+        "entries": 23,
+        "!label": 74
+    },
+    "889x819": {
+        "!button": 23,
+        "!combobox": 10,
+        "form_labels": 28,
+        "entries": 22,
+        "!label": 74
+    },
+    "864x816": {
+        "!button": 22,
+        "!combobox": 10,
+        "form_labels": 27,
+        "entries": 22,
+        "!label": 73
+    },
+    "840x810": {
+        "!button": 21,
+        "!combobox": 10,
+        "form_labels": 27,
+        "entries": 22,
+        "!label": 72
+    },
+    "836x808": {
+        "!button": 21,
+        "!combobox": 10,
+        "form_labels": 26,
+        "entries": 22,
+        "!label": 72
+    },
+    "700x710": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 61
+    },
+    "700x714": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 62
+    },
+    "700x723": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 63
+    },
+    "700x719": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 64
+    },
+    "700x676": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 18,
+        "!label": 60
+    },
+    "700x713": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 63
+    },
+    "700x698": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 62
     }
 }

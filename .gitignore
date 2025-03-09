@@ -18,3 +18,4 @@ temporary/
 *.vscode
 .vscode
 workspace
+*/logs
