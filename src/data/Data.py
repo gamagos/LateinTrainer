@@ -1375,3 +1375,14 @@ class Data:
                 "Ablativ_Plural": "ipsis",
             }
         }
+        self.quis_quis_quid = {
+           "quis_maskulinum": {
+               
+           },
+            "quis_femininum": {
+                
+            },
+            "quid":{
+                
+            }
+        }
