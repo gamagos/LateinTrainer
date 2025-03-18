@@ -47,7 +47,7 @@
         "!combobox": 8,
         "form_labels": 21,
         "entries": 23,
-        "!label": 63
+        "!label": 62
     },
     "700x706": {
         "!button": 16,
@@ -61,7 +61,7 @@
         "!combobox": 8,
         "form_labels": 21,
         "entries": 23,
-        "!label": 58
+        "!label": 62
     },
     "700x712": {
         "!button": 16,
@@ -199,7 +199,7 @@
         "!combobox": 8,
         "form_labels": 21,
         "entries": 19,
-        "!label": 63
+        "!label": 19
     },
     "700x684": {
         "!button": 16,
@@ -287,10 +287,10 @@
     },
     "700x722": {
         "!button": 16,
-        "!combobox": 7,
+        "!combobox": 8,
         "form_labels": 21,
         "entries": 18,
-        "!label": 58
+        "!label": 63
     },
     "700x746": {
         "!button": 16,
@@ -385,10 +385,10 @@
     },
     "700x729": {
         "!button": 16,
-        "!combobox": 9,
+        "!combobox": 8,
         "form_labels": 21,
         "entries": 19,
-        "!label": 67
+        "!label": 64
     },
     "700x695": {
         "!button": 16,
@@ -1033,5 +1033,54 @@
         "form_labels": 21,
         "entries": 19,
         "!label": 62
+    },
+    "700x705": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 62
+    },
+    "700x726": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 65
+    },
+    "700x730": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 65
+    },
+    "700x733": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 65
+    },
+    "700x736": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 65
+    },
+    "700x732": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 64
+    },
+    "700x689": {
+        "!button": 16,
+        "!combobox": 8,
+        "form_labels": 21,
+        "entries": 19,
+        "!label": 61
     }
 }

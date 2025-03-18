@@ -18,7 +18,6 @@ class GUI:
     def __init__( self, root ):
         self.debug = True         
         self.tests = False
-        self.last_cache_clear = 0
         self.project_path = getattr( sys, "_MEIPASS", os.path.dirname( os.path.dirname( os.path.abspath( __file__ ) ) ) )
         self.settings_location = os.path.join( self.project_path, "data", "settings.csv" )
         self.font_cache_location = os.path.join( self.project_path, "data", "font_cache.json" )
@@ -26,7 +25,7 @@ class GUI:
         self.FileAndChacheHandler = fileAndCacheHandler( self )
         self.font_cache = self.FileAndChacheHandler.load_cache()
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
-        version = "v1.1.0"
+        version = "v1.1.1"
         self.data = Data()
         self.form_labels = []
         self.entries = []
@@ -36,6 +35,7 @@ class GUI:
         self.root_prev_width = self.root_width
         self.root_height = 700
         self.root_prev_height = self.root_height
+        self.last_cache_clear = 0
         
         self.first_form_label = tk.Label( text = "this is only a placeholder label for adjust_form_label_font_size()" )
         
@@ -187,6 +187,7 @@ class GUI:
             self.user_entries[ case_or_tempus ] = self.entries[ i ]
             
         self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
+        self.handle_resize()
     
     
     def check_answers( self ):
@@ -254,7 +255,8 @@ class GUI:
                 
             self.user_entries = {}
             self.results = {}
-            self.form_labels = []    
+            self.form_labels = []
+            self.entries = []
             self.populate_entries()
           
                     
@@ -398,7 +400,7 @@ class GUI:
         new_height = canvas_height - 2
         
         self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
-        self.canvas.config(scrollregion = self.canvas.bbox( "all" ) )
+        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
             
             
     def get_refresh_rate( self ):
