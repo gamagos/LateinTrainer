@@ -25,7 +25,7 @@ class GUI:
         self.FileAndChacheHandler = fileAndCacheHandler( self )
         self.font_cache = self.FileAndChacheHandler.load_cache()
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
-        version = "v1.1.1"
+        version = "v1.1.0"
         self.data = Data()
         self.form_labels = []
         self.entries = []
@@ -42,7 +42,6 @@ class GUI:
         self.declensions_nouns = self.data.declensions
         self.conjugations = self.data.conjugations
         self.declensions_adjectives = self.data.declensions_adjectives
-        #pronouns
         self.hic_haec_hoc = self.data.hic_haec_hoc
         self.qui_quae_quod = self.data.qui_quae_quod
         self.ille_illa_illud = self.data.ille_illa_illud
@@ -96,16 +95,20 @@ class GUI:
         self.previous_form = self.selected_option.get()
         self.user_entries = {}
         self.results = {}
+        self.frame_initialized_correctly = False
         
         self.FileAndChacheHandler.get_settings()
         self.form_select()
         self.debug_print( "Form was selected" )
         self.create_widgets()
         self.adjust_canvas_window()
-        self.debug_print( "Frame was filled" ) 
+        self.debug_print( "Frame was filled" )
         
         self.canvas.bind_all( "<MouseWheel>", self.on_mouse_wheel )
         self.canvas.bind_all( "<Shift-MouseWheel>", self.on_shift_mouse_wheel )
+        self.frame_initialized_correctly = True
+        
+        self.handle_resize()
         
         
     def form_select( self ):
@@ -230,7 +233,7 @@ class GUI:
         self.check_button.config( text = "Retry", command = self.retry )
     
     
-    def retry(self):
+    def retry( self ):
         for case, correct_answer in self.current_forms.items():
             
             if case == "nominativ_singular" or self.results.get( case, True ):
@@ -239,7 +242,7 @@ class GUI:
             self.user_entries[ case ].config( fg = "black", state = "normal" )
             self.user_entries[ case ].delete( 0, tk.END )
         
-        self.check_button.config(text="Check", command=self.check_answers)
+        self.check_button.config(text = "Check", command = self.check_answers)
     
 
     def next_class( self ):
@@ -319,8 +322,9 @@ class GUI:
     def handle_resize( self ):
         self.resizing = True
         self.root.update_idletasks()
+        self.get_root_size()
         
-        self.adjust_font_size( self.check_button, 0.72, 0.72 )
+        self.adjust_font_size( self.title, font_weight = "bold" )
         self.adjust_font_size( self.combobox_select_form, 0.83, 0.83 )
             
         for i in range( len( self.form_labels ) ):
@@ -329,7 +333,7 @@ class GUI:
                 self.adjust_font_size( self.entries[ i ], 0.7, 0.7, "entryplaceholder", element_name = "entries" )
             except Exception as e:
                 self.debug_print( f"Error adjusting form labels or entries: { e }" )
-        self.adjust_font_size( self.title, font_weight = "bold" )
+        self.adjust_font_size( self.check_button, 0.72, 0.72 )
         self.adjust_canvas_window()
             
         self.root_prev_width = self.root_width
@@ -355,7 +359,8 @@ class GUI:
         except Exception as e:
             self.debug_print( f"Error in adjusting font size: { e }" )
             return font_size
-            
+        
+        self.root.update_idletasks()
         widget_width = widget.winfo_width()
         widget_height = widget.winfo_height()
         max_width = int( widget_width * max_width_ratio )
@@ -369,10 +374,13 @@ class GUI:
         width_ratio = max_width/text_width
         height_ratio = max_height/text_height
         ratio = min( width_ratio, height_ratio )
+        
         if 0.8 < ratio and ratio < 1.1:
+            self.debug_print( f"ratio of { element_name } too small" )
             return font_size
         
         font_size = int( font_size * ratio )
+        self.debug_print( widget_width, widget_height, element_name )
         
         while True:
             temp_font = font.Font( family = "Arial", size = font_size, weight = font_weight )
@@ -396,8 +404,8 @@ class GUI:
         canvas_width = self.canvas.winfo_width()
         canvas_height = self.canvas.winfo_height()
         
-        new_width = canvas_width - 2      
-        new_height = canvas_height - 2
+        new_width = canvas_width - 4
+        new_height = canvas_height - 4
         
         self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
@@ -441,10 +449,19 @@ class GUI:
         return "\n".join( result )
             
             
-    def debug_print( self, toPrint ):
+    def debug_print( self, *toPrint ):
         time = str( datetime.now() ) + ": "
         if ( self.debug == True ):
-            print( time, toPrint )
+            formatted_toPrints = []
+            for arg in toPrint:
+                if isinstance( arg, str ) and  (arg.startswith( "'" ) and arg.endswith( "'" ) ):
+                    formatted_toPrints.append(arg)
+                elif isinstance( arg, str ) and ( arg.startswith( "(" ) and arg.endswith( ")" ) ):
+                    formatted_toPrints.append( arg )
+                else:
+                    formatted_toPrints.append( str( arg ) )
+        output = " ".join( formatted_toPrints )
+        print( time, output )
             
     def enable_debug( self, event ):
         time = str( datetime.now() ) + ": "
@@ -471,7 +488,7 @@ class GUI:
             self.root.after( 1900, info_Label.place_forget() )
             with open( self.settings_location, "r+" ) as file:
                 settings = file.readlines()
-                settings[0] = "debug=False\n"
-                file.seek(0)
+                settings[ 0 ] = "debug=False\n"
+                file.seek( 0 )
                 file.writelines( settings )
                 file.truncate()

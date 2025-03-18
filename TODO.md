@@ -8,6 +8,7 @@ Fiaults To do List
 -make UI look nicer
 -make log file
 -optimized code
+-make debug print tell where error comes from
 
 ------------------------------------
 Schiesslers To Do List
