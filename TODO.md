@@ -9,6 +9,6 @@ Fiaults To do List
 -make log file
 -optimized code
 -make debug print tell where error comes from
-
+-make the exe with nukita or some better compiler
 ------------------------------------
 Schiesslers To Do List

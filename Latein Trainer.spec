@@ -14,7 +14,7 @@ a = Analysis(
     "numpy.distutils",
     "numpy.matlib"],
     noarchive=False,
-    optimize=2,
+    optimize=0,
 )
 pyz = PYZ(a.pure)
 
@@ -40,7 +40,6 @@ coll = COLLECT(
     exe,
     a.binaries,
     a.datas,
-    strip=True,
     upx=True,
     upx_exclude=[],
     name='Latein Trainer',
