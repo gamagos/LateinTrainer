@@ -769,8 +769,6 @@ class Data:
                 "3._Person_Plural": "rexerint",
             },
             "Konsonantische Konjugation PPA": {
-                "Singular": "regens",
-                "Plural": "regentes",
                 "Nominativ_Singular": "regens",
                 "Genitiv_Singular": "regentis",
                 "Dativ_Singular": "regenti",
@@ -784,8 +782,6 @@ class Data:
 
             },
             "Konsonantische Konjugation PPP": {
-                "Singular": "rectus",
-                "Plural": "recti",
                 "Nominativ_Singular": "rectus",
                 "Genitiv_Singular": "recti",
                 "Dativ_Singular": "recto",
@@ -798,8 +794,6 @@ class Data:
                 "Ablativ_Plural": "rectis",
             },
             "Konsonantische Konjugation PFA": {
-                "Singular": "recturus",
-                "Plural": "recturi",
                 "Nominativ_Singular": "recturus",
                 "Genitiv_Singular": "recturi",
                 "Dativ_Singular": "recturo",

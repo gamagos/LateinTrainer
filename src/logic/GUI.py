@@ -182,7 +182,7 @@ class GUI:
             
             self.entries.append( tk.Entry( self.forms_frame ) )
             
-            if case_or_tempus == "Nominativ_Singular":
+            if case_or_tempus == "Nominativ_Singular" or case_or_tempus == "1._Person_Singular":
                 self.entries[ i ].insert( 0, correct_answer )
                 self.entries[ i ].config( state = "disabled", disabledforeground = "gray" )
                 
