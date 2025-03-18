@@ -1,6 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
 a = Analysis(
     ['src\\main.py'],
     pathex=[],
@@ -10,12 +9,12 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=["PyQt5", "PySide2", "django", "email", "pytest", "asyncio", "cryptography", "sqlite3", "xml", "ssl","numpy.testing",
-    "numpy.f2py",  # Fortran stuff you probably don't need
+    excludes=["PyQt5", "PySide2", "django", "email", "pytest", "asyncio", "cryptography", "sqlite3", "xml", "ssl", "numpy.testing",
+    "numpy.f2py",
     "numpy.distutils",
     "numpy.matlib"],
     noarchive=False,
-    optimize=0,
+    optimize=2,
 )
 pyz = PYZ(a.pure)
 
@@ -41,7 +40,7 @@ coll = COLLECT(
     exe,
     a.binaries,
     a.datas,
-    strip=False,
+    strip=True,
     upx=True,
     upx_exclude=[],
     name='Latein Trainer',
