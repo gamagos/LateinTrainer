@@ -12,13 +12,13 @@ class fileAndCacheHandler:
                 
         
     def get_settings( self ):    
-        if ( os.path.getsize( self.gui_instance.settings_location ) == 0 ):
-            with open( self.gui_instance.settings_location, "w" ) as file:
-                shutil.copyfile( self.gui_instance.settings_default_location, self.gui_instance.settings_location )
+        if  not os.path.exists( self.gui_instance.settings_path ) or os.path.getsize( self.gui_instance.settings_path ) == 0:
+            with open( self.gui_instance.settings_path, "w" ) as file:
+                shutil.copyfile( self.gui_instance.settings_default_path, self.gui_instance.settings_path )
                 print( "settings were restored(empty)" )
         else:
             try:
-                with open( self.gui_instance.settings_location, "r" ) as file:
+                with open( self.gui_instance.settings_path, "r" ) as file:
                     contents = file.readlines()
                     self.gui_instance.debug = "True" == contents[ 0 ].split( "=" )[ 1 ].strip()
                     self.gui_instance.tests = "True" == contents[ 1 ].split( "=" )[ 1 ].strip()
@@ -28,13 +28,13 @@ class fileAndCacheHandler:
                     self.gui_instance.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in contents ] ) + "\n" )
                                   
             except Exception as e:
-                with open( self.gui_instance.settings_location, "w" ) as file:
-                    shutil.copyfile( self.gui_instance.settings_default_location, self.gui_instance.settings_location )
+                with open( self.gui_instance.settings_path, "w" ) as file:
+                    shutil.copyfile( self.gui_instance.settings_default_path, self.gui_instance.settings_path )
                     self.gui_instance.debug_print( f"settings were restored(error in settings file): { e }" )
                     
                     
     def save_current_form( self ):
-        with open( self.gui_instance.settings_location, "r+" ) as file:
+        with open( self.gui_instance.settings_path, "r+" ) as file:
                 contents = file.readlines()
                 contents[ 2 ] = f"selected_option={ self.gui_instance.selected_option.get() }\n"
                 file.seek( 0 )
@@ -43,13 +43,13 @@ class fileAndCacheHandler:
                     
             
     def load_cache( self ):
-        if os.path.exists( self.gui_instance.font_cache_location ):
+        if os.path.exists( self.gui_instance.font_cache_path ):
             try:
-                with open( self.gui_instance.font_cache_location,"r" ) as file:
+                with open( self.gui_instance.font_cache_path,"r" ) as file:
                     return json.load( file )
             except Exception as e:
                 self.gui_instance.debug_print( f"load_cache: Error reading font_cache.json, file was reset: { e }" )
-                with open( self.gui_instance.font_cache_location, "w" ) as file:
+                with open( self.gui_instance.font_cache_path, "w" ) as file:
                     json.dump( {}, file, indent = 4 )
                 return {}
         else:
@@ -67,15 +67,15 @@ class fileAndCacheHandler:
     
     
     def save_cache( self ):
-        with open( self.gui_instance.font_cache_location ,"w" ) as file:
+        with open( self.gui_instance.font_cache_path ,"w" ) as file:
             json.dump( self.gui_instance.font_cache, file, indent = 4 )
             
             
     def clear_cache( self ):
-        with open( self.gui_instance.font_cache_location, "w" ) as file:
+        with open( self.gui_instance.font_cache_path, "w" ) as file:
             json.dump( {}, file, indent = 4 )
         
-        with open( self.gui_instance.settings_location, "r+" ) as file:
+        with open( self.gui_instance.settings_path, "r+" ) as file:
             contents = file.readlines()
             contents[ 3 ] = f"last_clear_cache={ time.time() }\n"
             file.truncate( 0 )

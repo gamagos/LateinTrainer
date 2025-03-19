@@ -13,32 +13,33 @@ import win32con
 from data.Data import Data
 from logic.fileAndCacheHandler import fileAndCacheHandler
 
+VERSION = "v1.1.0"
 
 class GUI:
     def __init__( self, root ):
-        self.debug = True         
-        self.tests = False
+        #paths
         self.project_path = getattr( sys, "_MEIPASS", os.path.dirname( os.path.dirname( os.path.abspath( __file__ ) ) ) )
-        self.settings_location = os.path.join( self.project_path, "data", "settings.csv" )
-        self.font_cache_location = os.path.join( self.project_path, "data", "font_cache.json" )
-        self.settings_default_location = os.path.join( self.project_path, "data", "default_settings.csv" )
-        self.FileAndChacheHandler = fileAndCacheHandler( self )
-        self.font_cache = self.FileAndChacheHandler.load_cache()
+        self.font_cache_path = os.path.join( self.project_path, "data", "font_cache.json" )
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
-        version = "v1.1.0"
-        self.data = Data()
-        self.form_labels = []
-        self.entries = []
-        self.last_resize_time = 0
+        self.settings_default_path = os.path.join( self.project_path, "data", "default_settings.csv" )
+        self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
+        
+        #settings
+        self.debug = True      
+        self.tests = False
+        self.selected_option = tk.StringVar()
+        
+        #UI State
+        self.frame_initialized_correctly = False
         self.resizing = False
+        self.last_resize_time = 0
         self.root_width = 700
         self.root_prev_width = self.root_width
         self.root_height = 700
         self.root_prev_height = self.root_height
-        self.last_cache_clear = 0
         
-        self.first_form_label = tk.Label( text = "this is only a placeholder label for adjust_form_label_font_size()" )
-        
+        #Data
+        self.data = Data()
         self.declensions_nouns = self.data.declensions
         self.conjugations = self.data.conjugations
         self.declensions_adjectives = self.data.declensions_adjectives
@@ -46,9 +47,29 @@ class GUI:
         self.qui_quae_quod = self.data.qui_quae_quod
         self.ille_illa_illud = self.data.ille_illa_illud
         self.ipse_ipsa_ipsum = self.data.ipse_ipsa_ipsum
+        self.declension_forms = list( self.declensions_nouns.keys() )
+        self.conjugation_forms = list( self.conjugations.keys() )
+        self.declensions_adjectives_forms = list( self.declensions_adjectives.keys() )
+        self.hic_haec_hoc_forms = list( self.hic_haec_hoc.keys() )
+        self.qui_quae_quod_forms = list( self.qui_quae_quod.keys() )
+        self.ille_illa_illud_forms = list( self.ille_illa_illud.keys() )
+        self.ipse_ipsa_ipsum_forms = list( self.ipse_ipsa_ipsum.keys() )
+        random.shuffle( self.declension_forms )
+        random.shuffle( self.conjugation_forms )
+        random.shuffle( self.hic_haec_hoc_forms )
+        random.shuffle( self.qui_quae_quod_forms )
+        random.shuffle( self.ille_illa_illud_forms )
+        random.shuffle( self.ipse_ipsa_ipsum_forms )                        
+        self.current_class_index = 0
+        self.user_entries = {}
+        self.results = {}
+        
+        #UI Elements
+        self.form_labels = []
+        self.entries = []
         
         self.root = root
-        self.root.title( "Latin Trainer " + version )
+        self.root.title( "Latin Trainer " + VERSION )
         self.root.bind( "<F3>", self.enable_debug )
         self.root.bind( "<Configure>", self.on_resize )
         self.root.iconbitmap( self.icon_path )
@@ -71,35 +92,19 @@ class GUI:
         self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
         
-        self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
-
-        self.ORIGINAL_SCALE = 1.5 
-        self.ui_scale = self.ORIGINAL_SCALE  
-        
+        #Cache and Performance
+        self.FileAndChacheHandler = fileAndCacheHandler( self )
+        self.font_cache = self.FileAndChacheHandler.load_cache()
+        self.last_cache_clear = 0
         self.frameRate = self.get_refresh_rate()
         self.frameTime = 1 / self.frameRate
         
-        self.declension_forms = list( self.declensions_nouns.keys() )
-        self.conjugation_forms = list( self.conjugations.keys() )
-        self.declensions_adjectives_forms = list( self.declensions_adjectives.keys() )
-        self.hic_haec_hoc_forms = list( self.hic_haec_hoc.keys() )
-        self.qui_quae_quod_forms = list( self.qui_quae_quod.keys() )
-        self.ille_illa_illud_forms = list( self.ille_illa_illud.keys() )
-        self.ipse_ipsa_ipsum_forms = list( self.ipse_ipsa_ipsum.keys() )
-        random.shuffle( self.declension_forms )
-        random.shuffle( self.conjugation_forms )
-        random.shuffle( self.hic_haec_hoc_forms )
-        random.shuffle( self.qui_quae_quod_forms )                                          
-        self.current_class_index = 0
-        self.selected_option = tk.StringVar()
-        self.previous_form = self.selected_option.get()
-        self.user_entries = {}
-        self.results = {}
-        self.frame_initialized_correctly = False
+        #UI initialisation methods
+        self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
         
         self.FileAndChacheHandler.get_settings()
+        self.previous_form = self.selected_option.get()
         self.form_select()
-        self.debug_print( "Form was selected" )
         self.create_widgets()
         self.adjust_canvas_window()
         self.debug_print( "Frame was filled" )
@@ -134,7 +139,7 @@ class GUI:
             self.curent_word_type_amount_of_forms = len( forms_list )
         else:
             messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
-            shutil.copyfile( self.settings_default_location, self.settings_location )
+            shutil.copyfile( self.settings_default_path, self.settings_path )
             self.FileAndChacheHandler.get_settings()
             self.form_select()
 
@@ -159,7 +164,7 @@ class GUI:
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
         
         self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers )
-        self.check_button.place( relx = 0.45, rely = 0.88, relheight = 0.08, relwidth = 0.24 )
+        self.check_button.place( relx = 0.42, rely = 0.88, relheight = 0.08, relwidth = 0.24 )
         
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ), relief = "flat" )
         
@@ -177,7 +182,7 @@ class GUI:
                 separation_form_tabel += 1
                 
             separation_form_tabel += 1
-            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), font = ( "Arial", int( 14 * self.ui_scale ) ), anchor = "sw" ) )
+            self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), anchor = "w" ) )
             self.form_labels[ i ].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
             self.entries.append( tk.Entry( self.forms_frame ) )
@@ -188,6 +193,11 @@ class GUI:
                 
             self.entries[ i ].place( relx = 0.42, rely = 0.09 * separation_form_tabel, relwidth = 0.58, relheight = 0.09 )
             self.user_entries[ case_or_tempus ] = self.entries[ i ]
+            
+        if list( self.current_forms.keys() )[ 0 ] == "Nominativ_Singular":
+            self.check_button.place( relx = 0.45, rely = 0.87, relheight = 0.08, relwidth = 0.24 )
+        else:
+            self.check_button.place( relx = 0.42, rely = 0.62, relheight = 0.08, relwidth = 0.24 )
             
         self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
         self.handle_resize()
@@ -460,8 +470,8 @@ class GUI:
                     formatted_toPrints.append( arg )
                 else:
                     formatted_toPrints.append( str( arg ) )
-        output = " ".join( formatted_toPrints )
-        print( time, output )
+            output = " ".join( formatted_toPrints )
+            print( time, output )
             
     def enable_debug( self, event ):
         time = str( datetime.now() ) + ": "
@@ -472,7 +482,7 @@ class GUI:
             info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
             self.root.after( 1900, info_Label.place_forget() )
-            with open( self.settings_location, "r+" ) as file:
+            with open( self.settings_path, "r+" ) as file:
                 settings = file.readlines()
                 settings[ 0 ] = "debug=True\n"
                 file.seek( 0 )
@@ -486,7 +496,7 @@ class GUI:
             info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
             self.root.after( 1900, info_Label.place_forget() )
-            with open( self.settings_location, "r+" ) as file:
+            with open( self.settings_path, "r+" ) as file:
                 settings = file.readlines()
                 settings[ 0 ] = "debug=False\n"
                 file.seek( 0 )

@@ -1,3 +1,4 @@
+#this is Sebastian Fiaults progress log on the project
         11.03.2025
 -Fixed UI elements not resizing on Startup leading to UI looking crappy before resize
 -Fixed a bug that caused the program to crash when you changed to the next class
@@ -7,4 +8,6 @@
 -made debug print work normally
 
         19.03.2025
--
+-made button appear higher when there are less forms to close distance
+-sorted variables in __init__()
+-removed redundant code
