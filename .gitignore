@@ -32,4 +32,4 @@ temporary/
 *.vscode
 .vscode
 workspace
-wrong_answers.json
+wrong_answers_per_case.json
