@@ -13,13 +13,14 @@ import win32con
 from data.Data import Data
 from logic.fileAndCacheHandler import fileAndCacheHandler
 
-VERSION = "v1.1.0"
+VERSION = "v1.2.0"
 
 class GUI:
     def __init__( self, root ):
         #paths
         self.project_path = getattr( sys, "_MEIPASS", os.path.dirname( os.path.dirname( os.path.abspath( __file__ ) ) ) )
         self.font_cache_path = os.path.join( self.project_path, "data", "font_cache.json" )
+        self.wrong_answers_per_case_path = os.path.join( self.project_path, "data", "wrong_answers_per_case.json")
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
         self.settings_default_path = os.path.join( self.project_path, "data", "default_settings.csv" )
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
@@ -63,6 +64,8 @@ class GUI:
         self.current_class_index = 0
         self.user_entries = {}
         self.results = {}
+        self.answers_wrong = 0
+        self.wrong_answers_per_case = {}
         
         #UI Elements
         self.form_labels = []
@@ -71,7 +74,9 @@ class GUI:
         self.root = root
         self.root.title( "Latin Trainer " + VERSION )
         self.root.bind( "<F3>", self.enable_debug )
+        self.root.bind( "<F5>", self.enable_tests )
         self.root.bind( "<Configure>", self.on_resize )
+        self.root.bind( "<Alt-F4>", self.on_close )
         self.root.iconbitmap( self.icon_path )
         self.root.protocol( "WM_DELETE_WINDOW", self.on_close )
         self.debug_print( "Root was initialized" )
@@ -205,6 +210,7 @@ class GUI:
     
     def check_answers( self ):
         wrong = False
+        self.wrong_answers_per_case[ f"{ self.current_key }" ] = self.answers_wrong
         
         for case_or_tempus, correct_answer in self.current_forms.items():
             
@@ -217,13 +223,17 @@ class GUI:
                 self.results[ case_or_tempus ] = True 
             else:
                 wrong = True
+                self.answers_wrong += 1
                 self.user_entries[ case_or_tempus ].config( fg = "red", state = "disabled", disabledforeground = "red" )
                 self.results[ case_or_tempus ] = False
-        
+                
+        self.wrong_answers_per_case[ f"{ self.current_key }" ] += self.answers_wrong
         if wrong:
             self.check_button.config( text = "Show Solutions", command = self.show_solutions ) 
         else:
+            self.answers_wrong = 0
             self.next_class()
+            self.FileAndChacheHandler.save_settings()
     
     
     def show_solutions( self ):
@@ -282,7 +292,7 @@ class GUI:
         self.current_class_index = 0
         if self.previous_form != self.selected_option.get():
             self.next_class()
-            self.FileAndChacheHandler.save_current_form()
+            self.FileAndChacheHandler.save_settings()
 
 
     def on_mouse_wheel( self, event ):
@@ -303,14 +313,16 @@ class GUI:
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
         
         
-    def on_close( self ):
+    def on_close( self, event=None ):
         if time.time() - self.last_cache_clear < ( 30 * 24 * 60 * 60 ):
             self.debug_print( "save and exit(on_close)" )
             self.debug_print( f"time till next clear: { ( ( 30 * 24 * 60 * 60 ) - ( time.time() - self.last_cache_clear ) ) / ( 24 * 60 * 60 ) } days" )
             self.FileAndChacheHandler.save_cache()
+            self.FileAndChacheHandler.save_settings()
         else:
             self.debug_print( "chache got cleared" )
             self.FileAndChacheHandler.clear_cache()
+            self.FileAndChacheHandler.save_settings()
         self.root.quit()
     
     
@@ -340,7 +352,7 @@ class GUI:
         for i in range( len( self.form_labels ) ):
             try:
                 self.adjust_font_size( self.form_labels[ i ], 1, 1, self.form_labels[ 0 ].cget( "text" ), element_name = "form_labels" )
-                self.adjust_font_size( self.entries[ i ], 0.7, 0.7, "entryplaceholder", element_name = "entries" )
+                self.adjust_font_size( self.entries[ i ], 0.75, 0.75, "entryplaceholder", element_name = "entries" )
             except Exception as e:
                 self.debug_print( f"Error adjusting form labels or entries: { e }" )
         self.adjust_font_size( self.check_button, 0.72, 0.72 )
@@ -353,7 +365,7 @@ class GUI:
         
         
     def adjust_font_size( self, widget, max_width_ratio = 0.72, max_height_ratio = 0.72, element_text = None, font_weight = "normal", element_name = None ):
-        cached_font_size = self.FileAndChacheHandler.get_font_size( element_name )
+        cached_font_size = self.FileAndChacheHandler.get_cached_font_size( element_name )
         
         if element_name is None:
             element_name = widget.winfo_name()
@@ -481,24 +493,33 @@ class GUI:
             info_Label = tk.Label( self.main_frame, text = "Debug on", font = ( "Arial", 25, "bold" ) )
             info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
-            self.root.after( 1900, info_Label.place_forget() )
-            with open( self.settings_path, "r+" ) as file:
-                settings = file.readlines()
-                settings[ 0 ] = "debug=True\n"
-                file.seek( 0 )
-                file.writelines( settings )
-                file.truncate()
-                
+            self.root.after( 1000, info_Label.place_forget() )
+            self.FileAndChacheHandler.save_settings()              
         else:
             self.debug = False
             print( time, "Debug off" )
             info_Label = tk.Label( self.main_frame, text = "Debug off", font = ( "Arial", 25, "bold" ) )
             info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
-            self.root.after( 1900, info_Label.place_forget() )
-            with open( self.settings_path, "r+" ) as file:
-                settings = file.readlines()
-                settings[ 0 ] = "debug=False\n"
-                file.seek( 0 )
-                file.writelines( settings )
-                file.truncate()
+            self.root.after( 1000, info_Label.place_forget() )
+            self.FileAndChacheHandler.save_settings()
+                
+                
+    def enable_tests( self, event ):
+        time = str( datetime.now() ) + ": "
+        if self.tests == False:
+            self.tests = True
+            print( time, "Tests on" )
+            info_Label = tk.Label( self.main_frame, text = "Tests on", font = ( "Arial", 25, "bold" ) )
+            info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
+            self.root.update()
+            self.root.after( 1000, info_Label.place_forget() )
+            self.FileAndChacheHandler.save_settings()                
+        else:
+            self.tests = False
+            print( time, "Tests off" )
+            info_Label = tk.Label( self.main_frame, text = "Tests off", font = ( "Arial", 25, "bold" ) )
+            info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
+            self.root.update()
+            self.root.after( 1000, info_Label.place_forget() )
+            self.FileAndChacheHandler.save_settings()

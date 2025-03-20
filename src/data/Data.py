@@ -586,7 +586,7 @@ class Data:
                 "Ablativ_Plural": "audientibus",
             },
             "I-Konjugation PPP": {
-                "Nominatv_Singular": "auditus",
+                "Nominativ_Singular": "auditus",
                 "Genitiv_Singular": "auditi",
                 "Dativ_Singular": "audito",
                 "Akkusativ_Singular": "auditum",

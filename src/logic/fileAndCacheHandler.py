@@ -11,7 +11,8 @@ class fileAndCacheHandler:
         self.gui_instance = gui_instance
                 
         
-    def get_settings( self ):    
+    def get_settings( self ):
+        #settings.csv 
         if  not os.path.exists( self.gui_instance.settings_path ) or os.path.getsize( self.gui_instance.settings_path ) == 0:
             with open( self.gui_instance.settings_path, "w" ) as file:
                 shutil.copyfile( self.gui_instance.settings_default_path, self.gui_instance.settings_path )
@@ -31,15 +32,39 @@ class fileAndCacheHandler:
                 with open( self.gui_instance.settings_path, "w" ) as file:
                     shutil.copyfile( self.gui_instance.settings_default_path, self.gui_instance.settings_path )
                     self.gui_instance.debug_print( f"settings were restored(error in settings file): { e }" )
+        
+        #wrong_answers_per_case.json        
+        if not os.path.exists( self.gui_instance.wrong_answers_per_case_path ) or os.path.getsize( self.gui_instance.wrong_answers_per_case_path ) == 0:
+            with open( self.gui_instance.wrong_answers_per_case_path, "w" ) as file:
+                json.dump( {}, file, indent = 4 )
+                print( "wrong_answeres_per_case.json was reset(empty)" )
+        else:
+            try:
+                with open( self.gui_instance.wrong_answers_per_case_path, "r" ) as file:    
+                    self.gui_instance.wrong_answers_per_case = json.load( file )
+            except Exception as e:
+                with open( self.gui_instance.wrong_answers_per_case_path, "w" ) as file:    
+                    json.dump( {}, file, indent = 4 )
+                    self.gui_instance.debug_print( f"wrong_answeres_per_case.json was reset(error in file): { e }" )
+                
                     
                     
-    def save_current_form( self ):
-        with open( self.gui_instance.settings_path, "r+" ) as file:
-                contents = file.readlines()
-                contents[ 2 ] = f"selected_option={ self.gui_instance.selected_option.get() }\n"
+    def save_settings( self, event = None ):
+        #settings.csv
+        try:
+            with open( self.gui_instance.settings_path, "r+" ) as file:
+                settings = file.readlines()
+                settings[ 0 ] = f"debug={ self.gui_instance.debug }\n"
+                settings[ 1 ] = f"tests={ self.gui_instance.tests }\n"
+                settings[ 2 ] = f"selected_option={ self.gui_instance.selected_option.get() }\n"
                 file.seek( 0 )
+                file.writelines( settings )
                 file.truncate()
-                file.writelines( contents )
+        except Exception as e:
+            self.gui_instance.debug_print( f"failed to save settings: { e }" )
+        #wrong_answer_per_case.json
+        with open( self.gui_instance.wrong_answers_per_case_path ,"w" ) as file:
+            json.dump( self.gui_instance.wrong_answers_per_case, file, indent = 4 )
                     
             
     def load_cache( self ):
@@ -83,7 +108,7 @@ class fileAndCacheHandler:
             file.writelines( contents )
               
         
-    def get_font_size( self, element_name ):
+    def get_cached_font_size( self, element_name ):
         try:
             self.gui_instance.get_root_size()
             key = f"{ self.gui_instance.root_width }x{ self.gui_instance.root_height }"
