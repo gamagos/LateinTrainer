@@ -26,7 +26,7 @@ class fileAndCacheHandler:
                     self.gui_instance.selected_option.set( contents[ 2 ].split( "=" )[ 1 ].strip() )
                     self.gui_instance.last_cache_clear = double( contents[ 3 ].split( "=" )[ 1 ].strip() )
                     self.gui_instance.debug_print( "settings were read successfully:" )
-                    self.gui_instance.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in contents ] ) + "\n" )
+                    self.gui_instance.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in contents ] ) )
                                   
             except Exception as e:
                 with open( self.gui_instance.settings_path, "w" ) as file:
@@ -96,9 +96,11 @@ class fileAndCacheHandler:
             json.dump( self.gui_instance.font_cache, file, indent = 4 )
             
             
-    def clear_cache( self ):
+    def clear_cache_and_logs( self ):
         with open( self.gui_instance.font_cache_path, "w" ) as file:
             json.dump( {}, file, indent = 4 )
+        with open( self.gui_instance.debug_log_path, "w" ) as file:
+            file.writelines( "" )
         
         with open( self.gui_instance.settings_path, "r+" ) as file:
             contents = file.readlines()
@@ -114,5 +116,13 @@ class fileAndCacheHandler:
             key = f"{ self.gui_instance.root_width }x{ self.gui_instance.root_height }"
             return self.gui_instance.font_cache[ key ][ element_name ]
         except Exception as e:
-            self.gui_instance.debug_print( f"Error: font size not cached yet or failed to get cached font size: { e }" )
             return None
+        
+    
+    def write_debug_log( self, *toWrite ):
+        toWrites = list( toWrite )
+        if not os.path.getsize( self.gui_instance.debug_log_path ) == 0:
+            toWrites[ 0 ] = "\n" + toWrites[ 0 ]
+        
+        with open( self.gui_instance.debug_log_path, "a" ) as file:
+            file.writelines( toWrites )

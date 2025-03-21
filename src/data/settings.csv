@@ -1,4 +1,4 @@
-debug=False
+debug=True
 tests=False
-selected_option=qui quae quod
+selected_option=Verben
 last_clear_cache=1741358192.0745842

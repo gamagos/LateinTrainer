@@ -6,7 +6,6 @@ Fiaults To do List
 -add gerundien
 -add more grammar forms
 -make UI look nicer, make title and check button align, maybe make labels allign with title
--make log file
 -optimize code
 -make debug print tell where error comes from
 -make updater

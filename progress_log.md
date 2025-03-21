@@ -5,9 +5,17 @@
 
         18.03.2025
 -fixed caching wrong font sizes due to wrong widget sizes during initialization
--made debug print work normally
+-made debug print work normaly
 
         19.03.2025
 -made button appear higher when there are less forms to close distance
 -sorted variables in __init__()
 -removed redundant code
+
+        20.03.2025
+-optimized code (saving)
+-made log
+
+        21.03.2025
+-fixed an issue where the ui would not resize correctly when you hit fullscreen
+-

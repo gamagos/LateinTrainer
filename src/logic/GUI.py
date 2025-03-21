@@ -5,6 +5,7 @@ import sys
 import time
 import tkinter as tk
 from datetime import datetime
+from PIL import Image
 from tkinter import font, messagebox, ttk
 
 import win32api
@@ -24,6 +25,8 @@ class GUI:
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
         self.settings_default_path = os.path.join( self.project_path, "data", "default_settings.csv" )
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
+        self.debug_log_path = os.path.join( self.project_path, "logs", "debug_log.txt" )
+        self.settingsPNG_path = os.path.join( self.project_path, "assets", "settings.png" )
         
         #settings
         self.debug = True      
@@ -71,6 +74,13 @@ class GUI:
         self.form_labels = []
         self.entries = []
         
+        #Cache and Performance
+        self.FileAndChacheHandler = fileAndCacheHandler( self )
+        self.font_cache = self.FileAndChacheHandler.load_cache()
+        self.last_cache_clear = 0
+        self.frameRate = self.get_refresh_rate()
+        self.frameTime = 1 / self.frameRate
+        
         self.root = root
         self.root.title( "Latin Trainer " + VERSION )
         self.root.bind( "<F3>", self.enable_debug )
@@ -96,13 +106,6 @@ class GUI:
 
         self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
-        
-        #Cache and Performance
-        self.FileAndChacheHandler = fileAndCacheHandler( self )
-        self.font_cache = self.FileAndChacheHandler.load_cache()
-        self.last_cache_clear = 0
-        self.frameRate = self.get_refresh_rate()
-        self.frameTime = 1 / self.frameRate
         
         #UI initialisation methods
         self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
@@ -161,9 +164,12 @@ class GUI:
         
         self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option,
                                                   values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
-        self.combobox_select_form.place( relx = 0.96 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
+        self.combobox_select_form.place( relx = 0.93 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
+        
+        self.settings_button = tk.Button( self.content_frame, relief = "sunken" )
+        self.settings_button.place( relx = 0.935, rely = 0, relheight = 0.05, relwidth = 0.05, anchor = "nw" )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
@@ -281,71 +287,16 @@ class GUI:
             self.form_labels = []
             self.entries = []
             self.populate_entries()
-          
-                    
-    def on_frame_configure( self, event ):
-        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
-        self.root.update()
-    
-    
-    def on_form_select( self, event ):
-        self.current_class_index = 0
-        if self.previous_form != self.selected_option.get():
-            self.next_class()
-            self.FileAndChacheHandler.save_settings()
-
-
-    def on_mouse_wheel( self, event ):
-        self.canvas.yview_scroll( int ( -1 * ( event.delta / 120 ) ), "units" )
-    
-    
-    def on_shift_mouse_wheel( self, event ):#       what is delta? and units?
-        self.canvas.xview_scroll( int( -1 * ( event.delta / 120 ) ), "units" )
-    
-        
-    def on_scrollbars_leave( self, event ):
-        self.h_scrollbar.place_forget()
-        self.v_scrollbar.place_forget()
-        
-        
-    def on_scrollbars_enter( self, event ):
-        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 20 )
-        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
-        
-        
-    def on_close( self, event=None ):
-        if time.time() - self.last_cache_clear < ( 30 * 24 * 60 * 60 ):
-            self.debug_print( "save and exit(on_close)" )
-            self.debug_print( f"time till next clear: { ( ( 30 * 24 * 60 * 60 ) - ( time.time() - self.last_cache_clear ) ) / ( 24 * 60 * 60 ) } days" )
-            self.FileAndChacheHandler.save_cache()
-            self.FileAndChacheHandler.save_settings()
-        else:
-            self.debug_print( "chache got cleared" )
-            self.FileAndChacheHandler.clear_cache()
-            self.FileAndChacheHandler.save_settings()
-        self.root.quit()
-    
-    
-    def on_resize( self, event ):
-        now = time.time()
-        self.get_root_size()
-        width_diff = abs( self.root_width - self.root_prev_width )
-        height_diff = abs( self.root_height - self.root_prev_height )
-        minimum_diff =  3
-        
-        if now - self.last_resize_time < self.frameTime or self.resizing:
-            return
-        
-        if width_diff >= minimum_diff or height_diff >= minimum_diff:
-            self.last_resize_time = now
-            self.handle_resize()
     
     
     def handle_resize( self ):
+        self.debug_print( "Handling resize..." )
         self.resizing = True
         self.root.update_idletasks()
         self.get_root_size()
+        self.debug_print( f"Root size: { self.root_width }x{ self.root_height }" )
         
+        self.adjust_canvas_window()
         self.adjust_font_size( self.title, font_weight = "bold" )
         self.adjust_font_size( self.combobox_select_form, 0.83, 0.83 )
             
@@ -356,15 +307,16 @@ class GUI:
             except Exception as e:
                 self.debug_print( f"Error adjusting form labels or entries: { e }" )
         self.adjust_font_size( self.check_button, 0.72, 0.72 )
-        self.adjust_canvas_window()
             
         self.root_prev_width = self.root_width
         self.root_prev_height =self.root_height
         
+        self.root.update()
         self.resizing = False
         
         
     def adjust_font_size( self, widget, max_width_ratio = 0.72, max_height_ratio = 0.72, element_text = None, font_weight = "normal", element_name = None ):
+        self.root.update_idletasks()
         cached_font_size = self.FileAndChacheHandler.get_cached_font_size( element_name )
         
         if element_name is None:
@@ -375,14 +327,9 @@ class GUI:
             widget.config( font = ( "Arial", font_size, font_weight ) )
             return font_size
             
-        try:
-            if element_text is None:
-                element_text = widget.cget( "text" )
-        except Exception as e:
-            self.debug_print( f"Error in adjusting font size: { e }" )
-            return font_size
-        
-        self.root.update_idletasks()
+        if element_text is None:
+            element_text = widget.cget( "text" )
+                
         widget_width = widget.winfo_width()
         widget_height = widget.winfo_height()
         max_width = int( widget_width * max_width_ratio )
@@ -402,7 +349,6 @@ class GUI:
             return font_size
         
         font_size = int( font_size * ratio )
-        self.debug_print( widget_width, widget_height, element_name )
         
         while True:
             temp_font = font.Font( family = "Arial", size = font_size, weight = font_weight )
@@ -469,6 +415,64 @@ class GUI:
             result.append( current_line.strip() )
 
         return "\n".join( result )
+ 
+                    
+    def on_frame_configure( self, event ):
+        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
+        self.root.update()
+    
+    
+    def on_form_select( self, event ):
+        self.current_class_index = 0
+        if self.previous_form != self.selected_option.get():
+            self.next_class()
+            self.FileAndChacheHandler.save_settings()
+
+
+    def on_mouse_wheel( self, event ):
+        self.canvas.yview_scroll( int ( -1 * ( event.delta / 120 ) ), "units" )
+    
+    
+    def on_shift_mouse_wheel( self, event ):#       what is delta? and units?
+        self.canvas.xview_scroll( int( -1 * ( event.delta / 120 ) ), "units" )
+    
+        
+    def on_scrollbars_leave( self, event ):
+        self.h_scrollbar.place_forget()
+        self.v_scrollbar.place_forget()
+        
+        
+    def on_scrollbars_enter( self, event ):
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 20 )
+        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
+    
+    
+    def on_resize( self, event ):
+        now = time.time()
+        self.get_root_size()
+        width_diff = abs( self.root_width - self.root_prev_width )
+        height_diff = abs( self.root_height - self.root_prev_height )
+        minimum_diff = 2
+        
+        if now - self.last_resize_time < self.frameTime or self.resizing:
+            return
+        
+        if width_diff >= minimum_diff or height_diff >= minimum_diff:
+            self.last_resize_time = now
+            self.handle_resize()
+        
+        
+    def on_close( self, event=None ):
+        if time.time() - self.last_cache_clear < ( 30 * 24 * 60 * 60 ):
+            self.debug_print( "save and exit(on_close)" )
+            self.debug_print( f"time till next clear: { ( ( 30 * 24 * 60 * 60 ) - ( time.time() - self.last_cache_clear ) ) / ( 24 * 60 * 60 ) } days" )
+            self.FileAndChacheHandler.save_cache()
+            self.FileAndChacheHandler.save_settings()
+        else:
+            self.debug_print( "chache got cleared" )
+            self.FileAndChacheHandler.clear_cache_and_logs()
+            self.FileAndChacheHandler.save_settings()
+        self.root.quit()
             
             
     def debug_print( self, *toPrint ):
@@ -484,6 +488,7 @@ class GUI:
                     formatted_toPrints.append( str( arg ) )
             output = " ".join( formatted_toPrints )
             print( time, output )
+            self.FileAndChacheHandler.write_debug_log( time + "\n".join( formatted_toPrints ) )
             
     def enable_debug( self, event ):
         time = str( datetime.now() ) + ": "
