@@ -33,6 +33,7 @@ class GUI:
         #settings
         self.debug = True      
         self.tests = False
+        self.first_start = False
         self.selected_option = tk.StringVar()
         
         #UI State
@@ -84,7 +85,7 @@ class GUI:
         self.frameTime = 1 / self.frameRate
         
         self.root = root
-        self.root.title( "Latin Trainer " + VERSION )
+        self.root.title( "Latein Formen Trainer " + VERSION )
         self.root.bind( "<F3>", self.enable_debug )
         self.root.bind( "<F5>", self.enable_tests )
         self.root.bind( "<Configure>", self.on_resize )
@@ -110,8 +111,11 @@ class GUI:
         
         #UI initialisation methods
         self.canvas.config( yscrollcommand = self.v_scrollbar.set, xscrollcommand = self.h_scrollbar.set )
-        
         self.FileAndChacheHandler.get_settings()
+        
+        if self.first_start == True:
+            self.reset_auto_select_progress()
+            
         self.previous_form = self.selected_option.get()
         self.form_select()
         self.create_widgets()
@@ -140,7 +144,7 @@ class GUI:
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
         
-        self.settings_button = tk.Button( self.content_frame, relief = "flat" )
+        self.settings_button = tk.Button( self.content_frame, relief = "flat", command = self.open_settings )
         self.settings_button.place( relx = 0.935, rely = 0, height = 25, width = 25, anchor = "nw" )
 
         self.forms_frame = tk.Frame( self.content_frame )
@@ -184,7 +188,13 @@ class GUI:
             self.check_button.place( relx = 0.42, rely = 0.62, relheight = 0.08, relwidth = 0.24 )
             
         self.handle_resize()
-    
+        
+        
+    def open_settings( self ):
+        settings_window = tk.Tk()
+        settings_window.geometry( "300x450" )
+        settings_window.title( "Einstellungen" )
+        
     
     def on_frame_configure( self, event ):
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
@@ -350,6 +360,8 @@ class GUI:
             
     def reset_auto_select_progress( self ):
         self.debug_print( "Finish me and make Data.py single dict" )
+        self.first_start = False
+        self.FileAndChacheHandler.save_settings()
     
     
     def handle_resize( self ):

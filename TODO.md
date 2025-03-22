@@ -6,7 +6,6 @@ Fiaults To do List
 -make adjustement for settings button image and square
 -fill adjectives in Data.py
 -add gerundien
--make cache for resized images
 -add more grammar forms
 -make UI look nicer, make title and check button align, maybe make labels allign with title
 -optimize code
