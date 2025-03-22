@@ -442,7 +442,7 @@ class GUI:
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
         
         
-    def adjust_settings_button_size( self, size = 0.05, element_name = "settings_Button" ):
+    def adjust_settings_button_size( self, size = 0.05 ):
         self.root.update_idletasks()
         self.get_root_size()
         root_avg_size = ( self.root_width + self.root_width ) / 2
@@ -450,16 +450,6 @@ class GUI:
  
         if new_width > 60.0:
             new_width = 60
-        cached_size = self.FileAndChacheHandler.get_cached_font_size( element_name )
-        
-        if cached_size is not None:
-            resized_image = self.settings_button_image.resize( cached_size, Image.Resampling.LANCZOS )
-            self.debug_print( "cached size: ", cached_size )
-            final_image = ImageTk.PhotoImage( resized_image )
-            self.settings_button.config( image = final_image )
-            self.settings_button.image = final_image
-            self.settings_button.place(  relx = 0.934, rely = 0, width = new_width, height = new_width, anchor = "nw" )
-            return new_width
         
         resized_image = self.settings_button_image.resize( ( math.floor( new_width ), math.floor( new_width ) ), Image.Resampling.LANCZOS )
         final_image = ImageTk.PhotoImage( resized_image )
@@ -468,7 +458,6 @@ class GUI:
 
         self.debug_print( "settings_button: new width: ", new_width )
         self.settings_button.place(  relx = 0.934, rely = 0, width = new_width, height = new_width, anchor = "nw" ) #2 times width because its a square
-        self.FileAndChacheHandler.cache_size( element_name, ( math.floor( new_width ), math.floor( new_width ) ) )
         return new_width
             
             
