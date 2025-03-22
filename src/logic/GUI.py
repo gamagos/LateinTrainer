@@ -1,3 +1,4 @@
+import math
 import os
 import random
 import shutil
@@ -5,11 +6,11 @@ import sys
 import time
 import tkinter as tk
 from datetime import datetime
-from PIL import Image
 from tkinter import font, messagebox, ttk
 
 import win32api
 import win32con
+from PIL import Image, ImageTk
 
 from data.Data import Data
 from logic.fileAndCacheHandler import fileAndCacheHandler
@@ -27,6 +28,7 @@ class GUI:
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
         self.debug_log_path = os.path.join( self.project_path, "logs", "debug_log.txt" )
         self.settingsPNG_path = os.path.join( self.project_path, "assets", "settings.png" )
+        self.settings_button_image = Image.open( self.settingsPNG_path )
         
         #settings
         self.debug = True      
@@ -103,7 +105,6 @@ class GUI:
 
         self.h_scrollbar = tk.Scrollbar( self.main_frame, orient = "horizontal", command = self.canvas.xview )
         self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 20 )
-
         self.v_scrollbar = tk.Scrollbar( self.main_frame, orient = "vertical", command = self.canvas.yview )
         self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
         
@@ -119,39 +120,10 @@ class GUI:
         
         self.canvas.bind_all( "<MouseWheel>", self.on_mouse_wheel )
         self.canvas.bind_all( "<Shift-MouseWheel>", self.on_shift_mouse_wheel )
+        
         self.frame_initialized_correctly = True
         
         self.handle_resize()
-        
-        
-    def form_select( self ):
-        word_type = self.selected_option.get()
-        if word_type == "Alle":
-            choices = [ "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ]
-            word_type = random.choice( choices )
-            
-        forms_mapping = {
-            "Nomen": ( self.declension_forms, self.declensions_nouns ),
-            "Verben": ( self.conjugation_forms, self.conjugations ),
-            "Adjektive": ( self.declensions_adjectives_forms, self.declensions_adjectives ),
-            "hic haec hoc": ( self.hic_haec_hoc_forms, self.hic_haec_hoc ),
-            "qui quae quod": ( self.qui_quae_quod_forms, self.qui_quae_quod ),
-            "ille illa illud": ( self.ille_illa_illud_forms, self.ille_illa_illud ),
-            "ipse ipsa ipsum": ( self.ipse_ipsa_ipsum_forms, self.ipse_ipsa_ipsum )
-        }
-
-        if word_type in forms_mapping:
-            forms_list, forms_dict = forms_mapping[ word_type ]
-            self.current_key = forms_list[ self.current_class_index ]
-            self.current_forms = forms_dict[ self.current_key ]
-            self.curent_word_type_amount_of_forms = len( forms_list )
-        else:
-            messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
-            shutil.copyfile( self.settings_default_path, self.settings_path )
-            self.FileAndChacheHandler.get_settings()
-            self.form_select()
-
-        self.previous_form = self.selected_option.get()
         
         
     def create_widgets( self ):
@@ -168,8 +140,8 @@ class GUI:
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
         
-        self.settings_button = tk.Button( self.content_frame, relief = "sunken" )
-        self.settings_button.place( relx = 0.935, rely = 0, relheight = 0.05, relwidth = 0.05, anchor = "nw" )
+        self.settings_button = tk.Button( self.content_frame, relief = "flat" )
+        self.settings_button.place( relx = 0.935, rely = 0, height = 25, width = 25, anchor = "nw" )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
@@ -182,6 +154,7 @@ class GUI:
         self.combobox_select_form.tkraise()
         self.root.update_idletasks()
         
+        self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
         self.populate_entries()
 
 
@@ -210,10 +183,66 @@ class GUI:
         else:
             self.check_button.place( relx = 0.42, rely = 0.62, relheight = 0.08, relwidth = 0.24 )
             
-        self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
         self.handle_resize()
     
     
+    def on_frame_configure( self, event ):
+        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
+        self.root.update()
+    
+    
+    def on_form_select( self, event ):
+        self.current_class_index = 0
+        if self.previous_form != self.selected_option.get():
+            self.next_class()
+            self.FileAndChacheHandler.save_settings()
+
+
+    def on_mouse_wheel( self, event ):
+        self.canvas.yview_scroll( int ( -1 * ( event.delta / 120 ) ), "units" )
+    
+    
+    def on_shift_mouse_wheel( self, event ):#       what is delta? and units?
+        self.canvas.xview_scroll( int( -1 * ( event.delta / 120 ) ), "units" )
+    
+        
+    def on_scrollbars_leave( self, event ):
+        self.h_scrollbar.place_forget()
+        self.v_scrollbar.place_forget()
+        
+        
+    def on_scrollbars_enter( self, event ):
+        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 20 )
+        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
+    
+    
+    def on_resize( self, event ):
+        now = time.time()
+        self.get_root_size()
+        width_diff = abs( self.root_width - self.root_prev_width )
+        height_diff = abs( self.root_height - self.root_prev_height )
+        minimum_diff = 2
+        
+        if now - self.last_resize_time < self.frameTime or self.resizing:
+            return
+        
+        if width_diff >= minimum_diff or height_diff >= minimum_diff:
+            self.last_resize_time = now
+            self.handle_resize()
+        
+    def on_close( self, event=None ):
+        if time.time() - self.last_cache_clear < ( 30 * 24 * 60 * 60 ):
+            self.debug_print( "save and exit(on_close)" )
+            self.debug_print( f"time till next clear: { ( ( 30 * 24 * 60 * 60 ) - ( time.time() - self.last_cache_clear ) ) / ( 24 * 60 * 60 ) } days" )
+            self.FileAndChacheHandler.save_cache()
+            self.FileAndChacheHandler.save_settings()
+        else:
+            self.debug_print( "chache got cleared" )
+            self.FileAndChacheHandler.clear_cache_and_logs()
+            self.FileAndChacheHandler.save_settings()
+        self.root.quit()
+            
+                 
     def check_answers( self ):
         wrong = False
         self.wrong_answers_per_case[ f"{ self.current_key }" ] = self.answers_wrong
@@ -271,6 +300,36 @@ class GUI:
         self.check_button.config(text = "Check", command = self.check_answers)
     
 
+    def form_select( self ):
+        word_type = self.selected_option.get()
+        if word_type == "Alle":
+            choices = [ "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ]
+            word_type = random.choice( choices )
+            
+        forms_mapping = {
+            "Nomen": ( self.declension_forms, self.declensions_nouns ),
+            "Verben": ( self.conjugation_forms, self.conjugations ),
+            "Adjektive": ( self.declensions_adjectives_forms, self.declensions_adjectives ),
+            "hic haec hoc": ( self.hic_haec_hoc_forms, self.hic_haec_hoc ),
+            "qui quae quod": ( self.qui_quae_quod_forms, self.qui_quae_quod ),
+            "ille illa illud": ( self.ille_illa_illud_forms, self.ille_illa_illud ),
+            "ipse ipsa ipsum": ( self.ipse_ipsa_ipsum_forms, self.ipse_ipsa_ipsum )
+        }
+
+        if word_type in forms_mapping:
+            forms_list, forms_dict = forms_mapping[ word_type ]
+            self.current_key = forms_list[ self.current_class_index ]
+            self.current_forms = forms_dict[ self.current_key ]
+            self.curent_word_type_amount_of_forms = len( forms_list )
+        else:
+            messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
+            shutil.copyfile( self.settings_default_path, self.settings_path )
+            self.FileAndChacheHandler.get_settings()
+            self.form_select()
+
+        self.previous_form = self.selected_option.get()
+        
+        
     def next_class( self ):
         self.current_class_index += 1
         
@@ -287,6 +346,10 @@ class GUI:
             self.form_labels = []
             self.entries = []
             self.populate_entries()
+            
+            
+    def reset_auto_select_progress( self ):
+        self.debug_print( "Finish me and make Data.py single dict" )
     
     
     def handle_resize( self ):
@@ -299,6 +362,7 @@ class GUI:
         self.adjust_canvas_window()
         self.adjust_font_size( self.title, font_weight = "bold" )
         self.adjust_font_size( self.combobox_select_form, 0.83, 0.83 )
+        self.adjust_settings_button_size()
             
         for i in range( len( self.form_labels ) ):
             try:
@@ -323,9 +387,8 @@ class GUI:
             element_name = widget.winfo_name()
         
         if cached_font_size is not None:
-            font_size = cached_font_size
-            widget.config( font = ( "Arial", font_size, font_weight ) )
-            return font_size
+            widget.config( font = ( "Arial", cached_font_size, font_weight ) )
+            return cached_font_size
             
         if element_text is None:
             element_text = widget.cget( "text" )
@@ -364,7 +427,7 @@ class GUI:
             font_size -= 1
         
         widget.config( font = ( "Arial", font_size, font_weight ) )
-        self.FileAndChacheHandler.cache_font_size( element_name, font_size )
+        self.FileAndChacheHandler.cache_size( element_name, font_size )
         return font_size
 
 
@@ -377,6 +440,36 @@ class GUI:
         
         self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
+        
+        
+    def adjust_settings_button_size( self, size = 0.05, element_name = "settings_Button" ):
+        self.root.update_idletasks()
+        self.get_root_size()
+        root_avg_size = ( self.root_width + self.root_width ) / 2
+        new_width = root_avg_size * size
+ 
+        if new_width > 60.0:
+            new_width = 60
+        cached_size = self.FileAndChacheHandler.get_cached_font_size( element_name )
+        
+        if cached_size is not None:
+            resized_image = self.settings_button_image.resize( cached_size, Image.Resampling.LANCZOS )
+            self.debug_print( "cached size: ", cached_size )
+            final_image = ImageTk.PhotoImage( resized_image )
+            self.settings_button.config( image = final_image )
+            self.settings_button.image = final_image
+            self.settings_button.place(  relx = 0.934, rely = 0, width = new_width, height = new_width, anchor = "nw" )
+            return new_width
+        
+        resized_image = self.settings_button_image.resize( ( math.floor( new_width ), math.floor( new_width ) ), Image.Resampling.LANCZOS )
+        final_image = ImageTk.PhotoImage( resized_image )
+        self.settings_button.config( image = final_image )
+        self.settings_button.image = final_image
+
+        self.debug_print( "settings_button: new width: ", new_width )
+        self.settings_button.place(  relx = 0.934, rely = 0, width = new_width, height = new_width, anchor = "nw" ) #2 times width because its a square
+        self.FileAndChacheHandler.cache_size( element_name, ( math.floor( new_width ), math.floor( new_width ) ) )
+        return new_width
             
             
     def get_refresh_rate( self ):
@@ -416,65 +509,7 @@ class GUI:
 
         return "\n".join( result )
  
-                    
-    def on_frame_configure( self, event ):
-        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
-        self.root.update()
-    
-    
-    def on_form_select( self, event ):
-        self.current_class_index = 0
-        if self.previous_form != self.selected_option.get():
-            self.next_class()
-            self.FileAndChacheHandler.save_settings()
-
-
-    def on_mouse_wheel( self, event ):
-        self.canvas.yview_scroll( int ( -1 * ( event.delta / 120 ) ), "units" )
-    
-    
-    def on_shift_mouse_wheel( self, event ):#       what is delta? and units?
-        self.canvas.xview_scroll( int( -1 * ( event.delta / 120 ) ), "units" )
-    
-        
-    def on_scrollbars_leave( self, event ):
-        self.h_scrollbar.place_forget()
-        self.v_scrollbar.place_forget()
-        
-        
-    def on_scrollbars_enter( self, event ):
-        self.h_scrollbar.place( relx = 0, rely = 0.97, relwidth = 0.97, height = 20 )
-        self.v_scrollbar.place( relx = 0.97, rely = 0, relheight = 1, width = 20 )
-    
-    
-    def on_resize( self, event ):
-        now = time.time()
-        self.get_root_size()
-        width_diff = abs( self.root_width - self.root_prev_width )
-        height_diff = abs( self.root_height - self.root_prev_height )
-        minimum_diff = 2
-        
-        if now - self.last_resize_time < self.frameTime or self.resizing:
-            return
-        
-        if width_diff >= minimum_diff or height_diff >= minimum_diff:
-            self.last_resize_time = now
-            self.handle_resize()
-        
-        
-    def on_close( self, event=None ):
-        if time.time() - self.last_cache_clear < ( 30 * 24 * 60 * 60 ):
-            self.debug_print( "save and exit(on_close)" )
-            self.debug_print( f"time till next clear: { ( ( 30 * 24 * 60 * 60 ) - ( time.time() - self.last_cache_clear ) ) / ( 24 * 60 * 60 ) } days" )
-            self.FileAndChacheHandler.save_cache()
-            self.FileAndChacheHandler.save_settings()
-        else:
-            self.debug_print( "chache got cleared" )
-            self.FileAndChacheHandler.clear_cache_and_logs()
-            self.FileAndChacheHandler.save_settings()
-        self.root.quit()
-            
-            
+                      
     def debug_print( self, *toPrint ):
         time = str( datetime.now() ) + ": "
         if ( self.debug == True ):

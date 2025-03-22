@@ -82,13 +82,13 @@ class fileAndCacheHandler:
             return {}
         
         
-    def cache_font_size( self, element_name, font_size ):
+    def cache_size( self, element_name, size ):
         if self.gui_instance.frame_initialized_correctly == True:
             self.gui_instance.get_root_size()
             key = f"{ self.gui_instance.root_width }x{ self.gui_instance.root_height }"
             if key not in self.gui_instance.font_cache:
                 self.gui_instance.font_cache[ key ] = {}
-            self.gui_instance.font_cache[ key ][ element_name ] = font_size
+            self.gui_instance.font_cache[ key ][ element_name ] = size
     
     
     def save_cache( self ):

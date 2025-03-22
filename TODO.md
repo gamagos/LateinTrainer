@@ -2,8 +2,11 @@ Fiaults To do List
 
 -make more features( settings what to learn, auto_select... )
 -organize code
+-make Data.py single dict
+-make adjustement for settings button image and square
 -fill adjectives in Data.py
 -add gerundien
+-make cache for resized images
 -add more grammar forms
 -make UI look nicer, make title and check button align, maybe make labels allign with title
 -optimize code
