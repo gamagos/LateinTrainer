@@ -12,3 +12,5 @@
 _internal filter=lfs diff=lfs merge=lfs -text
 */dist filter=lfs diff=lfs merge=lfs -text
 */build filter=lfs diff=lfs merge=lfs -text
+.exe filter=lfs diff=lfs merge=lfs -text
+*.bbm filter=lfs diff=lfs merge=lfs -text

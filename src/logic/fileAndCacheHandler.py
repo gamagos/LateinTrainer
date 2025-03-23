@@ -4,6 +4,7 @@ import shutil
 import time
 
 from numpy import double
+from tkinter import messagebox
 
 
 class fileAndCacheHandler:
@@ -26,6 +27,7 @@ class fileAndCacheHandler:
                     self.gui_instance.selected_option.set( contents[ 2 ].split( "=" )[ 1 ].strip() )
                     self.gui_instance.last_cache_clear = double( contents[ 3 ].split( "=" )[ 1 ].strip() )
                     self.gui_instance.first_start = "True" == contents[ 4 ].split( "=" )[ 1 ].strip()
+                    self.gui_instance.auto_select_on = "True" == contents[ 5 ].split( "=" )[ 1 ].strip()
                     self.gui_instance.debug_print( "settings were read successfully:" )
                     self.gui_instance.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in contents ] ) )
                                   
@@ -36,16 +38,16 @@ class fileAndCacheHandler:
         
         #wrong_answers_per_case.json        
         if not os.path.exists( self.gui_instance.wrong_answers_per_case_path ) or os.path.getsize( self.gui_instance.wrong_answers_per_case_path ) == 0:
-            with open( self.gui_instance.wrong_answers_per_case_path, "w" ) as file:
-                json.dump( {}, file, indent = 4 )
+            with open( self.gui_instance.wrong_answers_per_case_path, "w", encoding = "utf-8" ) as file:
+                json.dump( {}, file, indent = 4, ensure_ascii = False )
                 print( "wrong_answeres_per_case.json was reset(empty)" )
         else:
             try:
-                with open( self.gui_instance.wrong_answers_per_case_path, "r" ) as file:    
+                with open( self.gui_instance.wrong_answers_per_case_path, "r", encoding = "utf-8" ) as file:    
                     self.gui_instance.wrong_answers_per_case = json.load( file )
             except Exception as e:
-                with open( self.gui_instance.wrong_answers_per_case_path, "w" ) as file:    
-                    json.dump( {}, file, indent = 4 )
+                with open( self.gui_instance.wrong_answers_per_case_path, "w", encoding = "utf-8" ) as file:    
+                    json.dump( {}, file, indent = 4, ensure_ascii = False )
                     self.gui_instance.debug_print( f"wrong_answeres_per_case.json was reset(error in file): { e }" )
                 
                     
@@ -65,10 +67,20 @@ class fileAndCacheHandler:
         except Exception as e:
             self.gui_instance.debug_print( f"failed to save settings: { e }" )
         #wrong_answer_per_case.json
-        with open( self.gui_instance.wrong_answers_per_case_path ,"w" ) as file:
-            json.dump( self.gui_instance.wrong_answers_per_case, file, indent = 4 )
-                    
+        with open( self.gui_instance.wrong_answers_per_case_path ,"w", encoding = "utf-8" ) as file:
+            json.dump( self.gui_instance.wrong_answers_per_case, file, indent = 4, ensure_ascii = False )
             
+            
+    def load_json( self, path ):
+        try:
+            with open( path, "r", encoding = "utf-8" ) as f:
+                #print( json.load( f )[ "forms" ].keys() )
+                return json.load( f )
+        except Exception as e:
+            self.gui_instance.debug_print( f"Error loading forms.json: { e }" )
+            messagebox.showerror( "Fehler", f"Fehler beim laden von forms.json\n{ e }" )
+            
+                                
     def load_cache( self ):
         if os.path.exists( self.gui_instance.font_cache_path ):
             try:
@@ -76,8 +88,8 @@ class fileAndCacheHandler:
                     return json.load( file )
             except Exception as e:
                 self.gui_instance.debug_print( f"load_cache: Error reading font_cache.json, file was reset: { e }" )
-                with open( self.gui_instance.font_cache_path, "w" ) as file:
-                    json.dump( {}, file, indent = 4 )
+                with open( self.gui_instance.font_cache_path, "w", encoding = "utf-8" ) as file:
+                    json.dump( {}, file, indent = 4, ensure_ascii = False )
                 return {}
         else:
             self.gui_instance.debug_print( "font_cache.json does not exist!" )
@@ -94,13 +106,13 @@ class fileAndCacheHandler:
     
     
     def save_cache( self ):
-        with open( self.gui_instance.font_cache_path ,"w" ) as file:
-            json.dump( self.gui_instance.font_cache, file, indent = 4 )
+        with open( self.gui_instance.font_cache_path ,"w", encoding = "utf-8" ) as file:
+            json.dump( self.gui_instance.font_cache, file, indent = 4, ensure_ascii=False )
             
             
     def clear_cache_and_logs( self ):
-        with open( self.gui_instance.font_cache_path, "w" ) as file:
-            json.dump( {}, file, indent = 4 )
+        with open( self.gui_instance.font_cache_path, "w", encoding="utf-8" ) as file:
+            json.dump( {}, file, indent = 4, ensure_ascii=False )
         with open( self.gui_instance.debug_log_path, "w" ) as file:
             file.writelines( "" )
         
@@ -120,11 +132,14 @@ class fileAndCacheHandler:
         except Exception as e:
             return None
         
-    
-    def write_debug_log( self, *toWrite ):
+
+    def write_debug_log( self, *toWrite, path = None ):
         toWrites = list( toWrite )
-        if not os.path.getsize( self.gui_instance.debug_log_path ) == 0:
+        if path is None:
+            path = self.gui_instance.debug_log_path
+        
+        if not os.path.getsize( path ) == 0:
             toWrites[ 0 ] = "\n" + toWrites[ 0 ]
         
-        with open( self.gui_instance.debug_log_path, "a" ) as file:
+        with open( path, "a" ) as file:
             file.writelines( toWrites )

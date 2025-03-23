@@ -11,6 +11,5 @@ temporary/
 *.tmp
 *.tmp.driveupload/
 *.tmp.driveupload
-*.vscode
 workspace
 wrong_answers_per_case.json

@@ -12,7 +12,6 @@ import win32api
 import win32con
 from PIL import Image, ImageTk
 
-from data.Data import Data
 from logic.fileAndCacheHandler import fileAndCacheHandler
 
 VERSION = "v1.2.0"
@@ -21,6 +20,7 @@ class GUI:
     def __init__( self, root ):
         #paths
         self.project_path = getattr( sys, "_MEIPASS", os.path.dirname( os.path.dirname( os.path.abspath( __file__ ) ) ) )
+        self.forms_path = os.path.join( self.project_path, "data", "forms.json" )
         self.font_cache_path = os.path.join( self.project_path, "data", "font_cache.json" )
         self.wrong_answers_per_case_path = os.path.join( self.project_path, "data", "wrong_answers_per_case.json")
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
@@ -28,6 +28,7 @@ class GUI:
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
         self.debug_log_path = os.path.join( self.project_path, "logs", "debug_log.txt" )
         self.settingsPNG_path = os.path.join( self.project_path, "assets", "settings.png" )
+        self.settings_disbledPNG_path = os.path.join( self.project_path, "assets", "settings_disabled.png" )
         self.settings_button_image = Image.open( self.settingsPNG_path )
         
         #settings
@@ -35,6 +36,7 @@ class GUI:
         self.tests = False
         self.first_start = False
         self.selected_option = tk.StringVar()
+        self.auto_select_on = tk.BooleanVar()
         
         #UI State
         self.frame_initialized_correctly = False
@@ -44,29 +46,23 @@ class GUI:
         self.root_prev_width = self.root_width
         self.root_height = 700
         self.root_prev_height = self.root_height
+        style = ttk.Style()
+        style.theme_use( "clam" )
+        style.configure( "Settings.TButton", relief = "flat", borderwidth = 0, padding = 0, background = "white", focuscolor = "white",
+                        highlightthickness = 0, highlightcolor = "white" )
+        style.map( "Settings.TButton",
+                   background = [ ( "disabled", "white" ), ( "!disabled", "white" ) ],
+                   foreground = [ ( "disabled", "white" ), ( "!disabled", "white" ) ], )
+        
+        #Cache and Performance
+        self.FileAndChacheHandler = fileAndCacheHandler( self )
+        self.font_cache = self.FileAndChacheHandler.load_cache()
+        self.last_cache_clear = 0
+        self.frameRate = self.get_refresh_rate()
+        self.frameTime = 1 / self.frameRate
         
         #Data
-        self.data = Data()
-        self.declensions_nouns = self.data.declensions
-        self.conjugations = self.data.conjugations
-        self.declensions_adjectives = self.data.declensions_adjectives
-        self.hic_haec_hoc = self.data.hic_haec_hoc
-        self.qui_quae_quod = self.data.qui_quae_quod
-        self.ille_illa_illud = self.data.ille_illa_illud
-        self.ipse_ipsa_ipsum = self.data.ipse_ipsa_ipsum
-        self.declension_forms = list( self.declensions_nouns.keys() )
-        self.conjugation_forms = list( self.conjugations.keys() )
-        self.declensions_adjectives_forms = list( self.declensions_adjectives.keys() )
-        self.hic_haec_hoc_forms = list( self.hic_haec_hoc.keys() )
-        self.qui_quae_quod_forms = list( self.qui_quae_quod.keys() )
-        self.ille_illa_illud_forms = list( self.ille_illa_illud.keys() )
-        self.ipse_ipsa_ipsum_forms = list( self.ipse_ipsa_ipsum.keys() )
-        random.shuffle( self.declension_forms )
-        random.shuffle( self.conjugation_forms )
-        random.shuffle( self.hic_haec_hoc_forms )
-        random.shuffle( self.qui_quae_quod_forms )
-        random.shuffle( self.ille_illa_illud_forms )
-        random.shuffle( self.ipse_ipsa_ipsum_forms )                        
+        self.forms = self.FileAndChacheHandler.load_json( self.forms_path )[ "forms" ]
         self.current_class_index = 0
         self.user_entries = {}
         self.results = {}
@@ -76,13 +72,6 @@ class GUI:
         #UI Elements
         self.form_labels = []
         self.entries = []
-        
-        #Cache and Performance
-        self.FileAndChacheHandler = fileAndCacheHandler( self )
-        self.font_cache = self.FileAndChacheHandler.load_cache()
-        self.last_cache_clear = 0
-        self.frameRate = self.get_refresh_rate()
-        self.frameTime = 1 / self.frameRate
         
         self.root = root
         self.root.title( "Latein Formen Trainer " + VERSION )
@@ -99,7 +88,7 @@ class GUI:
         self.main_frame.bind( "<Leave>", self.on_scrollbars_leave )
         self.main_frame.place( relheight = 1, relwidth = 1, )
         
-        self.canvas = tk.Canvas( self.main_frame, relief = "flat" )
+        self.canvas = tk.Canvas( self.main_frame, relief = "flat", borderwidth = 0 )
         self.canvas.place( relheight = 0.95, relwidth = 0.95 )
         self.canvas.bind( "<Enter>", self.on_scrollbars_leave )
         self.canvas.bind( "<Leave>", self.on_scrollbars_enter )
@@ -136,7 +125,7 @@ class GUI:
         
         self.title = tk.Label( self.content_frame, text = f"{ self.add_newline_if_too_long( self.current_key ) }",
                                anchor = "center", justify = "left" )
-        self.title.place( relx = 0.032, rely = 0, relheight = 0.2, relwidth = 0.81, anchor = "nw" )
+        self.title.place( relx = 0.48, rely = 0.09, relheight = 0.17, relwidth = 0.93, anchor = "center" )
         
         self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option,
                                                   values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
@@ -144,14 +133,14 @@ class GUI:
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
         
-        self.settings_button = tk.Button( self.content_frame, relief = "flat", command = self.open_settings )
-        self.settings_button.place( relx = 0.935, rely = 0, height = 25, width = 25, anchor = "nw" )
+        self.settings_button = ttk.Button( self.content_frame, style = "Settings.TButton", takefocus = 0, command = self.open_settings )
+        self.settings_button.place( relx = 0.934, rely = 0, height = 25, width = 25 )
 
         self.forms_frame = tk.Frame( self.content_frame )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
         
-        self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers )
-        self.check_button.place( relx = 0.42, rely = 0.88, relheight = 0.08, relwidth = 0.24 )
+        self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers, anchor = "center" )
+        self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.08, relwidth = 0.24, anchor = "center" )
         
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ), relief = "flat" )
         
@@ -183,18 +172,38 @@ class GUI:
             self.user_entries[ case_or_tempus ] = self.entries[ i ]
             
         if list( self.current_forms.keys() )[ 0 ] == "Nominativ_Singular":
-            self.check_button.place( relx = 0.45, rely = 0.87, relheight = 0.08, relwidth = 0.24 )
+            self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.08, relwidth = 0.24 )
         else:
-            self.check_button.place( relx = 0.42, rely = 0.62, relheight = 0.08, relwidth = 0.24 )
+            self.check_button.place( relx = 0.48, rely = 0.62, relheight = 0.08, relwidth = 0.24 )
             
         self.handle_resize()
         
         
     def open_settings( self ):
+        self.settings_button.config( command = self.dummy_method )
+        self.settings_button_image = Image.open( self.settings_disbledPNG_path )
+        self.adjust_image_button_size( self.settings_button_image )
+        
         settings_window = tk.Tk()
         settings_window.geometry( "300x450" )
         settings_window.title( "Einstellungen" )
+        settings_window.iconbitmap( self.icon_path )
+        settings_window.protocol( "WM_DELETE_WINDOW", lambda: self.on_close_settings( settings_window ) )
         
+        check_for_updates_button = tk.Button( settings_window, text = "Check for Updates" )
+        check_for_updates_button.place( relx = 0.6, rely = 0 )
+        
+        autoSelect_switch = tk.Checkbutton( settings_window, text = "autoselect" )
+        autoSelect_switch.place( relx = 0, rely = 0.2 )
+        
+        
+    def on_close_settings( self, settings_window ):
+        self.settings_button.config( command = self.open_settings )
+        self.settings_button_image = Image.open( self.settingsPNG_path )
+        self.adjust_image_button_size( self.settings_button_image )
+        self.FileAndChacheHandler.save_settings()
+        settings_window.destroy()
+                
     
     def on_frame_configure( self, event ):
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
@@ -231,7 +240,7 @@ class GUI:
         self.get_root_size()
         width_diff = abs( self.root_width - self.root_prev_width )
         height_diff = abs( self.root_height - self.root_prev_height )
-        minimum_diff = 2
+        minimum_diff = 1
         
         if now - self.last_resize_time < self.frameTime or self.resizing:
             return
@@ -242,7 +251,7 @@ class GUI:
         
     def on_close( self, event=None ):
         if time.time() - self.last_cache_clear < ( 30 * 24 * 60 * 60 ):
-            self.debug_print( "save and exit(on_close)" )
+            self.debug_print( "save and exit" )
             self.debug_print( f"time till next clear: { ( ( 30 * 24 * 60 * 60 ) - ( time.time() - self.last_cache_clear ) ) / ( 24 * 60 * 60 ) } days" )
             self.FileAndChacheHandler.save_cache()
             self.FileAndChacheHandler.save_settings()
@@ -255,7 +264,7 @@ class GUI:
                  
     def check_answers( self ):
         wrong = False
-        self.wrong_answers_per_case[ f"{ self.current_key }" ] = self.answers_wrong
+        self.wrong_answers_per_case[ self.current_key ] = self.answers_wrong
         
         for case_or_tempus, correct_answer in self.current_forms.items():
             
@@ -272,7 +281,7 @@ class GUI:
                 self.user_entries[ case_or_tempus ].config( fg = "red", state = "disabled", disabledforeground = "red" )
                 self.results[ case_or_tempus ] = False
                 
-        self.wrong_answers_per_case[ f"{ self.current_key }" ] += self.answers_wrong
+        self.wrong_answers_per_case[ self.current_key ] += self.answers_wrong
         if wrong:
             self.check_button.config( text = "Show Solutions", command = self.show_solutions ) 
         else:
@@ -317,20 +326,20 @@ class GUI:
             word_type = random.choice( choices )
             
         forms_mapping = {
-            "Nomen": ( self.declension_forms, self.declensions_nouns ),
-            "Verben": ( self.conjugation_forms, self.conjugations ),
-            "Adjektive": ( self.declensions_adjectives_forms, self.declensions_adjectives ),
-            "hic haec hoc": ( self.hic_haec_hoc_forms, self.hic_haec_hoc ),
-            "qui quae quod": ( self.qui_quae_quod_forms, self.qui_quae_quod ),
-            "ille illa illud": ( self.ille_illa_illud_forms, self.ille_illa_illud ),
-            "ipse ipsa ipsum": ( self.ipse_ipsa_ipsum_forms, self.ipse_ipsa_ipsum )
+            "Nomen": ("Nouns", list( random.sample( list( self.forms[ "Nouns" ].keys() ), len( self.forms[ "Nouns" ] ) ) ) ),
+            "Verben": ("Conjugations", list( random.sample( list( self.forms[ "Conjugations" ].keys() ), len( self.forms[ "Conjugations" ] ) ) ) ),
+            "Adjektive": ("Adjectives", list( random.sample( list( self.forms[ "Adjectives" ].keys() ), len( self.forms[ "Adjectives" ] ) ) ) ),
+            "hic haec hoc": ("hic_haec_hoc", list( random.sample( list( self.forms[ "hic_haec_hoc" ].keys() ), len( self.forms[ "hic_haec_hoc" ] ) ) ) ),
+            "qui quae quod": ("qui_quae_quod", list( random.sample( list( self.forms[ "qui_quae_quod" ].keys() ), len( self.forms[ "qui_quae_quod" ] ) ) ) ),
+            "ille illa illud": ("ille_illa_illud", list( random.sample( list( self.forms[ "ille_illa_illud" ].keys() ), len( self.forms[ "ille_illa_illud" ] ) ) ) ),
+            "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( random.sample( list( self.forms[ "ipse_ipsa_ipsum" ].keys() ), len( self.forms[ "ipse_ipsa_ipsum" ] ) ) ) ),
         }
 
         if word_type in forms_mapping:
-            forms_list, forms_dict = forms_mapping[ word_type ]
-            self.current_key = forms_list[ self.current_class_index ]
-            self.current_forms = forms_dict[ self.current_key ]
-            self.curent_word_type_amount_of_forms = len( forms_list )
+            key, sub_dicts = forms_mapping[ word_type ]
+            self.current_key = sub_dicts[ self.current_class_index ]
+            self.current_forms = self.forms[ key ][ sub_dicts[ self.current_class_index ] ]
+            self.curent_word_type_amount_of_forms = sub_dicts.__len__()
         else:
             messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
             shutil.copyfile( self.settings_default_path, self.settings_path )
@@ -359,7 +368,10 @@ class GUI:
             
             
     def reset_auto_select_progress( self ):
-        self.debug_print( "Finish me and make Data.py single dict" )
+        self.debug_print( "auto_select_progress was reset" )
+        for key in self.forms:
+            for key2 in self.forms[ key ]:
+                self.wrong_answers_per_case[ str( key2 ) ] = 1000
         self.first_start = False
         self.FileAndChacheHandler.save_settings()
     
@@ -372,9 +384,10 @@ class GUI:
         self.debug_print( f"Root size: { self.root_width }x{ self.root_height }" )
         
         self.adjust_canvas_window()
+        self.title.config( text = self.current_key )
         self.adjust_font_size( self.title, font_weight = "bold" )
         self.adjust_font_size( self.combobox_select_form, 0.83, 0.83 )
-        self.adjust_settings_button_size()
+        self.adjust_image_button_size( self.settings_button_image )
             
         for i in range( len( self.form_labels ) ):
             try:
@@ -454,7 +467,7 @@ class GUI:
         self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
         
         
-    def adjust_settings_button_size( self, size = 0.05 ):
+    def adjust_image_button_size( self, buttonImage, size = 0.05 ):
         self.root.update_idletasks()
         self.get_root_size()
         root_avg_size = ( self.root_width + self.root_width ) / 2
@@ -463,7 +476,7 @@ class GUI:
         if new_width > 60.0:
             new_width = 60
         
-        resized_image = self.settings_button_image.resize( ( math.floor( new_width ), math.floor( new_width ) ), Image.Resampling.LANCZOS )
+        resized_image = buttonImage.resize( ( math.floor( new_width ) - 1, math.floor( new_width ) - 1 ), Image.Resampling.LANCZOS )
         final_image = ImageTk.PhotoImage( resized_image )
         self.settings_button.config( image = final_image )
         self.settings_button.image = final_image
@@ -509,6 +522,10 @@ class GUI:
             result.append( current_line.strip() )
 
         return "\n".join( result )
+    
+    
+    def dummy_method( self, *args ):
+        pass
  
                       
     def debug_print( self, *toPrint ):
