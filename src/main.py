@@ -1,7 +1,7 @@
 import os
 import sys
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 
 from logic.fileAndCacheHandler import fileAndCacheHandler
 from logic.GUI import GUI

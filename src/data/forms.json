@@ -1226,8 +1226,80 @@
                 "Ablativ_Plural": "celeribus"
             }
         },
-        "Gerunds": {},
-        "Gerdundives": {},
+        "Gerunds": {
+            "A-Konjugation": {
+                "Genitiv": "amandi",
+                "Dativ": "amando",
+                "Akkusativ": "amandum",
+                "Ablativ": "amando"
+            },
+            "E-Konjugation": {
+                "Genitiv": "monendi",
+                "Dativ": "monendo",
+                "Akkusativ": "monendum",
+                "Ablativ": "monendo"
+            },
+            "Konsonantische Konjugation": {
+                "Genitiv": "regendi",
+                "Dativ": "regendo",
+                "Akkusativ": "regendum",
+                "Ablativ": "regendo"
+            },
+            "I-Konjugation": {
+                "Genitiv": "audiendi",
+                "Dativ": "audiendo",
+                "Akkusativ": "audiendum",
+                "Ablativ": "audiendo"
+            },
+            "Gemischte Konjugation": {
+                "Genitiv": "capiendi",
+                "Dativ": "capiendo",
+                "Akkusativ": "capiendum",
+                "Ablativ": "capiendo"
+            }
+        },
+        "Gerundives": {
+            "A-Konjugation": {
+                "Maskulinum_Singular": "amandus",
+                "Femininum_Singular": "amanda",
+                "Neutrum_Singular": "amandum",
+                "Maskulinum_Plural": "amandi",
+                "Femininum_Plural": "amandae",
+                "Neutrum_Plural": "amanda"
+            },
+            "E-Konjugation": {
+                "Maskulinum_Singular": "monendus",
+                "Femininum_Singular": "monenda",
+                "Neutrum_Singular": "monendum",
+                "Maskulinum_Plural": "monendi",
+                "Femininum_Plural": "monendae",
+                "Neutrum_Plural": "monenda"
+            },
+            "Konsonantische Konjugation": {
+                "Maskulinum_Singular": "regendus",
+                "Femininum_Singular": "regenda",
+                "Neutrum_Singular": "regendum",
+                "Maskulinum_Plural": "regendi",
+                "Femininum_Plural": "regendae",
+                "Neutrum_Plural": "regenda"
+            },
+            "I-Konjugation": {
+                "Maskulinum_Singular": "audiendus",
+                "Femininum_Singular": "audienda",
+                "Neutrum_Singular": "audiendum",
+                "Maskulinum_Plural": "audiendi",
+                "Femininum_Plural": "audiendae",
+                "Neutrum_Plural": "audienda"
+            },
+            "Gemischte Konjugation": {
+                "Maskulinum_Singular": "capiendus",
+                "Femininum_Singular": "capienda",
+                "Neutrum_Singular": "capiendum",
+                "Maskulinum_Plural": "capiendi",
+                "Femininum_Plural": "capiendae",
+                "Neutrum_Plural": "capienda"
+            }
+        },
         "hic_haec_hoc": {
             "hic": {
                 "Nominativ_Singular": "hic",

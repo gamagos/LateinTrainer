@@ -3,6 +3,7 @@ import os
 import random
 import shutil
 import sys
+import threading
 import time
 import tkinter as tk
 from datetime import datetime
@@ -27,9 +28,14 @@ class GUI:
         self.settings_default_path = os.path.join( self.project_path, "data", "default_settings.csv" )
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
         self.debug_log_path = os.path.join( self.project_path, "logs", "debug_log.txt" )
-        self.settingsPNG_path = os.path.join( self.project_path, "assets", "settings.png" )
-        self.settings_disbledPNG_path = os.path.join( self.project_path, "assets", "settings_disabled.png" )
+        self.settingsPNG_path = os.path.join( self.project_path, "assets/settings_button", "settings.png" )
+        self.settings_disbledPNG_path = os.path.join( self.project_path, "assets/settings_button", "settings_disabled.png" )
         self.settings_button_image = Image.open( self.settingsPNG_path )
+        self.autoSelect_switchPNGs_paths = [ os.path.join( self.project_path, "assets/autoSelect_switch", "switch_0.png" ),
+                                  os.path.join( self.project_path, "assets/autoSelect_switch", "switch_1.png" ),
+                                  os.path.join( self.project_path, "assets/autoSelect_switch", "switch_2.png" ),
+                                  os.path.join( self.project_path, "assets/autoSelect_switch", "switch_3.png" ),
+                                  os.path.join( self.project_path, "assets/autoSelect_switch", "switch_4.png" )]
         
         #settings
         self.debug = True      
@@ -72,6 +78,7 @@ class GUI:
         #UI Elements
         self.form_labels = []
         self.entries = []
+        self.autoSelect_image = None
         
         self.root = root
         self.root.title( "Latein Formen Trainer " + VERSION )
@@ -184,8 +191,9 @@ class GUI:
         self.settings_button_image = Image.open( self.settings_disbledPNG_path )
         self.adjust_image_button_size( self.settings_button_image )
         
-        settings_window = tk.Tk()
+        settings_window = tk.Toplevel( self.root )
         settings_window.geometry( "300x450" )
+        settings_window.resizable( False, False )
         settings_window.title( "Einstellungen" )
         settings_window.iconbitmap( self.icon_path )
         settings_window.protocol( "WM_DELETE_WINDOW", lambda: self.on_close_settings( settings_window ) )
@@ -193,8 +201,18 @@ class GUI:
         check_for_updates_button = tk.Button( settings_window, text = "Check for Updates" )
         check_for_updates_button.place( relx = 0.6, rely = 0 )
         
-        autoSelect_switch = tk.Checkbutton( settings_window, text = "autoselect" )
-        autoSelect_switch.place( relx = 0, rely = 0.2 )
+        #add image
+        autoSelect_label = tk.Label( settings_window, text = "Autoselect", font = ( "Arial", 12 ) )
+        
+        autoSelect_switch = tk.Label( settings_window, takefocus = 0 )
+        image = Image.open( self.autoSelect_switchPNGs_paths[ 4 ] ) if self.auto_select_on else Image.open( self.autoSelect_switchPNGs_paths[ 0 ] )
+        image_width, image_height = image.size
+        image = image.resize( ( math.floor( image_width * 0.1 ), math.floor( image_height * 0.1 ) ), Image.Resampling.LANCZOS )
+        self.autoSelect_image = ImageTk.PhotoImage( image )
+        autoSelect_label.place( relx = 0.02, rely = 0.02 )
+        autoSelect_switch.config( image = self.autoSelect_image )
+        autoSelect_switch.image = self.autoSelect_image
+        autoSelect_switch.place( relx = 0.3, rely = 0.02 )
         
         
     def on_close_settings( self, settings_window ):
@@ -484,6 +502,29 @@ class GUI:
         self.debug_print( "settings_button: new width: ", new_width )
         self.settings_button.place(  relx = 0.934, rely = 0, width = new_width, height = new_width, anchor = "nw" ) #2 times width because its a square
         return new_width
+    
+    
+    def play_animation( self, widget, image_paths, direction_forward = True, duration = 7 ):
+        def animation():
+            fward = 1 if direction_forward else -1  # Set the step based on direction
+            start = 0 if direction_forward else len(image_paths) - 1
+            end = len(image_paths) if direction_forward else -1
+
+            frame_duration = duration / len( image_paths )
+            for i in range( start, end, fward ):
+                start_time = time.perf_counter()
+                
+                image = Image.open( image_paths[i] )       
+                image_size = image.size()
+                image = image.resize( image_size * 0.1 )
+                final_image = ImageTk.PhotoImage( image )
+                self.root.after( 0, widget.config( image = final_image ) )
+                self.root.after( 0, setattr, widget, "image", final_image )
+                self.root.after( duration / len( image_paths ) )
+                
+                while time.perf_counter() - start_time < frame_duration:
+                    time.sleep( self.frameTime )
+        threading.Thread( target = animation, daemon = True )              
             
             
     def get_refresh_rate( self ):
@@ -506,7 +547,7 @@ class GUI:
         self.root_height = self.root.winfo_height()
         
         
-    def add_newline_if_too_long( self, text, max_length = 33 ):
+    def add_newline_if_too_long( self, text, max_length = 30 ):
         words = text.split()
         result = []
         current_line = ""

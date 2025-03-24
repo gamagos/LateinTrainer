@@ -3,3 +3,4 @@ tests=False
 selected_option=Nomen
 last_clear_cache=1741358192.0745842
 first_start=False
+auto_select_on=False
