@@ -42,7 +42,7 @@ class GUI:
         self.tests = False
         self.first_start = False
         self.selected_option = tk.StringVar()
-        self.auto_select_on = tk.BooleanVar()
+        self.autoSelect_on = False
         
         #UI State
         self.frame_initialized_correctly = False
@@ -200,19 +200,19 @@ class GUI:
         
         check_for_updates_button = tk.Button( settings_window, text = "Check for Updates" )
         check_for_updates_button.place( relx = 0.6, rely = 0 )
-        
-        #add image
-        autoSelect_label = tk.Label( settings_window, text = "Autoselect", font = ( "Arial", 12 ) )
-        
+
         autoSelect_switch = tk.Label( settings_window, takefocus = 0 )
-        image = Image.open( self.autoSelect_switchPNGs_paths[ 4 ] ) if self.auto_select_on else Image.open( self.autoSelect_switchPNGs_paths[ 0 ] )
+        image = Image.open( self.autoSelect_switchPNGs_paths[ 4 ] ) if self.autoSelect_on else Image.open( self.autoSelect_switchPNGs_paths[ 0 ] )
         image_width, image_height = image.size
         image = image.resize( ( math.floor( image_width * 0.1 ), math.floor( image_height * 0.1 ) ), Image.Resampling.LANCZOS )
         self.autoSelect_image = ImageTk.PhotoImage( image )
-        autoSelect_label.place( relx = 0.02, rely = 0.02 )
         autoSelect_switch.config( image = self.autoSelect_image )
         autoSelect_switch.image = self.autoSelect_image
+        autoSelect_switch.bind( "<Button-1>", lambda event: self.on_autoSelect_switch( event, autoSelect_switch ) )
         autoSelect_switch.place( relx = 0.3, rely = 0.02 )
+        
+        autoSelect_label = tk.Label( settings_window, text = "Autoselect", font = ( "Arial", 12 ) )
+        autoSelect_label.place( relx = 0.02, rely = 0.02 )
         
         
     def on_close_settings( self, settings_window ):
@@ -221,6 +221,15 @@ class GUI:
         self.adjust_image_button_size( self.settings_button_image )
         self.FileAndChacheHandler.save_settings()
         settings_window.destroy()
+        
+        
+    def on_autoSelect_switch( self, event, widget ):
+        self.autoSelect_on = not self.autoSelect_on
+        widget.unbind( "<Button-1>" )
+        self.debug_print( "auto_select_on =", self.autoSelect_on )
+        self.play_animation( widget, self.autoSelect_switchPNGs_paths, self.autoSelect_on )
+        widget.bind( "<Button-1>", lambda event: self.on_autoSelect_switch( event, widget ) )
+        self.FileAndChacheHandler.save_settings()
                 
     
     def on_frame_configure( self, event ):
@@ -499,12 +508,11 @@ class GUI:
         self.settings_button.config( image = final_image )
         self.settings_button.image = final_image
 
-        self.debug_print( "settings_button: new width: ", new_width )
         self.settings_button.place(  relx = 0.934, rely = 0, width = new_width, height = new_width, anchor = "nw" ) #2 times width because its a square
         return new_width
     
     
-    def play_animation( self, widget, image_paths, direction_forward = True, duration = 7 ):
+    def play_animation( self, widget, image_paths, direction_forward = True, duration = 0.065 ):
         def animation():
             fward = 1 if direction_forward else -1  # Set the step based on direction
             start = 0 if direction_forward else len(image_paths) - 1
@@ -515,16 +523,16 @@ class GUI:
                 start_time = time.perf_counter()
                 
                 image = Image.open( image_paths[i] )       
-                image_size = image.size()
-                image = image.resize( image_size * 0.1 )
+                image_width, image_height = image.size
+                image = image.resize( ( math.floor( image_width * 0.1 ), math.floor( image_height * 0.1 ) ), Image.Resampling.LANCZOS )
                 final_image = ImageTk.PhotoImage( image )
                 self.root.after( 0, widget.config( image = final_image ) )
                 self.root.after( 0, setattr, widget, "image", final_image )
-                self.root.after( duration / len( image_paths ) )
+                self.root.update()
                 
                 while time.perf_counter() - start_time < frame_duration:
                     time.sleep( self.frameTime )
-        threading.Thread( target = animation, daemon = True )              
+        threading.Thread( target = animation, daemon = True ).start()       
             
             
     def get_refresh_rate( self ):
