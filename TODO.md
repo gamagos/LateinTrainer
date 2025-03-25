@@ -2,10 +2,9 @@ Fiaults To do List
 
 -make more features( settings what to learn, auto_select... )
 -organize code
+-make a class or sum for the slider
 -add darkmode
 -make better icon
--fill adjectives in Data.py
--add gerundien
 -add more grammar forms
 -make UI look nicer, make title and check button align, maybe make labels allign with title
 -optimize code
