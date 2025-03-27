@@ -4,6 +4,7 @@ Fiaults To do List
 -organize code
 -make a class or sum for the slider
 -add darkmode
+-make animation for when mouse is touching an object
 -make better icon
 -add more grammar forms
 -make UI look nicer, make title and check button align, maybe make labels allign with title

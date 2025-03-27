@@ -69,6 +69,7 @@ class GUI:
         
         #Data
         self.forms = self.FileAndChacheHandler.load_json( self.forms_path )[ "forms" ]
+        self.choices = [ "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum", "Gerundien", "Gerundiven" ]
         self.current_class_index = 0
         self.user_entries = {}
         self.results = {}
@@ -79,6 +80,7 @@ class GUI:
         self.form_labels = []
         self.entries = []
         self.autoSelect_image = None
+        self.settings_window = None
         
         self.root = root
         self.root.title( "Latein Formen Trainer " + VERSION )
@@ -137,7 +139,7 @@ class GUI:
         self.title.place( relx = 0.48, rely = 0.09, relheight = 0.17, relwidth = 0.93, anchor = "center" )
         
         self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option,
-                                                  values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
+                                                  values = self.choices ) 
         self.combobox_select_form.place( relx = 0.93 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
@@ -326,20 +328,20 @@ class GUI:
         self.settings_button_image = Image.open( self.settings_disbledPNG_path )
         self.adjust_image_button_size( self.settings_button_image )
         
-        settings_window = tk.Toplevel( self.root )
-        settings_window.geometry( "300x450" )
-        settings_window.resizable( False, False )
-        settings_window.title( "Einstellungen" )
-        settings_window.iconbitmap( self.icon_path )
-        settings_window.protocol( "WM_DELETE_WINDOW", lambda: self.on_close_settings( settings_window ) )
+        self.settings_window = tk.Toplevel( self.root )
+        self.settings_window.geometry( "300x450" )
+        self.settings_window.resizable( False, False )
+        self.settings_window.title( "Einstellungen" )
+        self.settings_window.iconbitmap( self.icon_path )
+        self.settings_window.protocol( "WM_DELETE_WINDOW", lambda: self.on_close_settings( self.settings_window ) )
         
-        check_for_updates_button = tk.Button( settings_window, text = "Check for Updates", font = ( "Arial", 12 ) )
+        check_for_updates_button = tk.Button( self.settings_window, text = "Check for Updates", font = ( "Arial", 12 ) )
         check_for_updates_button.place( relx = 0, rely = 0 )
         
-        forms_settings_label = tk.Label( settings_window, text = "-----------------------Form Einstellungen-----------------------", font = ( "Arial", 10 ) )
+        forms_settings_label = tk.Label( self.settings_window, text = "-----------------------Form Einstellungen-----------------------", font = ( "Arial", 10 ) )
         forms_settings_label.place( relx = 0, rely = 0.11 )
 
-        autoSelect_switch = tk.Label( settings_window, takefocus = 0 )
+        autoSelect_switch = tk.Label( self.settings_window, takefocus = 0 )
         image = Image.open( self.autoSelect_switchPNGs_paths[ 4 ] ) if self.autoSelect_on else Image.open( self.autoSelect_switchPNGs_paths[ 0 ] )
         image_width, image_height = image.size
         image = image.resize( ( math.floor( image_width * 0.1 ), math.floor( image_height * 0.1 ) ), Image.Resampling.LANCZOS )
@@ -349,10 +351,10 @@ class GUI:
         autoSelect_switch.bind( "<Button-1>", lambda event: self.on_autoSelect_switch( event, autoSelect_switch ) )
         autoSelect_switch.place( relx = 0.4, rely = 0.17 )
         
-        autoSelect_label = tk.Label( settings_window, text = "Autoselect", font = ( "Arial", 12 ) )
+        autoSelect_label = tk.Label( self.settings_window, text = "Autoselect", font = ( "Arial", 12 ) )
         autoSelect_label.place( relx = 0.04, rely = 0.17 )
         
-        autoSelect_reset_Button = tk.Button( settings_window, text = "Autoselect Fortschritt zurücksetzen", font = ( "Arial", 12 ), command = self.reset_auto_select_progress )
+        autoSelect_reset_Button = tk.Button( self.settings_window, text = "Autoselect Fortschritt zurücksetzen", font = ( "Arial", 12 ), command = self.reset_auto_select_progress )
         autoSelect_reset_Button.place( relx = 0.04, rely = 0.24 )
         
     
@@ -433,35 +435,36 @@ class GUI:
     def form_select( self ):
         word_type = self.selected_option.get()
         if word_type == "Alle":
-            choices = [ "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ]
-            word_type = random.choice( choices )
+            word_type = random.choice( self.choices )
         
         if not self.autoSelect_on:
             forms_mapping = {
-                "Nomen": ("Nouns", list( random.sample( list( self.forms[ "Nouns" ].keys() ), len( self.forms[ "Nouns" ] ) ) ) ),
-                "Verben": ("Conjugations", list( random.sample( list( self.forms[ "Conjugations" ].keys() ), len( self.forms[ "Conjugations" ] ) ) ) ),
-                "Adjektive": ("Adjectives", list( random.sample( list( self.forms[ "Adjectives" ].keys() ), len( self.forms[ "Adjectives" ] ) ) ) ),
-                "hic haec hoc": ("hic_haec_hoc", list( random.sample( list( self.forms[ "hic_haec_hoc" ].keys() ), len( self.forms[ "hic_haec_hoc" ] ) ) ) ),
-                "qui quae quod": ("qui_quae_quod", list( random.sample( list( self.forms[ "qui_quae_quod" ].keys() ), len( self.forms[ "qui_quae_quod" ] ) ) ) ),
+                "Nomen": ("Nouns", list( random.sample( list( self.forms["Nouns"].keys() ), len( self.forms["Nouns"] ) ) ) ),
+                "Verben": ("Conjugations", list( random.sample( list( self.forms["Conjugations"].keys() ), len( self.forms["Conjugations"] ) ) ) ),
+                "Adjektive": ("Adjectives", list( random.sample( list( self.forms["Adjectives"].keys() ), len( self.forms["Adjectives"] ) ) ) ),
+                "hic haec hoc": ("hic_haec_hoc", list( random.sample( list( self.forms["hic_haec_hoc"].keys() ), len( self.forms["hic_haec_hoc"] ) ) ) ),
+                "qui quae quod": ("qui_quae_quod", list( random.sample( list( self.forms["qui_quae_quod"].keys() ), len( self.forms["qui_quae_quod"] ) ) ) ),
                 "ille illa illud": ("ille_illa_illud", list( random.sample( list( self.forms[ "ille_illa_illud" ].keys() ), len( self.forms[ "ille_illa_illud" ] ) ) ) ),
                 "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( random.sample( list( self.forms[ "ipse_ipsa_ipsum" ].keys() ), len( self.forms[ "ipse_ipsa_ipsum" ] ) ) ) ),
+                "Gerundien": ("Gerunds", list( random.sample( list( self.forms["Gerunds"].keys(), len( self.forms["Gerunds"] ) ) ) ) ),
+                "Gerundiven": ("Gerundives"),
             }
         else:
             forms_mapping = {
-                "Nomen": ("Nouns", list( random.sample( list( self.forms[ "Nouns" ].keys() ), len( self.forms[ "Nouns" ] ) ) ) ),
-                "Verben": ("Conjugations", list( random.sample( list( self.forms[ "Conjugations" ].keys() ), len( self.forms[ "Conjugations" ] ) ) ) ),
-                "Adjektive": ("Adjectives", list( random.sample( list( self.forms[ "Adjectives" ].keys() ), len( self.forms[ "Adjectives" ] ) ) ) ),
-                "hic haec hoc": ("hic_haec_hoc", list( random.sample( list( self.forms[ "hic_haec_hoc" ].keys() ), len( self.forms[ "hic_haec_hoc" ] ) ) ) ),
-                "qui quae quod": ("qui_quae_quod", list( random.sample( list( self.forms[ "qui_quae_quod" ].keys() ), len( self.forms[ "qui_quae_quod" ] ) ) ) ),
-                "ille illa illud": ("ille_illa_illud", list( random.sample( list( self.forms[ "ille_illa_illud" ].keys() ), len( self.forms[ "ille_illa_illud" ] ) ) ) ),
-                "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( random.sample( list( self.forms[ "ipse_ipsa_ipsum" ].keys() ), len( self.forms[ "ipse_ipsa_ipsum" ] ) ) ) ),
+                "Nomen": ("Nouns", list( self.forms[ "Nouns" ].keys() ) ),
+                "Verben": ("Conjugations", list( self.forms[ "Conjugations" ].keys() ) ),
+                "Adjektive": ("Adjectives", list( self.forms[ "Adjectives" ].keys() ) ),
+                "hic haec hoc": ("hic_haec_hoc", list( self.forms[ "hic_haec_hoc" ].keys() ) ),
+                "qui quae quod": ("qui_quae_quod", list( self.forms[ "qui_quae_quod" ].keys() ) ),
+                "ille illa illud": ("ille_illa_illud", list( self.forms[ "ille_illa_illud" ].keys() ) ),
+                "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( self.forms[ "ipse_ipsa_ipsum" ].keys() ) ),
             }
             
         if word_type in forms_mapping:
-            key, sub_dicts = forms_mapping[ word_type ]
-            self.current_key = sub_dicts[ self.current_class_index ]
-            self.current_forms = self.forms[ key ][ sub_dicts[ self.current_class_index ] ]
-            self.curent_word_type_amount_of_forms = sub_dicts.__len__()
+            key, sub_dicts_array = forms_mapping[ word_type ]
+            self.current_key = sub_dicts_array[ self.current_class_index ]
+            self.current_forms = self.forms[ key ][ sub_dicts_array[ self.current_class_index ] ]
+            self.curent_word_type_amount_of_forms = sub_dicts_array.__len__()
         else:
             messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
             shutil.copyfile( self.settings_default_path, self.settings_path )
@@ -551,7 +554,12 @@ class GUI:
             
             
     def reset_auto_select_progress( self ):
-        c0ntinue =  messagebox.askyesno( "Warnung", "Aller Autoselect Lern Fortschritt wird hiermit zurückgesetzt.\nDas heißt das Program wird nicht mehr wissen wie gut sie in welchen Formen sind.\n\nTrotzdem fortfahren?" )
+        self.root.grab_set()
+        c0ntinue =  messagebox.askyesno( "Warnung", "Aller Autoselect Lern Fortschritt wird hiermit zurückgesetzt.\n"
+                                        "Das heißt das Program wird nicht mehr wissen wie gut sie in welchen Formen sind.\n\n"
+                                        "Trotzdem fortfahren?" )
+        self.root.grab_release()
+        self.settings_window.deiconify()
         print( c0ntinue )
         if not c0ntinue:
             return
