@@ -97,7 +97,7 @@ class GUI:
         self.main_frame.bind( "<Leave>", self.on_scrollbars_leave )
         self.main_frame.place( relheight = 1, relwidth = 1, )
         
-        self.canvas = tk.Canvas( self.main_frame, relief = "flat", borderwidth = 0 )
+        self.canvas = tk.Canvas( self.main_frame, relief = "flat", borderwidth = 0, highlightthickness = 0 ,highlightcolor = "white" )
         self.canvas.place( relheight = 0.95, relwidth = 0.95 )
         self.canvas.bind( "<Enter>", self.on_scrollbars_leave )
         self.canvas.bind( "<Leave>", self.on_scrollbars_enter )
@@ -130,7 +130,7 @@ class GUI:
     
     #UI
     def create_widgets( self ):
-        self.content_frame = tk.Frame( self.canvas, relief = "flat" )
+        self.content_frame = tk.Frame( self.canvas, relief = "flat", borderwidth = 0, highlightthickness = 0 )
         self.content_frame.bind( "<Enter>", self.check_answers )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
@@ -446,8 +446,8 @@ class GUI:
                 "qui quae quod": ("qui_quae_quod", list( random.sample( list( self.forms["qui_quae_quod"].keys() ), len( self.forms["qui_quae_quod"] ) ) ) ),
                 "ille illa illud": ("ille_illa_illud", list( random.sample( list( self.forms[ "ille_illa_illud" ].keys() ), len( self.forms[ "ille_illa_illud" ] ) ) ) ),
                 "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( random.sample( list( self.forms[ "ipse_ipsa_ipsum" ].keys() ), len( self.forms[ "ipse_ipsa_ipsum" ] ) ) ) ),
-                "Gerundien": ("Gerunds", list( random.sample( list( self.forms["Gerunds"].keys(), len( self.forms["Gerunds"] ) ) ) ) ),
-                "Gerundiven": ("Gerundives"),
+                "Gerundien": ("Gerunds", list( random.sample( list( self.forms["Gerunds"].keys() ), len( self.forms["Gerunds"] ) ) ) ),
+                "Gerundiven": ("Gerundives", list( random.sample( list( self.forms["Gerundives"].keys() ), len( self.forms["Gerundives"] ) ) ) ),
             }
         else:
             forms_mapping = {
@@ -458,6 +458,8 @@ class GUI:
                 "qui quae quod": ("qui_quae_quod", list( self.forms[ "qui_quae_quod" ].keys() ) ),
                 "ille illa illud": ("ille_illa_illud", list( self.forms[ "ille_illa_illud" ].keys() ) ),
                 "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( self.forms[ "ipse_ipsa_ipsum" ].keys() ) ),
+                "Gerundien": ("Gerunds", list( self.forms["Gerunds"].keys() ) ),
+                "Gerundiven": ("Gerundives", list( self.forms["Gerundives"].keys() ) ),
             }
             
         if word_type in forms_mapping:
