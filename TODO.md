@@ -15,6 +15,7 @@ Fiaults To do List
 -make updater
 -make the exe with nukita or some better compiler
 -make more antivirus friendly
+-make enter go down the entries and add more keyboard control
 -----------------------------------------------
 Schiesslers To Do List
 -----------------------------------------------
