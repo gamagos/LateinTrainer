@@ -69,7 +69,7 @@ class GUI:
         
         #Data
         self.forms = self.FileAndChacheHandler.load_json( self.forms_path )[ "forms" ]
-        self.choices = [ "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum", "Gerundien", "Gerundiven" ]
+        self.choices = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum", "Gerundien", "Gerundiven" ]
         self.current_class_index = 0
         self.user_entries = {}
         self.results = {}
