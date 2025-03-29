@@ -53,7 +53,7 @@ class GUI:
         style.map( "Settings.TButton",
                    background = [ ( "disabled", "white" ), ( "!disabled", "white" ) ],
                    foreground = [ ( "disabled", "white" ), ( "!disabled", "white" ) ], )
-        style.configure( "TCombobox", fieldbackground = "white", background = "white")
+        style.configure( "TCombobox", fieldbackground = "white", background = "white", color = "white")
         
         #Cache and Performance
         self.FileAndChacheHandler = fileAndCacheHandler( self )
@@ -84,12 +84,12 @@ class GUI:
         self.root.protocol( "WM_DELETE_WINDOW", self.on_close )
         self.debug_print( "Root was initialized" )
         
-        self.main_frame = tk.Frame( self.root, relief = "flat", bg = "white" )
+        self.main_frame = tk.Frame( self.root, relief = "flat" )
         self.main_frame.bind( "<Enter>", self.on_scrollbars_enter )
         self.main_frame.bind( "<Leave>", self.on_scrollbars_leave )
         self.main_frame.place( relheight = 1, relwidth = 1, )
         
-        self.canvas = tk.Canvas( self.main_frame, relief = "flat", borderwidth = 0, bg = "white" )
+        self.canvas = tk.Canvas( self.main_frame, relief = "flat", borderwidth = 0 )
         self.canvas.place( relheight = 0.95, relwidth = 0.95 )
         self.canvas.bind( "<Enter>", self.on_scrollbars_leave )
         self.canvas.bind( "<Leave>", self.on_scrollbars_enter )
@@ -121,17 +121,16 @@ class GUI:
         
         
     def create_widgets( self ):
-        self.content_frame = tk.Frame( self.canvas, relief = "flat", bg = "white" )
+        self.content_frame = tk.Frame( self.canvas, relief = "flat", borderwidth = 0 )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
         self.title = tk.Label( self.content_frame, text = f"{ self.add_newline_if_too_long( self.current_key ) }",
-                               anchor = "center", justify = "left", bg = "white" )
+                               anchor = "center", justify = "left" )
         self.title.place( relx = 0.48, rely = 0.09, relheight = 0.17, relwidth = 0.93, anchor = "center" )
         
         self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option,
                                                   values = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", 
-                                                            "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ],
-                                                  style = "TCombobox" ) 
+                                                            "qui quae quod", "ille illa illud", "ipse ipsa ipsum" ] ) 
         self.combobox_select_form.place( relx = 0.93 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
@@ -139,7 +138,7 @@ class GUI:
         self.settings_button = ttk.Button( self.content_frame, style = "Settings.TButton", takefocus = 0, command = self.open_settings )
         self.settings_button.place( relx = 0.934, rely = 0, height = 25, width = 25 )
 
-        self.forms_frame = tk.Frame( self.content_frame )
+        self.forms_frame = tk.Frame( self.content_frame, bg = "white" )
         self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
         
         self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers, anchor = "center" )
@@ -172,7 +171,7 @@ class GUI:
                 self.entries[ i ].config( state = "disabled", disabledforeground = "gray" )
                 
             self.entries[ i ].place( relx = 0.42, rely = 0.09 * separation_form_tabel, relwidth = 0.58, relheight = 0.09 )
-            self.user_entries[ case_or_tempus ] = self.entries[ i ]
+            self.user_entries[ case_or_tempus ] = self.entries[i]
             
         if list( self.current_forms.keys() )[ 0 ] == "Nominativ_Singular":
             self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.08, relwidth = 0.24 )
@@ -247,7 +246,7 @@ class GUI:
         self.get_root_size()
         width_diff = abs( self.root_width - self.root_prev_width )
         height_diff = abs( self.root_height - self.root_prev_height )
-        minimum_diff = 1
+        minimum_diff = 5
         
         if now - self.last_resize_time < self.frameTime or self.resizing:
             return
@@ -366,7 +365,6 @@ class GUI:
             
             for widget in self.forms_frame.winfo_children():
                 widget.destroy()
-                
             self.user_entries = {}
             self.results = {}
             self.form_labels = []

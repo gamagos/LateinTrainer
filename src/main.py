@@ -23,6 +23,7 @@ except Exception as e:
 
 root = tk.Tk()
 root.geometry( "700x700" )
+root.configure(bg = "white")  # Set root background to white
 app = GUI( root )
 FileAndCacheHandler = fileAndCacheHandler( app )
 root.mainloop()
