@@ -1,0 +1,15 @@
+build/
+*.code-workspace
+code-workspace
+dist/
+font_cache.json
+_internal
+LateinTrainer.code-workspace
+logs/
+__pycache__/
+temporary/
+*.tmp
+*.tmp.driveupload/
+*.tmp.driveupload
+workspace
+wrong_answers_per_case.json
