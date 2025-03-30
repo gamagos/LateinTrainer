@@ -27,7 +27,7 @@ class fileAndCacheHandler:
                     self.gui_instance.selected_option.set( contents[ 2 ].split( "=" )[ 1 ].strip() )
                     self.gui_instance.last_cache_clear = double( contents[ 3 ].split( "=" )[ 1 ].strip() )
                     self.gui_instance.first_start = "True" == contents[ 4 ].split( "=" )[ 1 ].strip()
-                    self.gui_instance.auto_select_on = "True" == contents[ 5 ].split( "=" )[ 1 ].strip()
+                    self.gui_instance.autoSelect_on = "True" == contents[ 5 ].split( "=" )[ 1 ].strip()
                     self.gui_instance.debug_print( "settings were read successfully:" )
                     self.gui_instance.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in contents ] ) )
                                   
@@ -60,7 +60,8 @@ class fileAndCacheHandler:
                 settings[ 0 ] = f"debug={ self.gui_instance.debug }\n"
                 settings[ 1 ] = f"tests={ self.gui_instance.tests }\n"
                 settings[ 2 ] = f"selected_option={ self.gui_instance.selected_option.get() }\n"
-                settings[ 4 ] = F"first_start={ self.gui_instance.first_start }"
+                settings[ 4 ] = f"first_start={ self.gui_instance.first_start }\n"
+                settings[ 5 ] = f"autoSelect_on={ self.gui_instance.autoSelect_on }\n"
                 file.seek( 0 )
                 file.writelines( settings )
                 file.truncate()

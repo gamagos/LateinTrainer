@@ -1,7 +1,7 @@
 import os
 import sys
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 
 from logic.fileAndCacheHandler import fileAndCacheHandler
 from logic.GUI import GUI
@@ -25,4 +25,5 @@ root = tk.Tk()
 root.geometry( "700x700" )
 app = GUI( root )
 FileAndCacheHandler = fileAndCacheHandler( app )
+app.debug_print( "!!!@gamagos Please use the real main.py this is a workaround to make vsc throw the errors" )
 root.mainloop()

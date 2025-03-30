@@ -18,4 +18,8 @@
 
         21.03.2025
 -fixed an issue where the ui would not resize correctly when you hit fullscreen
--
+
+        22.03.2025-28.03.2025
+-added gerunds and gerundives
+-made settings menu
+-made crashed in main get written to log and shown to user

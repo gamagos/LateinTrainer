@@ -1,6 +1,6 @@
-This is a Latin Trainer for myself and maybe Friends to learn the endings of words in different cases.
-This program is NOT meant to be used by others and is only for me to learn Latin and the use of git and github in coding so don't be surprised if things are weird or buggy. Even though feel free to use it anyways, you have been warned!
+This is a German Latin Grammer Forms Trainer I made for my and my friends.
+Its probably very buggy so please report bugs to me on the issues page on the github.
 
-     Made by:
+Made by:
 Sebastian Fiault, 
 Sebastian Jonas Schiessler
