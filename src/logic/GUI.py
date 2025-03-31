@@ -447,9 +447,13 @@ class GUI:
                 "ille illa illud": ("ille_illa_illud", list( random.sample( list( self.forms[ "ille_illa_illud" ].keys() ), len( self.forms[ "ille_illa_illud" ] ) ) ) ),
                 "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( random.sample( list( self.forms[ "ipse_ipsa_ipsum" ].keys() ), len( self.forms[ "ipse_ipsa_ipsum" ] ) ) ) ),
                 "Gerundien": ("Gerunds", list( random.sample( list( self.forms["Gerunds"].keys(), len( self.forms["Gerunds"] ) ) ) ) ),
-                "Gerundiven": ("Gerundives"),
+                "Gerundiven": ("Gerundives", list( random.sample( list( self.forms["Gerundives"].keys(), len( self.forms["Gerundives"]) ) ) ) ),
             }
         else:
+            if not os.path.exists(self.wrong_answers_per_case_path):
+                self.reset_auto_select_progress()
+                self.debug_print( "AutoSelect progress was reset (GUI.form_select)" )
+            
             forms_mapping = {
                 "Nomen": ("Nouns", list( self.forms[ "Nouns" ].keys() ) ),
                 "Verben": ("Conjugations", list( self.forms[ "Conjugations" ].keys() ) ),
@@ -458,9 +462,12 @@ class GUI:
                 "qui quae quod": ("qui_quae_quod", list( self.forms[ "qui_quae_quod" ].keys() ) ),
                 "ille illa illud": ("ille_illa_illud", list( self.forms[ "ille_illa_illud" ].keys() ) ),
                 "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( self.forms[ "ipse_ipsa_ipsum" ].keys() ) ),
+                "Gerundien": ("Gerunds", list( self.forms["Gerunds"].keys() ) ),
+                "Gerundiven": ("Gerundives", list( self.forms["Gerundives"].keys() ) ),
             }
             
         if word_type in forms_mapping:
+            print( forms_mapping )
             key, sub_dicts_array = forms_mapping[ word_type ]
             self.current_key = sub_dicts_array[ self.current_class_index ]
             self.current_forms = self.forms[ key ][ sub_dicts_array[ self.current_class_index ] ]

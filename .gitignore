@@ -1,7 +1,9 @@
 build/
 *.code-workspace
 code-workspace
+/dist
 dist/
+dist
 font_cache.json
 _internal
 LateinTrainer.code-workspace
