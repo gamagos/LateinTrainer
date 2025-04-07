@@ -446,8 +446,8 @@ class GUI:
                 "qui quae quod": ("qui_quae_quod", list( random.sample( list( self.forms["qui_quae_quod"].keys() ), len( self.forms["qui_quae_quod"] ) ) ) ),
                 "ille illa illud": ("ille_illa_illud", list( random.sample( list( self.forms[ "ille_illa_illud" ].keys() ), len( self.forms[ "ille_illa_illud" ] ) ) ) ),
                 "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( random.sample( list( self.forms[ "ipse_ipsa_ipsum" ].keys() ), len( self.forms[ "ipse_ipsa_ipsum" ] ) ) ) ),
-                "Gerundien": ("Gerunds", list( random.sample( list( self.forms["Gerunds"].keys(), len( self.forms["Gerunds"] ) ) ) ) ),
-                "Gerundiven": ("Gerundives", list( random.sample( list( self.forms["Gerundives"].keys(), len( self.forms["Gerundives"]) ) ) ) ),
+                "Gerundien": ("Gerunds", list( random.sample( list( self.forms["Gerunds"].keys() ), len( self.forms["Gerunds"] ) ) ) ),
+                "Gerundiven": ("Gerundives", list( random.sample( list( self.forms["Gerundives"].keys() ), len( self.forms["Gerundives"]) ) ) ),
             }
         else:
             if not os.path.exists(self.wrong_answers_per_case_path):
@@ -467,7 +467,6 @@ class GUI:
             }
             
         if word_type in forms_mapping:
-            print( forms_mapping )
             key, sub_dicts_array = forms_mapping[ word_type ]
             self.current_key = sub_dicts_array[ self.current_class_index ]
             self.current_forms = self.forms[ key ][ sub_dicts_array[ self.current_class_index ] ]
