@@ -97,7 +97,7 @@ class GUI:
         self.main_frame.bind( "<Leave>", self.on_scrollbars_leave )
         self.main_frame.place( relheight = 1, relwidth = 1, )
         
-        self.canvas = tk.Canvas( self.main_frame, relief = "flat", borderwidth = 0 )
+        self.canvas = tk.Canvas( self.main_frame, relief = "flat", borderwidth = 0, highlightthickness = 0 ,highlightcolor = "white" )
         self.canvas.place( relheight = 0.95, relwidth = 0.95 )
         self.canvas.bind( "<Enter>", self.on_scrollbars_leave )
         self.canvas.bind( "<Leave>", self.on_scrollbars_enter )
@@ -130,7 +130,7 @@ class GUI:
     
     #UI
     def create_widgets( self ):
-        self.content_frame = tk.Frame( self.canvas, relief = "flat" )
+        self.content_frame = tk.Frame( self.canvas, relief = "flat", borderwidth = 0, highlightthickness = 0 )
         self.content_frame.bind( "<Enter>", self.check_answers )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
