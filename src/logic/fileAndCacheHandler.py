@@ -138,6 +138,11 @@ class fileAndCacheHandler:
         toWrites = list( toWrite )
         if path is None:
             path = self.gui_instance.debug_log_path
+            
+        if not os.path.exists( path ):
+            os.makedirs( os.path.dirname(path) )
+            with open( path, "w" ) as file:
+                file.write( "" )
         
         if not os.path.getsize( path ) == 0:
             toWrites[ 0 ] = "\n" + toWrites[ 0 ]
