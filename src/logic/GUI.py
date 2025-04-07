@@ -173,7 +173,7 @@ class GUI:
             self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), anchor = "w" ) )
             self.form_labels[ i ].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
-            self.entries.append( tk.Entry( self.forms_frame ) )
+            self.entries.append( tk.Entry( self.forms_frame, state = "enabled" ) )
             
             if case_or_tempus == "Nominativ_Singular" or case_or_tempus == "1._Person_Singular":
                 self.entries[ i ].insert( 0, correct_answer )
