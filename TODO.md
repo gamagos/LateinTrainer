@@ -14,6 +14,7 @@ Fiaults To do List
 -make debug print tell where error comes from
 -make updater
 -make the exe with nukita or some better compiler
+-switch Framework to PyQT or something
 -make more antivirus friendly
 -----------------------------------------------
 Schiesslers To Do List

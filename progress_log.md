@@ -23,3 +23,7 @@
 -added gerunds and gerundives
 -made settings menu
 -made crashed in main get written to log and shown to user
+
+        07.04.2025
+-fixed weird branches in git
+-fixed reset_autoSelect_progress
