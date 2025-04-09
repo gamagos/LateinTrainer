@@ -31,11 +31,13 @@ class GUI:
         self.settingsPNG_path = os.path.join( self.project_path, "assets/settings_button", "settings.png" )
         self.settings_disbledPNG_path = os.path.join( self.project_path, "assets/settings_button", "settings_disabled.png" )
         self.settings_button_image = Image.open( self.settingsPNG_path )
-        self.autoSelect_switchPNGs_paths = [ os.path.join( self.project_path, "assets/autoSelect_switch", "switch_0.png" ),
-                                  os.path.join( self.project_path, "assets/autoSelect_switch", "switch_1.png" ),
-                                  os.path.join( self.project_path, "assets/autoSelect_switch", "switch_2.png" ),
-                                  os.path.join( self.project_path, "assets/autoSelect_switch", "switch_3.png" ),
-                                  os.path.join( self.project_path, "assets/autoSelect_switch", "switch_4.png" )]
+        self.autoSelect_switchPNGs_paths = []
+        i = 0
+        while True:
+            self.autoSelect_switchPNGs_paths.append( f"assets/autoSelect_switch/switch_{i}.png" )
+            if not os.path.exists( self.autoSelect_switchPNGs_paths[i] ):
+                break
+            i += 1
         
         #settings
         self.debug = True      
@@ -95,6 +97,7 @@ class GUI:
         self.main_frame = tk.Frame( self.root, relief = "flat" )
         self.main_frame.bind( "<Enter>", self.on_scrollbars_enter )
         self.main_frame.bind( "<Leave>", self.on_scrollbars_leave )
+        self.main_frame.bind( "<Return>", self.check_answers )
         self.main_frame.place( relheight = 1, relwidth = 1, )
         
         self.canvas = tk.Canvas( self.main_frame, relief = "flat", borderwidth = 0, highlightthickness = 0 ,highlightcolor = "white" )
@@ -131,7 +134,6 @@ class GUI:
     #UI
     def create_widgets( self ):
         self.content_frame = tk.Frame( self.canvas, relief = "flat", borderwidth = 0, highlightthickness = 0 )
-        self.content_frame.bind( "<Enter>", self.check_answers )
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
         self.title = tk.Label( self.content_frame, text = f"{ self.add_newline_if_too_long( self.current_key ) }",
@@ -171,18 +173,18 @@ class GUI:
                 
             separation_form_tabel += 1
             self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), anchor = "w" ) )
-            self.form_labels[ i ].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
+            self.form_labels[i].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
-            self.entries.append( tk.Entry( self.forms_frame ) )
+            self.entries.append( tk.Entry( self.forms_frame, state = "normal" ) )
             
             if case_or_tempus == "Nominativ_Singular" or case_or_tempus == "1._Person_Singular":
-                self.entries[ i ].insert( 0, correct_answer )
-                self.entries[ i ].config( state = "disabled", disabledforeground = "gray" )
+                self.entries[i].insert( 0, correct_answer )
+                self.entries[i].config( state = "disabled", disabledforeground = "gray" )
                 
-            self.entries[ i ].place( relx = 0.42, rely = 0.09 * separation_form_tabel, relwidth = 0.58, relheight = 0.09 )
-            self.user_entries[ case_or_tempus ] = self.entries[ i ]
+            self.entries[i].place( relx = 0.42, rely = 0.09 * separation_form_tabel, relwidth = 0.58, relheight = 0.09 )
+            self.user_entries[ case_or_tempus ] = self.entries[i]
             
-        if list( self.current_forms.keys() )[ 0 ] == "Nominativ_Singular":
+        if list( self.current_forms.keys() )[0] == "Nominativ_Singular":
             self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.08, relwidth = 0.24 )
         else:
             self.check_button.place( relx = 0.48, rely = 0.62, relheight = 0.08, relwidth = 0.24 )
@@ -375,7 +377,7 @@ class GUI:
                 
     
     def on_frame_configure( self, event ):
-        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
+        self.canvas.config( scrollregion = self.canvas.bbox("all") )
         self.root.update()
     
     
@@ -447,9 +449,13 @@ class GUI:
                 "ille illa illud": ("ille_illa_illud", list( random.sample( list( self.forms[ "ille_illa_illud" ].keys() ), len( self.forms[ "ille_illa_illud" ] ) ) ) ),
                 "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( random.sample( list( self.forms[ "ipse_ipsa_ipsum" ].keys() ), len( self.forms[ "ipse_ipsa_ipsum" ] ) ) ) ),
                 "Gerundien": ("Gerunds", list( random.sample( list( self.forms["Gerunds"].keys() ), len( self.forms["Gerunds"] ) ) ) ),
-                "Gerundiven": ("Gerundives", list( random.sample( list( self.forms["Gerundives"].keys() ), len( self.forms["Gerundives"] ) ) ) ),
+                "Gerundiven": ("Gerundives", list( random.sample( list( self.forms["Gerundives"].keys() ), len( self.forms["Gerundives"]) ) ) ),
             }
         else:
+            if not os.path.exists(self.wrong_answers_per_case_path):
+                self.reset_auto_select_progress()
+                self.debug_print( "AutoSelect progress was reset (GUI.form_select)" )
+            
             forms_mapping = {
                 "Nomen": ("Nouns", list( self.forms[ "Nouns" ].keys() ) ),
                 "Verben": ("Conjugations", list( self.forms[ "Conjugations" ].keys() ) ),
@@ -476,7 +482,10 @@ class GUI:
         self.previous_form = self.selected_option.get()
         
         
-    def check_answers( self, event ):
+    def check_answers( self, event = None ):
+        self.main_frame.unbind( "<Return>" )
+        if not self.frame_initialized_correctly:
+            return
         wrong = False
         self.wrong_answers_per_case[ self.current_key ] = self.answers_wrong
         
@@ -497,14 +506,17 @@ class GUI:
                 
         self.wrong_answers_per_case[ self.current_key ] += self.answers_wrong
         if wrong:
-            self.check_button.config( text = "Show Solutions", command = self.show_solutions ) 
+            self.check_button.config( text = "Show Solutions", command = self.show_solutions )
+            self.main_frame.bind( "<Return>", self.show_solutions )
         else:
             self.answers_wrong = 0
             self.next_class()
             self.FileAndChacheHandler.save_settings()
+            self.main_frame.bind( "<Return>", self.check_answers )
     
     
-    def show_solutions( self ):
+    def show_solutions( self, event = None  ):
+        self.main_frame.unbind("<Return>")
         for case_or_tempus, correct_answer in self.current_forms.items():
             
             if case_or_tempus == "Nominativ_Singular" or self.results.get( case_or_tempus, True ) or case_or_tempus == "1._Person_Singular":
@@ -519,9 +531,11 @@ class GUI:
                 self.user_entries[ case_or_tempus ].config( state = "disabled", disabledforeground = "blue" )
         
         self.check_button.config( text = "Retry", command = self.retry )
+        self.main_frame.bind( "<Return>", self.retry )
     
     
-    def retry( self ):
+    def retry( self, event = None  ):
+        self.main_frame.unbind("<Return>")
         for case, correct_answer in self.current_forms.items():
             
             if case == "nominativ_singular" or self.results.get( case, True ):
@@ -531,6 +545,7 @@ class GUI:
             self.user_entries[ case ].delete( 0, tk.END )
         
         self.check_button.config(text = "Check", command = self.check_answers)
+        self.main_frame.bind( "<Return>", self.check_answers )
         
         
     def next_class( self ):
@@ -561,8 +576,9 @@ class GUI:
                                         "Das heißt das Program wird nicht mehr wissen wie gut sie in welchen Formen sind.\n\n"
                                         "Trotzdem fortfahren?" )
         self.root.grab_release()
-        self.settings_window.deiconify()
-        print( c0ntinue )
+        if self.settings_window is not None:
+            self.settings_window.deiconify()
+        self.debug_print( "Realy delete autoSelect_progress: ", c0ntinue )
         if not c0ntinue:
             return
         self.debug_print( "auto_select_progress was reset" )
