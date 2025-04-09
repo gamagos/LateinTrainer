@@ -1,0 +1,12 @@
+These are rules I want the AI to follow when generating code
+
+### style
+
+For () I prefer this format ( content ) if the the content is a single thing and has "" around it do it like this: ("content").
+Do not do the "" thing for functions with multiple parameters. Dont do this if the content of the () is a single digit number.
+
+For [] I prefer this format [ content ] if the the content is a single thing and has "" around it do it like this: ["content"].
+Do not do the "" thing for lists with multiple elements. Dont do this if the content of the [] is a single digit number.
+
+For {} I prefer this format { content } if the the content is a single thing and has "" around it do it like this: {"content"}.
+Do not do the "" thing for things with multiple elements and loops. Dont do this if the content of the {} is a single digit number.
