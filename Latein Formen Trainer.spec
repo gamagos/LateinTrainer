@@ -23,7 +23,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='Latein Trainer',
+    name='Latein Fromen Trainer',
     debug=False,
     bootloader_ignore_signals=False,
     strip=True,

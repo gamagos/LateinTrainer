@@ -36,25 +36,28 @@ class fileAndCacheHandler:
                     shutil.copyfile( self.gui_instance.settings_default_path, self.gui_instance.settings_path )
                     self.gui_instance.debug_print( f"settings were restored(error in settings file): { e }" )
         
-        #wrong_answers_per_case.json        
-        if not os.path.exists( self.gui_instance.wrong_answers_per_case_path ) or os.path.getsize( self.gui_instance.wrong_answers_per_case_path ) == 0:
-            with open( self.gui_instance.wrong_answers_per_case_path, "w", encoding = "utf-8" ) as file:
+        #autoSelect_progress.json
+        if not os.path.exists( self.gui_instance.autoSelect_progress_path ) or os.path.getsize( self.gui_instance.autoSelect_progress_path ) == 0:
+            with open( self.gui_instance.autoSelect_progress_path, "w", encoding = "utf-8" ) as file:
                 json.dump( {}, file, indent = 4, ensure_ascii = False )
-                print( "wrong_answeres_per_case.json was reset(empty)" )
+                print( "autoSelect_progress.json was reset(empty)" )
+                messagebox.showerror( f"Fehler in Programm Datein Datei: {self.gui_instance.autoSelect_progress_path} nicht gefunden!" )
+                self.gui_instance.reset_auto_select_progress()
+                return {"Error autoSelect_progress.json is empty"}
         else:
             try:
-                with open( self.gui_instance.wrong_answers_per_case_path, "r", encoding = "utf-8" ) as file:    
-                    self.gui_instance.wrong_answers_per_case = json.load( file )
+                with open( self.gui_instance.autoSelect_progress_path, "r", encoding = "utf-8" ) as file:    
+                    self.gui_instance.autoSelect_progress = json.load( file )
             except Exception as e:
-                with open( self.gui_instance.wrong_answers_per_case_path, "w", encoding = "utf-8" ) as file:    
+                with open( self.gui_instance.autoSelect_progress_path, "w", encoding = "utf-8" ) as file:    
                     json.dump( {}, file, indent = 4, ensure_ascii = False )
                     self.gui_instance.debug_print( f"wrong_answeres_per_case.json was reset(error in file): { e }" )
                 
                     
                     
     def save_settings( self, event = None ):
-        #settings.csv
         try:
+            #settings.csv
             with open( self.gui_instance.settings_path, "r+" ) as file:
                 settings = file.readlines()
                 settings[ 0 ] = f"debug={ self.gui_instance.debug }\n"
@@ -65,11 +68,13 @@ class fileAndCacheHandler:
                 file.seek( 0 )
                 file.writelines( settings )
                 file.truncate()
+                
+            #wrong_answer_per_case.json
+            with open( self.gui_instance.autoSelect_progress_path ,"w", encoding = "utf-8" ) as file:
+                json.dump( self.gui_instance.autoSelect_progress, file, indent = 4, ensure_ascii = False )
+                
         except Exception as e:
             self.gui_instance.debug_print( f"failed to save settings: { e }" )
-        #wrong_answer_per_case.json
-        with open( self.gui_instance.wrong_answers_per_case_path ,"w", encoding = "utf-8" ) as file:
-            json.dump( self.gui_instance.wrong_answers_per_case, file, indent = 4, ensure_ascii = False )
             
             
     def load_json( self, path ):

@@ -23,7 +23,7 @@ class GUI:
         self.project_path = getattr( sys, "_MEIPASS", os.path.dirname( os.path.dirname( os.path.abspath( __file__ ) ) ) )
         self.forms_path = os.path.join( self.project_path, "data", "forms.json" )
         self.font_cache_path = os.path.join( self.project_path, "data", "font_cache.json" )
-        self.wrong_answers_per_case_path = os.path.join( self.project_path, "data", "wrong_answers_per_case.json")
+        self.autoSelect_progress_path = os.path.join( self.project_path, "data", "autoSelect_progress.json")
         self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
         self.settings_default_path = os.path.join( self.project_path, "data", "default_settings.csv" )
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
@@ -34,8 +34,9 @@ class GUI:
         self.autoSelect_switchPNGs_paths = []
         i = 0
         while True:
-            self.autoSelect_switchPNGs_paths.append( f"assets/autoSelect_switch/switch_{i}.png" )
+            self.autoSelect_switchPNGs_paths.append( os.path.join( self.project_path ,f"assets/autoSelect_switch/switch_{i}.PNG" ) )
             if not os.path.exists( self.autoSelect_switchPNGs_paths[i] ):
+                self.autoSelect_switchPNGs_paths.pop(i)
                 break
             i += 1
         
@@ -61,6 +62,7 @@ class GUI:
         style.map( "Settings.TButton",
                    background = [ ( "disabled", "white" ), ( "!disabled", "white" ) ],
                    foreground = [ ( "disabled", "white" ), ( "!disabled", "white" ) ], )
+        self.combobox_select_form_prev_option = "Alle"
         
         #Cache and Performance
         self.FileAndChacheHandler = fileAndCacheHandler( self )
@@ -76,7 +78,7 @@ class GUI:
         self.user_entries = {}
         self.results = {}
         self.answers_wrong = 0
-        self.wrong_answers_per_case = {}
+        self.autoSelect_progress = {}
         
         #UI Elements
         self.form_labels = []
@@ -145,6 +147,9 @@ class GUI:
         self.combobox_select_form.place( relx = 0.93 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
+        if self.autoSelect_on:
+            self.combobox_select_form.state( ["disabled"] )
+            self.selected_option.set("Autoselect")
         
         self.settings_button = ttk.Button( self.content_frame, style = "Settings.TButton", takefocus = 0, command = self.on_open_settings )
         self.settings_button.place( relx = 0.934, rely = 0, height = 25, width = 25 )
@@ -207,7 +212,7 @@ class GUI:
             
         for i in range( len( self.form_labels ) ):
             try:
-                self.adjust_font_size( self.form_labels[ i ], 1, 1, self.form_labels[ 0 ].cget( "text" ), element_name = "form_labels" )
+                self.adjust_font_size( self.form_labels[ i ], 0.8, 0.8, "TODO fix this gam", element_name = "form_labels" )
                 self.adjust_font_size( self.entries[ i ], 0.75, 0.75, "entryplaceholder", element_name = "entries" )
             except Exception as e:
                 self.debug_print( f"Error adjusting form labels or entries: { e }" )
@@ -370,10 +375,17 @@ class GUI:
         
     def on_autoSelect_switch( self, event, widget ):
         self.autoSelect_on = not self.autoSelect_on
+        if self.autoSelect_on:
+            self.combobox_select_form.state( ["disabled"] )
+            self.selected_option.set("Autoselect")
+        else:
+            self.combobox_select_form.state( ["readonly"] )
+            self.selected_option.set( self.combobox_select_form_prev_option )
         self.debug_print( "auto_select_on =", self.autoSelect_on )
         self.play_animation( widget, self.autoSelect_switchPNGs_paths, self.autoSelect_on )
         widget.bind( "<Button-1>", lambda event: self.on_autoSelect_switch( event, widget ) )
         self.FileAndChacheHandler.save_settings()
+        self.next_class()
                 
     
     def on_frame_configure( self, event ):
@@ -383,6 +395,7 @@ class GUI:
     
     def on_form_select( self, event ):
         self.current_class_index = 0
+        self.combobox_select_form_prev_option = self.selected_option.get()
         if self.previous_form != self.selected_option.get():
             self.next_class()
             self.FileAndChacheHandler.save_settings()
@@ -452,27 +465,44 @@ class GUI:
                 "Gerundiven": ("Gerundives", list( random.sample( list( self.forms["Gerundives"].keys() ), len( self.forms["Gerundives"]) ) ) ),
             }
         else:
-            if not os.path.exists(self.wrong_answers_per_case_path):
+            if not os.path.exists( self.autoSelect_progress_path ):
                 self.reset_auto_select_progress()
-                self.debug_print( "AutoSelect progress was reset (GUI.form_select)" )
+                self.debug_print( "AutoSelect progress was reset (GUI.form_select) because file does not exist!" )
             
-            forms_mapping = {
-                "Nomen": ("Nouns", list( self.forms[ "Nouns" ].keys() ) ),
-                "Verben": ("Conjugations", list( self.forms[ "Conjugations" ].keys() ) ),
-                "Adjektive": ("Adjectives", list( self.forms[ "Adjectives" ].keys() ) ),
-                "hic haec hoc": ("hic_haec_hoc", list( self.forms[ "hic_haec_hoc" ].keys() ) ),
-                "qui quae quod": ("qui_quae_quod", list( self.forms[ "qui_quae_quod" ].keys() ) ),
-                "ille illa illud": ("ille_illa_illud", list( self.forms[ "ille_illa_illud" ].keys() ) ),
-                "ipse ipsa ipsum": ("ipse_ipsa_ipsum", list( self.forms[ "ipse_ipsa_ipsum" ].keys() ) ),
-                "Gerundien": ("Gerunds", list( self.forms["Gerunds"].keys() ) ),
-                "Gerundiven": ("Gerundives", list( self.forms["Gerundives"].keys() ) ),
-            }
-            
+            highest_value = -1
+            highest_key = None
+            highest_main_key = None
+
+            for main_key, value in self.autoSelect_progress.items():
+                if isinstance( value, dict ):
+                    for sub_key, sub_value in value.items():
+                        if sub_value == 10000:  # Found first 10000, use it immediately
+                            self.current_key = sub_key
+                            self.current_forms = self.forms[ main_key ][ sub_key ]
+                            self.curent_word_type_amount_of_forms = len( self.forms[ main_key ] )
+                            self.debug_print( f"Autoselect selected 10000: {sub_key}" )
+                            return
+                        elif sub_value > highest_value:  # Track highest value as fallback
+                            highest_value = sub_value
+                            highest_key = sub_key
+                            highest_main_key = main_key
+
+            if highest_key:  # Use highest value if no 10000 was found
+                self.current_key = highest_key
+                self.current_forms = self.forms[ highest_main_key ][ highest_key ]
+                self.curent_word_type_amount_of_forms = len( self.forms[ highest_main_key ] )
+                self.debug_print( f"Autoselect selected highest value ({highest_value}): {highest_key}" )
+            else:
+                messagebox.showerror( "Fehler", "Fehler beim Autoselect.\nAutoselect wird ausgeschaltet." )
+                self.autoSelect_on = False
+                self.form_select()
+
         if word_type in forms_mapping:
-            key, sub_dicts_array = forms_mapping[ word_type ]
-            self.current_key = sub_dicts_array[ self.current_class_index ]
-            self.current_forms = self.forms[ key ][ sub_dicts_array[ self.current_class_index ] ]
-            self.curent_word_type_amount_of_forms = sub_dicts_array.__len__()
+            key, sub_dicts_list = forms_mapping[ word_type ]
+            self.current_key = sub_dicts_list[ self.current_class_index ]
+            self.current_forms = self.forms[ key ][ sub_dicts_list[ self.current_class_index ] ]
+            self.curent_word_type_amount_of_forms = sub_dicts_list.__len__()
+            print(self.curent_word_type_amount_of_forms)
         else:
             messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
             shutil.copyfile( self.settings_default_path, self.settings_path )
@@ -487,7 +517,7 @@ class GUI:
         if not self.frame_initialized_correctly:
             return
         wrong = False
-        self.wrong_answers_per_case[ self.current_key ] = self.answers_wrong
+        self.autoSelect_progress[ self.current_key ] = self.answers_wrong
         
         for case_or_tempus, correct_answer in self.current_forms.items():
             
@@ -504,7 +534,7 @@ class GUI:
                 self.user_entries[ case_or_tempus ].config( fg = "red", state = "disabled", disabledforeground = "red" )
                 self.results[ case_or_tempus ] = False
                 
-        self.wrong_answers_per_case[ self.current_key ] += self.answers_wrong
+        self.autoSelect_progress[ self.current_key ] += self.answers_wrong
         if wrong:
             self.check_button.config( text = "Show Solutions", command = self.show_solutions )
             self.main_frame.bind( "<Return>", self.show_solutions )
@@ -553,17 +583,17 @@ class GUI:
         
         if self.current_class_index >= self.curent_word_type_amount_of_forms:
             self.current_class_index = 0
-        else:
-            self.form_select()
             
-            for widget in self.forms_frame.winfo_children():
-                widget.destroy()
+        self.form_select()
+            
+        for widget in self.forms_frame.winfo_children():
+           widget.destroy()
                 
-            self.user_entries = {}
-            self.results = {}
-            self.form_labels = []
-            self.entries = []
-            self.populate_entries()
+        self.user_entries = {}
+        self.results = {}
+        self.form_labels = []
+        self.entries = []
+        self.populate_entries()
             
             
     def enable_autoSelect( self ):
@@ -576,21 +606,23 @@ class GUI:
                                         "Das heißt das Program wird nicht mehr wissen wie gut sie in welchen Formen sind.\n\n"
                                         "Trotzdem fortfahren?" )
         self.root.grab_release()
+        
         if self.settings_window is not None:
             self.settings_window.deiconify()
-        self.debug_print( "Realy delete autoSelect_progress: ", c0ntinue )
+        self.debug_print( "Realy delete autoSelect_progress:", c0ntinue )
+        
         if not c0ntinue:
             return
-        self.debug_print( "auto_select_progress was reset" )
+        self.autoSelect_progress = {}
+        
         for key in self.forms:
-            
-            if key not in self.wrong_answers_per_case:
-                self.wrong_answers_per_case[ key ] = {}
-                            
+            if key not in self.autoSelect_progress:
+                self.autoSelect_progress[ key ] = {}      
             for key2 in self.forms[ key ]:
-                self.wrong_answers_per_case[ key ][ key2 ] = 1000
+                self.autoSelect_progress[ key ][ key2 ] = 10000
         self.first_start = False
         self.FileAndChacheHandler.save_settings()
+        self.debug_print( "auto_select_progress was reset" )
         
         
     def add_newline_if_too_long( self, text, max_length = 30 ):

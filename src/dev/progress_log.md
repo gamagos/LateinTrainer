@@ -27,3 +27,9 @@
         07.04.2025
 -fixed weird branches in git
 -fixed reset_autoSelect_progress
+
+        09.04.2025-10.04.2025
+-fixed branches fr this time
+-made autoSelect work
+-made updater
+-gave users new version

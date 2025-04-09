@@ -12,11 +12,8 @@ Fiaults To do List
 -make UI look nicer, make title and check button align, maybe make labels allign with title
 -optimize code
 -make debug print tell where error comes from
--make updater
 -make the exe with nukita or some better compiler
--switch Framework to PyQT or something
+-switch Framework to PyQT
 -make more antivirus friendly
 -make enter go down the entries and add more keyboard control
------------------------------------------------
-Schiesslers To Do List
------------------------------------------------
+-make autoUpdate

@@ -1,0 +1,23 @@
+These are rules I want the AI to follow when generating code
+
+# Good (single content with quotes)
+("content")
+["content"]
+
+# Good (multiple contents or no quotes)
+( content1 )
+( content1, content2 )
+[ 1, 2, 3 ]
+
+# Good (single digit)
+(1)
+[5]
+
+#Good (= signs)
+variable = something #allways leave space between the items and the =
+
+# Bad (multiple quote contents)
+("content1", "content2")  # Don't use quote style with multiple items
+
+# Bad (single digit in brackets)
+[ 1 ]  # Don't use space style with single digit
