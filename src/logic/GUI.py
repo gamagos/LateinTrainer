@@ -13,6 +13,7 @@ import win32api
 import win32con
 from PIL import Image, ImageTk
 
+import logic.autoUpdate as autoUpdate
 from logic.fileAndCacheHandler import fileAndCacheHandler
 
 VERSION = "v1.2.0"
@@ -79,12 +80,15 @@ class GUI:
         self.results = {}
         self.answers_wrong = 0
         self.autoSelect_progress = {}
+        self.download_progress = 0
+        self.exctraction_progress = 0
         
         #UI Elements
         self.form_labels = []
         self.entries = []
         self.autoSelect_image = None
         self.settings_window = None
+        self.update_window = None
         
         self.root = root
         self.root.title( "Latein Formen Trainer " + VERSION )
@@ -342,7 +346,8 @@ class GUI:
         self.settings_window.iconbitmap( self.icon_path )
         self.settings_window.protocol( "WM_DELETE_WINDOW", lambda: self.on_close_settings( self.settings_window ) )
         
-        check_for_updates_button = tk.Button( self.settings_window, text = "Check for Updates", font = ( "Arial", 12 ) )
+        check_for_updates_button = tk.Button( self.settings_window, text = "Check for Updates", font = ( "Arial", 12 ),
+                                              command = lambda: self.on_check_for_updates_button( self.settings_window ) )
         check_for_updates_button.place( relx = 0, rely = 0 )
         
         forms_settings_label = tk.Label( self.settings_window, text = "-----------------------Form Einstellungen-----------------------", font = ( "Arial", 10 ) )
@@ -386,6 +391,42 @@ class GUI:
         widget.bind( "<Button-1>", lambda event: self.on_autoSelect_switch( event, widget ) )
         self.FileAndChacheHandler.save_settings()
         self.next_class()
+        
+        
+    def on_check_for_updates_button( self, window ):
+        update_complete = False
+        window.on_check_for_updates_button.config( state = "disabled" )
+        
+        self.update_window = tk.Toplevel( self.settings_window )
+        self.update_window.geometry( "300x240" )
+        self.update_window.resizable( False, False )
+        self.update_window.title( "Update - Latein Formen Trainer" )
+        self.update_window.iconbitmap( self.icon_path )
+        self.settings_window.protocol( "WM_DELETE_WINDOW", lambda: self.on_close_update_window( self.update_window ) )
+        
+        info = tk.Label( self.update_window, text = "Sucht update" )
+        info.place( x = 20, y = 20 )
+        
+        # Add progress bars
+        update_progressbar = ttk.Progressbar( self.update_window, orient = "horizontal", length = 220, mode = "determinate" )
+        update_progressbar.place( x = 20, y = 60 )
+        
+        # Update progress
+        update_available, latest_version, release_data = autoUpdate.check_for_updates( self )
+        if update_available:
+            info.config( text = "Update gefunden" )
+            
+            def update_progress():
+                update_progressbar.config( value = self.download_progress )
+                if self.download_progress < 100:
+                    self.update_window.after( 10, update_progress )
+                    
+            autoUpdate.download_and_install_update()   
+        
+        
+    def on_close_update_window( self, window ):
+        #TODO fill this
+        window.destroy()
                 
     
     def on_frame_configure( self, event ):

@@ -9,12 +9,32 @@ These are rules I want the AI to follow when generating code
 ( content1, content2 )
 [ 1, 2, 3 ]
 
+#Good (multiple quote contents or content and quote content)
+( "content", "content" )
+( "content", content )
+
 # Good (single digit)
 (1)
 [5]
 
 #Good (= signs)
 variable = something #allways leave space between the items and the =
+widget.config( parameter = thing )
+
+#Good (space between methods and classes)
+class c1:
+    def method():
+        code
+        code
+        return
+
+
+    def method2():  #leave 2 spaces between methods for readability
+        ...
+
+
+class c2: #leave 2 spaces between classes for readability
+    def ...
 
 # Bad (multiple quote contents)
 ("content1", "content2")  # Don't use quote style with multiple items

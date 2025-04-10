@@ -10,6 +10,7 @@ from logic.GUI import VERSION, GUI
 GITHUB_REPO = "gamagos/LateinTrainer"
 CURRENT_VERSION = VERSION
 
+
 def check_for_updates( gui ):
     try:
         # Get latest release info from GitHub
@@ -31,32 +32,66 @@ def check_for_updates( gui ):
         gui.debug_print( f"Error checking for updates: {e}" )
         return False, CURRENT_VERSION, None
 
+
 def download_and_install_update( download_url, gui ):
     try:
-        # Create temp directory for download
-        temp_dir = os.path.join( os.getenv("TEMP"), "LateinTrainer_update" )
+        temp_dir = os.path.join( os.getenv( "TEMP" ), "LateinTrainer_update" )
+        extract_dir = os.path.join( temp_dir, "extracted" )
         os.makedirs( temp_dir, exist_ok = True )
+        os.makedirs( extract_dir, exist_ok = True )
         
-        # Download the update
-        response = requests.get( download_url, stream = True )
+        # Create update batch script that will run after app closes
+        batch_script = f"""
+        @echo off
+        timeout /t 1 /nobreak >nul
+        xcopy /s /y "{extract_dir}\\*.*" "{os.path.dirname( __file__ )}\\..\\..\\*.*"
+        start "" "{sys.executable}" "{os.path.abspath( sys.argv[0] )}"
+        rmdir /s /q "{temp_dir}"
+        del "%~f0"
+        """
+        
+        with open( os.path.join( temp_dir, "update.bat" ), "w" ) as f:
+            f.write( batch_script )
+        
+        # Download and extract update
         update_zip = os.path.join( temp_dir, "update.zip" )
+        gui.debug_print( "Starting download..." )
+        
+        response = requests.get( download_url, stream = True )
+        total_size = int( response.headers.get( "content-length", 0 ) )
+        downloaded_size = 0
         
         with open( update_zip, "wb" ) as f:
             for chunk in response.iter_content( chunk_size = 8192 ):
-                f.write( chunk )
+                if chunk:
+                    f.write( chunk )
+                    downloaded_size += len( chunk )
+                    progress = ( downloaded_size / total_size ) * 100
+                    gui.debug_print( f"Download progress: {progress:.1f}%" )
+                    gui.download_progress = round( progress, 1 )
         
-        # Extract the update
-        app_dir = os.path.dirname( os.path.dirname( os.path.dirname( __file__ ) ) )
+        # Extract to temporary directory
+        gui.debug_print( "Downloading complete. Extracting..." )
         with zipfile.ZipFile( update_zip, "r" ) as zip_ref:
-            zip_ref.extractall( app_dir )
+            zip_files = zip_ref.namelist()
+            total_files = len( zip_files )
+            for index, file in enumerate( zip_files, 1 ):
+                zip_ref.extract( file, extract_dir )
+                progress = ( index / total_files ) * 100
+                gui.debug_print( f"Extraction progress: {progress:.1f}%" )
+                gui.extraction_progress = round( progress, 1 )
         
-        # Clean up
-        os.remove( update_zip )
-        return True
-    
+        os.remove( update_zip )  # Remove the zip file
+        
+        # Start the update batch script and exit
+        os.startfile( os.path.join( temp_dir, "update.bat" ) )
+        gui.root.quit()
+        sys.exit(0)
+        
     except Exception as e:
         gui.debug_print( f"Error installing update: {e}" )
         return False
+
 
 def run_update_check( gui ):
     update_available, latest_version, download_url = check_for_updates( gui )
@@ -65,16 +100,7 @@ def run_update_check( gui ):
         gui.debug_print( f"Update available! Version {latest_version}" )
         if download_and_install_update( download_url, gui ):
             gui.debug_print( "Update installed successfully!" )
-            # Restart the application
-            os.execv( sys.executable, ["python"] + sys.argv )
         else:
             gui.debug_print( "Update installation failed." )
     else:
         gui.debug_print( f"You're running the latest version ({CURRENT_VERSION})" )
-
-if __name__ == "__main__":
-    # For testing purposes only
-    from GUI import GUI
-    root = tk.Tk()
-    gui = GUI( root )
-    run_update_check( gui )
