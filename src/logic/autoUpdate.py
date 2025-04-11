@@ -36,27 +36,30 @@ def check_for_updates( gui ):
 def download_and_install_update( download_url, gui ):
     try:
         temp_dir = os.path.join( os.getenv( "TEMP" ), "LateinTrainer_update" )
+        extract_dir = os.path.join( temp_dir, "extracted" )
         os.makedirs( temp_dir, exist_ok = True )
+        os.makedirs( extract_dir, exist_ok = True )
         
-        # Create update batch script
+        # Create update batch script that will run after app closes
         batch_script = f"""
-@echo off
-timeout /t 1 /nobreak >nul
-xcopy /s /y "{temp_dir}\\*.*" "{os.path.dirname(__file__)}\\..\\..\\*.*"
-start "" "{sys.executable}" "{os.path.abspath(sys.argv[0])}"
-del "%~f0"
+        @echo off
+        timeout /t 1 /nobreak >nul
+        xcopy /s /y "{extract_dir}\\*.*" "{os.path.dirname( __file__ )}\\..\\..\\*.*"
+        start "" "{sys.executable}" "{os.path.abspath( sys.argv[0] )}"
+        rmdir /s /q "{temp_dir}"
+        del "%~f0"
         """
         
         with open( os.path.join( temp_dir, "update.bat" ), "w" ) as f:
             f.write( batch_script )
         
-        # Get file size
+        # Download and extract update
+        update_zip = os.path.join( temp_dir, "update.zip" )
+        gui.debug_print( "Starting download..." )
+        
         response = requests.get( download_url, stream = True )
         total_size = int( response.headers.get( "content-length", 0 ) )
         downloaded_size = 0
-        
-        # Download the update
-        update_zip = os.path.join( temp_dir, "update.zip" )
         
         gui.debug_print( "Starting download..." )
         with open( update_zip, "wb" ) as f:
@@ -66,27 +69,25 @@ del "%~f0"
                     downloaded_size += len( chunk )
                     progress = ( downloaded_size / total_size ) * 100
                     gui.debug_print( f"Download progress: {progress:.1f}%" )
-                    gui.download_progress  = round( progress, 1)
+                    gui.download_progress = round( progress, 1 )
         
-        # Extract the update
-        gui.debug_print( "Downloading complete. Starting installation..." )
-        app_dir = os.path.dirname( os.path.dirname( os.path.dirname( __file__ ) ) )
+        # Extract to temporary directory
+        gui.debug_print( "Downloading complete. Extracting..." )
         with zipfile.ZipFile( update_zip, "r" ) as zip_ref:
             zip_files = zip_ref.namelist()
             total_files = len( zip_files )
             for index, file in enumerate( zip_files, 1 ):
-                zip_ref.extract( file, app_dir )
+                zip_ref.extract( file, extract_dir )
                 progress = ( index / total_files ) * 100
-                gui.debug_print( f"Installation progress: {progress:.1f}%" )
-                gui.extraction_progress  = round( progress, 1)
+                gui.debug_print( f"Extraction progress: {progress:.1f}%" )
+                gui.extraction_progress = round( progress, 1 )
         
-        # Clean up
-        os.remove( update_zip )
+        os.remove( update_zip )  # Remove the zip file
         
-        # Instead of restarting directly, run the batch script and exit
+        # Start the update batch script and exit
         os.startfile( os.path.join( temp_dir, "update.bat" ) )
-        gui.root.quit()  # Close the application
-        sys.exit(0)  # Exit the Python process
+        gui.root.quit()
+        sys.exit(0)
         
     except Exception as e:
         gui.debug_print( f"Error installing update: {e}" )
