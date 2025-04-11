@@ -7,15 +7,18 @@ These are rules I want the AI to follow when generating code
 # Good (multiple contents or no quotes)
 ( content1 )
 ( content1, content2 )
-[ 1, 2, 3 ]
+
+#Good (lists with multiple strings in them)
+[ "abc", "abc" ]
 
 #Good (multiple quote contents or content and quote content)
 ( "content", "content" )
 ( "content", content )
 
-# Good (single digit)
+# Good (single digit or string)
 (1)
 [5]
+["only for strings"]
 
 #Good (= signs)
 variable = something #allways leave space between the items and the =

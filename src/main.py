@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 import os
 import sys
 import tkinter as tk
 from tkinter import messagebox, ttk
 
-from logic.fileAndCacheHandler import fileAndCacheHandler
+from logic.FileAndCacheHandler import FileAndCacheHandler
 from logic.GUI import GUI
 
 """
@@ -24,6 +26,5 @@ except Exception as e:
 root = tk.Tk()
 root.geometry( "700x700" )
 app = GUI( root )
-FileAndCacheHandler = fileAndCacheHandler( app )
 app.debug_print( "\n\n!!!!!!!!@gamagos Please use the real main.py this is a workaround to make vsc throw the errors!!!!!!!!\n" )
 root.mainloop()

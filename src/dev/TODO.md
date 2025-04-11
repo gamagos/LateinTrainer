@@ -17,3 +17,7 @@ Fiaults To do List
 -make more antivirus friendly
 -make enter go down the entries and add more keyboard control
 -make autoUpdate
+-make learn progress tracker
+-give word translation
+-add ?s for better accessability
+-add different words of the same type for more learning

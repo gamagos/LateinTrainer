@@ -1,14 +1,16 @@
+from __future__ import annotations
+
 import json
 import os
 import shutil
 import time
+from tkinter import messagebox
 
 from numpy import double
-from tkinter import messagebox
 
 
 class fileAndCacheHandler:
-    def __init__( self, gui_instance ):
+    def __init__( self, gui_instance: "GUI" ):
         self.gui_instance = gui_instance
                 
         
