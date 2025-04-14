@@ -32,4 +32,9 @@
 -fixed branches fr this time
 -made autoSelect work
 -made updater
--gave users new version
+
+        14.04.2025
+-made update gui
+-made new version
+-made autoUpdate after a week
+-made build.bat

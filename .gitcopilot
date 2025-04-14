@@ -6,6 +6,8 @@ style:
   indent: 4
   max_line_length: 90
   quotes: double
+  spacing:
+    around_operators: true
 
 # Documentation preferences
 documentation:

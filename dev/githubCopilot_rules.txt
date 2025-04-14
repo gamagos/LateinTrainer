@@ -4,18 +4,22 @@ These are rules I want the AI to follow when generating code
 ("content")
 ["content"]
 
+#Good (content in [] and {})
+[thing]
+{other thing}
+
 # Good (multiple contents or no quotes)
 ( content1 )
 ( content1, content2 )
 
 #Good (lists with multiple strings in them)
-[ "abc", "abc" ]
+["abc", "abc"]
 
 #Good (multiple quote contents or content and quote content)
 ( "content", "content" )
 ( "content", content )
 
-# Good (single digit or string)
+# Good (single symbol or strings)
 (1)
 [5]
 ["only for strings"]
@@ -24,7 +28,7 @@ These are rules I want the AI to follow when generating code
 variable = something #allways leave space between the items and the =
 widget.config( parameter = thing )
 
-#Good (space between methods and classes)
+#Good (space between methods and classes) #dont do this for methods in methods
 class c1:
     def method():
         code
@@ -43,4 +47,4 @@ class c2: #leave 2 spaces between classes for readability
 ("content1", "content2")  # Don't use quote style with multiple items
 
 # Bad (single digit in brackets)
-[ 1 ]  # Don't use space style with single digit
+[ 1 ]  # Don't use space style with single symbol

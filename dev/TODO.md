@@ -2,22 +2,22 @@ Fiaults To do List
 
 -make more features( settings what to learn, learn tracker, reminder notifications, make background shine red or green when button clicked... )
 -organize code
--make a class or sum for the slider
 -add darkmode
 -make animation for when mouse is touching an object
 -remove cache or make it respect if text in labels is different
--change to PyQT
+-compare with old commit because of lost contents
 -make better icon
 -add more grammar forms
 -make UI look nicer, make title and check button align, maybe make labels allign with title
 -optimize code
+-make autoUpdate
 -make debug print tell where error comes from
 -make the exe with nukita or some better compiler
 -switch Framework to PyQT
 -make more antivirus friendly
 -make enter go down the entries and add more keyboard control
--make autoUpdate
 -make learn progress tracker
 -give word translation
+-make update progress widget var
 -add ?s for better accessability
 -add different words of the same type for more learning

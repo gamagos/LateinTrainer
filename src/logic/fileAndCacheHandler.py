@@ -7,14 +7,15 @@ import time
 from tkinter import messagebox
 
 from numpy import double
+from yaml import Event
 
 
-class fileAndCacheHandler:
-    def __init__( self, gui_instance: "GUI" ):
+class FileAndCacheHandler:
+    def __init__( self, gui_instance: "GUI" ) -> None: #type: ignore
         self.gui_instance = gui_instance
                 
         
-    def get_settings( self ):
+    def get_settings( self ) -> None:
         #settings.csv 
         if  not os.path.exists( self.gui_instance.settings_path ) or os.path.getsize( self.gui_instance.settings_path ) == 0:
             with open( self.gui_instance.settings_path, "w" ) as file:
@@ -30,6 +31,8 @@ class fileAndCacheHandler:
                     self.gui_instance.last_cache_clear = double( contents[ 3 ].split( "=" )[ 1 ].strip() )
                     self.gui_instance.first_start = "True" == contents[ 4 ].split( "=" )[ 1 ].strip()
                     self.gui_instance.autoSelect_on = "True" == contents[ 5 ].split( "=" )[ 1 ].strip()
+                    self.gui_instance.last_update = double( contents[ 6 ].split( "=" )[ 1 ].strip() )
+                    self.gui_instance.autoUpdate_on = "True" == contents[ 7 ].split( "=" )[ 1 ].strip()
                     self.gui_instance.debug_print( "settings were read successfully:" )
                     self.gui_instance.debug_print( " ".join( [ item.split( "=" )[ 1 ].strip() for item in contents ] ) )
                                   
@@ -57,7 +60,7 @@ class fileAndCacheHandler:
                 
                     
                     
-    def save_settings( self, event = None ):
+    def save_settings( self, event: Event = None ) -> None:
         try:
             #settings.csv
             with open( self.gui_instance.settings_path, "r+" ) as file:
@@ -67,6 +70,8 @@ class fileAndCacheHandler:
                 settings[ 2 ] = f"selected_option={ self.gui_instance.selected_option.get() }\n"
                 settings[ 4 ] = f"first_start={ self.gui_instance.first_start }\n"
                 settings[ 5 ] = f"autoSelect_on={ self.gui_instance.autoSelect_on }\n"
+                settings[ 6 ] = f"last_update={ self.gui_instance.last_update }\n"
+                settings[ 7 ] = f"autoUpdate_on={ self.gui_instance.autoUpdate_on }"
                 file.seek( 0 )
                 file.writelines( settings )
                 file.truncate()
@@ -79,7 +84,7 @@ class fileAndCacheHandler:
             self.gui_instance.debug_print( f"failed to save settings: { e }" )
             
             
-    def load_json( self, path ):
+    def load_json( self, path: str ) -> dict:
         try:
             with open( path, "r", encoding = "utf-8" ) as f:
                 #print( json.load( f )[ "forms" ].keys() )
@@ -89,7 +94,7 @@ class fileAndCacheHandler:
             messagebox.showerror( "Fehler", f"Fehler beim laden von forms.json\n{ e }" )
             
                                 
-    def load_cache( self ):
+    def load_cache( self ) -> dict:
         if os.path.exists( self.gui_instance.font_cache_path ):
             try:
                 with open( self.gui_instance.font_cache_path,"r" ) as file:
@@ -104,7 +109,7 @@ class fileAndCacheHandler:
             return {}
         
         
-    def cache_size( self, element_name, size ):
+    def cache_size( self, element_name: str, size: int ) -> None:
         if self.gui_instance.frame_initialized_correctly == True:
             self.gui_instance.get_root_size()
             key = f"{ self.gui_instance.root_width }x{ self.gui_instance.root_height }"
@@ -113,12 +118,12 @@ class fileAndCacheHandler:
             self.gui_instance.font_cache[ key ][ element_name ] = size
     
     
-    def save_cache( self ):
+    def save_cache( self ) -> None:
         with open( self.gui_instance.font_cache_path ,"w", encoding = "utf-8" ) as file:
             json.dump( self.gui_instance.font_cache, file, indent = 4, ensure_ascii=False )
             
             
-    def clear_cache_and_logs( self ):
+    def clear_cache_and_logs( self ) -> None:
         with open( self.gui_instance.font_cache_path, "w", encoding="utf-8" ) as file:
             json.dump( {}, file, indent = 4, ensure_ascii=False )
         with open( self.gui_instance.debug_log_path, "w" ) as file:
@@ -132,7 +137,7 @@ class fileAndCacheHandler:
             file.writelines( contents )
               
         
-    def get_cached_font_size( self, element_name ):
+    def get_cached_font_size( self, element_name: str ) -> int:
         try:
             self.gui_instance.get_root_size()
             key = f"{ self.gui_instance.root_width }x{ self.gui_instance.root_height }"
@@ -141,7 +146,7 @@ class fileAndCacheHandler:
             return None
         
 
-    def write_debug_log( self, *toWrite, path = None ):
+    def write_debug_log( self, *toWrite: tuple, path: str = None ) -> None:
         toWrites = list( toWrite )
         if path is None:
             path = self.gui_instance.debug_log_path
