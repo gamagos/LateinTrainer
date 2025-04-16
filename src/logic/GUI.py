@@ -60,12 +60,12 @@ class GUI:
         self.root_height = 700
         self.root_prev_height = self.root_height
         style = ttk.Style()
-        style.theme_use( "clam" )
-        style.configure( "Settings.TButton", relief = "flat", borderwidth = 0, padding = 0, background = "white", focuscolor = "white",
-                        highlightthickness = 0, highlightcolor = "white" )
+        style.theme_use("clam")
+        style.configure( "Settings.TButton", relief = "flat", borderwidth = 0, padding = 0, background = "white",
+            focuscolor = "white", highlightthickness = 0, highlightcolor = "white" )
         style.map( "Settings.TButton",
-                   background = [ ( "disabled", "white" ), ( "!disabled", "white" ) ],
-                   foreground = [ ( "disabled", "white" ), ( "!disabled", "white" ) ], )
+            background = [ ( "disabled", "white" ), ( "!disabled", "white" ) ],
+            foreground = [ ( "disabled", "white" ), ( "!disabled", "white" ) ], )
         style.configure( "TCombobox", fieldbackground = "white", background = "white", color = "white")
         self.combobox_select_form_prev_option = "Alle"
         
@@ -78,7 +78,7 @@ class GUI:
         self.frameTime = 1 / self.frameRate
         
         #Data
-        self.forms = self.FileAndChacheHandler.load_json( self.forms_path )[ "forms" ]
+        self.forms = self.FileAndChacheHandler.load_json( self.forms_path )["forms"]
         self.current_class_index = 0
         self.user_entries = {}
         self.results = {}
@@ -86,7 +86,8 @@ class GUI:
         self.autoSelect_progress = {}
         self.download_progress = 0
         self.exctraction_progress = 0
-        self.choices = [ "Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud", "ipse ipsa ipsum", "Gerundien", "Gerundiven" ]
+        self.choices = ["Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud",
+            "ipse ipsa ipsum", "Gerundien", "Gerundiven"]
         self.update_complete = True
         self.last_update = 0
         self.autoUpdate_on = False
@@ -106,7 +107,7 @@ class GUI:
         self.root.bind( "<Alt-F4>", self.on_close )
         self.root.iconbitmap( self.icon_path )
         self.root.protocol( "WM_DELETE_WINDOW", self.on_close )
-        self.debug_print( "Root was initialized" )
+        self.debug_print("Root was initialized")
         
         self.main_frame = tk.Frame( self.root, relief = "flat" )
         self.main_frame.bind( "<Enter>", self.on_scrollbars_enter )
@@ -128,14 +129,14 @@ class GUI:
         self.FileAndChacheHandler.get_settings()
         
         if self.first_start == True:
-            self.debug_print( "First start" )
+            self.debug_print("First start")
             self.reset_auto_select_progress()
             
         self.previous_form = self.selected_option.get()
         self.form_select()
         self.create_widgets()
         self.adjust_canvas_window()
-        self.debug_print( "Frame was filled" )
+        self.debug_print("Frame was filled")
         
         self.canvas.bind_all( "<MouseWheel>", self.on_mouse_wheel )
         self.canvas.bind_all( "<Shift-MouseWheel>", self.on_shift_mouse_wheel )
@@ -150,11 +151,11 @@ class GUI:
         self.canvas_window = self.canvas.create_window( ( 0, 0 ), window = self.content_frame, anchor = "nw" )
         
         self.title = tk.Label( self.content_frame, text = f"{ self.add_newline_if_too_long( self.current_key ) }",
-                               anchor = "center", justify = "left" )
+            anchor = "center", justify = "left" )
         self.title.place( relx = 0.48, rely = 0.09, relheight = 0.17, relwidth = 0.93, anchor = "center" )
         
         self.combobox_select_form = ttk.Combobox( self.content_frame, textvariable = self.selected_option,
-                                                  values = self.choices ) 
+            values = self.choices ) 
         self.combobox_select_form.place( relx = 0.93 , rely = 0, relheight = 0.026, relwidth = 0.18, anchor = "ne" )
         self.combobox_select_form.state( ["readonly"] )
         self.combobox_select_form.bind( "<<ComboboxSelected>>", self.on_form_select )
@@ -162,7 +163,8 @@ class GUI:
             self.combobox_select_form.state( ["disabled"] )
             self.selected_option.set("Autoselect")
         
-        self.settings_button = ttk.Button( self.content_frame, style = "Settings.TButton", takefocus = 0, command = self.on_open_settings )
+        self.settings_button = ttk.Button( self.content_frame, style = "Settings.TButton", takefocus = 0,
+            command = self.on_open_settings )
         self.settings_button.place( relx = 0.934, rely = 0, height = 25, width = 25 )
 
         self.forms_frame = tk.Frame( self.content_frame )
@@ -171,7 +173,7 @@ class GUI:
         self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers, anchor = "center" )
         self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.08, relwidth = 0.24, anchor = "center" )
         
-        self.canvas.config( scrollregion = self.canvas.bbox( "all" ), relief = "flat" )
+        self.canvas.config( scrollregion = self.canvas.bbox("all"), relief = "flat" )
         
         self.combobox_select_form.tkraise()
         self.root.update_idletasks()
@@ -199,9 +201,9 @@ class GUI:
                 self.entries[i].config( state = "disabled", disabledforeground = "gray" )
                 
             self.entries[i].place( relx = 0.42, rely = 0.09 * separation_form_tabel, relwidth = 0.58, relheight = 0.09 )
-            self.user_entries[ case_or_tempus ] = self.entries[i]
+            self.user_entries[case_or_tempus] = self.entries[i]
             
-        if list( self.current_forms.keys() )[ 0 ] == "Nominativ_Singular":
+        if list( self.current_forms.keys() )[0] == "Nominativ_Singular":
             self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.08, relwidth = 0.24 )
         else:
             self.check_button.place( relx = 0.48, rely = 0.62, relheight = 0.08, relwidth = 0.24 )
@@ -210,7 +212,7 @@ class GUI:
         
         
     def change_darkmode( self ) -> None:
-        self.debug_print( "Still need to make darkmode!" )
+        self.debug_print("Still need to make darkmode!")
         pass
         
         
@@ -228,7 +230,7 @@ class GUI:
         for child in children_to_destroy:
             child.destroy()        
         settings_window.destroy()
-        self.debug_print( "Settings window was closed")
+        self.debug_print("Settings window was closed")
                 
     
     def on_frame_configure( self, event: tk.tk.Event ) -> None:
@@ -278,12 +280,12 @@ class GUI:
         
     def on_close( self, event: tk.Event = None ) -> None:
         if time.time() - self.last_cache_clear < ( 30 * 24 * 60 * 60 ):
-            self.debug_print( "save and exit" )
+            self.debug_print("save and exit")
             self.debug_print( f"time until next clear: { ( ( 30 * 24 * 60 * 60 ) - ( time.time() - self.last_cache_clear ) ) / ( 24 * 60 * 60 ) } days" )
             self.FileAndChacheHandler.save_cache()
             self.FileAndChacheHandler.save_settings()
         else:
-            self.debug_print( "chache got cleared" )
+            self.debug_print("chache got cleared")
             self.FileAndChacheHandler.clear_cache_and_logs()
             self.FileAndChacheHandler.save_settings()
         self.root.quit()
@@ -304,10 +306,10 @@ class GUI:
             
         for i in range( len( self.form_labels ) ):
             try:
-                self.adjust_font_size( self.form_labels[ i ], 1, 1, self.form_labels[ 0 ].cget( "text" ), element_name = "form_labels" )
-                self.adjust_font_size( self.entries[ i ], 0.75, 0.75, "entryplaceholder", element_name = "entries" )
+                self.adjust_font_size( self.form_labels[i], 1, 1, self.form_labels[0].cget("text"), element_name = "form_labels" )
+                self.adjust_font_size( self.entries[i], 0.75, 0.75, "entryplaceholder", element_name = "entries" )
             except Exception as e:
-                self.debug_print( f"Error adjusting form labels or entries: { e }" )
+                self.debug_print( f"Error adjusting form labels or entries: {e}" )
         self.adjust_font_size( self.check_button, 0.72, 0.72 )
             
         self.root_prev_width = self.root_width
@@ -318,7 +320,7 @@ class GUI:
         
         
     def adjust_font_size( self, widget: "tkinter_widget", max_width_ratio: float = 0.72, max_height_ratio: float = 0.72, # type: ignore
-                          element_text: str = None, font_weight: str = "normal", element_name: str = None ) -> float:
+            element_text: str = None, font_weight: str = "normal", element_name: str = None ) -> float:
         self.root.update_idletasks()
         cached_font_size = self.FileAndChacheHandler.get_cached_font_size( element_name )
         
@@ -330,7 +332,7 @@ class GUI:
             return cached_font_size
             
         if element_text is None:
-            element_text = widget.cget( "text" )
+            element_text = widget.cget("text")
                 
         widget_width = widget.winfo_width()
         widget_height = widget.winfo_height()
@@ -340,7 +342,7 @@ class GUI:
         
         temp_font = font.Font( family = "Arial", size = font_size, weight = font_weight )
         text_width = temp_font.measure( element_text )
-        text_height = temp_font.metrics( "linespace" )
+        text_height = temp_font.metrics("linespace")
                   
         width_ratio = max_width/text_width
         height_ratio = max_height/text_height
@@ -355,7 +357,7 @@ class GUI:
         while True:
             temp_font = font.Font( family = "Arial", size = font_size, weight = font_weight )
             text_width = temp_font.measure( element_text )
-            text_height = temp_font.metrics( "linespace" )
+            text_height = temp_font.metrics("linespace")
             if text_width <= max_width and text_height <= max_height:
                 break
             
@@ -378,7 +380,7 @@ class GUI:
         new_height = canvas_height - 4
         
         self.canvas.itemconfig( self.canvas_window, width = new_width, height = new_height )
-        self.canvas.config( scrollregion = self.canvas.bbox( "all" ) )
+        self.canvas.config( scrollregion = self.canvas.bbox("all") )
         
         
     def adjust_image_button_size( self, buttonImage: Image, size: float = 0.05 ) -> int:
@@ -430,22 +432,22 @@ class GUI:
         self.adjust_image_button_size( self.settings_button_image )
         
         self.settings_window = tk.Toplevel( self.root )
-        self.settings_window.geometry( "300x450" )
+        self.settings_window.geometry("300x450")
         self.settings_window.resizable( False, False )
-        self.settings_window.title( "Einstellungen" )
+        self.settings_window.title("Einstellungen")
         self.settings_window.iconbitmap( self.icon_path )
         self.settings_window.protocol( "WM_DELETE_WINDOW", lambda: self.on_close_settings( self.settings_window ) )
         
         check_for_updates_button = tk.Button( self.settings_window, text = "Check for Updates", font = ( "Arial", 12 ),
-                                              command = lambda: self.on_check_for_updates_button( self.settings_window, 
-                                                                                                  check_for_updates_button ) )
+            command = lambda: self.on_check_for_updates_button( self.settings_window, 
+                check_for_updates_button ) )
         check_for_updates_button.place( relx = 0, rely = 0 )
         
         forms_settings_label = tk.Label( self.settings_window, text = "-----------------------Form Einstellungen-----------------------", font = ( "Arial", 10 ) )
         forms_settings_label.place( relx = 0, rely = 0.11 )
 
         autoSelect_switch = tk.Label( self.settings_window, takefocus = 0 )
-        image = Image.open( self.autoSelect_switchPNGs_paths[ 4 ] ) if self.autoSelect_on else Image.open( self.autoSelect_switchPNGs_paths[ 0 ] )
+        image = Image.open( self.autoSelect_switchPNGs_paths[4] ) if self.autoSelect_on else Image.open( self.autoSelect_switchPNGs_paths[ 0 ] )
         image_width, image_height = image.size
         image = image.resize( ( math.floor( image_width * 0.1 ), math.floor( image_height * 0.1 ) ), Image.Resampling.LANCZOS )
         self.autoSelect_image = ImageTk.PhotoImage( image )
@@ -465,10 +467,10 @@ class GUI:
         self.current_class_index = 0
         self.autoSelect_on = not self.autoSelect_on
         if self.autoSelect_on:
-            self.combobox_select_form.state( ["disabled"] )
+            self.combobox_select_form.state(["disabled"])
             self.selected_option.set("Autoselect")
         else:
-            self.combobox_select_form.state( ["readonly"] )
+            self.combobox_select_form.state(["readonly"])
             self.selected_option.set( self.combobox_select_form_prev_option )
         self.debug_print( "auto_select_on =", self.autoSelect_on )
         self.play_animation( widget, self.autoSelect_switchPNGs_paths, self.autoSelect_on )
@@ -482,7 +484,7 @@ class GUI:
         check_for_updates_button.config( state = "disabled" )
         
         self.update_window = tk.Toplevel( window )
-        self.update_window.geometry( "300x240" )
+        self.update_window.geometry("300x240")
         self.update_window.resizable( False, False )
         self.update_window.title( title )
         self.update_window.iconbitmap( self.icon_path )
@@ -500,18 +502,18 @@ class GUI:
         update_progressbar.place( x = 20, y = 60 )
         
         exit_button = tk.Button( self.update_window, text = "fertig",
-                                 command = lambda: self.on_close_update_window( self.update_window, check_for_updates_button ) )
+            command = lambda: self.on_close_update_window( self.update_window, check_for_updates_button ) )
         
         # Update progress
         if self.check_internet_connection():
-            self.debug_print( "Access to internet availale" )
+            self.debug_print("Access to internet availale")
         else:
-            self.debug_print( "Acces to internet not available" )
+            self.debug_print("Acces to internet not available")
             info.config( text = "Keine Internet Verbindung" )
             exit_button.place( relx = 0.99, rely = 0.99, anchor = "se" )
         update_available, latest_version, release_data = self.autoUpdate.check_for_updates()
         if update_available:
-            self.debug_print( "" )
+            self.debug_print("") 
             info.config( text = f"Update gefunden: {latest_version} > {VERSION}" )
             
             def update_progress():
@@ -536,10 +538,12 @@ class GUI:
             
                  
     #logic
-    def form_select( self ):
+    def form_select( self ) -> None:
         word_type = self.selected_option.get()
+        choices = self.choices.copy()
+        choices.remove("Alle")
         if word_type == "Alle":
-            word_type = random.choice( self.choices )
+            word_type = random.choice( choices )
         
         if not self.autoSelect_on:
             forms_mapping = {
@@ -556,7 +560,7 @@ class GUI:
         else:
             if not os.path.exists( self.autoSelect_progress_path ):
                 self.reset_auto_select_progress()
-                self.debug_print( "AutoSelect progress was reset (GUI.form_select) because file does not exist!" )
+                self.debug_print("AutoSelect progress was reset (GUI.form_select) because file does not exist!")
             
             highest_value = -1
             highest_key = None
@@ -567,8 +571,8 @@ class GUI:
                     for sub_key, sub_value in value.items():
                         if sub_value == 10000:  # Found first 10000, use it immediately
                             self.current_key = sub_key
-                            self.current_forms = self.forms[ main_key ][ sub_key ]
-                            self.curent_word_type_amount_of_forms = len( self.forms[ main_key ] )
+                            self.current_forms = self.forms[main_key][sub_key]
+                            self.curent_word_type_amount_of_forms = len( self.forms[main_key] )
                             self.debug_print( f"Autoselect selected 10000: {sub_key}" )
                             return
                         elif sub_value > highest_value:  # Track highest value as fallback
@@ -578,8 +582,8 @@ class GUI:
 
             if highest_key:  # Use highest value if no 10000 was found
                 self.current_key = highest_key
-                self.current_forms = self.forms[ highest_main_key ][ highest_key ]
-                self.curent_word_type_amount_of_forms = len( self.forms[ highest_main_key ] )
+                self.current_forms = self.forms[highest_main_key][highest_key]
+                self.curent_word_type_amount_of_forms = len( self.forms[highest_main_key] )
                 self.debug_print( f"Autoselect selected highest value ({highest_value}): {highest_key}" )
                 return
             else:
@@ -589,12 +593,13 @@ class GUI:
                 return
 
         if word_type in forms_mapping:
-            key, sub_dicts_list = forms_mapping[ word_type ]
-            self.current_key = sub_dicts_list[ self.current_class_index ]
-            self.current_forms = self.forms[ key ][ sub_dicts_list[ self.current_class_index ] ]
+            key, sub_dicts_list = forms_mapping[word_type]
+            self.current_key = sub_dicts_list[self.current_class_index]
+            self.current_forms = self.forms[key][ sub_dicts_list[self.current_class_index] ]
             self.curent_word_type_amount_of_forms = sub_dicts_list.__len__()
         else:
-            messagebox.showerror( "Fehler: ", "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
+            messagebox.showerror( "Fehler: ",
+                "Programm konnte die Form nicht auswählen.\nEinstellungen und Formen wurden auf Standard zurückgesetzt" )
             shutil.copyfile( self.settings_default_path, self.settings_path )
             self.FileAndChacheHandler.get_settings()
             self.form_select()
@@ -602,29 +607,29 @@ class GUI:
         self.previous_form = self.selected_option.get()
         
         
-    def check_answers( self, event = None ):
+    def check_answers( self, event: tk.Event = None ) -> None:
         self.main_frame.unbind( "<Return>" )
         if not self.frame_initialized_correctly:
             return
         wrong = False
-        self.autoSelect_progress[ self.current_key ] = self.answers_wrong
+        self.autoSelect_progress[self.current_key] = self.answers_wrong
         
         for case_or_tempus, correct_answer in self.current_forms.items():
             
             if case_or_tempus == "Nominativ_Singular" or case_or_tempus == "1._Person_Singular":
                 continue
-            user_input = self.user_entries[ case_or_tempus ].get().strip()
+            user_input = self.user_entries[case_or_tempus].get().strip()
             
             if user_input == correct_answer:
-                self.user_entries[ case_or_tempus ].config( fg = "green", state = "disabled", disabledforeground = "green" )
-                self.results[ case_or_tempus ] = True 
+                self.user_entries[case_or_tempus].config( fg = "green", state = "disabled", disabledforeground = "green" )
+                self.results[case_or_tempus] = True 
             else:
                 wrong = True
                 self.answers_wrong += 1
-                self.user_entries[ case_or_tempus ].config( fg = "red", state = "disabled", disabledforeground = "red" )
-                self.results[ case_or_tempus ] = False
+                self.user_entries[case_or_tempus].config( fg = "red", state = "disabled", disabledforeground = "red" )
+                self.results[case_or_tempus] = False
                 
-        self.autoSelect_progress[ self.current_key ] += self.answers_wrong
+        self.autoSelect_progress[self.current_key] += self.answers_wrong
         if wrong:
             self.check_button.config( text = "Show Solutions", command = self.show_solutions )
             self.main_frame.bind( "<Return>", self.show_solutions )
@@ -635,7 +640,7 @@ class GUI:
             self.main_frame.bind( "<Return>", self.check_answers )
     
     
-    def show_solutions( self, event = None  ):
+    def show_solutions( self, event: tk.Event = None  ) -> None:
         self.main_frame.unbind("<Return>")
         for case_or_tempus, correct_answer in self.current_forms.items():
             
@@ -645,16 +650,16 @@ class GUI:
             user_input = self.user_entries[case_or_tempus].get().strip()
             
             if user_input != correct_answer:
-                self.user_entries[ case_or_tempus ].config( fg = "blue", state = "normal" )
-                self.user_entries[ case_or_tempus ].delete( 0, tk.END )
-                self.user_entries[ case_or_tempus ].insert( 0, correct_answer )
-                self.user_entries[ case_or_tempus ].config( state = "disabled", disabledforeground = "blue" )
+                self.user_entries[case_or_tempus].config( fg = "blue", state = "normal" )
+                self.user_entries[case_or_tempus].delete( 0, tk.END )
+                self.user_entries[case_or_tempus].insert( 0, correct_answer )
+                self.user_entries[case_or_tempus].config( state = "disabled", disabledforeground = "blue" )
         
         self.check_button.config( text = "Retry", command = self.retry )
         self.main_frame.bind( "<Return>", self.retry )
     
     
-    def retry( self, event = None  ):
+    def retry( self, event: tk.Event = None ) -> None:
         self.main_frame.unbind("<Return>")
         for case, correct_answer in self.current_forms.items():
             
@@ -668,7 +673,7 @@ class GUI:
         self.main_frame.bind( "<Return>", self.check_answers )
         
         
-    def next_class( self ):
+    def next_class( self ) -> None:
         self.current_class_index += 1
         
         if self.current_class_index >= self.curent_word_type_amount_of_forms:
@@ -686,11 +691,11 @@ class GUI:
         self.populate_entries()
             
             
-    def reset_auto_select_progress( self ):
+    def reset_auto_select_progress( self ) -> None:
         self.root.grab_set()
         c0ntinue =  messagebox.askyesno( "Warnung", "Aller Autoselect Lern Fortschritt wird hiermit zurückgesetzt.\n"
-                                        "Das heißt das Program wird nicht mehr wissen wie gut sie in welchen Formen sind.\n\n"
-                                        "Trotzdem fortfahren?" )
+            "Das heißt das Program wird nicht mehr wissen wie gut sie in welchen Formen sind.\n\n"
+            "Trotzdem fortfahren?" )
         self.root.grab_release()
         
         if self.settings_window is not None:
@@ -703,15 +708,15 @@ class GUI:
         
         for key in self.forms:
             if key not in self.autoSelect_progress:
-                self.autoSelect_progress[ key ] = {}      
-            for key2 in self.forms[ key ]:
-                self.autoSelect_progress[ key ][ key2 ] = 10000
+                self.autoSelect_progress[key] = {}      
+            for key2 in self.forms[key]:
+                self.autoSelect_progress[key][key2] = 10000
         self.first_start = False
         self.FileAndChacheHandler.save_settings()
         self.debug_print( "auto_select_progress was reset" )
         
         
-    def add_newline_if_too_long( self, text, max_length = 33 ):
+    def add_newline_if_too_long( self, text: str, max_length: int = 33 ) -> str:
         words = text.split()
         result = []
         current_line = ""
@@ -762,11 +767,11 @@ class GUI:
         return self.root.winfo_width(), self.root.winfo_height()
         
     
-    def dummy_method( self, *args ):
+    def dummy_method( self, *args ) -> None:
         pass
  
                       
-    def debug_print( self, *toPrint ):
+    def debug_print( self, *toPrint ) -> None:
         time = str( datetime.now() ) + ": "
         if ( self.debug == True ):
             formatted_toPrints = []
@@ -781,7 +786,7 @@ class GUI:
             print( time, output )
             self.FileAndChacheHandler.write_debug_log( time + "\n".join( formatted_toPrints ) )
             
-    def enable_debug( self, event ):
+    def enable_debug( self, event: Tk.Event ) -> None:
         time = str( datetime.now() ) + ": "
         if self.debug == False:
             self.debug = True
@@ -801,7 +806,7 @@ class GUI:
             self.FileAndChacheHandler.save_settings()
                 
                 
-    def enable_tests( self, event ):
+    def enable_tests( self, event: tk.Event ) -> None:
         time = str( datetime.now() ) + ": "
         if self.tests == False:
             self.tests = True

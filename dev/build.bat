@@ -1,12 +1,16 @@
+REM Clean previous build
+if exist "dist" rmdir /s /q "dist"
+
+REM Compile python source code to C and C++
 python -m nuitka ^
 --standalone ^
---windows-console-mode = disable ^
+--windows-console-mode=disable ^
 --windows-icon-from-ico=src/assets/icon.ico ^
 --output-dir=dist ^
 --output-filename="Latein Formen Trainer" ^
---include-data-dir=src/logic=logic ^
---include-data-dir=src/data=data ^
---include-data-dir=src/assets=assets ^
+--include-data-dir=src/logic=src/logic ^
+--include-data-dir=src/data=src/data ^
+--include-data-dir=src/assets=src/assets ^
 --enable-plugin=tk-inter ^
 --include-module=tkinter.font ^
 --include-module=tkinter.ttk ^
@@ -32,6 +36,14 @@ python -m nuitka ^
 --nofollow-import-to=numpy.matlib ^
 --remove-output ^
 --assume-yes-for-downloads ^
---jobs=4 src/main.py
+--msvc=latest ^
+--jobs=4 ^
+src/main.py
 
-pause
+REM Move everything to _internal except .exe for easier accessablility by users
+cd dist/main.dist
+mkdir _internal
+move *.* _internal/
+move "Latein Formen Trainer.exe"
+cd ..
+rmdir /s /q main.dist

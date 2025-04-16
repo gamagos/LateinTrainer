@@ -6,7 +6,7 @@ import shutil
 import time
 from tkinter import messagebox
 
-from numpy import double
+from numpy import double, empty
 from yaml import Event
 
 
@@ -148,6 +148,12 @@ class FileAndCacheHandler:
 
     def write_debug_log( self, *toWrite: tuple, path: str = None ) -> None:
         toWrites = list( toWrite )
+        if not toWrites:
+            return
+        
+        # Convert None to string "None" and handle empty strings
+        toWrites = [str(x) if x is not None else "" for x in toWrites]
+                 
         if path is None:
             path = self.gui_instance.debug_log_path
             

@@ -38,3 +38,5 @@
 -made new version
 -made autoUpdate after a week
 -made build.bat
+
+        15.04.2025

@@ -13,6 +13,7 @@ font_cache.json
 _internal
 LateinTrainer.code-workspace
 logs/
+nuitka-crahs-logs.xml
 __pycache__/
 temporary/
 *.tmp
