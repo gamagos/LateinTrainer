@@ -4,7 +4,7 @@
 style:
   language: python
   indent: 4
-  max_line_length: 90
+  max_line_length: 110
   quotes: double
   spacing:
     around_operators: true
