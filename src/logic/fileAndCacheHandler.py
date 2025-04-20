@@ -45,8 +45,7 @@ class FileAndCacheHandler:
         if not os.path.exists( self.gui_instance.autoSelect_progress_path ) or os.path.getsize( self.gui_instance.autoSelect_progress_path ) == 0:
             with open( self.gui_instance.autoSelect_progress_path, "w", encoding = "utf-8" ) as file:
                 json.dump( {}, file, indent = 4, ensure_ascii = False )
-                print( "autoSelect_progress.json was reset(empty)" )
-                messagebox.showerror( f"Fehler in Programm Datein Datei: {self.gui_instance.autoSelect_progress_path} nicht gefunden!" )
+                self.gui_instance.debug_print( "autoSelect_progress.json was reset(empty)" )
                 self.gui_instance.reset_auto_select_progress()
                 return {"Error autoSelect_progress.json is empty"}
         else:
@@ -158,7 +157,7 @@ class FileAndCacheHandler:
             path = self.gui_instance.debug_log_path
             
         if not os.path.exists( path ):
-            os.makedirs( os.path.dirname(path) )
+            os.makedirs( os.path.dirname( path ), exist_ok = True )
             with open( path, "w" ) as file:
                 file.write( "" )
         

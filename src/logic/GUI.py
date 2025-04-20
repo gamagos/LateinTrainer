@@ -19,7 +19,7 @@ from PIL import Image, ImageTk
 from logic.AutoUpdate import AutoUpdate
 from logic.FileAndCacheHandler import FileAndCacheHandler
 
-VERSION = "v1.2.0"
+VERSION = "v1.2.0"    #do not remove the spacing around the = as this will break the build.bat file
 
 class GUI:
     def __init__( self, root: tk.Tk ) -> None:
@@ -32,8 +32,8 @@ class GUI:
         self.settings_default_path = os.path.join( self.project_path, "data", "default_settings.csv" )
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
         self.debug_log_path = os.path.join( self.project_path, "logs", "debug_log.txt" )
-        self.settingsPNG_path = os.path.join( self.project_path, "assets/settings_button", "settings.png" )
-        self.settings_disbledPNG_path = os.path.join( self.project_path, "assets/settings_button", "settings_disabled.png" )
+        self.settingsPNG_path = os.path.join( self.project_path, "assets" , "settings_button", "settings.png" )
+        self.settings_disbledPNG_path = os.path.join( self.project_path, "assets", "settings_button", "settings_disabled.png" )
         self.settings_button_image = Image.open( self.settingsPNG_path )
         self.autoSelect_switchPNGs_paths = []
         i = 0
@@ -84,8 +84,8 @@ class GUI:
         self.results = {}
         self.answers_wrong = 0
         self.autoSelect_progress = {}
-        self.download_progress = 0
-        self.exctraction_progress = 0
+        self.download_progress = tk.DoubleVar()
+        self.download_progress.set(0)
         self.choices = ["Alle", "Nomen", "Verben", "Adjektive", "hic haec hoc", "qui quae quod", "ille illa illud",
             "ipse ipsa ipsum", "Gerundien", "Gerundiven"]
         self.update_complete = True
@@ -98,6 +98,7 @@ class GUI:
         self.autoSelect_image = None
         self.settings_window = None
         self.update_window = None
+        self.info = None
         
         self.root = root
         self.root.title( "Latein Formen Trainer " + VERSION )
@@ -479,54 +480,71 @@ class GUI:
         self.next_class()
         
         
-    def on_check_for_updates_button( self, window: tk.Toplevel, check_for_updates_button: tk.Button, title: str = "Update - Latein Formen Trainer" ) -> None:
+    def on_check_for_updates_button( self, window: tk.Toplevel, check_for_updates_button: tk.Button, title: str = "Update - Latein Formen Trainer") -> None:
         self.update_complete = False
         check_for_updates_button.config( state = "disabled" )
         
         self.update_window = tk.Toplevel( window )
-        self.update_window.geometry("300x240")
+        self.update_window.geometry("300x140")
         self.update_window.resizable( False, False )
         self.update_window.title( title )
         self.update_window.iconbitmap( self.icon_path )
         self.update_window.protocol( "WM_DELETE_WINDOW", lambda: self.on_close_update_window( self.update_window, check_for_updates_button ) )
         
-        info = tk.Label( self.update_window, text = "Sucht update" )
-        info.place( x = 20, y = 20 )
+        self.info = tk.Label( self.update_window, text = "Sucht update" )
+        self.info.place( x = 20, y = 20 )
         
         style = ttk.Style()
-        style.configure("green.Horizontal.TProgressbar", background='green')
+        style.configure("green.Horizontal.TProgressbar", background = 'green')
 
         update_progressbar = ttk.Progressbar(self.update_window, orient = "horizontal", 
-                                   length = 220, mode = "determinate",
-                                   style = "green.Horizontal.TProgressbar" )
+                                   length = 240, mode = "determinate",
+                                   style = "green.Horizontal.TProgressbar", variable = self.download_progress )
         update_progressbar.place( x = 20, y = 60 )
         
         exit_button = tk.Button( self.update_window, text = "fertig",
             command = lambda: self.on_close_update_window( self.update_window, check_for_updates_button ) )
         
-        # Update progress
         if self.check_internet_connection():
-            self.debug_print("Access to internet availale")
-        else:
-            self.debug_print("Acces to internet not available")
-            info.config( text = "Keine Internet Verbindung" )
-            exit_button.place( relx = 0.99, rely = 0.99, anchor = "se" )
-        update_available, latest_version, release_data = self.autoUpdate.check_for_updates()
-        if update_available:
-            self.debug_print("") 
-            info.config( text = f"Update gefunden: {latest_version} > {VERSION}" )
+            self.debug_print("Access to internet available")
             
-            def update_progress():
-                update_progressbar.config( value = self.download_progress )
-                if self.download_progress < 100:
-                    self.update_window.after( 10, update_progress )
-                    
-            self.autoUpdate.download_and_install_update()   
-            threading.start( update_progress )
+            update_available, latest_version, release_data = self.autoUpdate.check_for_updates()
+            if update_available:
+                self.debug_print("Update found")
+                self.info.config(text = f"Update gefunden: {latest_version} > {VERSION}")
+                
+                def download_and_update():
+                    try:
+                        # Run download in background thread
+                        self.autoUpdate.run_update_check()
+                        
+                        # Update UI on completion (using after to ensure thread safety)
+                        self.update_window.after( 0, lambda: [
+                            self.info.config( text = "Download abgeschlossen" ),
+                            self.download_progress.set( 100 ),
+                            exit_button.place( relx = 0.99, rely = 0.99, anchor = "se" )
+                        ])
+                    except Exception as e:
+                        self.debug_print( f"Update error: {e}" )
+                        self.update_window.after( 0, lambda: [
+                            self.info.config( text = "Fehler beim Update" ),
+                            self.download_progress.set( 0 ),
+                            exit_button.place( relx = 0.99, rely = 0.99, anchor = "se" )
+                        ])
+
+                # Start download in separate thread
+                update_thread = threading.Thread( target = download_and_update, daemon = True )
+                update_thread.start()
+                self.info.config( text = "Lädt runter..." )
+            else:
+                self.info.config( text = "Neueste Version bereits installiert" )
+                self.download_progress.set( 100 )
+                exit_button.place( relx = 0.99, rely = 0.99, anchor = "se" )
         else:
-            info.config( text = "Neueste Version bereits installiert")
-            update_progressbar.config( value = 100 )
-            exit_button.place( relx = 0.99, rely = 0.99, anchor = "se")
+            self.debug_print("Access to internet not available")
+            self.info.config( text = "Keine Internet Verbindung" )
+            self.download_progress.set(0)
+            exit_button.place( relx = 0.99, rely = 0.99, anchor = "se" )
             
         self.update_complete = True
         
@@ -693,9 +711,12 @@ class GUI:
             
     def reset_auto_select_progress( self ) -> None:
         self.root.grab_set()
-        c0ntinue =  messagebox.askyesno( "Warnung", "Aller Autoselect Lern Fortschritt wird hiermit zurückgesetzt.\n"
-            "Das heißt das Program wird nicht mehr wissen wie gut sie in welchen Formen sind.\n\n"
-            "Trotzdem fortfahren?" )
+        if os.path.exists( self.autoSelect_progress_path ) and os.path.getsize( self.autoSelect_progress_path ) > 0:
+            c0ntinue =  messagebox.askyesno( "Warnung", "Aller Autoselect Lern Fortschritt wird hiermit zurückgesetzt.\n"
+                "Das heißt das Program wird nicht mehr wissen wie gut sie in welchen Formen sind.\n\n"
+                "Trotzdem fortfahren?" )
+        else:
+            c0ntinue = True
         self.root.grab_release()
         
         if self.settings_window is not None:
@@ -823,4 +844,4 @@ class GUI:
             info_Label.place( relx = 0.5, rely = 0.5, height = 46, width = 150, anchor = "center" )
             self.root.update()
             self.root.after( 1000, info_Label.place_forget() )
-            self.FileAndChacheHandler.save_settings()
+            self.FileAndChacheHandler.save_settings() 

@@ -1,8 +1,8 @@
 debug=True
 tests=False
-selected_option=Alle
+selected_option=Autoselect
 last_clear_cache=1744650904.0978072
 first_start=False
-autoSelect_on=False
+autoSelect_on=True
 last_update=1791358192.0745842
 autoUpdate_on=True

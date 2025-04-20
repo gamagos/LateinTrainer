@@ -73,10 +73,11 @@ class AutoUpdate:
                         downloaded_size += len( chunk )
                         progress = ( downloaded_size / total_size ) * 100
                         self.gui.debug_print( f"Download progress: {progress:.1f}%" )
-                        self.gui.download_progress = round( progress, 1 )
+                        self.gui.download_progress.set( progress )
         
             # Extract to temporary directory
             self.gui.debug_print( "Downloading complete. Extracting..." )
+            self.gui.info.config( text = "Extrahiert..." )
             with zipfile.ZipFile( update_zip, "r" ) as zip_ref:
                 zip_files = zip_ref.namelist()
                 total_files = len( zip_files )
@@ -84,7 +85,7 @@ class AutoUpdate:
                     zip_ref.extract( file, extract_dir )
                     progress = ( index / total_files ) * 100
                     self.gui.debug_print( f"Extraction progress: {progress:.1f}%" )
-                    self.gui.extraction_progress = round( progress, 1 )
+                    self.gui.download_progress.set( progress )
         
             os.remove( update_zip )  # Remove the zip file
         
@@ -99,11 +100,11 @@ class AutoUpdate:
 
 
     def run_update_check( self ) -> None:
-        update_available, latest_version, download_url = self.check_for_updates( self.gui )
+        update_available, latest_version, download_url = self.check_for_updates()
     
         if update_available:
             self.gui.debug_print( f"Update available! Version {latest_version}" )
-            if self.download_and_install_update( download_url, self.gui ):
+            if self.download_and_install_update( download_url ):
                 self.gui.debug_print( "Update installed successfully!" )
             else:
                 self.gui.debug_print( "Update installation failed." )
