@@ -12,12 +12,12 @@ from logic.GUI import GUI
 logs_path = os.path.join( getattr( sys, "_MEIPASS",
         os.path.dirname( os.path.abspath( __file__ ) ) ), "logs", "debug_log.txt"
     )
-# TODO remove on compilation to dist
+
 try:
+    leFileAndCacheHandler = FileAndCacheHandler( None )
     root = tk.Tk()
     root.geometry( "700x700" )
     app = GUI( root )
-    leFileAndCacheHandler = FileAndCacheHandler( app )
     
     def report_callback_exception( exc, val, tb ):
         error_details = "".join( traceback.format_exception( exc, val, tb ) )
@@ -51,12 +51,5 @@ except Exception as e:
         print(f"Failed to write to log: {log_error}")
     messagebox.showerror( "Fehler", f"{e}" )
 
-"""
-root = tk.Tk()
-root.geometry( "700x700" )
-app = GUI( root )
-app.debug_print( "\n\n!!!!!!!!@gamagos Please use the real main.py this is a workaround to make vsc throw the errors!!!!!!!!\n" )
-root.mainloop()
-"""
 print( "Quitting..." )
 sys.exit(0)

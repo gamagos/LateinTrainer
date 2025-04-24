@@ -13,22 +13,21 @@ from tkinter import Event, Tk, font, messagebox, ttk
 
 import win32api
 import win32con
-from numpy import double
 from PIL import Image, ImageTk
 
 from logic.AutoUpdate import AutoUpdate
 from logic.FileAndCacheHandler import FileAndCacheHandler
 
-VERSION = "v1.2.0"    #do not remove the spacing around the = as this will break the build.bat file
+VERSION = "v1.2.1"    #do not remove the spacing around the = as this will break the build.bat file
 
 class GUI:
     def __init__( self, root: tk.Tk ) -> None:
         #paths
         self.project_path = getattr( sys, "_MEIPASS", os.path.dirname( os.path.dirname( os.path.abspath( __file__ ) ) ) )
+        self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
         self.forms_path = os.path.join( self.project_path, "data", "forms.json" )
         self.font_cache_path = os.path.join( self.project_path, "data", "font_cache.json" )
         self.autoSelect_progress_path = os.path.join( self.project_path, "data", "autoSelect_progress.json")
-        self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
         self.settings_default_path = os.path.join( self.project_path, "data", "default_settings.csv" )
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
         self.debug_log_path = os.path.join( self.project_path, "logs", "debug_log.txt" )
@@ -107,6 +106,7 @@ class GUI:
         self.root.bind( "<Configure>", self.on_resize )
         self.root.bind( "<Alt-F4>", self.on_close )
         self.root.iconbitmap( self.icon_path )
+        self.root.wm_iconbitmap( self.icon_path )
         self.root.protocol( "WM_DELETE_WINDOW", self.on_close )
         self.debug_print("Root was initialized")
         
@@ -169,10 +169,13 @@ class GUI:
         self.settings_button.place( relx = 0.934, rely = 0, height = 25, width = 25 )
 
         self.forms_frame = tk.Frame( self.content_frame )
-        self.forms_frame.place( relx = 0.02, rely = 0.16, relwidth = 0.9, relheight = 0.7 )
+        self.forms_frame.place( relx = 0.02, rely = 0.2, relwidth = 0.9, relheight = 0.7 )
         
         self.check_button = tk.Button( self.content_frame, text = "Überprüfen", command = self.check_answers, anchor = "center" )
-        self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.08, relwidth = 0.24, anchor = "center" )
+        self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.06, relwidth = 0.18, anchor = "center" )
+        
+        self.translation = tk.Label( self.content_frame, anchor = "center", text = f"Bedeutung: {self.current_forms["Translation"]}" )
+        self.translation.place( rely = 0.164, relx = 0.5, relwidth = 0.4, relheight = 0.04, anchor = "center" )
         
         self.canvas.config( scrollregion = self.canvas.bbox("all"), relief = "flat" )
         
@@ -180,34 +183,37 @@ class GUI:
         self.root.update_idletasks()
         
         self.title.config( text = self.add_newline_if_too_long( self.current_key ) )
-        self.populate_entries()
+        self.populate_table()
 
 
-    def populate_entries( self ) -> None:
-        separation_form_tabel = - 1
+    def populate_table( self ) -> None:
+        separation_form_tabel = -1
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_forms.items() ):
+            i2 = i - 1
+            if case_or_tempus == "Translation":
+                continue
             
             if case_or_tempus == "Nominativ_Plural" or case_or_tempus == "1._Person_Plural":
                 separation_form_tabel += 1
                 
             separation_form_tabel += 1
             self.form_labels.append( tk.Label( self.forms_frame, text = case_or_tempus.replace( "_", " " ), anchor = "w" ) )
-            self.form_labels[i].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
+            self.form_labels[i2].place( relx = 0.01, rely = 0.09 * separation_form_tabel, relwidth = 0.4, relheight = 0.09 )
             
             self.entries.append( tk.Entry( self.forms_frame ) )
             
             default_forms = ["Nominativ_Singular", "1._Person_Singular", "Maskulinum_Singular", "Genitiv"] #TODO remove when it give translation
             if case_or_tempus in default_forms:
-                self.entries[i].insert( 0, correct_answer )
-                self.entries[i].config( state = "disabled", disabledforeground = "gray" )
+                self.entries[i2].insert( 0, correct_answer )
+                self.entries[i2].config( state = "disabled", disabledforeground = "gray" )
                 
-            self.entries[i].place( relx = 0.42, rely = 0.09 * separation_form_tabel, relwidth = 0.58, relheight = 0.09 )
-            self.user_entries[case_or_tempus] = self.entries[i]
+            self.entries[i2].place( relx = 0.42, rely = 0.09 * separation_form_tabel, relwidth = 0.58, relheight = 0.09 )
+            self.user_entries[case_or_tempus] = self.entries[i2]
             
-        if list( self.current_forms.keys() )[0] == "Nominativ_Singular":
-            self.check_button.place( relx = 0.48, rely = 0.9, relheight = 0.08, relwidth = 0.24 )
+        if list( self.current_forms.keys() )[1] == "Nominativ_Singular":
+            self.check_button.place( relx = 0.48, rely = 0.96, relheight = 0.08, relwidth = 0.24 )
         else:
-            self.check_button.place( relx = 0.48, rely = 0.62, relheight = 0.08, relwidth = 0.24 )
+            self.check_button.place( relx = 0.48, rely = 0.78, relheight = 0.08, relwidth = 0.24 )
             
         self.handle_resize()
         
@@ -304,6 +310,7 @@ class GUI:
         self.adjust_font_size( self.title, font_weight = "bold" )
         self.adjust_font_size( self.combobox_select_form, 0.83, 0.83 )
         self.adjust_image_button_size( self.settings_button_image )
+        self.adjust_font_size( self.translation, 0.99, 0.99 )
             
         for i in range( len( self.form_labels ) ):
             try:
@@ -311,7 +318,7 @@ class GUI:
                 self.adjust_font_size( self.entries[i], 0.75, 0.75, "entryplaceholder", element_name = "entries" )
             except Exception as e:
                 self.debug_print( f"Error adjusting form labels or entries: {e}" )
-        self.adjust_font_size( self.check_button, 0.72, 0.72 )
+        self.adjust_font_size( self.check_button, 0.8, 0.8 )
             
         self.root_prev_width = self.root_width
         self.root_prev_height =self.root_height
@@ -398,7 +405,7 @@ class GUI:
         self.settings_button.config( image = final_image )
         self.settings_button.image = final_image
 
-        self.debug_print( "settings_button: new width: ", new_width )
+        self.debug_print( "settings_button: new width:", new_width )
         self.settings_button.place(  relx = 0.934, rely = 0, width = new_width, height = new_width, anchor = "nw" ) #2 times width because its a square
         return new_width
     
@@ -486,6 +493,7 @@ class GUI:
         
         self.update_window = tk.Toplevel( window )
         self.update_window.geometry("300x140")
+        self.update_window.iconbitmap( self.icon_path )
         self.update_window.resizable( False, False )
         self.update_window.title( title )
         self.update_window.iconbitmap( self.icon_path )
@@ -706,7 +714,7 @@ class GUI:
         self.results = {}
         self.form_labels = []
         self.entries = []
-        self.populate_entries()
+        self.populate_table()
             
             
     def reset_auto_select_progress( self ) -> None:

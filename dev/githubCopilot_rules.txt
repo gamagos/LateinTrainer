@@ -5,8 +5,8 @@ These are rules I want the AI to follow when generating code
 ["content"]
 
 #Good (content in [] and {})
-[thing]
-{other thing}
+[ thing ]
+{ other thing }
 
 # Good (multiple contents or no quotes)
 ( content1 )
@@ -15,13 +15,14 @@ These are rules I want the AI to follow when generating code
 #Good (lists with multiple strings in them)
 ["abc", "abc"]
 
-#Good (multiple quote contents or content and quote content)
+#Good (multiple quote contents or normal content and quote content)
 ( "content", "content" )
 ( "content", content )
 
 # Good (single symbol or strings)
 (1)
 [5]
+{i}
 ["only for strings"]
 
 #Good (= signs)
