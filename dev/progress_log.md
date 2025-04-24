@@ -27,3 +27,16 @@
         07.04.2025
 -fixed weird branches in git
 -fixed reset_autoSelect_progress
+
+        09.04.2025-10.04.2025
+-fixed branches fr this time
+-made autoSelect work
+-made updater
+
+        14.04.2025
+-made update gui
+-made new version
+-made autoUpdate after a week
+-made build.bat
+
+        15.04.2025

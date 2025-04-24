@@ -1,3 +1,5 @@
+autoSelect_progress.json
+src/data/autoSelect_progress.json
 build/
 *.code-workspace
 code-workspace
@@ -13,6 +15,7 @@ font_cache.json
 _internal
 LateinTrainer.code-workspace
 logs/
+nuitka-crahs-logs.xml
 __pycache__/
 temporary/
 *.tmp
