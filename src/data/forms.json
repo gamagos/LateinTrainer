@@ -2,6 +2,7 @@
     "forms": {
         "Nouns": {
             "A-Deklination": {
+                "Translation": "Das Mädchen",
                 "Nominativ_Singular": "puella",
                 "Genitiv_Singular": "puellae",
                 "Dativ_Singular": "puellae",
@@ -14,6 +15,7 @@
                 "Ablativ_Plural": "puellis"
             },
             "O-Deklination": {
+                "Translation": "Der Hausherr/Herr",
                 "Nominativ_Singular": "dominus",
                 "Genitiv_Singular": "domini",
                 "Dativ_Singular": "domino",
@@ -26,6 +28,7 @@
                 "Ablativ_Plural": "dominis"
             },
             "O-Deklination Neutrum": {
+                "Translation": "Der Krieg",
                 "Nominativ_Singular": "bellum",
                 "Genitiv_Singular": "belli",
                 "Dativ_Singular": "bello",
@@ -38,6 +41,7 @@
                 "Ablativ_Plural": "bellis"
             },
             "konsonantische Deklination": {
+                "Translation": "Der König",
                 "Nominativ_Singular": "rex",
                 "Genitiv_Singular": "regis",
                 "Dativ_Singular": "regi",
@@ -50,6 +54,7 @@
                 "Ablativ_Plural": "regibus"
             },
             "konsonantische Deklination neutrum": {
+                "Translation": "Der Körper",
                 "Nominativ_Singular": "corpus",
                 "Genitiv_Singular": "corporis",
                 "Dativ_Singular": "corpori",
@@ -62,6 +67,7 @@
                 "Ablativ_Plural": "corporibus"
             },
             "konsonantische Deklination neutrum mit Gen. Plural -ium": {
+                "Translation": "Das Tier",
                 "Nominativ_Singular": "animal",
                 "Genitiv_Singular": "animalis",
                 "Dativ_Singular": "animali",
@@ -74,6 +80,7 @@
                 "Ablativ_Plural": "animalibus"
             },
             "I-Deklination": {
+                "Translation": "Der Bürger",
                 "Nominativ_Singular": "civis",
                 "Genitiv_Singular": "civis",
                 "Dativ_Singular": "civi",
@@ -86,6 +93,7 @@
                 "Ablativ_Plural": "civibus"
             },
             "I-Deklination Neutrum": {
+                "Translation": "Das Meer",
                 "Nominativ_Singular": "mare",
                 "Genitiv_Singular": "maris",
                 "Dativ_Singular": "mari",
@@ -98,6 +106,7 @@
                 "Ablativ_Plural": "maribus"
             },
             "U-Deklination": {
+                "Translation": "Die Hand",
                 "Nominativ_Singular": "manus",
                 "Genitiv_Singular": "manus",
                 "Dativ_Singular": "manui",
@@ -110,6 +119,7 @@
                 "Ablativ_Plural": "manibus"
             },
             "E-Deklination": {
+                "Translation": "Die Sache",
                 "Nominativ_Singular": "res",
                 "Genitiv_Singular": "rei",
                 "Dativ_Singular": "rei",
@@ -124,6 +134,7 @@
         },
         "Conjugations": {
             "A-Konjugation Präsens": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amo",
                 "2._Person_Singular": "amas",
                 "3._Person_Singular": "amat",
@@ -132,6 +143,7 @@
                 "3._Person_Plural": "amant"
             },
             "A-Konjugation Imperfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amabam",
                 "2._Person_Singular": "amabas",
                 "3._Person_Singular": "amabat",
@@ -140,6 +152,7 @@
                 "3._Person_Plural": "amabant"
             },
             "A-Konjugation Plusquamperfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amaveram",
                 "2._Person_Singular": "amaveras",
                 "3._Person_Singular": "amaverat",
@@ -148,6 +161,7 @@
                 "3._Person_Plural": "amaverant"
             },
             "A-Konjugation Perfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amavi",
                 "2._Person_Singular": "amavisti",
                 "3._Person_Singular": "amavit",
@@ -156,6 +170,7 @@
                 "3._Person_Plural": "amaverunt"
             },
             "A-Konjugation Futur 1": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amabo",
                 "2._Person_Singular": "amabis",
                 "3._Person_Singular": "amabit",
@@ -164,6 +179,7 @@
                 "3._Person_Plural": "amabunt"
             },
             "A-Konjugation Futur 2": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amavero",
                 "2._Person_Singular": "amaveris",
                 "3._Person_Singular": "amaverit",
@@ -172,6 +188,7 @@
                 "3._Person_Plural": "amaverint"
             },
             "A-Konjugation PPA": {
+                "Translation": "von amare: liebhaben, lieben",
                 "Nominatv_Singular": "amans",
                 "Genitiv_Singular": "amantis",
                 "Dativ_Singular": "amanti",
@@ -184,6 +201,7 @@
                 "Ablativ_Plural": "amantibus"
             },
             "A-Konjugation PPP": {
+                "Translation": "von amare: liebhaben, lieben",
                 "Nominativ_Singular": "amatus",
                 "Genitiv_Singular": "amati",
                 "Dativ_Singular": "amato",
@@ -196,6 +214,7 @@
                 "Ablativ_Plural": "amatis"
             },
             "A-Konjugation PFA": {
+                "Translation": "von amare: liebhaben, lieben",
                 "Singular": "amaturus",
                 "Genitiv_Singular": "amaturi",
                 "Dativ_Singular": "amaturo",
@@ -208,6 +227,7 @@
                 "Ablativ_Plural": "amaturis"
             },
             "A-Konjugation Passiv Präsens": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amor",
                 "2._Person_Singular": "amaris",
                 "3._Person_Singular": "amatur",
@@ -216,6 +236,7 @@
                 "3._Person_Plural": "amantur"
             },
             "A-Konjugation Passiv Imperfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amabar",
                 "2._Person_Singular": "amabaris",
                 "3._Person_Singular": "amabatur",
@@ -224,6 +245,7 @@
                 "3._Person_Plural": "amabantur"
             },
             "A-Konjugation Passiv Perfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amatus sum",
                 "2._Person_Singular": "amatus es",
                 "3._Person_Singular": "amatus est",
@@ -232,6 +254,7 @@
                 "3._Person_Plural": "amati sunt"
             },
             "A-Konjugation Passiv Plusquamperfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amatus eram",
                 "2._Person_Singular": "amatus eras",
                 "3._Person_Singular": "amatus erat",
@@ -240,6 +263,7 @@
                 "3._Person_Plural": "amati erant"
             },
             "A-Konjugation Passiv Futur 1": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amabor",
                 "2._Person_Singular": "amaberis",
                 "3._Person_Singular": "amabitur",
@@ -248,6 +272,7 @@
                 "3._Person_Plural": "amabuntur"
             },
             "A-Konjugation Passiv Futur 2": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amatus ero",
                 "2._Person_Singular": "amatus eris",
                 "3._Person_Singular": "amatus erit",
@@ -256,6 +281,7 @@
                 "3._Person_Plural": "amati erunt"
             },
             "A-Konjugation Konjunktiv Präsens": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amem",
                 "2._Person_Singular": "ames",
                 "3._Person_Singular": "amet",
@@ -264,6 +290,7 @@
                 "3._Person_Plural": "ament"
             },
             "A-Konjugation Konjunktiv Imperfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amarem",
                 "2._Person_Singular": "amares",
                 "3._Person_Singular": "amaret",
@@ -272,6 +299,7 @@
                 "3._Person_Plural": "amarent"
             },
             "A-Konjugation Konjunktiv Perfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amaverim",
                 "2._Person_Singular": "amaveris",
                 "3._Person_Singular": "amaverit",
@@ -280,6 +308,7 @@
                 "3._Person_Plural": "amaverint"
             },
             "A-Konjugation Konjunktiv Plusquamperfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amavissem",
                 "2._Person_Singular": "amavisses",
                 "3._Person_Singular": "amavisset",
@@ -288,6 +317,7 @@
                 "3._Person_Plural": "amavissent"
             },
             "A-Konjugation Passiv Konjunktiv Präsens": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amer",
                 "2._Person_Singular": "ameris",
                 "3._Person_Singular": "ametur",
@@ -296,6 +326,7 @@
                 "3._Person_Plural": "amentur"
             },
             "A-Konjugation Passiv Konjunktiv Imperfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amarer",
                 "2._Person_Singular": "amareris",
                 "3._Person_Singular": "amaretur",
@@ -304,6 +335,7 @@
                 "3._Person_Plural": "amarentur"
             },
             "A-Konjugation Passiv Konjunktiv Perfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amatus sim",
                 "2._Person_Singular": "amatus sis",
                 "3._Person_Singular": "amatus sit",
@@ -312,6 +344,7 @@
                 "3._Person_Plural": "amati sint"
             },
             "A-Konjugation Passiv Konjunktiv Plusquamperfekt": {
+                "Translation": "von amare: liebhaben, lieben",
                 "1._Person_Singular": "amatus essem",
                 "2._Person_Singular": "amatus esses",
                 "3._Person_Singular": "amatus esset",
@@ -320,6 +353,7 @@
                 "3._Person_Plural": "amati essent"
             },
             "E-Konjugation Präsens": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "moneo",
                 "2._Person_Singular": "mones",
                 "3._Person_Singular": "monet",
@@ -328,6 +362,7 @@
                 "3._Person_Plural": "monent"
             },
             "E-Konjugation Imperfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monebam",
                 "2._Person_Singular": "monebas",
                 "3._Person_Singular": "monebat",
@@ -336,6 +371,7 @@
                 "3._Person_Plural": "monebant"
             },
             "E-Konjugation Plusquamperfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monueram",
                 "2._Person_Singular": "monueras",
                 "3._Person_Singular": "monuerat",
@@ -344,6 +380,7 @@
                 "3._Person_Plural": "monuerant"
             },
             "E-Konjugation Perfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monui",
                 "2._Person_Singular": "monuisti",
                 "3._Person_Singular": "monuit",
@@ -352,6 +389,7 @@
                 "3._Person_Plural": "monuerunt"
             },
             "E-Konjugation Futur 1": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monebo",
                 "2._Person_Singular": "monebis",
                 "3._Person_Singular": "monebit",
@@ -360,6 +398,7 @@
                 "3._Person_Plural": "monebunt"
             },
             "E-Konjugation Futur 2": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monuero",
                 "2._Person_Singular": "monueris",
                 "3._Person_Singular": "monuerit",
@@ -368,6 +407,7 @@
                 "3._Person_Plural": "monuerint"
             },
             "E-Konjugation PPA": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "Nominativ_Singular": "monens",
                 "Genitiv_Singular": "monentis",
                 "Dativ_Singular": "monenti",
@@ -380,6 +420,7 @@
                 "Ablativ_Plural": "monentibus"
             },
             "E-Konjugation PPP": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "Nominativ_Singular": "monitus",
                 "Genitiv_Singular": "moniti",
                 "Dativ_Singular": "monito",
@@ -392,6 +433,7 @@
                 "Ablativ_Plural": "monitis"
             },
             "E-Konjugation PFA": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "Nominativ_Singular": "moniturus",
                 "Genitiv_Singular": "monituri",
                 "Dativ_Singular": "monituro",
@@ -404,6 +446,7 @@
                 "Ablativ_Plural": "monituris"
             },
             "E-Konjugation Passiv Präsens": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "moneor",
                 "2._Person_Singular": "moneris",
                 "3._Person_Singular": "monetur",
@@ -412,6 +455,7 @@
                 "3._Person_Plural": "monentur"
             },
             "E-Konjugation Passiv Imperfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monebar",
                 "2._Person_Singular": "monebaris",
                 "3._Person_Singular": "monebatur",
@@ -420,6 +464,7 @@
                 "3._Person_Plural": "monebantur"
             },
             "E-Konjugation Passiv Perfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monitus sum",
                 "2._Person_Singular": "monitus es",
                 "3._Person_Singular": "monitus est",
@@ -428,6 +473,7 @@
                 "3._Person_Plural": "moniti sunt"
             },
             "E-Konjugation Passiv Plusquamperfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monitus eram",
                 "2._Person_Singular": "monitus eras",
                 "3._Person_Singular": "monitus erat",
@@ -436,6 +482,7 @@
                 "3._Person_Plural": "moniti erant"
             },
             "E-Konjugation Passiv Futur 1": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monebor",
                 "2._Person_Singular": "moneberis",
                 "3._Person_Singular": "monebitur",
@@ -444,6 +491,7 @@
                 "3._Person_Plural": "monebuntur"
             },
             "E-Konjugation Passiv Futur 2": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monitus ero",
                 "2._Person_Singular": "monitus eris",
                 "3._Person_Singular": "monitus erit",
@@ -452,6 +500,7 @@
                 "3._Person_Plural": "moniti erunt"
             },
             "E-Konjugation Konjunktiv Präsens": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "moneam",
                 "2._Person_Singular": "moneas",
                 "3._Person_Singular": "moneat",
@@ -460,6 +509,7 @@
                 "3._Person_Plural": "moneant"
             },
             "E-Konjugation Konjunktiv Imperfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monerem",
                 "2._Person_Singular": "moneres",
                 "3._Person_Singular": "moneret",
@@ -468,6 +518,7 @@
                 "3._Person_Plural": "monerent"
             },
             "E-Konjugation Konjunktiv Perfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monuerim",
                 "2._Person_Singular": "monueris",
                 "3._Person_Singular": "monuerit",
@@ -476,6 +527,7 @@
                 "3._Person_Plural": "monuerint"
             },
             "E-Konjugation Konjunktiv Plusquamperfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monuissem",
                 "2._Person_Singular": "monuisses",
                 "3._Person_Singular": "monuisset",
@@ -484,6 +536,7 @@
                 "3._Person_Plural": "monuissent"
             },
             "E-Konjugation Passiv Konjunktiv Präsens": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monear",
                 "2._Person_Singular": "monearis",
                 "3._Person_Singular": "moneatur",
@@ -492,6 +545,7 @@
                 "3._Person_Plural": "moneantur"
             },
             "E-Konjugation Passiv Konjunktiv Imperfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monerer",
                 "2._Person_Singular": "monereris",
                 "3._Person_Singular": "moneretur",
@@ -500,6 +554,7 @@
                 "3._Person_Plural": "monerentur"
             },
             "E-Konjugation Passiv Konjunktiv Perfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monitus sim",
                 "2._Person_Singular": "monitus sis",
                 "3._Person_Singular": "monitus sit",
@@ -508,6 +563,7 @@
                 "3._Person_Plural": "moniti sint"
             },
             "E-Konjugation Passiv Konjunktiv Plusquamperfekt": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "1._Person_Singular": "monitus essem",
                 "2._Person_Singular": "monitus esses",
                 "3._Person_Singular": "monitus esset",
@@ -516,6 +572,7 @@
                 "3._Person_Plural": "moniti essent"
             },
             "I-Konjugation Präsens": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audio",
                 "2._Person_Singular": "audis",
                 "3._Person_Singular": "audit",
@@ -524,6 +581,7 @@
                 "3._Person_Plural": "audiunt"
             },
             "I-Konjugation Imperfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audiebam",
                 "2._Person_Singular": "audiebas",
                 "3._Person_Singular": "audiebat",
@@ -532,6 +590,7 @@
                 "3._Person_Plural": "audiebant"
             },
             "I-Konjugation Plusquamperfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audiveram",
                 "2._Person_Singular": "audiveras",
                 "3._Person_Singular": "audiverat",
@@ -540,6 +599,7 @@
                 "3._Person_Plural": "audiverant"
             },
             "I-Konjugation Perfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audivi",
                 "2._Person_Singular": "audivisti",
                 "3._Person_Singular": "audivit",
@@ -548,6 +608,7 @@
                 "3._Person_Plural": "audiverunt"
             },
             "I-Konjugation Futur 1": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audiam",
                 "2._Person_Singular": "audies",
                 "3._Person_Singular": "audiet",
@@ -556,6 +617,7 @@
                 "3._Person_Plural": "audient"
             },
             "I-Konjugation Futur 2": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audivero",
                 "2._Person_Singular": "audiveris",
                 "3._Person_Singular": "audiverit",
@@ -564,6 +626,7 @@
                 "3._Person_Plural": "audiverint"
             },
             "I-Konjugation PPA": {
+                "Translation": "von audire: hören",
                 "Nominativ_Singular": "audiens",
                 "Genitiv_Singular": "audientis",
                 "Dativ_Singular": "audienti",
@@ -576,6 +639,7 @@
                 "Ablativ_Plural": "audientibus"
             },
             "I-Konjugation PPP": {
+                "Translation": "von audire: hören",
                 "Nominativ_Singular": "auditus",
                 "Genitiv_Singular": "auditi",
                 "Dativ_Singular": "audito",
@@ -588,6 +652,7 @@
                 "Ablativ_Plural": "auditis"
             },
             "I-Konjugation PFA": {
+                "Translation": "von audire: hören",
                 "Nominativ_Singular": "auditurus",
                 "Genitiv_Singular": "audituri",
                 "Dativ_Singular": "audituro",
@@ -600,6 +665,7 @@
                 "Ablativ_Plural": "audituris"
             },
             "I-Konjugation Passiv Präsens": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audior",
                 "2._Person_Singular": "audiris",
                 "3._Person_Singular": "auditur",
@@ -608,6 +674,7 @@
                 "3._Person_Plural": "audiuntur"
             },
             "I-Konjugation Passiv Imperfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audiebar",
                 "2._Person_Singular": "audiebaris",
                 "3._Person_Singular": "audiebatur",
@@ -616,6 +683,7 @@
                 "3._Person_Plural": "audiebantur"
             },
             "I-Konjugation Passiv Perfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "auditus sum",
                 "2._Person_Singular": "auditus es",
                 "3._Person_Singular": "auditus est",
@@ -624,6 +692,7 @@
                 "3._Person_Plural": "auditi sunt"
             },
             "I-Konjugation Passiv Plusquamperfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "auditus eram",
                 "2._Person_Singular": "auditus eras",
                 "3._Person_Singular": "auditus erat",
@@ -632,6 +701,7 @@
                 "3._Person_Plural": "auditi erant"
             },
             "I-Konjugation Passiv Futur 1": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audiar",
                 "2._Person_Singular": "audieris",
                 "3._Person_Singular": "audietur",
@@ -640,6 +710,7 @@
                 "3._Person_Plural": "audientur"
             },
             "I-Konjugation Passiv Futur 2": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "auditus ero",
                 "2._Person_Singular": "auditus eris",
                 "3._Person_Singular": "auditus erit",
@@ -648,6 +719,7 @@
                 "3._Person_Plural": "auditi erunt"
             },
             "I-Konjugation Konjunktiv Präsens": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audiam",
                 "2._Person_Singular": "audias",
                 "3._Person_Singular": "audiat",
@@ -656,6 +728,7 @@
                 "3._Person_Plural": "audiant"
             },
             "I-Konjugation Konjunktiv Imperfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audirem",
                 "2._Person_Singular": "audires",
                 "3._Person_Singular": "audiret",
@@ -664,6 +737,7 @@
                 "3._Person_Plural": "audirent"
             },
             "I-Konjugation Konjunktiv Perfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audiverim",
                 "2._Person_Singular": "audiveris",
                 "3._Person_Singular": "audiverit",
@@ -672,6 +746,7 @@
                 "3._Person_Plural": "audiverint"
             },
             "I-Konjugation Konjunktiv Plusquamperfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audivissem",
                 "2._Person_Singular": "audivisses",
                 "3._Person_Singular": "audivisset",
@@ -680,6 +755,7 @@
                 "3._Person_Plural": "audivissent"
             },
             "I-Konjugation Passiv Konjunktiv Präsens": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audiar",
                 "2._Person_Singular": "audiaris",
                 "3._Person_Singular": "audiatur",
@@ -688,6 +764,7 @@
                 "3._Person_Plural": "audiantur"
             },
             "I-Konjugation Passiv Konjunktiv Imperfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "audirer",
                 "2._Person_Singular": "audireris",
                 "3._Person_Singular": "audiretur",
@@ -696,6 +773,7 @@
                 "3._Person_Plural": "audirentur"
             },
             "I-Konjugation Passiv Konjunktiv Perfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "auditus sim",
                 "2._Person_Singular": "auditus sis",
                 "3._Person_Singular": "auditus sit",
@@ -704,6 +782,7 @@
                 "3._Person_Plural": "auditi sint"
             },
             "I-Konjugation Passiv Konjunktiv Plusquamperfekt": {
+                "Translation": "von audire: hören",
                 "1._Person_Singular": "auditus essem",
                 "2._Person_Singular": "auditus esses",
                 "3._Person_Singular": "auditus esset",
@@ -712,6 +791,7 @@
                 "3._Person_Plural": "auditi essent"
             },
             "Konsonantische Konjugation Präsens": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rego",
                 "2._Person_Singular": "regis",
                 "3._Person_Singular": "regit",
@@ -720,6 +800,7 @@
                 "3._Person_Plural": "regunt"
             },
             "Konsonantische Konjugation Imperfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regebam",
                 "2._Person_Singular": "regebas",
                 "3._Person_Singular": "regebat",
@@ -728,6 +809,7 @@
                 "3._Person_Plural": "regebant"
             },
             "Konsonantische Konjugation Plusquamperfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rexeram",
                 "2._Person_Singular": "rexeras",
                 "3._Person_Singular": "rexerat",
@@ -736,6 +818,7 @@
                 "3._Person_Plural": "rexerant"
             },
             "Konsonantische Konjugation Perfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rexi",
                 "2._Person_Singular": "rexisti",
                 "3._Person_Singular": "rexit",
@@ -744,6 +827,7 @@
                 "3._Person_Plural": "rexerunt"
             },
             "Konsonantische Konjugation Futur 1": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regam",
                 "2._Person_Singular": "reges",
                 "3._Person_Singular": "reget",
@@ -752,6 +836,7 @@
                 "3._Person_Plural": "regent"
             },
             "Konsonantische Konjugation Futur 2": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rexero",
                 "2._Person_Singular": "rexeris",
                 "3._Person_Singular": "rexerit",
@@ -760,6 +845,7 @@
                 "3._Person_Plural": "rexerint"
             },
             "Konsonantische Konjugation PPA": {
+                "Translation": "von regere: herrschen, regieren",
                 "Nominativ_Singular": "regens",
                 "Genitiv_Singular": "regentis",
                 "Dativ_Singular": "regenti",
@@ -772,6 +858,7 @@
                 "Ablativ_Plural": "regentibus"
             },
             "Konsonantische Konjugation PPP": {
+                "Translation": "von regere: herrschen, regieren",
                 "Nominativ_Singular": "rectus",
                 "Genitiv_Singular": "recti",
                 "Dativ_Singular": "recto",
@@ -784,6 +871,7 @@
                 "Ablativ_Plural": "rectis"
             },
             "Konsonantische Konjugation PFA": {
+                "Translation": "von regere: herrschen, regieren",
                 "Nominativ_Singular": "recturus",
                 "Genitiv_Singular": "recturi",
                 "Dativ_Singular": "recturo",
@@ -796,6 +884,7 @@
                 "Ablativ_Plural": "recturis"
             },
             "Konsonantische Konjugation Passiv Präsens": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regor",
                 "2._Person_Singular": "regeris",
                 "3._Person_Singular": "regitur",
@@ -804,6 +893,7 @@
                 "3._Person_Plural": "reguntur"
             },
             "Konsonantische Konjugation Passiv Imperfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regebar",
                 "2._Person_Singular": "regebaris",
                 "3._Person_Singular": "regebatur",
@@ -812,6 +902,7 @@
                 "3._Person_Plural": "regebantur"
             },
             "Konsonantische Konjugation Passiv Perfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rectus sum",
                 "2._Person_Singular": "rectus es",
                 "3._Person_Singular": "rectus est",
@@ -820,6 +911,7 @@
                 "3._Person_Plural": "recti sunt"
             },
             "Konsonantische Konjugation Passiv Plusquamperfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rectus eram",
                 "2._Person_Singular": "rectus eras",
                 "3._Person_Singular": "rectus erat",
@@ -828,6 +920,7 @@
                 "3._Person_Plural": "recti erant"
             },
             "Konsonantische Konjugation Passiv Futur 1": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regar",
                 "2._Person_Singular": "regeris",
                 "3._Person_Singular": "regetur",
@@ -836,6 +929,7 @@
                 "3._Person_Plural": "regentur"
             },
             "Konsonantische Konjugation Passiv Futur 2": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rectus ero",
                 "2._Person_Singular": "rectus eris",
                 "3._Person_Singular": "rectus erit",
@@ -844,6 +938,7 @@
                 "3._Person_Plural": "recti erunt"
             },
             "Konsonantische Konjugation Konjunktiv Präsens": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regam",
                 "2._Person_Singular": "regas",
                 "3._Person_Singular": "regat",
@@ -852,6 +947,7 @@
                 "3._Person_Plural": "regant"
             },
             "Konsonantische Konjugation Konjunktiv Imperfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regerem",
                 "2._Person_Singular": "regeres",
                 "3._Person_Singular": "regeret",
@@ -860,6 +956,7 @@
                 "3._Person_Plural": "regerent"
             },
             "Konsonantische Konjugation Konjunktiv Perfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rexerim",
                 "2._Person_Singular": "rexeris",
                 "3._Person_Singular": "rexerit",
@@ -868,6 +965,7 @@
                 "3._Person_Plural": "rexerint"
             },
             "Konsonantische Konjugation Konjunktiv Plusquamperfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rexissem",
                 "2._Person_Singular": "rexisses",
                 "3._Person_Singular": "rexisset",
@@ -876,6 +974,7 @@
                 "3._Person_Plural": "rexissent"
             },
             "Konsonantische Konjugation Passiv Konjunktiv Präsens": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regar",
                 "2._Person_Singular": "regaris",
                 "3._Person_Singular": "regatur",
@@ -884,6 +983,7 @@
                 "3._Person_Plural": "regantur"
             },
             "Konsonantische Konjugation Passiv Konjunktiv Imperfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "regerer",
                 "2._Person_Singular": "regereris",
                 "3._Person_Singular": "regeretur",
@@ -892,6 +992,7 @@
                 "3._Person_Plural": "regerentur"
             },
             "Konsonantische Konjugation Passiv Konjunktiv Perfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rectus sim",
                 "2._Person_Singular": "rectus sis",
                 "3._Person_Singular": "rectus sit",
@@ -900,6 +1001,7 @@
                 "3._Person_Plural": "recti sint"
             },
             "Konsonantische Konjugation Passiv Konjunktiv Plusquamperfekt": {
+                "Translation": "von regere: herrschen, regieren",
                 "1._Person_Singular": "rectus essem",
                 "2._Person_Singular": "rectus esses",
                 "3._Person_Singular": "rectus esset",
@@ -908,6 +1010,7 @@
                 "3._Person_Plural": "recti essent"
             },
             "Gemischte Konjugation Präsens": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "capio",
                 "2._Person_Singular": "capis",
                 "3._Person_Singular": "capit",
@@ -916,6 +1019,7 @@
                 "3._Person_Plural": "capiunt"
             },
             "Gemischte Konjugation Imperfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "capiebam",
                 "2._Person_Singular": "capiebas",
                 "3._Person_Singular": "capiebat",
@@ -924,6 +1028,7 @@
                 "3._Person_Plural": "capiebant"
             },
             "Gemischte Konjugation Plusquamperfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "ceperam",
                 "2._Person_Singular": "ceperas",
                 "3._Person_Singular": "ceperat",
@@ -932,6 +1037,7 @@
                 "3._Person_Plural": "ceperant"
             },
             "Gemischte Konjugation Perfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "cepi",
                 "2._Person_Singular": "cepisti",
                 "3._Person_Singular": "cepit",
@@ -940,6 +1046,7 @@
                 "3._Person_Plural": "ceperunt"
             },
             "Gemischte Konjugation Futur 1": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "capiam",
                 "2._Person_Singular": "capies",
                 "3._Person_Singular": "capiet",
@@ -948,6 +1055,7 @@
                 "3._Person_Plural": "capient"
             },
             "Gemischte Konjugation Futur 2": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "cepero",
                 "2._Person_Singular": "ceperis",
                 "3._Person_Singular": "ceperit",
@@ -956,6 +1064,7 @@
                 "3._Person_Plural": "ceperint"
             },
             "Gemischte Konjugation Passiv Konjunktiv Präsens": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "capiar",
                 "2._Person_Singular": "capiaris",
                 "3._Person_Singular": "capiatur",
@@ -964,6 +1073,7 @@
                 "3._Person_Plural": "capiantur"
             },
             "Gemischte Konjugation Passiv Konjunktiv Imperfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "caperer",
                 "2._Person_Singular": "capereris",
                 "3._Person_Singular": "caperetur",
@@ -972,6 +1082,7 @@
                 "3._Person_Plural": "caperentur"
             },
             "Gemischte Konjugation Passiv Konjunktiv Perfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "captus sim",
                 "2._Person_Singular": "captus sis",
                 "3._Person_Singular": "captus sit",
@@ -980,6 +1091,7 @@
                 "3._Person_Plural": "capti sint"
             },
             "Gemischte Konjugation Passiv Konjunktiv Plusquamperfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "captus essem",
                 "2._Person_Singular": "captus esses",
                 "3._Person_Singular": "captus esset",
@@ -988,18 +1100,22 @@
                 "3._Person_Plural": "capti essent"
             },
             "Gemischte Konjugation PPA": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "Singular": "capiens",
                 "Plural": "capientes"
             },
             "Gemischte Konjugation PPP": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "Singular": "captus",
                 "Plural": "capti"
             },
             "Gemischte Konjugation PFA": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "Singular": "capturus",
                 "Plural": "capturi"
             },
             "Gemischte Konjugation Passiv Präsens": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "capior",
                 "2._Person_Singular": "caperis",
                 "3._Person_Singular": "capitur",
@@ -1008,6 +1124,7 @@
                 "3._Person_Plural": "capiuntur"
             },
             "Gemischte Konjugation Passiv Imperfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "capiebar",
                 "2._Person_Singular": "capiebaris",
                 "3._Person_Singular": "capiebatur",
@@ -1016,6 +1133,7 @@
                 "3._Person_Plural": "capiebantur"
             },
             "Gemischte Konjugation Passiv Perfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "captus sum",
                 "2._Person_Singular": "captus es",
                 "3._Person_Singular": "captus est",
@@ -1024,6 +1142,7 @@
                 "3._Person_Plural": "capti sunt"
             },
             "Gemischte Konjugation Passiv Plusquamperfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "captus eram",
                 "2._Person_Singular": "captus eras",
                 "3._Person_Singular": "captus erat",
@@ -1032,6 +1151,7 @@
                 "3._Person_Plural": "capti erant"
             },
             "Gemischte Konjugation Passiv Futur 1": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "capiar",
                 "2._Person_Singular": "capieris",
                 "3._Person_Singular": "capietur",
@@ -1040,6 +1160,7 @@
                 "3._Person_Plural": "capientur"
             },
             "Gemischte Konjugation Passiv Futur 2": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "captus ero",
                 "2._Person_Singular": "captus eris",
                 "3._Person_Singular": "captus erit",
@@ -1048,6 +1169,7 @@
                 "3._Person_Plural": "capti erunt"
             },
             "Gemischte Konjugation Konjunktiv Präsens": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "capiam",
                 "2._Person_Singular": "capias",
                 "3._Person_Singular": "capiat",
@@ -1056,6 +1178,7 @@
                 "3._Person_Plural": "capiant"
             },
             "Gemischte Konjugation Konjunktiv Imperfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "caperem",
                 "2._Person_Singular": "caperes",
                 "3._Person_Singular": "caperet",
@@ -1064,6 +1187,7 @@
                 "3._Person_Plural": "caperent"
             },
             "Gemischte Konjugation Konjunktiv Perfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "ceperim",
                 "2._Person_Singular": "ceperis",
                 "3._Person_Singular": "ceperit",
@@ -1072,6 +1196,7 @@
                 "3._Person_Plural": "ceperint"
             },
             "Gemischte Konjugation Konjunktiv Plusquamperfekt": {
+                "Translation" : "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "1._Person_Singular": "cepissem",
                 "2._Person_Singular": "cepisses",
                 "3._Person_Singular": "cepisset",
@@ -1082,6 +1207,7 @@
         },
         "Adjectives": {
             "A/O-Deklination maskulinum": {
+                "Translation": "groß, weit, hoch, lang",
                 "Nominativ_Singular": "magnus",
                 "Genitiv_Singular": "magni",
                 "Dativ_Singular": "magno",
@@ -1094,6 +1220,7 @@
                 "Ablativ_Plural": "magnis"
             },
             "A/O-Deklination femininum": {
+                "Translation": "groß, weit, hoch, lang",
                 "Nominativ_Singular": "magna",
                 "Genitiv_Singular": "magnae",
                 "Dativ_Singular": "magnae",
@@ -1106,6 +1233,7 @@
                 "Ablativ_Plural": "magnis"
             },
             "A/O-Deklination neutrum": {
+                "Translation": "groß, weit, hoch, lang",
                 "Nominativ_Singular": "magnum",
                 "Genitiv_Singular": "magni",
                 "Dativ_Singular": "magno",
@@ -1118,6 +1246,7 @@
                 "Ablativ_Plural": "magnis"
             },
             "I-Deklination einendig maskulinum": {
+                "Translation": "riesig, ungeheuer gros",
                 "Nominativ_Singular": "ingens",
                 "Genitiv_Singular": "ingentis",
                 "Dativ_Singular": "ingenti",
@@ -1130,6 +1259,7 @@
                 "Ablativ_Plural": "ingentibus"
             },
             "I-Deklination einendig femininum": {
+                "Translation": "riesig, ungeheuer gros",
                 "Nominativ_Singular": "ingens",
                 "Genitiv_Singular": "ingentis",
                 "Dativ_Singular": "ingenti",
@@ -1142,6 +1272,7 @@
                 "Ablativ_Plural": "ingentibus"
             },
             "I-Deklination einendig neutrum": {
+                "Translation": "riesig, ungeheuer gros",
                 "Nominativ_Singular": "ingens",
                 "Genitiv_Singular": "ingentis",
                 "Dativ_Singular": "ingenti",
@@ -1154,6 +1285,7 @@
                 "Ablativ_Plural": "ingentibus"
             },
             "I-Deklination zweiendig maskulinum": {
+                "Translation": "stark, kraftvoll, kräftig",
                 "Nominativ_Singular": "fortis",
                 "Genitiv_Singular": "fortis",
                 "Dativ_Singular": "forti",
@@ -1166,6 +1298,7 @@
                 "Ablativ_Plural": "fortibus"
             },
             "I-Deklination zweiendig femininum": {
+                "Translation": "stark, kraftvoll, kräftig",
                 "Nominativ_Singular": "fortis",
                 "Genitiv_Singular": "fortis",
                 "Dativ_Singular": "forti",
@@ -1178,6 +1311,7 @@
                 "Ablativ_Plural": "fortibus"
             },
             "I-Deklination zweiendig neutrum": {
+                "Translation": "stark, kraftvoll, kräftig",
                 "Nominativ_Singular": "forte",
                 "Genitiv_Singular": "fortis",
                 "Dativ_Singular": "forti",
@@ -1190,6 +1324,7 @@
                 "Ablativ_Plural": "fortibus"
             },
             "I-Deklination dreiendig maskulinum": {
+                "Translation": "schnell, rasch, eilend",
                 "Nominativ_Singular": "celer",
                 "Genitiv_Singular": "celeris",
                 "Dativ_Singular": "celeri",
@@ -1202,6 +1337,7 @@
                 "Ablativ_Plural": "celeribus"
             },
             "I-Deklination dreiendig femininum": {
+                "Translation": "schnell, rasch, eilend",
                 "Nominativ_Singular": "celeris",
                 "Genitiv_Singular": "celeris",
                 "Dativ_Singular": "celeri",
@@ -1214,6 +1350,7 @@
                 "Ablativ_Plural": "celeribus"
             },
             "I-Deklination dreiendig neutrum": {
+                "Translation": "schnell, rasch, eilend",
                 "Nominativ_Singular": "celere",
                 "Genitiv_Singular": "celeris",
                 "Dativ_Singular": "celeri",
@@ -1228,30 +1365,35 @@
         },
         "Gerunds": {
             "A-Konjugation": {
+                "Translation": "von amare: liebhaben, lieben",
                 "Genitiv": "amandi",
                 "Dativ": "amando",
                 "Akkusativ": "amandum",
                 "Ablativ": "amando"
             },
             "E-Konjugation": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "Genitiv": "monendi",
                 "Dativ": "monendo",
                 "Akkusativ": "monendum",
                 "Ablativ": "monendo"
             },
             "Konsonantische Konjugation": {
+                "Translation": "von regere: herrschen, regieren",
                 "Genitiv": "regendi",
                 "Dativ": "regendo",
                 "Akkusativ": "regendum",
                 "Ablativ": "regendo"
             },
             "I-Konjugation": {
+                "Translation": "von audire: hören",
                 "Genitiv": "audiendi",
                 "Dativ": "audiendo",
                 "Akkusativ": "audiendum",
                 "Ablativ": "audiendo"
             },
             "Gemischte Konjugation": {
+                "Translation": "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "Genitiv": "capiendi",
                 "Dativ": "capiendo",
                 "Akkusativ": "capiendum",
@@ -1260,6 +1402,7 @@
         },
         "Gerundives": {
             "A-Konjugation": {
+                "Translation": "von amare: liebhaben, lieben",
                 "Maskulinum_Singular": "amandus",
                 "Femininum_Singular": "amanda",
                 "Neutrum_Singular": "amandum",
@@ -1268,6 +1411,7 @@
                 "Neutrum_Plural": "amanda"
             },
             "E-Konjugation": {
+                "Translation": "von monere: ermahnen, auffordern, jdn. an etwas erinnern",
                 "Maskulinum_Singular": "monendus",
                 "Femininum_Singular": "monenda",
                 "Neutrum_Singular": "monendum",
@@ -1276,6 +1420,7 @@
                 "Neutrum_Plural": "monenda"
             },
             "Konsonantische Konjugation": {
+                "Translation": "von regere: herrschen, regieren",
                 "Maskulinum_Singular": "regendus",
                 "Femininum_Singular": "regenda",
                 "Neutrum_Singular": "regendum",
@@ -1284,6 +1429,7 @@
                 "Neutrum_Plural": "regenda"
             },
             "I-Konjugation": {
+                "Translation": "von audire: hören",
                 "Maskulinum_Singular": "audiendus",
                 "Femininum_Singular": "audienda",
                 "Neutrum_Singular": "audiendum",
@@ -1292,6 +1438,7 @@
                 "Neutrum_Plural": "audienda"
             },
             "Gemischte Konjugation": {
+                "Translation": "von capere: erfassen, ergreifen, fangen, einnehmen",
                 "Maskulinum_Singular": "capiendus",
                 "Femininum_Singular": "capienda",
                 "Neutrum_Singular": "capiendum",
@@ -1302,6 +1449,7 @@
         },
         "hic_haec_hoc": {
             "hic": {
+                "Translation": "dieser",
                 "Nominativ_Singular": "hic",
                 "Genitiv_Singular": "huius",
                 "Dativ_Singular": "huic",
@@ -1314,6 +1462,7 @@
                 "Ablativ_Plural": "his"
             },
             "haec": {
+                "Translation": "diese",
                 "Nominativ_Singular": "haec",
                 "Genitiv_Singular": "huius",
                 "Dativ_Singular": "huic",
@@ -1326,6 +1475,7 @@
                 "Ablativ_Plural": "his"
             },
             "hoc": {
+                "Translation": "dieses",
                 "Nominativ_Singular": "hoc",
                 "Genitiv_Singular": "huius",
                 "Dativ_Singular": "huic",
@@ -1340,6 +1490,7 @@
         },
         "qui_quae_quod": {
             "qui": {
+                "Translation": "welcher",
                 "Nominativ_Singular": "qui",
                 "Genitiv_Singular": "cuius",
                 "Dativ_Singular": "cui",
@@ -1352,6 +1503,7 @@
                 "Ablativ_Plural": "quibus"
             },
             "quae": {
+                "Translation": "welche",
                 "Nominativ_Singular": "quae",
                 "Genitiv_Singular": "cuius",
                 "Dativ_Singular": "cui",
@@ -1364,6 +1516,7 @@
                 "Ablativ_Plural": "quibus"
             },
             "quod": {
+                "Translation": "welches",
                 "Nominativ_Singular": "quod",
                 "Genitiv_Singular": "cuius",
                 "Dativ_Singular": "cui",
@@ -1378,6 +1531,7 @@
         },
         "ille_illa_illud": {
             "ille": {
+                "Translation": "jener",
                 "Nominativ_Singular": "ille",
                 "Genitiv_Singular": "illius",
                 "Dativ_Singular": "illi",
@@ -1390,6 +1544,7 @@
                 "Ablativ_Plural": "illis"
             },
             "illa": {
+                "Translation": "jene",
                 "Nominativ_Singular": "illa",
                 "Genitiv_Singular": "illius",
                 "Dativ_Singular": "illi",
@@ -1402,6 +1557,7 @@
                 "Ablativ_Plural": "illis"
             },
             "illud": {
+                "Translation": "jenes",
                 "Nominativ_Singular": "illud",
                 "Genitiv_Singular": "illius",
                 "Dativ_Singular": "illi",
@@ -1416,6 +1572,7 @@
         },
         "ipse_ipsa_ipsum": {
             "ipse": {
+                "Translation": "selbst",
                 "Nominativ_Singular": "ipse",
                 "Genitiv_Singular": "ipsius",
                 "Dativ_Singular": "ipsi",
@@ -1428,6 +1585,7 @@
                 "Ablativ_Plural": "ipsis"
             },
             "ipsa": {
+                "Translation": "selbst",
                 "Nominativ_Singular": "ipsa",
                 "Genitiv_Singular": "ipsius",
                 "Dativ_Singular": "ipsi",
@@ -1440,6 +1598,7 @@
                 "Ablativ_Plural": "ipsis"
             },
             "ipsum": {
+                "Translation": "selbst",
                 "Nominativ_Singular": "ipsum",
                 "Genitiv_Singular": "ipsius",
                 "Dativ_Singular": "ipsi",
@@ -1454,6 +1613,7 @@
         },
         "quis_quis_quid": {
             "quis_maskulinum": {
+                "Translation": "irgendwer, (irgend)jemand, etwas, irgendein(e)",
                 "Nominativ_Singular": "quis",
                 "Genitiv_Singular": "cuius",
                 "Dativ_Singular": "cui",
@@ -1466,6 +1626,7 @@
                 "Ablativ_Plural": "quibus"
             },
             "quis_femininum": {
+                "Translation": "irgendwer, (irgend)jemand, etwas, irgendein(e)",
                 "Nominativ_Singular": "quis",
                 "Genitiv_Singular": "cuius",
                 "Dativ_Singular": "cui",
@@ -1478,6 +1639,7 @@
                 "Ablativ_Plural": "quibus"
             },
             "quid": {
+                "Translation": "irgendwer, (irgend)jemand, etwas, irgendein(e)",
                 "Nominativ_Singular": "quid",
                 "Genitiv_Singular": "cuius",
                 "Dativ_Singular": "cui",
