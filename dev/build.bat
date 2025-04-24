@@ -25,6 +25,9 @@ call python -m nuitka ^
 --include-data-dir=src/assets/autoSelect_switch/=assets/autoSelect_switch ^
 --include-data-dir=src/assets=assets ^
 --include-data-dir=src/data=data ^
+--noinclude-data-files=src/data/autoSelect_progress.json,
+src/data/font_chach.json, __pycache__/* ^
+--noinclude-data-dir=__pycache__ ^
 --enable-plugin=tk-inter ^
 --plugin-enable=tk-inter ^
 --include-package=tkinter ^
@@ -103,10 +106,10 @@ rmdir /s /q main.dist
 REM Create shortcut for .exe
 if exist "_internal\Latein Formen Trainer.exe" (
     echo Set oWS = CreateObject^("WScript.Shell"^) > CreateShortcut.vbs
-    echo sLinkFile = oWS.ExpandEnvironmentStrings^("%~dp0"^) ^& "\Latein Formen Trainer.lnk" >> CreateShortcut.vbs
+    echo sLinkFile = oWS.ExpandEnvironmentStrings^("%CD%"^) ^& "\Latein Formen Trainer.lnk" >> CreateShortcut.vbs
     echo Set oLink = oWS.CreateShortcut^(sLinkFile^) >> CreateShortcut.vbs
-    echo oLink.TargetPath = oWS.ExpandEnvironmentStrings^("%~dp0"^) ^& "\_internal\Latein Formen Trainer.exe" >> CreateShortcut.vbs
-    echo oLink.WorkingDirectory = oWS.ExpandEnvironmentStrings^("%~dp0"^) ^& "\_internal" >> CreateShortcut.vbs
+    echo oLink.TargetPath = oWS.ExpandEnvironmentStrings^("%CD%"^) ^& "\_internal\Latein Formen Trainer.exe" >> CreateShortcut.vbs
+    echo oLink.WorkingDirectory = oWS.ExpandEnvironmentStrings^("%CD%"^) ^& "\_internal" >> CreateShortcut.vbs
     echo oLink.Save >> CreateShortcut.vbs
     cscript CreateShortcut.vbs
     if errorlevel 1 (

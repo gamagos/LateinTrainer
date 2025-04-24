@@ -20,7 +20,7 @@ class FileAndCacheHandler:
         if  not os.path.exists( self.gui_instance.settings_path ) or os.path.getsize( self.gui_instance.settings_path ) == 0:
             with open( self.gui_instance.settings_path, "w" ) as file:
                 shutil.copyfile( self.gui_instance.settings_default_path, self.gui_instance.settings_path )
-                print( "settings were restored(empty)" )
+                self.gui_instance.debug_print( "settings were restored(empty)" )
         else:
             try:
                 with open( self.gui_instance.settings_path, "r" ) as file:
@@ -86,7 +86,6 @@ class FileAndCacheHandler:
     def load_json( self, path: str ) -> dict:
         try:
             with open( path, "r", encoding = "utf-8" ) as f:
-                #print( json.load( f )[ "forms" ].keys() )
                 return json.load( f )
         except Exception as e:
             self.gui_instance.debug_print( f"Error loading forms.json: { e }" )

@@ -13,6 +13,7 @@ from tkinter import Event, Tk, font, messagebox, ttk
 
 import win32api
 import win32con
+import win32gui
 from numpy import double
 from PIL import Image, ImageTk
 
@@ -25,10 +26,10 @@ class GUI:
     def __init__( self, root: tk.Tk ) -> None:
         #paths
         self.project_path = getattr( sys, "_MEIPASS", os.path.dirname( os.path.dirname( os.path.abspath( __file__ ) ) ) )
+        self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
         self.forms_path = os.path.join( self.project_path, "data", "forms.json" )
         self.font_cache_path = os.path.join( self.project_path, "data", "font_cache.json" )
         self.autoSelect_progress_path = os.path.join( self.project_path, "data", "autoSelect_progress.json")
-        self.icon_path = os.path.abspath( os.path.join( self.project_path, "assets", "icon.ico" ) )
         self.settings_default_path = os.path.join( self.project_path, "data", "default_settings.csv" )
         self.settings_path = os.path.join( self.project_path, "data", "settings.csv" )
         self.debug_log_path = os.path.join( self.project_path, "logs", "debug_log.txt" )
@@ -107,6 +108,7 @@ class GUI:
         self.root.bind( "<Configure>", self.on_resize )
         self.root.bind( "<Alt-F4>", self.on_close )
         self.root.iconbitmap( self.icon_path )
+        self.root.wm_iconbitmap( self.icon_path )
         self.root.protocol( "WM_DELETE_WINDOW", self.on_close )
         self.debug_print("Root was initialized")
         
@@ -186,6 +188,8 @@ class GUI:
     def populate_entries( self ) -> None:
         separation_form_tabel = - 1
         for i, ( case_or_tempus, correct_answer ) in enumerate( self.current_forms.items() ):
+            if case_or_tempus == "Translation":
+                return
             
             if case_or_tempus == "Nominativ_Plural" or case_or_tempus == "1._Person_Plural":
                 separation_form_tabel += 1
@@ -398,7 +402,7 @@ class GUI:
         self.settings_button.config( image = final_image )
         self.settings_button.image = final_image
 
-        self.debug_print( "settings_button: new width: ", new_width )
+        self.debug_print( "settings_button: new width:", new_width )
         self.settings_button.place(  relx = 0.934, rely = 0, width = new_width, height = new_width, anchor = "nw" ) #2 times width because its a square
         return new_width
     
@@ -486,6 +490,7 @@ class GUI:
         
         self.update_window = tk.Toplevel( window )
         self.update_window.geometry("300x140")
+        self.update_window.iconbitmap( self.icon_path )
         self.update_window.resizable( False, False )
         self.update_window.title( title )
         self.update_window.iconbitmap( self.icon_path )
