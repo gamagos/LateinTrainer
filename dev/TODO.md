@@ -22,3 +22,4 @@ Fiaults To do List
 -add more precise selection on what to learn with manual mode
 -fix desktop shortcut and updater
 -reorganize code
+-make an option to select the cases autoselect should select
