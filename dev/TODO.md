@@ -18,3 +18,7 @@ Fiaults To do List
 -give word translation
 -add ?s for better accessability
 -add different words of the same type for more learning
+-let chatGPT compare the tables from my books to the tables in the code
+-add more precise selection on what to learn with manual mode
+-fix desktop shortcut and updater
+-reorganize code
