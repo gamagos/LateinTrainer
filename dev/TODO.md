@@ -18,3 +18,4 @@ Fiaults To do List
 -give word translation
 -add ?s for better accessability
 -add different words of the same type for more learning
+-make time passed since last time asked count into autoselect
