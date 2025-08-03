@@ -8,13 +8,14 @@ the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
+but WITHOUT ANY WARRANTY. without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
-A copy of the GNU general public license and a short non-binding summary is
+A copy of the GNU general public license and a non-binding summary is
 provided below.
-Alternatively you can visit <https://www.gnu.org/licenses/>.
+Alternatively you can visit <https://www.gnu.org/licenses/>
+to find the text there.
 
 ---
 
@@ -22,21 +23,26 @@ NON-BINDING SUMMARY OF THE GNU GENERAL PUBLIC LICENSE ( GPL-3.0 )
 
 This summary is for CONVENIENCE ONLY.
 It has NO LEGAL VALUE and may be INCOMPLETE or INACURATE.
-You will have to decide on your own if you find this summary be trustable to represent the contents of the GPL 3.0 correctly. 
-Refer to the full GPL-3.0 license text for actual legal terms.
+You will have to decide on your own terms if you find this summary be
+trustable to represent the contents of the GPL 3.0 correctly.
+Refer to the full GPL-3.0 license text for actual legal terms
+if you distrust the acuracy and/or completeness of this summary.
 
-- If you are just using the program normally, you do not need to worry about this license text. 
-It is here for developers, modifiers, and redistributors. The author has no legal power over a normal user.
-
+- If you are just using the software normally, you do not need to
+worry about this license text.
+It is here for developers, modifiers, and redistributors. The author has
+no legal power over a normal user.
 - You are free to use, copy, modify, and distribute this software.
 - If you distribute copies or modified versions, you must also provide access to the full source code.
-- Any distributed version (original or modified) must be licensed under GPL-3.0.
-- You cannot add restrictions beyond those in the GPL.
-- There is no warranty; the software is provided "as is."; Meaning I cannot be held liable for any damages caused by this program.
+- Any distributed version (original or modified) must be licensed under the GPL-3.0 License.
+- You cannot add restrictions beyond those in the GPL-3.0 License.
+- There is no warranty; the software is provided "as is."; Meaning I cannot be held liable for
+any damages caused by this software.
 Use it at your own risk.
 - You must keep all copyright and license notices intact.
 - If you convey the software, you must do so under the same license terms.
 - The license is perpetual and worldwide.
+- You must state wether a version of the software is modified or original when redistributing it
 
 
 Now follows the original license text from the GPL-3.0.
