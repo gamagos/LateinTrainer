@@ -1,0 +1,40 @@
+# GitHub Copilot Configuration
+
+# Code style preferences
+style:
+  language: python
+  indent: 4
+  max_line_length: 110
+  quotes: double
+  spacing:
+    around_operators: true
+
+# Documentation preferences
+documentation:
+  required: true
+  style: google
+  include_types: true
+  include_returns: true
+
+# Testing preferences
+testing:
+  framework: pytest
+  required: true
+  coverage_minimum: 80
+
+# Security rules
+security:
+  check_dependencies: true
+  avoid_hardcoded_secrets: true
+  require_input_validation: true
+
+# Custom conventions
+conventions:
+  naming:
+    functions: snake_case
+    classes: PascalCase
+    constants: UPPER_CASE
+  imports:
+    group_stdlib: true
+    group_third_party: true
+    group_local: true
