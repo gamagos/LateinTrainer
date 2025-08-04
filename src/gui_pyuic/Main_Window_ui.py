@@ -103,6 +103,7 @@ class Ui_Main_Windows(object):
         font3.setFamilies([u"Bahnschrift"])
         font3.setPointSize(60)
         font3.setBold(True)
+        font3.setUnderline(False)
         font3.setStrikeOut(False)
         font3.setKerning(True)
         self.Form_Title.setFont(font3)

@@ -2,17 +2,17 @@ import json
 import os
 
 from datetime import datetime
-from typing import Any, Union
+from typing import Union
 
-from src.Utils import Utils
+from src.Utils.DebugUtils import DebugUtils
 
 
-class FileManager( Utils ):
-    def __init__( self ) -> None:
-        super().__init__()
-        self.BASE_PATH = os.path.dirname( os.path.dirname( os.path.abspath(__file__)))
+class FileUtils:
+    def __init__( self, debug_utils: DebugUtils ) -> None:
+        print( f"[INIT] { self.__class__.__name__ }" )
         
-        self.callback_write_log = self.write_log
+        self.BASE_PATH = os.path.dirname( os.path.dirname( os.path.dirname( os.path.abspath( __file__ )))) #same as ../../../
+        self.debug_utils: DebugUtils = debug_utils
         
         
     def get_dict_from_json( self, path: str, *keys: Union[ str, list ] ) -> dict:# * For each key in *keys the method will go one subkey deeper.     
@@ -30,6 +30,7 @@ class FileManager( Utils ):
             elif isinstance( key, str ):
                 return recursive_get( data[ key ], rest )
         return recursive_get( data, keys )
+    #def get_dict_from_json
         
         
     def write_log( self, *to_write: Union[ tuple , list ] ) -> bool:
@@ -42,7 +43,7 @@ class FileManager( Utils ):
                     File.write( f"[{ time }]: { to_write }\n" )
                 return True
             except Exception as e:
-                self.debug_print( f"Error in FileManager.write_log(). {e}" )
+                self.debug_utils.debug_print( f"Error in FileManager.write_log(). {e}", write_log = False )
                 return False
             
         def write_many() -> bool:
@@ -54,7 +55,7 @@ class FileManager( Utils ):
                     File.writelines( lines )
                 return True
             except Exception as e:
-                self.debug_print( f"Error in FileManager.write_log(). {e}" )
+                self.debug_utils.debug_print( f"Error in FileManager.write_log(). {e}", write_log = False )
                 return False  
         
         if isinstance( to_write, str ):

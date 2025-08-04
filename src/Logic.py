@@ -1,17 +1,23 @@
 import os
 
-from src.FileManager import FileManager
+from src.Utils import DebugUtils, DictUtils, FileUtils, GeneralUtils
 
 
-class Logic( FileManager ):
+class Logic( GeneralUtils, FileUtils, DictUtils, DebugUtils ):
+    VERSION = "2.0.0.0"
+    
     def __init__( self ) -> None:
-        super().__init__()
-        
+        DebugUtils.__init__( self, self.write_log )
+        DictUtils.__init__( self )
+        debug_utils_instance = DebugUtils( self.write_log )
+        FileUtils.__init__( self, debug_utils_instance )
+        GeneralUtils.__init__( self )
+
         self.data_path = os.path.join( self.BASE_PATH, "data" )
         self.forms_json_path = os.path.join( self.data_path, "forms.json" )
         self.FORMS_DICT_NAME = "forms"
         
-    def select_form_manually( self, user_word_type: str = None, user_form: str = None ) -> dict:
+    def select_form_manually( self, top_key: str, key: str ) -> dict:
         def get_by_form( form ):
             word_types = self.get_dict_from_json( self.forms_json_path, self.FORMS_DICT_NAME ).keys()
             for word_type in word_types:

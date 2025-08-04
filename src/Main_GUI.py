@@ -2,10 +2,11 @@ from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon, QFont
 from PySide6.QtWidgets import QGridLayout, QLabel, QMainWindow, QSizePolicy, QToolButton
 
+from src.Utils import DictUtils
 from src.gui_pyuic.Main_Window_ui import Ui_Main_Windows
 from src.Assets import Assets
 from src.Logic import Logic
-from src.PySide6Utils import PySide6Utils
+from src.Utils.PySide6Utils import PySide6Utils
 
 
 class MainWindow( QMainWindow, Logic ):
@@ -13,7 +14,10 @@ class MainWindow( QMainWindow, Logic ):
         super().__init__()
         self.ui_trainer_main_window = None
         self.Assets = Assets( self.BASE_PATH, self.darkmode_on )
-        self.PySide6Utils = PySide6Utils()
+        dict_utils_instance = DictUtils()
+        self.PySide6Utils = PySide6Utils( dict_utils_instance )
+
+        self.form_labels: list[ QLabel ] = []
 
         #variables
         self.current_form_index = 0
@@ -49,9 +53,23 @@ class MainWindow( QMainWindow, Logic ):
     #def creat_main_window    
         
 
-    def generate_forms_table_in_gridlayout( self, forms: dict, layout: QGridLayout, font_family: str = "Bahnschrift", font_size: int = 17,
-                                             font_wheight: QFont.Weight = QFont.Weight.Normal, min_width: int = 100, min_height: int = 32 ) -> None:
-        def set_label_attributes( label: QLabel, minimum_width: int = min_width, minimum_height: int = min_height, maximum_width: int = None, maximum_height: int = None ) -> QLabel:
+    def generate_forms_table_in_gridlayout(
+        self, forms: dict,
+        layout: QGridLayout,
+        font_family: str = "Bahnschrift",
+        font_size: int = 17,
+        font_wheight: QFont.Weight = QFont.Weight.Normal,
+        min_width: int = 100,
+        min_height: int = 32
+    ) -> None:
+        
+        def set_label_attributes(
+            label: QLabel,
+            minimum_width: int = min_width,
+            minimum_height: int = min_height,
+            maximum_width: int = None,
+            maximum_height: int = None
+        ) -> QLabel:
             form_label_font = QFont( font_family, font_size, font_wheight )
             label.setSizePolicy( QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding )
             label.setMinimumSize( minimum_width, minimum_height )

@@ -1,4 +1,4 @@
-Fiaults To do List
+# Fiaults To do List
 
 -make more features( settings what to learn, learn tracker, reminder notifications, make background shine red or green when button clicked... )
 -organize code
@@ -20,6 +20,7 @@ Fiaults To do List
 -add different words of the same type for more learning
 -point system/progress logging system
 -translate json to english
+-make sure all _init__ are properly made to show were things are imported
 
 -remove release without the license to avoid getting sued
 -make main readme better

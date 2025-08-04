@@ -184,6 +184,7 @@
           <family>Bahnschrift</family>
           <pointsize>60</pointsize>
           <bold>true</bold>
+          <underline>false</underline>
           <strikeout>false</strikeout>
           <kerning>true</kerning>
          </font>
