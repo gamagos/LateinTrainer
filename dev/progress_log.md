@@ -1,13 +1,13 @@
-#this is Sebastian Fiaults progress log on the project
-        11.03.2025
+# Sebastian Fiaults progress log on the project
+        *11.03.2025*
 -Fixed UI elements not resizing on Startup leading to UI looking crappy before resize
 -Fixed a bug that caused the program to crash when you changed to the next class
 
-        18.03.2025
+        *18.03.2025*
 -fixed caching wrong font sizes due to wrong widget sizes during initialization
 -made debug print work normaly
 
-        19.03.2025
+        *19.03.2025*
 -made button appear higher when there are less forms to close distance
 -sorted variables in __init__()
 -removed redundant code
@@ -58,3 +58,11 @@
 
         27.07.2025
 -resorted forms_json to have more sub categories
+
+        16.08.2025
+-worked on forms query grid
+-started working on passing user form selection to code
+
+        18.08.2025
+-worked on table generator logic
+-made title display upon generation
