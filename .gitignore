@@ -12,7 +12,7 @@ dist/*
 */dist/
 */dist/*
 venv
-*/venv*
+*/venv
 font_cache.json
 _internal
 LateinTrainer.code-workspace
@@ -24,4 +24,3 @@ temporary/
 *.tmp.driveupload/
 *.tmp.driveupload
 workspace
-wrong_answers_per_case.json

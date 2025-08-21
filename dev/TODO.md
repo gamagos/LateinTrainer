@@ -21,6 +21,7 @@
 -point system/progress logging system
 -translate json to english
 -make sure all _init__ are properly made to show were things are imported
+-make UI super clean
 
 -remove release without the license to avoid getting sued
 -make main readme better
