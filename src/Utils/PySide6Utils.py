@@ -13,6 +13,7 @@ class PySide6Utils:
     #def __init__
         
 #TODO make checkbox not close when selected
+
     def dict_to_QMenu( self, dictionary: dict, parent: QMenu = None, action_callback: Callable[[ str, str ], None ] = None, top_key: str = "All" ) -> QMenu:
         if not isinstance( dictionary, dict ):
             raise TypeError( f"Expected dict, got { type( dictionary ).__name__ }" )
@@ -24,7 +25,7 @@ class PySide6Utils:
             
             action = QAction( parent = top_menu )
             action.setCheckable( True )
-            if i == 0: #TODO change appearance of "All" compared to regular options
+            if i == 0:                   #TODO change appearance of "All" compared to regular options
                 action.setText( "All" )
                 top_menu.addAction( action )
                 if isinstance( action_callback, Callable ) and action_callback:

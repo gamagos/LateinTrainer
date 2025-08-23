@@ -22,5 +22,6 @@ class Logic( GeneralUtils, FileUtils, DictUtils, DebugUtils ):
     #TODO write more comments  
     def select_form_manually( self, top_key: str, key: str, checked: bool ) -> dict:
         
-        return loaded_forms
 #class Logic
+
+# JetBrains Mono is such an amazing font, espacially with ligatures on
