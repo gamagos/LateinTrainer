@@ -1,27 +1,24 @@
 import os
 
+from src.Constants import Paths
 from src.Utils import DebugUtils, DictUtils, FileUtils, GeneralUtils
 
 
-class Logic( GeneralUtils, FileUtils, DictUtils, DebugUtils ):
-    VERSION = "2.0.0.0"
+class Logic( GeneralUtils, FileUtils, DictUtils ):
+    VERSION: str = "2.0.0.0"
     
     def __init__( self ) -> None:
-        print( f"[INIT] { self.__class__.__name__ }" )
-        DebugUtils.__init__( self, self.write_log )
-        DictUtils.__init__( self )
-        debug_utils_for_file_utils = DebugUtils( self.write_log )
-        FileUtils.__init__( self, debug_utils_for_file_utils )
-        GeneralUtils.__init__( self )
+        Tag = DebugUtils.Tag
+        
+        DebugUtils.debug_print( f"{ Tag.INIT } { self.__class__.__name__ }" )
+        super().__init__()
 
-        self.data_path = os.path.join( self.BASE_PATH, "data" )
-        self.forms_json_path = os.path.join( self.data_path, "forms.json" )
-        self.FORMS_DICT_NAME = "forms"
+        self.FORMS_DICT_NAME = "forms" #TODO make this more scaleable
         
         self.current_forms: set = {}
     #TODO write more comments  
+    
+    
     def select_form_manually( self, top_key: str, key: str, checked: bool ) -> dict:
-        
+        print( f"top_key: {top_key}, key: {key}, checked: {checked}" )
 #class Logic
-
-# JetBrains Mono is such an amazing font, espacially with ligatures on

@@ -1,52 +1,69 @@
 from contextlib import contextmanager
+from pickletools import pyset
 
 from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon, QFont, Qt
 from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QSizePolicy, QSpacerItem, QToolButton, QWidget
 
-from src.Utils import DictUtils
+from src.Constants import Paths, AssetFolders, LightModeAssets, DarkModeAssets
 from src.gui_pyuic.Main_Window_ui import Ui_Main_Windows
-from src.Assets import Assets
 from src.Logic import Logic
+from src.Utils.DebugUtils import DebugUtils
+from src.Utils.DictUtils import DictUtils
 from src.Utils.PySide6Utils import PySide6Utils
 
-
+#TODO make spacer not go to translation
 class MainWindow( QMainWindow, Logic ):
     def __init__( self ) -> None:
-        print( f"[INIT] { self.__class__.__name__ }" )
+        DebugUtils.debug_print( DebugUtils.Tag.INIT, f"{self.__class__.__name__ }" )
+
+        #init stuff
         super().__init__()
         self.ui_trainer_main_window = None
-        self.Assets = Assets( self.BASE_PATH, self.darkmode_on )
-        dict_utils_instance = DictUtils()
-        self.PySide6Utils = PySide6Utils( dict_utils_instance )
+        dict_utils_instance: DictUtils = DictUtils()
+        self.PySide6Utils: PySide6Utils = PySide6Utils( dict_utils_instance )
 
+        #variable definitions for other methods
         self.form_labels: list[ QLabel ] = []
         self.form_line_edits: list[ QLineEdit ] = []
 
         #variables
-        self.current_form_index = 0
+        self.current_form_index: int = 0
         
-        #TODO find a way to get system wide settings
+        #TODO find a way to get system wide settings for darkmode
     #def __init__
 
         
     def create_main_window( self ) -> None:
+        """
+        Basicly main method for starting the GUI
+        """        
         if self.ui_trainer_main_window is None:
             self.ui_trainer_main_window = Ui_Main_Windows()
             self.ui_trainer_main_window.setupUi( self )
             
             #Window configuration
             self.setWindowTitle( "Shitty Latin Forms Trainer" )
-            self.trainer_main_window_icon = QIcon( self.Assets.icon_path )
+            
+            icon_path: str
+            settings_button_path: str
+            if self.darkmode_on:
+                icon_path = DarkModeAssets.ICON.value
+                settings_button_path = DarkModeAssets.SETTINGS_BUTTON.value
+            else:
+                icon_path = LightModeAssets.ICON.value
+                settings_button_path = LightModeAssets.SETTINGS_BUTTON.value
+                
+            self.trainer_main_window_icon = QIcon( icon_path )
             self.setWindowIcon( self.trainer_main_window_icon )
             
             #buttons
-            trainer_settings_button_icon = QIcon( self.Assets.settings_button_png_path )
+            trainer_settings_button_icon = QIcon( settings_button_path )
             self.ui_trainer_main_window.Settings_Button.setIcon( trainer_settings_button_icon )
             self.ui_trainer_main_window.Settings_Button.setIconSize( QSize( 50, 50 ))
             
             self.ui_trainer_main_window.Form_Select.setPopupMode( QToolButton.ToolButtonPopupMode.InstantPopup )
-            forms_dict = self.get_dict_from_json( self.forms_json_path, "forms" )
+            forms_dict = self.get_dict_from_json( Paths.FORMS_JSON_PATH.value, "forms" )
             self.Form_Select_Menu = self.PySide6Utils.dict_to_QMenu( forms_dict )
             self.ui_trainer_main_window.Form_Select.setMenu( self.Form_Select_Menu )
             
@@ -68,8 +85,22 @@ class MainWindow( QMainWindow, Logic ):
         min_width: int = 215,
         min_height: int = 32,
     ) -> None:
+        """
+        Method for generating the table with labels and entries
+        in the gridLayout inside the ScrollArea.
+
+        Args:
+            forms (dict): the dict with all forms to be loaded. Depth = 1 max!
+            title (str): Name of the category of the forms displayed
+            layout (QGridLayout): The gridlayout in which the table is to be generated
+            font_family (str, optional): Defaults to "Bahnschrift".
+            font_size (int, optional): Defaults to 17.
+            font_wheight (QFont.Weight, optional): Defaults to QFont.Weight.Normal.
+            min_width (int, optional): Minimum width of the individual labels. Defaults to 215.
+            min_height (int, optional): Minimum height of the individual labels. Defaults to 32.
+        """        
         
-        @contextmanager # * Make this more scalable if set_label_attributes is used more than once
+        @contextmanager # * Make this more scalable if set_label_attributes is used more than once. Maybe make it it's own standalone method
         def monkey_patch_set_label_attributes():
             def set_label_attributes(
                 self: QLabel,
@@ -80,6 +111,21 @@ class MainWindow( QMainWindow, Logic ):
                 alignementflag_1: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignLeft,
                 alignmentflag_2: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignVCenter
             ) -> QLabel:
+                """Sets a bunch of values for a label at once
+                so the later code is more readble.
+
+                Args:
+                    self (QLabel): _description_
+                    minimum_width (int, optional): _description_. Defaults to min_width.
+                    minimum_height (int, optional): _description_. Defaults to min_height.
+                    maximum_width (int, optional): _description_. Defaults to None.
+                    maximum_height (int, optional): _description_. Defaults to None.
+                    alignementflag_1 (Qt.AlignmentFlag, optional): _description_. Defaults to Qt.AlignmentFlag.AlignLeft.
+                    alignmentflag_2 (Qt.AlignmentFlag, optional): _description_. Defaults to Qt.AlignmentFlag.AlignVCenter.
+
+                Returns:
+                    QLabel: _description_
+                """                
                 form_label_font = QFont( font_family, font_size, font_wheight )
                 self.setAlignment( alignementflag_1 )
                 self.setAlignment( alignmentflag_2 )

@@ -1,25 +1,56 @@
 import json
-import os
 
-from datetime import datetime
-from typing import Union
+from typing import Any, Union
 
 from src.Utils.DebugUtils import DebugUtils
 
 
 class FileUtils:
-    def __init__( self, debug_utils: DebugUtils ) -> None:
-        print( f"[INIT] { self.__class__.__name__ }" )
+    """
+    A class with various methods to handle certain file operations in the program.
+    """    
+    def __init__( self ) -> None:
+        DebugUtils.debug_print( f"{ DebugUtils.Tag.INIT } { self.__class__.__name__ }" )        
         
-        self.BASE_PATH = os.path.dirname( os.path.dirname( os.path.dirname( os.path.abspath( __file__ )))) #same as ../../../
-        self.debug_utils: DebugUtils = debug_utils
         
-        
-    def get_dict_from_json( self, path: str, *keys: Union[ str, list ] ) -> dict:# * For each key in *keys the method will go one subkey deeper.     
-        with open( path, "r" ) as file:                                          # * If we have a list of different keys in any of *key, all of them
-            data = json.load( file )                                             # * will be returned in one dict so more than a single subkey
-                                                                                 # * may be retrived. 
-        def recursive_get( data, keys ):
+    def get_dict_from_json( self, path: str, *keys: Union[str, list] ) -> dict:# * For each key in *keys the method will go one subkey deeper.     
+        """A method that get's a dict or a value out of a nested dict.
+        Example input path = test.json, keys = i, ii
+        content of test.json:
+        "i": {
+            "ii": {
+                "iii": {
+                    "one": 1,
+                    "two": 2,
+                    "three": 3
+                }
+            }
+        }
+        Example output:
+        iii": {
+           "one": 1,
+           "two": 2,
+           "three": 3
+        }
+        Args:
+            path (str): path leading to a .json file
+
+        Returns:
+            dict: returns the dict associated with the last key
+        """
+        with open( path, "r" ) as file:
+            data: dict = json.load( file )
+
+        def recursive_get( data: dict, keys ) -> Union[Any, dict]:
+            """recursively get's the content for all the keys given
+
+            Args:
+                data (dict): The dict in which to search
+                keys: The keys to search for in the dict in data
+
+            Returns:
+                Any/dict: returns whichever values were asociated with the keys 
+            """            
             if not keys:
                 return data
             key = keys[0]
@@ -29,40 +60,11 @@ class FileUtils:
                 return { sub_key: recursive_get( data[ sub_key ], rest ) for sub_key in key }
             elif isinstance( key, str ):
                 return recursive_get( data[ key ], rest )
+            
+            
         return recursive_get( data, keys )
     #def get_dict_from_json
-        
-        
-    def write_log( self, *to_write: Union[ tuple , list ] ) -> bool:
-        logs_path = os.path.join( self.BASE_PATH, "logs", "log.txt" )
-        time = str( datetime.now() )
-        
-        def write_one() -> bool:
-            try:
-                with open( logs_path, "a" ) as File:
-                    File.write( f"[{ time }]: { to_write }\n" )
-                return True
-            except Exception as e:
-                self.debug_utils.debug_print( f"Error in FileManager.write_log(). {e}", write_log = False )
-                return False
-            
-        def write_many() -> bool:
-            try:
-                with open( logs_path, "a" ) as File:
-                    lines = []
-                    for line in to_write:
-                        lines.append( f"[{ time }]: { line }\n" )
-                    File.writelines( lines )
-                return True
-            except Exception as e:
-                self.debug_utils.debug_print( f"Error in FileManager.write_log(). {e}", write_log = False )
-                return False  
-        
-        if isinstance( to_write, str ):
-            write_one()
-        elif isinstance( to_write, list ) or isinstance( to_write, tuple ):
-            write_many()
-        else:
-            return False
-    #def write_log
+    #! I really need to write more comments and docstrings!
 #class FileManager
+
+#JetBrains Mono is so awesome!

@@ -3,18 +3,19 @@ from typing import Callable
 from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QMenu
 
-from src.Utils import DictUtils
+from src.Utils.DictUtils import DictUtils
+from src.Utils.DebugUtils import DebugUtils
 
 
 class PySide6Utils:
-    def __init__( self, dict_utils_instance: DictUtils ) -> None:
-        self.dict_utils_instance = dict_utils_instance
-        print( f"[INIT] { self.__class__.__name__ }" )
+    def __init__(self, dict_utils_instance: DictUtils ) -> None:
+        self.dict_utils_instance = dict_utils_instance #TODO make this static
+        DebugUtils.debug_print(DebugUtils.Tag.INIT, f"{self.__class__.__name__}")
     #def __init__
         
 #TODO make checkbox not close when selected
 
-    def dict_to_QMenu( self, dictionary: dict, parent: QMenu = None, action_callback: Callable[[ str, str ], None ] = None, top_key: str = "All" ) -> QMenu:
+    def dict_to_QMenu( self, dictionary: dict, parent: QMenu = None, action_callback: Callable = None, top_key: str = "All" ) -> QMenu:
         if not isinstance( dictionary, dict ):
             raise TypeError( f"Expected dict, got { type( dictionary ).__name__ }" )
         

@@ -1,11 +1,13 @@
 import random
 from typing import Any, Union
+
+from src.Utils.DebugUtils import DebugUtils
 #TODO I was working on splitting up my Utils, making sure everything works again then and making sure all __init__files tell where what is being imported
 
 
 class DictUtils:
     def __init__( self ) -> None:
-        print( f"[INIT] { self.__class__.__name__ }" )
+        DebugUtils.debug_print(DebugUtils.Tag.INIT, f"{ self.__class__.__name__ }" )
         
         
     def get_dict_minimum_depth( self, dictionary: dict[ Union[ dict, Any ]] ) -> int:
