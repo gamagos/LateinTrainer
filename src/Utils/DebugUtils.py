@@ -35,18 +35,17 @@ class DebugUtils:
         print( f"{ DebugUtils.Tag.INIT } { self.__class__.__name__ }" )
         self.debug: bool = True        
         
-        
+    """
+    SYNOPSIS:
+        A method for creating a logs file with checking if
+        creation was a success
+    Args:
+        logs_folder (str, optional): The folder that the log files are to be placed in
+    Returns:
+        str: The path to the logs file
+    """
     @staticmethod
     def create_log_file( logs_folder: str = None ) -> str:
-        """A method for creating a logs file with checking if
-        creation was a success
-
-        Args:
-            logs_folder (str, optional): The folder that the log files are to be placed in
-
-        Returns:
-            str: The path to the logs file
-        """        
         if not DebugUtils.current_logs_file:        
             log_time = str(datetime.now()).replace(' ', '_').replace('-', '_').replace(':', '_').replace('.', '_')
             if logs_folder:

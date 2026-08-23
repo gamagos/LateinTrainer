@@ -2,13 +2,13 @@ import os
 
 from enum import Enum
 
+"""
+SYNOPSIS:
+    Many useful ANSI codes
+REMARKS:
+    Only use strings in here!
+"""
 class ANSICodes:
-    """
-    SYNOPSIS:
-        Many useful ANSI codes
-    REMARKS:
-        Only use strings in here!
-    """
     ESC_SEQUENCE = "\x1b"
     RESET = "\x1b[0m"
     
