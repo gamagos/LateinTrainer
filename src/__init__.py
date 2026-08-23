@@ -4,4 +4,4 @@ from .MainWindow import MainWindow
 
 from src.Utils.DebugUtils import DebugUtils
 
-DebugUtils.debug_print(f"{DebugUtils.Tag.IMPORT} Importing {__name__}")
+DebugUtils.debug_print(DebugUtils.Tag.IMPORT, f"Importing {__name__}")

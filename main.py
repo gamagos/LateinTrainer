@@ -6,9 +6,11 @@ from src.MainWindow import MainWindow
 from src.Utils.DebugUtils import DebugUtils
 
 
+"""
+SYNOPSIS:
+    Main class. Only holds the main function for now.
+"""
 class Main:
-    """Main class. Only holds the main function for now.
-    """    
     @staticmethod
     def main():
         """Main program code."""
@@ -31,6 +33,7 @@ class Main:
         
 if __name__ == "__main__":
     Main.main()
-#if __name__ == "__main__":
 
-#SAO season 1 best
+#TODO add multi language support with string translation
+
+# SAO season 1 best

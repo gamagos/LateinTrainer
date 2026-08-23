@@ -7,4 +7,4 @@ from .PySide6Utils import PySide6Utils
 
 DebugUtils.debug_print(DebugUtils.Tag.IMPORT, f"Importing {__name__}")
 
-#Sword Art Online is the best Anime ever
+# Sword Art Online is the best Anime ever

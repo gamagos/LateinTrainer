@@ -34,10 +34,11 @@ class MainWindow( QMainWindow, Logic ):
     #def __init__
 
         
+    """
+    SYNOPSIS:
+        Basically main method for starting the GUI
+    """        
     def create_main_window( self ) -> None:
-        """
-        Basicly main method for starting the GUI
-        """        
         if self.ui_trainer_main_window is None:
             self.ui_trainer_main_window = Ui_Main_Windows()
             self.ui_trainer_main_window.setupUi( self )
@@ -81,7 +82,7 @@ class MainWindow( QMainWindow, Logic ):
         layout: QGridLayout,
         font_family: str = "Bahnschrift",
         font_size: int = 17,
-        font_wheight: QFont.Weight = QFont.Weight.Normal,
+        font_weight: QFont.Weight = QFont.Weight.Normal,
         min_width: int = 215,
         min_height: int = 32,
     ) -> None:
@@ -95,7 +96,7 @@ class MainWindow( QMainWindow, Logic ):
             layout (QGridLayout): The gridlayout in which the table is to be generated
             font_family (str, optional): Defaults to "Bahnschrift".
             font_size (int, optional): Defaults to 17.
-            font_wheight (QFont.Weight, optional): Defaults to QFont.Weight.Normal.
+            font_weight (QFont.Weight, optional): Defaults to QFont.Weight.Normal.
             min_width (int, optional): Minimum width of the individual labels. Defaults to 215.
             min_height (int, optional): Minimum height of the individual labels. Defaults to 32.
         """        
@@ -106,8 +107,8 @@ class MainWindow( QMainWindow, Logic ):
                 self: QLabel,
                 minimum_width: int = min_width,
                 minimum_height: int = min_height,
-                maximum_width: int = None,
-                maximum_height: int = None,
+                maximum_width: int = 0,
+                maximum_height: int = 0,
                 alignementflag_1: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignLeft,
                 alignmentflag_2: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignVCenter
             ) -> QLabel:
@@ -118,15 +119,15 @@ class MainWindow( QMainWindow, Logic ):
                     self (QLabel): _description_
                     minimum_width (int, optional): _description_. Defaults to min_width.
                     minimum_height (int, optional): _description_. Defaults to min_height.
-                    maximum_width (int, optional): _description_. Defaults to None.
-                    maximum_height (int, optional): _description_. Defaults to None.
+                    maximum_width (int, optional): _description_. Defaults to 0.
+                    maximum_height (int, optional): _description_. Defaults to 0.
                     alignementflag_1 (Qt.AlignmentFlag, optional): _description_. Defaults to Qt.AlignmentFlag.AlignLeft.
                     alignmentflag_2 (Qt.AlignmentFlag, optional): _description_. Defaults to Qt.AlignmentFlag.AlignVCenter.
 
                 Returns:
                     QLabel: _description_
                 """                
-                form_label_font = QFont( font_family, font_size, font_wheight )
+                form_label_font = QFont( font_family, font_size, font_weight )
                 self.setAlignment( alignementflag_1 )
                 self.setAlignment( alignmentflag_2 )
                 self.setFont( form_label_font )

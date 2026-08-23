@@ -1,9 +1,13 @@
 {
     "python.REPL.enableREPLSmartSend": false,
     "cSpell.words": [
+        "alignementflag",
+        "alignmentflag",
         "autodeletion",
         "darkmode",
         "Deklination",
-        "Fira"
+        "Fira",
+        "hspacer",
+        "pyuic"
     ]
 }

@@ -5,7 +5,7 @@ import inspect
 import os
 
 from datetime import datetime
-from typing import Union
+from typing import Any, Union
 from typing_extensions import TypeForm
 
 from src.Constants import ANSICodes, Paths
@@ -45,7 +45,7 @@ class DebugUtils:
         str: The path to the logs file
     """
     @staticmethod
-    def create_log_file( logs_folder: str = None ) -> str:
+    def create_log_file( logs_folder: str = "" ) -> str:
         if not DebugUtils.current_logs_file:        
             log_time = str(datetime.now()).replace(' ', '_').replace('-', '_').replace(':', '_').replace('.', '_')
             if logs_folder:
@@ -75,31 +75,33 @@ class DebugUtils:
             return DebugUtils.current_logs_file
 
     
-    @staticmethod
-    def write_log( *to_write: Union[ tuple , list ], logs_folder: str = None ) -> bool:
-        """
+    """
+    SYNOPSIS:
         Writes to_write to log file
-
-        Args:
-            to_write: A list, tuple or single element to write to the log file
-
-        Returns:
-            bool: Wether the operation was successful
-        """
+    Args:
+        to_write: A list, tuple or single element to write to the log file
+        logs_folder: The folder to write the logs in, if no path is given a default path will be used
+    Returns:
+        Wether the operation was successful
+    """
+    @staticmethod
+    def write_log( *to_write: Union[ tuple , list, str ], logs_folder: str = "" ) -> bool:
         log_path = DebugUtils.create_log_file(logs_folder)
         
         def write_one() -> bool:
-            """Writes a single element to log
+            """
+            SYNOPSIS:
+                Writes a single element to log
 
             Returns:
-                bool: Wether the operation was a success
+                Wether the operation was a success
             """            
             try:
                 with open( log_path, "a" ) as File:
                     File.write( f"{to_write}\n" )
                 return True
             except Exception as error:
-                DebugUtils.debug_print( DebugUtils.Tag.ERROR, error, write_log = False )
+                DebugUtils.debug_print( DebugUtils.Tag.ERROR, error, write_logs = False )
                 return False
             
         def write_many() -> bool:
@@ -120,18 +122,16 @@ class DebugUtils:
                 return False  
         
         if isinstance( to_write, str ):
-            write_one()
+            return write_one()
         elif isinstance( to_write, list ) or isinstance( to_write, tuple ):
-            write_many()
+            return write_many()
         else:
             return False
-    #def write_log    
-        
         
     @staticmethod
     def debug_print(
         tag: Tag = Tag.INFO,
-        *to_print: Union[ tuple, list, str ],
+        *to_print: Union[ tuple, list, str, Any ],
         write_logs: bool = True,
         print_timestamps: bool = False,
     ) -> None:
@@ -150,7 +150,7 @@ class DebugUtils:
         if not isinstance( tag, DebugUtils.Tag ):
             raise TypeError("debug_print(): tag must be of type Utils.DebugUtils.Tag")    
 
-        caller_frame = inspect.currentframe().f_back
+        caller_frame = inspect.currentframe().f_back # type: ignore
         caller_info = ""
         if caller_frame:    #TODO improve caller info
             function_name = caller_frame.f_code.co_name
