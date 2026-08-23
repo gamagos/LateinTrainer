@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Union
 from typing_extensions import TypeForm
 
-from src.Constants import Paths
+from src.Constants import ANSICodes, Paths
 
 class DebugUtils:
     """
@@ -18,16 +18,16 @@ class DebugUtils:
     
     class Tag(Enum):
         """
-        Basicly an Enum only that I wanted the actual values
+        Basically an Enum only that I wanted the actual values
         displayed so I spared myself the hassle
         of having to write .value everywhere by making it to regular constants.
         """
-        DEBUG = "[DEBUG]"
-        ERROR = "[ERROR]"
-        INFO = "[INFO]"
-        INIT = "[INIT]"
-        IMPORT = "[IMPORT]"
-        WARNING = "[WARNING]"
+        DEBUG = f"{ANSICodes.generate_ANSI_24bit_color(194, 194, 0)}[DEBUG]{ANSICodes.RESET}"
+        ERROR = f"{ANSICodes.generate_ANSI_24bit_color(255, 50, 50)}[ERROR]{ANSICodes.RESET}"
+        INFO = f"{ANSICodes.generate_ANSI_24bit_color(150, 189, 255)}[INFO]{ANSICodes.RESET}"
+        INIT = f"{ANSICodes.generate_ANSI_24bit_color(0, 203, 255)}[INIT]{ANSICodes.RESET}"
+        IMPORT = f"{ANSICodes.generate_ANSI_24bit_color(200, 50, 255)}[IMPORT]{ANSICodes.RESET}"
+        WARNING = f"{ANSICodes.generate_ANSI_24bit_color(255, 120, 10)}[WARNING]{ANSICodes.RESET}" #! Note to self, make sure these colors look good on both bright and dark terminal themes(aim for luminance of ~50%), if that is possible without making the color look ugly
     #class Tag
         
         
@@ -82,10 +82,10 @@ class DebugUtils:
         Writes to_write to log file
 
         Args:
-            to_write: A list, tupple or single element to write to the log file
+            to_write: A list, tuple or single element to write to the log file
 
         Returns:
-            bool: Wether the operation was sucessful
+            bool: Wether the operation was successful
         """
         log_path = DebugUtils.create_log_file(logs_folder)
         

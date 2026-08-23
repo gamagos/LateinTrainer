@@ -1,6 +1,6 @@
 import sys
 
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication # type: ignore
 
 from src.MainWindow import MainWindow
 from src.Utils.DebugUtils import DebugUtils
