@@ -4,10 +4,14 @@
         "alignementflag",
         "alignmentflag",
         "autodeletion",
+        "Bahnschrift",
         "darkmode",
         "Deklination",
+        "docstrings",
         "Fira",
+        "gridlayout",
         "hspacer",
-        "pyuic"
+        "pyuic",
+        "vspacer"
     ]
 }
