@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Any, Union
 from typing_extensions import TypeForm
 
-from src.Constants import ANSICodes, Paths
+from Trainer.Constants import ANSICodes, Paths
 
 class DebugUtils:
     """

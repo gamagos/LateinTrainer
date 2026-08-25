@@ -2,7 +2,7 @@ import json
 
 from typing import Any, Union
 
-from src.Utils.DebugUtils import DebugUtils
+from Trainer.Utils.DebugUtils import DebugUtils
 
 
 class FileUtils:

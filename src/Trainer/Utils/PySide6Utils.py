@@ -3,8 +3,8 @@ from typing import Callable
 from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QMenu
 
-from src.Utils.DictUtils import DictUtils
-from src.Utils.DebugUtils import DebugUtils
+from Trainer.Utils.DictUtils import DictUtils
+from Trainer.Utils.DebugUtils import DebugUtils
 
 
 class PySide6Utils:

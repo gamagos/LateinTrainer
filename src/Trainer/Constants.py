@@ -30,7 +30,7 @@ class ANSICodes:
 
 class Paths(Enum):#TODO really need to write more comments
     """many paths used throughout the program"""    
-    BASE_PATH = os.path.dirname( os.path.dirname( os.path.abspath( __file__ ))) #same as ../../
+    BASE_PATH = os.path.dirname(os.path.dirname( os.path.dirname( os.path.abspath( __file__ )))) #same as ../../
     DATA_PATH = os.path.join( BASE_PATH, "data" )
     FORMS_JSON_PATH = os.path.join( DATA_PATH, "forms.json" )
 

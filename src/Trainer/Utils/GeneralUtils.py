@@ -10,7 +10,7 @@ from PySide6.QtGui import QFont, Qt
 from PySide6.QtWidgets import QLabel, QSizePolicy
 
 # Project Modules
-from src.Utils.DebugUtils import DebugUtils
+from Trainer.Utils.DebugUtils import DebugUtils
 
 class GeneralUtils:    
     def __init__( self ) -> None:

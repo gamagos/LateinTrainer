@@ -1,7 +1,7 @@
 import os
 
-from src.Constants import Paths
-from src.Utils import DebugUtils, DictUtils, FileUtils, GeneralUtils
+from Trainer.Constants import Paths
+from Trainer.Utils import DebugUtils, DictUtils, FileUtils, GeneralUtils
 
 
 class Logic( GeneralUtils, FileUtils, DictUtils ):

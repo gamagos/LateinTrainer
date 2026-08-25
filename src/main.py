@@ -2,8 +2,8 @@ import sys
 
 from PySide6.QtWidgets import QApplication # type: ignore
 
-from src.MainWindow import MainWindow
-from src.Utils.DebugUtils import DebugUtils
+from Trainer.MainWindow import MainWindow
+from Trainer.Utils.DebugUtils import DebugUtils
 
 
 """

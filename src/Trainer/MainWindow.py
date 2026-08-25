@@ -5,13 +5,13 @@ from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon, QFont, Qt
 from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QSizePolicy, QSpacerItem, QToolButton, QWidget
 
-from src.Constants import Paths, AssetFolders, LightModeAssets, DarkModeAssets
-from src.gui_pyuic.Main_Window_ui import Ui_Main_Windows
-from src.Logic import Logic
-from src.Utils.DebugUtils import DebugUtils
-from src.Utils.DictUtils import DictUtils
-from src.Utils.GeneralUtils import GeneralUtils
-from src.Utils.PySide6Utils import PySide6Utils
+from Trainer.Constants import Paths, AssetFolders, LightModeAssets, DarkModeAssets
+from Trainer.gui_pyuic.Main_Window_ui import Ui_Main_Windows
+from Trainer.Logic import Logic
+from Trainer.Utils.DebugUtils import DebugUtils
+from Trainer.Utils.DictUtils import DictUtils
+from Trainer.Utils.GeneralUtils import GeneralUtils
+from Trainer.Utils.PySide6Utils import PySide6Utils
 
 #TODO make spacer not go to translation
 class MainWindow( QMainWindow, Logic ):
@@ -74,8 +74,8 @@ class MainWindow( QMainWindow, Logic ):
         
     """
     SYNOPSIS:
-        Method for generating the table with labels and entries
-        in the gridLayout inside the ScrollArea.
+        Method for generating the table containing the forms and text entry fields
+        with labels and entries in the gridLayout inside the ScrollArea.
     Args:
         forms (dict): the dict with all forms to be loaded. Depth = 1 max!
         title (str): Name of the category of the forms displayed
@@ -114,18 +114,30 @@ class MainWindow( QMainWindow, Logic ):
             font_size = font_size,
             font_weight = font_weight
         )
+        # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+        #
+        # Loops through all the forms of the current Conjugation/Declination/...
+        # and creates the corresponding labels, text entry fields... for them
+        #
+        # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
         i_extra = 0
         key: str = "" #TODO write comments and docstrings
         for i, key in enumerate( forms.keys() ):
             formatted_key = key.replace( "_", " " )
             self.forms_labels.append( GeneralUtils.GamagosQLabel( f"{ formatted_key }" ))
             self.forms_labels[i].set_label_attributes( arguments_set_label_attributes )         #TODO make spacer labels to QSpacerItem
+            # ======================================================================================================
+            # Add a spacer between the plural and singular cases, if applicable
+            # ======================================================================================================
             if key == "Nominative_Plural":
                 spacer_label = GeneralUtils.GamagosQLabel("")
                 spacer_label.set_label_attributes( arguments_set_label_attributes )
 
                 layout.addWidget( spacer_label, i + i_extra, 1 )
                 i_extra += 1
+            # ======================================================================================================
+            # Change the style and position for the widget containing the translation 
+            # ======================================================================================================
             elif key == "Translation":
                 #translation label
                 font = QFont( font_family, font_size, QFont.Weight.Thin )
@@ -133,6 +145,9 @@ class MainWindow( QMainWindow, Logic ):
                 translation_label.setFont( font )
                 translation_label.setText( f"{ self.forms_labels[i].text() }: { forms[ key ] } " )
             
+            # ======================================================================================================
+            # Add the labels for the forms and their corresponding text entry fields
+            # ======================================================================================================
             if key != "Translation":
                 layout.addWidget( self.forms_labels[i], i + i_extra, 1, Qt.AlignmentFlag.AlignRight )
                 #LineEdit
@@ -143,6 +158,9 @@ class MainWindow( QMainWindow, Logic ):
                 current_line_edit.setMaximumWidth( 300 ) #TODO improve resizing logic a ton and add tests
                 layout.addWidget( current_line_edit, i + i_extra, 2 )
                 
+            # ======================================================================================================
+            # Add widget for the translation 
+            # ======================================================================================================
             if i == len( forms.keys() ) - 1:
                 i_extra += 1
                 translation_widget = QWidget()

@@ -1,7 +1,7 @@
 import random
 from typing import Any, Union
 
-from src.Utils.DebugUtils import DebugUtils
+from Trainer.Utils.DebugUtils import DebugUtils
 #TODO I was working on splitting up my Utils, making sure everything works again then and making sure all __init__files tell where what is being imported
 
 
