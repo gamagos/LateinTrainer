@@ -11,6 +11,8 @@
         "Fira",
         "gridlayout",
         "hspacer",
+        "NOSONAR",
+        "pixmap",
         "pyuic",
         "vspacer"
     ]

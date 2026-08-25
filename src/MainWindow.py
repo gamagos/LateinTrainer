@@ -10,6 +10,7 @@ from src.gui_pyuic.Main_Window_ui import Ui_Main_Windows
 from src.Logic import Logic
 from src.Utils.DebugUtils import DebugUtils
 from src.Utils.DictUtils import DictUtils
+from src.Utils.GeneralUtils import GeneralUtils
 from src.Utils.PySide6Utils import PySide6Utils
 
 #TODO make spacer not go to translation
@@ -31,8 +32,6 @@ class MainWindow( QMainWindow, Logic ):
         self.current_form_index: int = 0
         
         #TODO find a way to get system wide settings for darkmode
-    #def __init__
-
         
     """
     SYNOPSIS:
@@ -72,8 +71,21 @@ class MainWindow( QMainWindow, Logic ):
             self.scroll_area_widget_layout = QGridLayout( parent = self.ui_trainer_main_window.Scroll_Area_Widget_Contents )
             self.ui_trainer_main_window.Scroll_Area_Widget_Contents.setLayout( self.scroll_area_widget_layout )
             self.generate_forms_table_in_gridlayout( forms_dict[ "Nouns" ][ "A-Declension" ], "A-Declension", self.scroll_area_widget_layout )
-    #def creat_main_window    
         
+    """
+    SYNOPSIS:
+        Method for generating the table with labels and entries
+        in the gridLayout inside the ScrollArea.
+    Args:
+        forms (dict): the dict with all forms to be loaded. Depth = 1 max!
+        title (str): Name of the category of the forms displayed
+        layout (QGridLayout): The gridlayout in which the table is to be generated
+        font_family (str, optional): Defaults to "Bahnschrift".
+        font_size (int, optional): Defaults to 17.
+        font_weight (QFont.Weight, optional): Defaults to QFont.Weight.Normal.
+        min_width (int, optional): Minimum width of the individual labels. Defaults to 215.
+        min_height (int, optional): Minimum height of the individual labels. Defaults to 32.
+    """
     #TODO add more dynamic resizing methods
     def generate_forms_table_in_gridlayout(
         self,
@@ -86,69 +98,7 @@ class MainWindow( QMainWindow, Logic ):
         min_width: int = 215,
         min_height: int = 32,
     ) -> None:
-        """
-        Method for generating the table with labels and entries
-        in the gridLayout inside the ScrollArea.
-
-        Args:
-            forms (dict): the dict with all forms to be loaded. Depth = 1 max!
-            title (str): Name of the category of the forms displayed
-            layout (QGridLayout): The gridlayout in which the table is to be generated
-            font_family (str, optional): Defaults to "Bahnschrift".
-            font_size (int, optional): Defaults to 17.
-            font_weight (QFont.Weight, optional): Defaults to QFont.Weight.Normal.
-            min_width (int, optional): Minimum width of the individual labels. Defaults to 215.
-            min_height (int, optional): Minimum height of the individual labels. Defaults to 32.
-        """        
-        
-        @contextmanager # * Make this more scalable if set_label_attributes is used more than once. Maybe make it it's own standalone method
-        def monkey_patch_set_label_attributes():
-            def set_label_attributes(
-                self: QLabel,
-                minimum_width: int = min_width,
-                minimum_height: int = min_height,
-                maximum_width: int = 0,
-                maximum_height: int = 0,
-                alignementflag_1: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignLeft,
-                alignmentflag_2: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignVCenter
-            ) -> QLabel:
-                """Sets a bunch of values for a label at once
-                so the later code is more readble.
-
-                Args:
-                    self (QLabel): _description_
-                    minimum_width (int, optional): _description_. Defaults to min_width.
-                    minimum_height (int, optional): _description_. Defaults to min_height.
-                    maximum_width (int, optional): _description_. Defaults to 0.
-                    maximum_height (int, optional): _description_. Defaults to 0.
-                    alignementflag_1 (Qt.AlignmentFlag, optional): _description_. Defaults to Qt.AlignmentFlag.AlignLeft.
-                    alignmentflag_2 (Qt.AlignmentFlag, optional): _description_. Defaults to Qt.AlignmentFlag.AlignVCenter.
-
-                Returns:
-                    QLabel: _description_
-                """                
-                form_label_font = QFont( font_family, font_size, font_weight )
-                self.setAlignment( alignementflag_1 )
-                self.setAlignment( alignmentflag_2 )
-                self.setFont( form_label_font )
-                self.setMinimumSize( minimum_width, minimum_height )
-                self.setSizePolicy( QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding )
-                if maximum_width:
-                    self.setMaximumWidth( maximum_width )
-                if maximum_height:
-                    self.setMaximumHeight( maximum_height )
-                return self
-            #def set_label_attributes
-            QLabel.set_label_attributes = set_label_attributes
-            try:
-                yield
-            finally:
-                if hasattr( QLabel, "set_label_attributes" ):
-                    delattr( QLabel, "set_label_attributes" )
-        #def monkey_patch_set_label_attributes
-
-        self.ui_trainer_main_window.Form_Title.setText( title )
-        
+        self.ui_trainer_main_window.Form_Title.setText( title ) # type: ignore
         self.hspacer1 = QSpacerItem( 20, 0 )
         self.hspacer2 = QSpacerItem( 93, 0 )
         self.vspacer1 = QSpacerItem( 0, 10 )
@@ -156,21 +106,23 @@ class MainWindow( QMainWindow, Logic ):
         layout.addItem( self.hspacer2, 0, 3 )
         layout.addItem( self.vspacer1, 0, 1, columnSpan = 2 )
 
-        self.forms_labels: list[ QLabel ] = []
+        self.forms_labels: list[ GeneralUtils.GamagosQLabel ] = []
+        arguments_set_label_attributes: GeneralUtils.GamagosQLabel.ArgumentsFor_set_label_attributes = GeneralUtils.GamagosQLabel.ArgumentsFor_set_label_attributes(
+            minimum_width = min_width,
+            minimum_height = min_height,
+            font_family = font_family,
+            font_size = font_size,
+            font_weight = font_weight
+        )
         i_extra = 0
-        key: str #TODO write comments and docstrings
+        key: str = "" #TODO write comments and docstrings
         for i, key in enumerate( forms.keys() ):
             formatted_key = key.replace( "_", " " )
-            
-            with monkey_patch_set_label_attributes():
-                self.forms_labels.append( QLabel( f"{ formatted_key }" ))
-                self.forms_labels[i].set_label_attributes()
-            #TODO make spacer labels to QSpacerItem
-            
+            self.forms_labels.append( GeneralUtils.GamagosQLabel( f"{ formatted_key }" ))
+            self.forms_labels[i].set_label_attributes( arguments_set_label_attributes )         #TODO make spacer labels to QSpacerItem
             if key == "Nominative_Plural":
-                with monkey_patch_set_label_attributes():
-                    spacer_label = QLabel("")
-                    spacer_label.set_label_attributes( minimum_height = 10, maximum_height = 15 )
+                spacer_label = GeneralUtils.GamagosQLabel("")
+                spacer_label.set_label_attributes( arguments_set_label_attributes )
 
                 layout.addWidget( spacer_label, i + i_extra, 1 )
                 i_extra += 1
@@ -198,11 +150,9 @@ class MainWindow( QMainWindow, Logic ):
                 layout.addWidget( translation_widget, i + i_extra, 1, 1, 2, Qt.AlignmentFlag.AlignCenter )
                 translation_widget.setLayout( translation_hbox_layout )
                 translation_hbox_layout.addWidget( translation_label, alignment = Qt.AlignmentFlag.AlignCenter )
-        #for i, key in enumerate( forms.keys() )
-
 
     def on_resize( self ) -> None:
-        print( "not yet finished" )#TODO
+        print( "not yet finished" ) #TODO <-- that before the comment
 #class MainWindow
 
 # I should use less AI but it's so confusing because it can be useful but I know it's mostly bad

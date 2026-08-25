@@ -8,12 +8,15 @@ from src.Utils.DebugUtils import DebugUtils
 
 """
 SYNOPSIS:
-    Main class. Only holds the main function for now.
+    Main class. Only holds the main function.
 """
 class Main:
+    """
+    SYNOPSIS:
+        Main method. This method starts and ends the entire application
+    """
     @staticmethod
     def main():
-        """Main program code."""
         Tag = DebugUtils.Tag
         
         app = QApplication( sys.argv )
@@ -35,5 +38,6 @@ if __name__ == "__main__":
     Main.main()
 
 #TODO add multi language support with string translation
+#TODO add complete testing
 
 # SAO season 1 best
